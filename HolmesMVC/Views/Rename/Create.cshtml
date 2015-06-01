@@ -1,0 +1,72 @@
+﻿@model HolmesMVC.Models.Rename
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Rename</legend>
+
+        <div>
+            @Html.LabelFor(model => model.Adaptation, "Adaptation")
+        </div>
+        <div>
+            @Html.DropDownList("Adaptation", String.Empty)
+            @Html.ValidationMessageFor(model => model.Adaptation)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Character, "in Canon")
+        </div>
+        <div>
+            @Html.DropDownList("Character", String.Empty)
+            @Html.ValidationMessageFor(model => model.Character)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Actor, "Actor")
+        </div>
+        <div>
+            @Html.DropDownList("Actor", String.Empty)
+            @Html.ValidationMessageFor(model => model.Actor)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Honorific, "Honorific1")
+        </div>
+        <div>
+            @Html.DropDownList("Honorific", String.Empty)
+            @Html.ValidationMessageFor(model => model.Honorific)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Forename)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Forename)
+            @Html.ValidationMessageFor(model => model.Forename)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Surname)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Surname)
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    
+}

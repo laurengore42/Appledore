@@ -1,0 +1,60 @@
+﻿@model HolmesMVC.Models.Character
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Character</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Forename)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Forename)
+            @Html.ValidationMessageFor(model => model.Forename)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Surname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Surname)
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Honorific, "Title")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Honorific", String.Empty)
+            @Html.ValidationMessageFor(model => model.Honorific)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Wikipedia, "Wikipedia URL")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Wikipedia)
+            @Html.ValidationMessageFor(model => model.Wikipedia)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    
+
+    @Scripts.Render("~/Scripts/Apdore-editorscripts.js")
+}

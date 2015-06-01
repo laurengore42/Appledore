@@ -1,0 +1,251 @@
+﻿@using HolmesMVC
+@using HolmesMVC.Enums
+@using HolmesMVC.Models
+@using HolmesMVC.Models.ViewModels
+@model CanonView
+
+@{
+    ViewBag.Title = Model.Adaptation.DisplayName;
+    
+    int i;
+    int year;
+    int tenthYear;
+    int decade;
+    int lastDecade = 0;
+    string decadeString;
+
+    const int Publish = (int)CanonOrder.Published;
+    const int Baring = (int)CanonOrder.Baring;
+    const int Keef = (int)CanonOrder.Keefauver;
+}
+
+<h2 class="detailscategory">Adaptation</h2>
+<h2 class="detailsheader">@ViewBag.Title</h2>
+
+<p>
+    This @Model.Adaptation.MediumName adaptation began in <span id="startYearSpan"></span>, and was made by @Model.Adaptation.Company.
+</p>
+
+@if (Request.IsAuthenticated)
+{
+    <p>@Html.ActionLink("Add episode", "Create", "Episode", new { Model.Adaptation.ID }, null) </p>
+}
+@Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.Adaptation.ID })
+
+@if (Model.Adaptation.Episodes.Any())
+{
+    <div id="timelinecontainer">
+        <canvas id="timeline">Turn on &lt;canvas&gt;.</canvas>
+    </div>
+}
+
+<br />
+Choose a date system:<br />
+<input type="button" value="Publication" onclick="changeTheDates(@Publish);" />
+<input type="button" value="Baring-Gould" onclick="changeTheDates(@Baring);" />
+<input type="button" value="Keefauver" onclick="changeTheDates(@Keef);" />
+
+<!-- Publication order -->
+
+<table id="PubOrder" style="display: none">
+    @{
+        var lastEpisode = new Episode();
+        i = 0;
+        foreach (var e in Model.Adaptation.Episodes)
+        {
+            if (i > 0 && lastEpisode.Season1.AirOrder != e.Season1.AirOrder)
+            {
+                var seasontext = "Season " + e.Season1.AirOrder;
+                if (!string.IsNullOrWhiteSpace(e.Season1.Name))
+                {
+                    seasontext = e.Season1.Name;
+                }
+        <text><tr>
+            <td colspan="2" class="adaptseason">
+                <h3>@seasontext</h3>
+            </td>
+        </tr></text>
+            }
+            if (i == 0 && !Model.Adaptation.SingleSeason)
+            {
+                var seasontext = "Season 1";
+                if (!string.IsNullOrWhiteSpace(e.Season1.Name))
+                {
+                    seasontext = e.Season1.Name;
+                }
+        <text><tr>
+            <td colspan="2" class="adaptseason">
+                <h3>@seasontext</h3>
+            </td>
+        </tr></text>
+            }
+        <text>
+        <tr>
+            <td>@Shared.VagueDate(e.Airdate, DatePrecision.Month, true, false)</td>
+            <td>@Html.ActionLink(e.Story1.Name, "Details", "Story", new { e.Story1.ID }, null)</td>
+        </tr>
+        </text>
+            lastEpisode = e;
+            i++;
+        }
+    }
+</table>
+
+<!-- Baring-Gould order -->
+
+<table id="BaringOrder" style="display: none">
+    @{
+        i = 0;
+        foreach (var s in Model.Stories.OrderBy(a => a.Date.BaringGouldStart))
+        {
+            year = s.Date.BaringGouldStart.Year;
+            tenthYear = (int)Math.Floor((double)year / 10);
+            decade = 10 * tenthYear;
+            decadeString = decade + "s";
+            if (i > 0 && lastDecade != decade)
+            {
+        <text><tr>
+            <td colspan="2" class="adaptseason">
+                <h3>@decadeString</h3>
+            </td>
+        </tr></text>
+            }
+            if (i == 0)
+            {
+        <text><tr>
+
+            <td colspan="2" class="adaptseason">
+                <h3>@decadeString</h3>
+            </td>
+        </tr></text>
+            }
+        <text>
+        <tr>
+            @if (s.Date.BaringGouldStart > new DateTime(1891, 5, 1)
+                    && s.Date.BaringGouldStart < new DateTime(1893, 4, 1))
+            {
+                <td><i>@Shared.VagueDate(s.Date.BaringGouldStart, (DatePrecision)s.Date.BaringGouldPrecision, false, true)</i></td>
+                <td><i>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</i></td>
+            }
+            else
+            {
+                <td>@Shared.VagueDate(s.Date.BaringGouldStart, (DatePrecision)s.Date.BaringGouldPrecision, false, true)</td>
+                <td>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</td>
+            }
+        </tr>
+        </text>
+            lastDecade = decade;
+            i++;
+        }
+    }
+</table>
+
+<!-- Keefauver order -->
+
+<table id="KeefOrder" style="display: none">
+    @{
+        i = 0;
+        foreach (var s in Model.Stories.OrderBy(a => a.Date.Keefauver))
+        {
+            year = s.Date.Keefauver.Year;
+            tenthYear = (int)Math.Floor((double)year / 10);
+            decade = 10 * tenthYear;
+            decadeString = decade + "s";
+            if (i > 0 && lastDecade != decade)
+            {
+        <text><tr>
+            <td colspan="2" class="adaptseason">
+                <h3>@decadeString</h3>
+            </td>
+        </tr></text>
+            }
+            if (i == 0)
+            {
+        <text><tr>
+
+            <td colspan="2" class="adaptseason">
+                <h3>@decadeString</h3>
+            </td>
+        </tr></text>
+            }
+        <text>
+        <tr>
+            @if (s.Date.Keefauver > new DateTime(1891, 5, 1)
+                    && s.Date.Keefauver < new DateTime(1893, 4, 1))
+            {
+                <td><i>@Shared.VagueDate(s.Date.Keefauver, DatePrecision.Full, false, true)</i></td>
+                <td><i>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</i></td>
+            }
+            else
+            {
+                <td>@Shared.VagueDate(s.Date.Keefauver, DatePrecision.Full, false, true)</td>
+                <td>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</td>
+            }
+        </tr>
+        </text>
+            lastDecade = decade;
+            i++;
+        }
+    }
+</table>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            changeTheDates(@Model.UserCanonOrder);
+        });
+
+        function changeTheDates(sysNum) {
+            $('#PubOrder').hide(); 
+            $('#BaringOrder').hide(); 
+            $('#KeefOrder').hide();
+            var startYear;
+            var startMonth;
+            var endYear;
+            var endMonth;
+            switch (sysNum) {
+                case @(Baring) :
+                    $('#BaringOrder').show();
+                    startYear = @Model.StartYear[Baring];
+                    startMonth = @Model.StartMonth[Baring];
+                    endYear = @Model.EndYear[Baring];
+                    endMonth = @Model.EndMonth[Baring];
+                    break;
+                case @(Keef) :
+                    $('#KeefOrder').show();
+                    startYear = @Model.StartYear[Keef];
+                    startMonth = @Model.StartMonth[Keef];
+                    endYear = @Model.EndYear[Keef];
+                    endMonth = @Model.EndMonth[Keef];
+                    break;
+                default :
+                    $('#PubOrder').show();
+                    startYear = @Model.StartYear[Publish];
+                    startMonth = @Model.StartMonth[Publish];
+                    endYear = @Model.EndYear[Publish];
+                    endMonth = @Model.EndMonth[Publish];
+            }
+            $('#startYearSpan').text(startYear);
+            spottyTimeline(startYear, startMonth, endYear, endMonth);
+        }
+
+        function spottyTimeline(startYear, startMonth, endYear, endMonth) {
+            var canvas = $('#timeline')[0];
+            var ctx = canvas.getContext('2d');
+
+            if ($('#PubOrder').is(":visible")) {
+                drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx,
+                    @Model.EpisodeDateString[Publish], true);
+                } else if ($('#BaringOrder').is(":visible")) {
+                    drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx,
+                        @Model.EpisodeDateString[Baring], true);
+                } else if ($('#KeefOrder').is(":visible")) {
+                    drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx,
+                        @Model.EpisodeDateString[Keef], true);
+                }
+    }
+    </script>
+}
+

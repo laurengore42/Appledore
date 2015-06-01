@@ -1,0 +1,110 @@
+﻿@using HolmesMVC.Enums
+@model HolmesMVC.Models.ViewModels.ActorView
+
+@{
+    ViewBag.Title = Model.ShortName;
+}
+<section id="details">
+    <h2 class="detailscategory">Actor</h2>
+
+    @if (Model.Pic != null)
+    {
+        <figure class="actorpic">
+            <img class="actorpic" src="@Model.Pic" alt="@Model.ShortName" title="@Model.ShortName"/>
+        </figure>
+    }
+
+    <h2 class="detailsheader">@Model.ShortName</h2>
+
+    <div>
+        <ul class="actordetails">
+            <li>Full name: @Model.LongName</li>
+            @{ string birthdateFormat; }
+            @switch (Model.BirthdatePrecision)
+            {
+                case DatePrecision.Month:
+                    birthdateFormat = "{0:MMMM yyyy}";
+                    break;
+                case DatePrecision.Year:
+                    birthdateFormat = "{0:yyyy}";
+                    break;
+                default:
+                    birthdateFormat = "{0:d MMMM yyyy}";
+                    break;
+            }
+            @{ string deathdateFormat; }
+            @switch (Model.DeathdatePrecision)
+            {
+                case DatePrecision.Month:
+                    deathdateFormat = "{0:MMMM yyyy}";
+                    break;
+                case DatePrecision.Year:
+                    deathdateFormat = "{0:yyyy}";
+                    break;
+                default:
+                    deathdateFormat = "{0:d MMMM yyyy}";
+                    break;
+            }
+
+            @if (Model.Birthdate != null && Model.Deathdate == null)
+            {
+                <li>Born: @string.Format(birthdateFormat, Model.Birthdate) @(Model.Age == null ? string.Empty : "(age " + Model.Age + ")")</li>
+            }
+            else if (Model.Birthdate != null) {
+                <li>Born: @string.Format(birthdateFormat, Model.Birthdate)</li>
+            }
+            else if (Model.YearOfFirstApp != null)
+            {
+                <li>Born: before @Model.YearOfFirstApp</li>
+            }
+            @if (Model.Birthplace != null)
+            {
+                <li>in @Model.Birthplace <a href="https://maps.google.com/maps?q=@Model.Birthplace"><i>(Map)</i></a></li>
+            }
+            @if (Model.Deathdate != null)
+            {
+                <li>Died: @string.Format(deathdateFormat, Model.Deathdate) @(Model.Age == null ? string.Empty : "(aged " + Model.Age + ")")</li>
+            }
+            @if (Model.IMDb != null)
+            {
+                <li>IMDb: <a href="http://www.imdb.com/name/@Html.DisplayFor(model => model.IMDb)">@Model.ShortName</a></li>
+            }
+            else
+            {
+                <li>IMDb: <a href="@string.Format("http://www.imdb.com/find?q=" + Model.ShortName + "&s=all#nm")">@Model.ShortName</a> <i>(link not verified)</i></li>
+            }
+            @if (Model.Wikipedia != null)
+            {
+                <li>Wikipedia: <a href="http://en.wikipedia.org/wiki/@Html.DisplayFor(model => model.Wikipedia)">@Model.Wikipedia</a></li>
+            }
+            else
+            {
+                <li>Wikipedia: <a href="@string.Format("http://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=" + Model.ShortName)">@Model.ShortName</a> <i>(link not verified)</i></li>
+            }
+        </ul>
+    </div>
+    @Html.Action("DatabaseLinks", "Home", new { table = "Actor", id = Model.ID })
+    <section id="historysummary">
+        <div>
+            <ul>
+                @foreach (var historysummary in Model.Summaries)
+                {
+                    <li class="historysummary">@Html.Partial("HistorySummary", historysummary)</li>
+                }
+            </ul>
+        </div>
+    </section>
+</section>
+<section id="historydetails">
+    <div>
+        <table class="lineddetails">
+            <tr>
+                <th colspan="3">Details</th>
+            </tr>
+            @foreach (var history in Model.Histories)
+            {
+                @Html.Partial("History", history)
+            }
+        </table>
+    </div>
+</section>

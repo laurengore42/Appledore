@@ -1,0 +1,22 @@
+﻿@model HolmesMVC.Models.Character
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this character?</h3>
+<fieldset>
+    <legend>Character</legend>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Honorific1.Name) @Html.DisplayFor(model => model.Forename) @Html.DisplayFor(model => model.Surname)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" />
+    </p>
+}

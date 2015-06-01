@@ -1,0 +1,48 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Appearance
+
+@if (Shared.DisplayName(Model.Episode1.Season1.Adaptation1) == "Canon")
+{
+    <div class="editor-field">
+        @Html.HiddenFor(model => model.Actor)
+    </div>
+}
+else if (Model.Actor > 0) // there's already an actor in the URL
+{
+    <div class="editor-field">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Actor, "Actor", new { @class = "inlinelabel" }): @Shared.DisplayName(Model.Actor1)<br />
+            <a onclick="location.replace(killParam(location, 'actor'))">Use different actor</a>
+        </div>
+    </div>
+}
+else // allow user to choose an actor
+{
+    <div id="OldActor">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Actor, "Actor", new { @class = "inlinelabel" }): <input id="actorsearch" name="search" placeholder="Start typing here" type="text" data-list=".actorlist" autocomplete="off">
+        </div>
+        <div class="editor-field">
+            <a onclick="ToggleActorVisible()">New actor</a><br />
+            <ul class="actorlist">
+                @foreach (var a in (List<SelectListItem>)ViewBag.Actor)
+                {
+                    <li><a class="listlink" tabindex="1" href="javascript:location.replace(addParam(location, 'actor', @a.Value));">@a.Text</a></li>
+                }
+            </ul>
+            @Html.ValidationMessageFor(model => model.Actor)
+        </div>
+    </div>
+            
+    <div class="popup" id="AddActor">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Actor, "Actor")
+        </div>
+        Forename:
+            <input id="actorforename" type="text" /><br />
+        Surname:
+            <input id="actorsurname" type="text" /><br />
+        <input type="button" id="actorsave" value="Save" onclick="SaveNewActor()" />
+        <a onclick="ToggleActorVisible()">Use existing actor</a>
+    </div>
+}

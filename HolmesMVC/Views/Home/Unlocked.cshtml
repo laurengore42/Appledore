@@ -1,0 +1,34 @@
+﻿@using HolmesMVC
+@using HolmesMVC.Models
+@{
+    ViewBag.Title = "Unlocked";
+}
+
+<h2>Unlocked Pages</h2>
+
+<div>
+    @{
+        var unlockedHolmes = (Actor)ViewBag.unlockedHolmes;
+        var unlockedActor = (Actor)ViewBag.unlockedActor;
+        var unlockedFilm = (Episode)ViewBag.unlockedFilm;
+        var unlockedEpisode = (Episode)ViewBag.unlockedEpisode;
+    }
+    @if (null != unlockedHolmes)
+    {
+        <text>Why not go fill in this Holmes's details (@ViewBag.unlockedHolmesCount left):<br/>
+            @Html.ActionLink(Shared.ShortName(unlockedHolmes), "Details", "Actor", new { id = unlockedHolmes.ID }, null)<br/></text>
+    }
+    Why not go fill in this canon actor's details (@ViewBag.unlockedActorCount left):<br/>
+    @Html.ActionLink(Shared.ShortName(unlockedActor),"Details","Actor",new { id = unlockedActor.ID},null)
+    <br/>
+    @if (null != unlockedFilm)
+    {
+        <text>Or this film's cast list (@ViewBag.unlockedFilmCount left):<br/>
+            @Html.ActionLink(Shared.DisplayName(unlockedFilm), "Details", "Episode", new { id = unlockedFilm.ID }, null)<br/></text>
+    }
+    else
+    {
+        <text>Or this episode's cast list (@ViewBag.unlockedEpisodeCount left):<br/>
+            @Html.ActionLink(Shared.DisplayName(unlockedEpisode), "Details", "Episode", new { id = unlockedEpisode.ID }, null)<br/></text>
+    }
+</div>

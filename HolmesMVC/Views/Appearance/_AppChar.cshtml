@@ -1,0 +1,43 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Appearance
+
+@if (Model.Character > 0) // there's already a character in the URL
+{
+    <div class="editor-field">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Character, "Character", new { @class = "inlinelabel" }): @Shared.DisplayName(Model.Character1)<br />
+            <a onclick="location.replace(killParam(location, 'character'))">Use different character</a>
+        </div>
+    </div>
+}
+else // allow user to choose a character
+{
+    <div id="OldChar">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Character, "Character", new { @class = "inlinelabel" }): <input id="charsearch" name="search" placeholder="Start typing here" type="text" data-list=".charlist" autocomplete="off">
+        </div>
+        <div class="editor-field">
+            <a onclick=" ToggleCharVisible() ">New character</a><br/>
+            <ul class="charlist">
+                @foreach (var c in (List<SelectListItem>)ViewBag.Character)
+                {
+                    <li><a class="listlink" tabindex="2" href="javascript:location.replace(addParam(location, 'character', @c.Value));">@c.Text</a></li>
+                }
+                    </ul>
+            
+            @Html.ValidationMessageFor(model => model.Character)
+        </div>
+    </div>
+
+    <div class="popup" id="AddChar">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Character, "Character")
+        </div>
+        Forename:
+            <input id="charforename" type="text" /><br />
+        Surname:
+            <input id="charsurname" type="text" /><br />
+        <input type="button" id="charsave" value="Save" onclick="SaveNewChar()" />
+        <a onclick="ToggleCharVisible()">Use existing character</a>
+    </div>
+}

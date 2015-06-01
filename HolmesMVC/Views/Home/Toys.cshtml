@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Toys";
+}
+
+<div id="body">
+    <h2>@ViewBag.Title</h2>
+    
+    <div>
+        @section Scripts {
+            <script>
+                $(document).ready(function() {
+
+                    $("#holmesNum").click(function() {
+                        var target = $('#targetName').val();
+                        $('#testarea').html("Calculating...");
+                        $.ajax({
+                            url: "/Home/HolmesNum",
+                            datatype: "text",
+                            data: { 'targetImdbName': target },
+                            type: "POST",
+                            success: function(data) {
+                                $('#testarea').html(data);
+                            },
+                            error: function(x, t, m) {
+                                if (m === "Internal Server Error") {
+                                    $('#testarea').html("Internal Server Error: unhandled exception during calculation.");
+                                } else {
+                                    alert(t + ":" + m);
+                                    $('#testarea').html(t + ":" + m);
+                                }
+                            }
+                        });
+                    });
+
+                    $("#brettNum").click(function() {
+                        var target = $('#targetName').val();
+                        $('#testarea').html("Calculating...");
+                        $.ajax({
+                            url: "/Home/BrettNum",
+                            datatype: "text",
+                            data: { 'targetImdbName': target },
+                            type: "POST",
+                            success: function(data) {
+                                $('#testarea').html(data);
+                            },
+                            error: function(x, t, m) {
+                                if (m === "Internal Server Error") {
+                                    $('#testarea').html("Internal Server Error: unhandled exception during calculation.");
+                                } else {
+                                    alert(t + ":" + m);
+                                    $('#testarea').html(t + ":" + m);
+                                }
+                            }
+                        });
+                    });
+
+                });
+            </script>
+        }
+        <h3>Holmes-Number Calculator</h3><br/>
+        <div>
+            Enter the name of an actor and press a button. Powered by <a href="http://oracleofbacon.org">the Oracle of Bacon</a>.<br/>
+            Please report any bugs or errors!<br/><br />
+            <input id="targetName" type="text" value="" />
+            <input id="holmesNum" type="button" value="Get Holmes Number" />
+            <input id="brettNum" type="button" value="Get Brett Number (for purists)" /><br/><br />
+
+            <div id="testarea"></div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,113 @@
+﻿@using HolmesMVC.Enums
+@model HolmesMVC.Models.ViewModels.EpisodeView
+
+@{
+    ViewBag.Title = "Edit Episode";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Episode</legend>
+
+        @Html.HiddenFor(model => model.EpId)
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adaptation, "Adaptation")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Adaptation", null, new { id = "AdaptBox", data_url = Url.Action("SeasonBox", "Episode") })
+            @Html.ValidationMessageFor(model => model.Adaptation)
+        </div>
+        
+            @Html.Action("SeasonBox", new { ID = Model.Adaptation, currentSeason = Model.Season })
+        <span id ="SeasonOut">
+        </span>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Story, "Story")
+        </div>
+        <div class="editor-field">
+            <select id="Story" name="Story"> <!-- This is done by hand as the automatic binding only displays 'Final Problem', not 'FINA' -->
+                <option value=""></option>
+                @foreach (var story in ViewBag.Story)
+                {
+                    <option selected="@story.Selected" value="@story.Value">@story.Value - @story.Text</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Story)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Airdate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Airdate, "Date")
+            <select name="AirdatePrecision">
+                <option value="@((int)DatePrecision.Full)" @if (Model.AirdatePrecision == DatePrecision.Full)
+                                  {<text>selected</text>}>Full precision</option>
+                <option value="@((int)DatePrecision.Month)" @if (Model.AirdatePrecision == DatePrecision.Month)
+                                  {<text>selected</text>}>Accurate to month</option>
+                <option value="@((int)DatePrecision.Season)" @if (Model.AirdatePrecision == DatePrecision.Season)
+                                  {<text>selected</text>}>Accurate to season</option>
+                <option value="@((int)DatePrecision.Year)" @if (Model.AirdatePrecision == DatePrecision.Year)
+                                  {<text>selected</text>}>Accurate to year</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.Airdate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Translation) <i><a href="https://translate.google.com/#auto/en/@Model.Title">Automate</a></i>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Translation)
+            @Html.ValidationMessageFor(model => model.Translation)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Episode", "Details", "Episode", new { ID = Model.EpId }, null)
+</div>
+
+@section Scripts {
+    
+
+    @Scripts.Render("~/Scripts/Apdore-editorscripts.js")
+
+    <!-- for SeasonBox -->
+    <script type="text/javascript">
+        $(function() {
+            $("#Season").change(function() {
+                updateSeason();
+            });
+            updateSeason();
+        });
+
+        function updateSeason() {
+            var seasonNum = $("#Season").val();
+            var newEdit = "/Season/Edit/" + seasonNum;
+            $("#editS").attr("href", newEdit);
+            var newDel = "/Season/Delete/" + seasonNum;
+            $("#deleteS").attr("href", newDel);
+        };
+    </script>
+}

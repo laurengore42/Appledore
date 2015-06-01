@@ -1,0 +1,253 @@
+﻿body {
+    margin: 0;
+    border-top: 0;
+}
+
+div.story {
+    max-width: 30em;
+}
+
+div.storyChunk p:first-of-type {
+    text-indent: 1em; /* override 'first paragraph' rule on chunk pages */
+}
+
+title {
+    display: block;
+    font-weight: bold;
+    padding-top: 1.5em;
+    font-size: 1.5em;
+    text-align: center;
+}
+part>title {
+    display: block;
+    padding-top: 2em;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+subtitle {
+    display: block;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+}
+
+div.title-display {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+div.table-of-contents {
+    margin-left: 5%;
+    padding: 0 0 4ex 0;
+}
+
+table.table-of-contents {
+    margin-left: 20%;
+}
+
+td.toc-collection {
+    font-size: large;
+    font-weight: bold;
+    padding: 4ex 0 1ex 0;
+}
+
+td.toc-single-story {
+    font-weight: bold;
+    padding: 4ex 0 0.75ex 1em;
+}
+
+td.toc-collection-story {
+    font-weight: bold;
+    padding-left: 1em;
+}
+
+td.toc-preface {
+    font-weight: bold;
+    padding-left: 1em;
+}
+
+td.toc-part {
+    padding: 0.5ex 0 0 1em;
+    font-style: italic;
+    padding-left: 2em;
+}
+
+td.toc-chapter-number {
+    vertical-align: top;
+    float: right;
+    padding-left: 2em;
+}
+
+td.toc-chapter-name {
+}
+
+p + p, div + p {
+    text-indent: 1em;
+}
+
+.poem {
+    text-align:center;
+}
+
+div.title-display + p {
+    text-indent: 0;
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+    h3.preface {
+        margin-top: 5ex;
+    }
+
+    h3.story {
+        margin-top: 20ex;
+    }
+
+    h4.part-header {
+        margin-top: 12ex;
+    }
+
+    h4.chapter-header {
+        margin-top: 8ex;
+    }
+
+    h4.chapter-subheader {
+        margin-bottom: 1em;
+    }
+
+div.preface-signature {
+    text-align: right;
+    font-style: italic;
+    margin-right: 5%;
+    margin-top: 2ex;
+    margin-bottom: 5ex;
+}
+
+div.telegram {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+p.telegram {
+    margin-bottom: 0;
+}
+
+p.telegram-sender {
+    text-transform: uppercase;
+    font-variant: small-caps;
+    margin-top: 0;
+    text-align: right;
+    padding-right: 5%;
+}
+
+div.telegram-bottomline {
+    text-align: right;
+}
+
+div.letter {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+div.letter-from-location {
+    text-align: right;
+    padding-right: 5ex;
+}
+
+div.letter-date {
+    text-align: right;
+    padding-right: 5ex;
+}
+
+div.letter-subject {
+    text-align: center;
+}
+
+    div.letter-subject + div.letter-address {
+        padding-top: 1ex;
+    }
+
+div.letter-address {
+    font-variant: small-caps;
+    padding-left: 1em;
+}
+
+div.letter-address-plain {
+    padding-left: 1em;
+}
+
+div.letter-block {
+    padding-top: 1ex;
+}
+
+    div.letter-block + div.letter-block {
+        text-indent: 0.75em;
+    }
+
+div.letter-signature {
+    font-variant: small-caps;
+    text-align: right;
+    padding-right: 5ex;
+    padding-top: 1ex;
+}
+
+div.letter-signature-plain {
+    text-align: right;
+    padding-right: 5ex;
+    padding-top: 1ex;
+}
+
+div.letter-postscript {
+    text-indent: 0.75em;
+    padding-top: 1ex;
+}
+
+div.newspaperheadline {
+    text-align: center;
+    font-variant: small-caps;
+}
+
+hr.small-print {
+    margin-top: 4cm;
+}
+
+div.small-print {
+    font-size: small;
+}
+
+td.label-left {
+    vertical-align: top;
+    text-align: right;
+}
+
+td.label-right {
+    vertical-align: top;
+}
+
+p.picture {
+    text-align: center;
+    text-indent: 0;
+}
+
+span.opening {
+    font-variant: small-caps;
+}
+
+span.italic-text {
+    font-style: italic;
+}
+
+span.plain-font {
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+}
+
+div.labeled-list-title {
+    text-indent: 0;
+    margin: 1ex 0 1ex 0;
+}

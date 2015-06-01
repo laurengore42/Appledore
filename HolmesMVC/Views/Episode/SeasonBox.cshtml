@@ -1,0 +1,36 @@
+﻿@model HolmesMVC.Models.ViewModels.EpisodeView
+
+<div class="editor-label">
+    <label for="Season">Season</label>
+</div>
+<div class="editor-field">
+    @Html.DropDownList("Season", ViewBag.SeasonList as SelectList, new { onchange="updateSeasonLinks();"}) @Html.ActionLink("New Season", "Create", "Season", new { ID = Model.Adaptation }, null) |
+
+    <span id="editLink">@Html.ActionLink("Edit Season","Edit","Season",new { ID = Model.Season}, null)</span>  |
+    <span id="delLink">@Html.ActionLink("Delete Season","Delete","Season",new { ID = Model.Season}, null)</span>
+    <input hidden type="text" id="oldSeason" value="@Model.Season" />
+    <span class="field-validation-valid" data-valmsg-for="Season" data-valmsg-replace="true"></span>
+</div>
+
+<script>
+    function updateSeasonLinks()
+    {
+        // get the Season value from the dropdown list
+        var newSeason = $('#Season').val();
+
+        // update the Edit and Delete links
+        var editLink = $('#editLink');
+        var delLink = $('#delLink');
+
+        var oldEdit = editLink.html();
+        var oldDel = delLink.html();
+
+        var oldSeason = $('#oldSeason').val();
+
+        editLink.html(oldEdit.replace(oldSeason, newSeason));
+        delLink.html(oldDel.replace(oldSeason, newSeason));
+
+        $('#oldSeason').val(newSeason);
+    }
+
+</script>

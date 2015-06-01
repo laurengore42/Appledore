@@ -1,0 +1,1356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5E95CFF-112E-496E-B13E-637718BE1817}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HolmesMVC</RootNamespace>
+    <AssemblyName>HolmesMVC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.0\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BaconXml.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActorController.cs" />
+    <Compile Include="Controllers\AdaptationController.cs" />
+    <Compile Include="Controllers\AppearanceController.cs" />
+    <Compile Include="Controllers\CanonController.cs" />
+    <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\EpisodeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HonorificController.cs" />
+    <Compile Include="Controllers\MediumController.cs" />
+    <Compile Include="Controllers\ReferenceController.cs" />
+    <Compile Include="Controllers\StoryController.cs" />
+    <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.cs" />
+    <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.Designer.cs">
+      <DependentUpon>201503301626341_option to translate episodes and adaptations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503301831243_translations for season names.cs" />
+    <Compile Include="Migrations\201503301831243_translations for season names.Designer.cs">
+      <DependentUpon>201503301831243_translations for season names.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\MultiActor.cs" />
+    <Compile Include="Models\ViewModels\ToyHolmes.cs" />
+    <Compile Include="Enums\CanonOrder.cs" />
+    <Compile Include="Enums\DatePrecision.cs" />
+    <Compile Include="HolmesDbController.cs" />
+    <Compile Include="Migrations\201502251210263_user has preferred canon order.cs" />
+    <Compile Include="Migrations\201502251210263_user has preferred canon order.Designer.cs">
+      <DependentUpon>201502251210263_user has preferred canon order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503161512450_actor imdbname in database.cs" />
+    <Compile Include="Migrations\201503161512450_actor imdbname in database.Designer.cs">
+      <DependentUpon>201503161512450_actor imdbname in database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\AdaptIndexView.cs" />
+    <Compile Include="Models\ViewModels\SearchItem.cs" />
+    <Compile Include="Services\IStoryXmlRetriever.cs" />
+    <Compile Include="Migrations\201502181457490_initialmigration.cs" />
+    <Compile Include="Migrations\201502181457490_initialmigration.Designer.cs">
+      <DependentUpon>201502181457490_initialmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502181517015_put limits back on actors.cs" />
+    <Compile Include="Migrations\201502181517015_put limits back on actors.Designer.cs">
+      <DependentUpon>201502181517015_put limits back on actors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Actor.cs" />
+    <Compile Include="Models\Adaptation.cs" />
+    <Compile Include="Models\Appearance.cs" />
+    <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\Date.cs" />
+    <Compile Include="Models\Episode.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\HolmesDBEntities.cs" />
+    <Compile Include="Models\Honorific.cs" />
+    <Compile Include="Models\Mapping\ActorMap.cs" />
+    <Compile Include="Models\Mapping\AdaptationMap.cs" />
+    <Compile Include="Models\Mapping\AppearanceMap.cs" />
+    <Compile Include="Models\Mapping\CharacterMap.cs" />
+    <Compile Include="Models\Mapping\DateMap.cs" />
+    <Compile Include="Models\Mapping\EpisodeMap.cs" />
+    <Compile Include="Models\Mapping\GenderMap.cs" />
+    <Compile Include="Models\Mapping\HonorificMap.cs" />
+    <Compile Include="Models\Mapping\MediumMap.cs" />
+    <Compile Include="Models\Mapping\ReferenceMap.cs" />
+    <Compile Include="Models\Mapping\RenameMap.cs" />
+    <Compile Include="Models\Mapping\SeasonMap.cs" />
+    <Compile Include="Models\Mapping\SpeciesMap.cs" />
+    <Compile Include="Models\Mapping\StoryMap.cs" />
+    <Compile Include="Models\Mapping\UserProfileMap.cs" />
+    <Compile Include="Models\Mapping\webpages_MembershipMap.cs" />
+    <Compile Include="Models\Mapping\webpages_OAuthMembershipMap.cs" />
+    <Compile Include="Models\Mapping\webpages_RolesMap.cs" />
+    <Compile Include="Models\Mapping\webpages_UsersInRolesMap.cs" />
+    <Compile Include="Models\Medium.cs" />
+    <Compile Include="Controllers\RenameController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SeasonController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reference.cs" />
+    <Compile Include="Models\Rename.cs" />
+    <Compile Include="Models\Season.cs" />
+    <Compile Include="Models\Species.cs" />
+    <Compile Include="Models\Story.cs" />
+    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\ViewModels\CanonView.cs" />
+    <Compile Include="Models\ViewModels\CharacterHistory.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ViewModels\ActorHistory.cs" />
+    <Compile Include="Models\ViewModels\ActorHistorySummary.cs" />
+    <Compile Include="Models\ViewModels\CharacterHistorySummary.cs" />
+    <Compile Include="Models\ViewModelContext.cs" />
+    <Compile Include="Models\ViewModels\ActorView.cs" />
+    <Compile Include="Models\ViewModels\AdaptView.cs" />
+    <Compile Include="Models\ViewModels\AnnivEpisode.cs" />
+    <Compile Include="Models\ViewModels\BirthdayActor.cs" />
+    <Compile Include="Models\ViewModels\CharView.cs" />
+    <Compile Include="Models\ViewModels\EpisodeView.cs" />
+    <Compile Include="Models\ViewModels\MassAdd.cs" />
+    <Compile Include="Models\ViewModels\RandomView.cs" />
+    <Compile Include="Models\ViewModels\RenameView.cs" />
+    <Compile Include="Models\ViewModels\StoryView.cs" />
+    <Compile Include="Models\webpages_Membership.cs" />
+    <Compile Include="Models\webpages_OAuthMembership.cs" />
+    <Compile Include="Models\webpages_Roles.cs" />
+    <Compile Include="Models\webpages_UsersInRoles.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared.cs" />
+    <Compile Include="Services\StoryXmlRetriever.svc.cs">
+      <DependentUpon>StoryXmlRetriever.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Stopwatch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Accordion.css" />
+    <Content Include="Content\CanoPics\danc-1.png" />
+    <Content Include="Content\CanoPics\danc-2.png" />
+    <Content Include="Content\CanoPics\danc-3.png" />
+    <Content Include="Content\CanoPics\danc-4.png" />
+    <Content Include="Content\CanoPics\danc-5.png" />
+    <Content Include="Content\CanoPics\danc-6.png" />
+    <Content Include="Content\CanoPics\danc-7.png" />
+    <Content Include="Content\CanoPics\danc-8.png" />
+    <Content Include="Content\CanoPics\danc-9.png" />
+    <Content Include="Content\CanoPics\gold-1.png" />
+    <Content Include="Content\CanoPics\miss-1.png" />
+    <Content Include="Content\CanoPics\miss-2.png" />
+    <Content Include="Content\CanoPics\nava-1.png" />
+    <Content Include="Content\CanoPics\prio-1.png" />
+    <Content Include="Content\CanoPics\reig-1.png" />
+    <Content Include="Content\CanoPics\reig-2.png" />
+    <Content Include="Content\Illustrations\3gab-01.jpg" />
+    <Content Include="Content\Illustrations\3gab-02.jpg" />
+    <Content Include="Content\Illustrations\3gab-03.jpg" />
+    <Content Include="Content\Illustrations\3gab-04.jpg" />
+    <Content Include="Content\Illustrations\3gar-01.jpg" />
+    <Content Include="Content\Illustrations\3gar-02.jpg" />
+    <Content Include="Content\Illustrations\3gar-04.jpg" />
+    <Content Include="Content\Illustrations\3gar-05.jpg" />
+    <Content Include="Content\Illustrations\3stu-01.jpg" />
+    <Content Include="Content\Illustrations\3stu-02.jpg" />
+    <Content Include="Content\Illustrations\3stu-03.jpg" />
+    <Content Include="Content\Illustrations\3stu-04.jpg" />
+    <Content Include="Content\Illustrations\3stu-05.jpg" />
+    <Content Include="Content\Illustrations\3stu-06.jpg" />
+    <Content Include="Content\Illustrations\3stu-07.jpg" />
+    <Content Include="Content\Illustrations\3stu-11.gif" />
+    <Content Include="Content\Illustrations\3stu-12.gif" />
+    <Content Include="Content\Illustrations\3stu-13.gif" />
+    <Content Include="Content\Illustrations\3stu-14.gif" />
+    <Content Include="Content\Illustrations\3stu-50.jpg" />
+    <Content Include="Content\Illustrations\abbe-01.jpg" />
+    <Content Include="Content\Illustrations\abbe-02.jpg" />
+    <Content Include="Content\Illustrations\abbe-03.jpg" />
+    <Content Include="Content\Illustrations\abbe-04.jpg" />
+    <Content Include="Content\Illustrations\abbe-05.jpg" />
+    <Content Include="Content\Illustrations\abbe-06.jpg" />
+    <Content Include="Content\Illustrations\abbe-07.jpg" />
+    <Content Include="Content\Illustrations\abbe-08.jpg" />
+    <Content Include="Content\Illustrations\abbe-11.gif" />
+    <Content Include="Content\Illustrations\abbe-12.gif" />
+    <Content Include="Content\Illustrations\abbe-13.gif" />
+    <Content Include="Content\Illustrations\abbe-50.jpg" />
+    <Content Include="Content\Illustrations\adven.jpg" />
+    <Content Include="Content\Illustrations\bery-01.jpg" />
+    <Content Include="Content\Illustrations\bery-02.jpg" />
+    <Content Include="Content\Illustrations\bery-03.jpg" />
+    <Content Include="Content\Illustrations\bery-04.jpg" />
+    <Content Include="Content\Illustrations\bery-05.jpg" />
+    <Content Include="Content\Illustrations\bery-06.jpg" />
+    <Content Include="Content\Illustrations\bery-07.jpg" />
+    <Content Include="Content\Illustrations\bery-08.jpg" />
+    <Content Include="Content\Illustrations\bery-09.jpg" />
+    <Content Include="Content\Illustrations\bery-21.jpg" />
+    <Content Include="Content\Illustrations\bery-22.jpg" />
+    <Content Include="Content\Illustrations\bery-23.jpg" />
+    <Content Include="Content\Illustrations\bery-24.jpg" />
+    <Content Include="Content\Illustrations\bery-25.jpg" />
+    <Content Include="Content\Illustrations\bery-26.jpg" />
+    <Content Include="Content\Illustrations\bery-27.jpg" />
+    <Content Include="Content\Illustrations\blac-01.jpg" />
+    <Content Include="Content\Illustrations\blac-02.jpg" />
+    <Content Include="Content\Illustrations\blac-03.jpg" />
+    <Content Include="Content\Illustrations\blac-04.jpg" />
+    <Content Include="Content\Illustrations\blac-05.jpg" />
+    <Content Include="Content\Illustrations\blac-06.jpg" />
+    <Content Include="Content\Illustrations\blac-07.jpg" />
+    <Content Include="Content\Illustrations\blac-11.gif" />
+    <Content Include="Content\Illustrations\blac-12.gif" />
+    <Content Include="Content\Illustrations\blac-13.gif" />
+    <Content Include="Content\Illustrations\blac-50.jpg" />
+    <Content Include="Content\Illustrations\blan-01.jpg" />
+    <Content Include="Content\Illustrations\blan-02.jpg" />
+    <Content Include="Content\Illustrations\blan-03.jpg" />
+    <Content Include="Content\Illustrations\blan-05.jpg" />
+    <Content Include="Content\Illustrations\blue-01.jpg" />
+    <Content Include="Content\Illustrations\blue-02.jpg" />
+    <Content Include="Content\Illustrations\blue-03.jpg" />
+    <Content Include="Content\Illustrations\blue-04.jpg" />
+    <Content Include="Content\Illustrations\blue-05.jpg" />
+    <Content Include="Content\Illustrations\blue-06.jpg" />
+    <Content Include="Content\Illustrations\blue-07.jpg" />
+    <Content Include="Content\Illustrations\blue-08.jpg" />
+    <Content Include="Content\Illustrations\blue-21.jpg" />
+    <Content Include="Content\Illustrations\blue-22.jpg" />
+    <Content Include="Content\Illustrations\blue-23.jpg" />
+    <Content Include="Content\Illustrations\blue-24.jpg" />
+    <Content Include="Content\Illustrations\blue-25.jpg" />
+    <Content Include="Content\Illustrations\blue-26.jpg" />
+    <Content Include="Content\Illustrations\blue-27.jpg" />
+    <Content Include="Content\Illustrations\bosc-01.jpg" />
+    <Content Include="Content\Illustrations\bosc-02.jpg" />
+    <Content Include="Content\Illustrations\bosc-03.jpg" />
+    <Content Include="Content\Illustrations\bosc-04.jpg" />
+    <Content Include="Content\Illustrations\bosc-05.jpg" />
+    <Content Include="Content\Illustrations\bosc-06.jpg" />
+    <Content Include="Content\Illustrations\bosc-07.jpg" />
+    <Content Include="Content\Illustrations\bosc-08.jpg" />
+    <Content Include="Content\Illustrations\bosc-09.jpg" />
+    <Content Include="Content\Illustrations\bosc-10.jpg" />
+    <Content Include="Content\Illustrations\bosc-21.jpg" />
+    <Content Include="Content\Illustrations\bosc-22.jpg" />
+    <Content Include="Content\Illustrations\bosc-23.jpg" />
+    <Content Include="Content\Illustrations\bosc-24.jpg" />
+    <Content Include="Content\Illustrations\bosc-25.jpg" />
+    <Content Include="Content\Illustrations\bosc-26.jpg" />
+    <Content Include="Content\Illustrations\bruc-01.jpg" />
+    <Content Include="Content\Illustrations\bruc-02.jpg" />
+    <Content Include="Content\Illustrations\bruc-03.jpg" />
+    <Content Include="Content\Illustrations\bruc-04.jpg" />
+    <Content Include="Content\Illustrations\bruc-05.jpg" />
+    <Content Include="Content\Illustrations\bruc-06.jpg" />
+    <Content Include="Content\Illustrations\card-01.jpg" />
+    <Content Include="Content\Illustrations\card-02.jpg" />
+    <Content Include="Content\Illustrations\card-03.jpg" />
+    <Content Include="Content\Illustrations\card-04.jpg" />
+    <Content Include="Content\Illustrations\card-05.jpg" />
+    <Content Include="Content\Illustrations\card-06.jpg" />
+    <Content Include="Content\Illustrations\card-07.jpg" />
+    <Content Include="Content\Illustrations\card-08.jpg" />
+    <Content Include="Content\Illustrations\card-11.gif" />
+    <Content Include="Content\Illustrations\card-12.gif" />
+    <Content Include="Content\Illustrations\card-13.gif" />
+    <Content Include="Content\Illustrations\card-14.gif" />
+    <Content Include="Content\Illustrations\chas-01.jpg" />
+    <Content Include="Content\Illustrations\chas-02.jpg" />
+    <Content Include="Content\Illustrations\chas-03.jpg" />
+    <Content Include="Content\Illustrations\chas-04.jpg" />
+    <Content Include="Content\Illustrations\chas-05.jpg" />
+    <Content Include="Content\Illustrations\chas-06.jpg" />
+    <Content Include="Content\Illustrations\chas-11.gif" />
+    <Content Include="Content\Illustrations\chas-12.gif" />
+    <Content Include="Content\Illustrations\chas-13.gif" />
+    <Content Include="Content\Illustrations\chas-14.gif" />
+    <Content Include="Content\Illustrations\chas-15.gif" />
+    <Content Include="Content\Illustrations\copp-01.jpg" />
+    <Content Include="Content\Illustrations\copp-02.jpg" />
+    <Content Include="Content\Illustrations\copp-03.jpg" />
+    <Content Include="Content\Illustrations\copp-04.jpg" />
+    <Content Include="Content\Illustrations\copp-05.jpg" />
+    <Content Include="Content\Illustrations\copp-06.jpg" />
+    <Content Include="Content\Illustrations\copp-07.jpg" />
+    <Content Include="Content\Illustrations\copp-08.jpg" />
+    <Content Include="Content\Illustrations\copp-09.jpg" />
+    <Content Include="Content\Illustrations\copp-21.jpg" />
+    <Content Include="Content\Illustrations\copp-22.jpg" />
+    <Content Include="Content\Illustrations\copp-23.jpg" />
+    <Content Include="Content\Illustrations\copp-24.jpg" />
+    <Content Include="Content\Illustrations\copp-25.jpg" />
+    <Content Include="Content\Illustrations\copp-26.jpg" />
+    <Content Include="Content\Illustrations\copp-27.jpg" />
+    <Content Include="Content\Illustrations\cree-01.jpg" />
+    <Content Include="Content\Illustrations\cree-02.jpg" />
+    <Content Include="Content\Illustrations\cree-03.jpg" />
+    <Content Include="Content\Illustrations\cree-04.jpg" />
+    <Content Include="Content\Illustrations\cree-05.jpg" />
+    <Content Include="Content\Illustrations\croo-01.jpg" />
+    <Content Include="Content\Illustrations\croo-02.jpg" />
+    <Content Include="Content\Illustrations\croo-03.jpg" />
+    <Content Include="Content\Illustrations\croo-04.jpg" />
+    <Content Include="Content\Illustrations\croo-05.jpg" />
+    <Content Include="Content\Illustrations\croo-06.jpg" />
+    <Content Include="Content\Illustrations\croo-07.jpg" />
+    <Content Include="Content\Illustrations\croo-11.gif" />
+    <Content Include="Content\Illustrations\croo-12.jpg" />
+    <Content Include="Content\Illustrations\danc-01.jpg" />
+    <Content Include="Content\Illustrations\danc-02.jpg" />
+    <Content Include="Content\Illustrations\danc-03.jpg" />
+    <Content Include="Content\Illustrations\danc-04.jpg" />
+    <Content Include="Content\Illustrations\danc-05.jpg" />
+    <Content Include="Content\Illustrations\danc-06.jpg" />
+    <Content Include="Content\Illustrations\danc-07.jpg" />
+    <Content Include="Content\Illustrations\danc-11.gif" />
+    <Content Include="Content\Illustrations\danc-12.gif" />
+    <Content Include="Content\Illustrations\danc-13.gif" />
+    <Content Include="Content\Illustrations\danc-51.gif" />
+    <Content Include="Content\Illustrations\devi-01.jpg" />
+    <Content Include="Content\Illustrations\devi-02.jpg" />
+    <Content Include="Content\Illustrations\devi-03.jpg" />
+    <Content Include="Content\Illustrations\devi-04.jpg" />
+    <Content Include="Content\Illustrations\devi-05.jpg" />
+    <Content Include="Content\Illustrations\devi-05b.jpg" />
+    <Content Include="Content\Illustrations\devi-06.jpg" />
+    <Content Include="Content\Illustrations\devi-07.jpg" />
+    <Content Include="Content\Illustrations\dyin-01.jpg" />
+    <Content Include="Content\Illustrations\dyin-02.jpg" />
+    <Content Include="Content\Illustrations\dyin-03.jpg" />
+    <Content Include="Content\Illustrations\dyin-04.jpg" />
+    <Content Include="Content\Illustrations\dyin-51.gif" />
+    <Content Include="Content\Illustrations\empt-01.jpg" />
+    <Content Include="Content\Illustrations\empt-02.jpg" />
+    <Content Include="Content\Illustrations\empt-03.jpg" />
+    <Content Include="Content\Illustrations\empt-04.jpg" />
+    <Content Include="Content\Illustrations\empt-05.jpg" />
+    <Content Include="Content\Illustrations\empt-06.jpg" />
+    <Content Include="Content\Illustrations\empt-07.jpg" />
+    <Content Include="Content\Illustrations\empt-50.jpg" />
+    <Content Include="Content\Illustrations\engr-01.jpg" />
+    <Content Include="Content\Illustrations\engr-02.jpg" />
+    <Content Include="Content\Illustrations\engr-03.jpg" />
+    <Content Include="Content\Illustrations\engr-04.jpg" />
+    <Content Include="Content\Illustrations\engr-05.jpg" />
+    <Content Include="Content\Illustrations\engr-06.jpg" />
+    <Content Include="Content\Illustrations\engr-07.jpg" />
+    <Content Include="Content\Illustrations\engr-08.jpg" />
+    <Content Include="Content\Illustrations\engr-21.jpg" />
+    <Content Include="Content\Illustrations\engr-22.jpg" />
+    <Content Include="Content\Illustrations\engr-23.jpg" />
+    <Content Include="Content\Illustrations\engr-24.jpg" />
+    <Content Include="Content\Illustrations\engr-25.jpg" />
+    <Content Include="Content\Illustrations\engr-26.jpg" />
+    <Content Include="Content\Illustrations\fina-01.jpg" />
+    <Content Include="Content\Illustrations\fina-02.jpg" />
+    <Content Include="Content\Illustrations\fina-03.jpg" />
+    <Content Include="Content\Illustrations\fina-04.jpg" />
+    <Content Include="Content\Illustrations\fina-05.jpg" />
+    <Content Include="Content\Illustrations\fina-06.jpg" />
+    <Content Include="Content\Illustrations\fina-07.jpg" />
+    <Content Include="Content\Illustrations\fina-08.jpg" />
+    <Content Include="Content\Illustrations\fina-09.jpg" />
+    <Content Include="Content\Illustrations\five-01.jpg" />
+    <Content Include="Content\Illustrations\five-02.jpg" />
+    <Content Include="Content\Illustrations\five-03.jpg" />
+    <Content Include="Content\Illustrations\five-04.jpg" />
+    <Content Include="Content\Illustrations\five-05.jpg" />
+    <Content Include="Content\Illustrations\five-06.jpg" />
+    <Content Include="Content\Illustrations\five-21.jpg" />
+    <Content Include="Content\Illustrations\five-22.jpg" />
+    <Content Include="Content\Illustrations\five-23.jpg" />
+    <Content Include="Content\Illustrations\five-24.jpg" />
+    <Content Include="Content\Illustrations\five-25.jpg" />
+    <Content Include="Content\Illustrations\glor-01.jpg" />
+    <Content Include="Content\Illustrations\glor-02.jpg" />
+    <Content Include="Content\Illustrations\glor-03.jpg" />
+    <Content Include="Content\Illustrations\glor-04.jpg" />
+    <Content Include="Content\Illustrations\glor-05.jpg" />
+    <Content Include="Content\Illustrations\glor-06.jpg" />
+    <Content Include="Content\Illustrations\glor-07.jpg" />
+    <Content Include="Content\Illustrations\glor-11.gif" />
+    <Content Include="Content\Illustrations\glor-12.jpg" />
+    <Content Include="Content\Illustrations\gold-01.jpg" />
+    <Content Include="Content\Illustrations\gold-02.jpg" />
+    <Content Include="Content\Illustrations\gold-03.jpg" />
+    <Content Include="Content\Illustrations\gold-04.jpg" />
+    <Content Include="Content\Illustrations\gold-05.jpg" />
+    <Content Include="Content\Illustrations\gold-06.jpg" />
+    <Content Include="Content\Illustrations\gold-07.jpg" />
+    <Content Include="Content\Illustrations\gold-08.jpg" />
+    <Content Include="Content\Illustrations\gold-50.jpg" />
+    <Content Include="Content\Illustrations\gree-01.jpg" />
+    <Content Include="Content\Illustrations\gree-02.jpg" />
+    <Content Include="Content\Illustrations\gree-03.jpg" />
+    <Content Include="Content\Illustrations\gree-04.jpg" />
+    <Content Include="Content\Illustrations\gree-05.jpg" />
+    <Content Include="Content\Illustrations\gree-06.jpg" />
+    <Content Include="Content\Illustrations\gree-07.jpg" />
+    <Content Include="Content\Illustrations\gree-08.jpg" />
+    <Content Include="Content\Illustrations\gree-11.gif" />
+    <Content Include="Content\Illustrations\gree-12.jpg" />
+    <Content Include="Content\Illustrations\holmes.jpg" />
+    <Content Include="Content\Illustrations\houn-00.jpg" />
+    <Content Include="Content\Illustrations\houn-01.jpg" />
+    <Content Include="Content\Illustrations\houn-02.jpg" />
+    <Content Include="Content\Illustrations\houn-03.jpg" />
+    <Content Include="Content\Illustrations\houn-04.jpg" />
+    <Content Include="Content\Illustrations\houn-05.jpg" />
+    <Content Include="Content\Illustrations\houn-06.jpg" />
+    <Content Include="Content\Illustrations\houn-07.jpg" />
+    <Content Include="Content\Illustrations\houn-08.jpg" />
+    <Content Include="Content\Illustrations\houn-09.jpg" />
+    <Content Include="Content\Illustrations\houn-10.jpg" />
+    <Content Include="Content\Illustrations\houn-11.jpg" />
+    <Content Include="Content\Illustrations\houn-12.jpg" />
+    <Content Include="Content\Illustrations\houn-13.jpg" />
+    <Content Include="Content\Illustrations\houn-14.jpg" />
+    <Content Include="Content\Illustrations\houn-15.jpg" />
+    <Content Include="Content\Illustrations\houn-16.jpg" />
+    <Content Include="Content\Illustrations\houn-17.jpg" />
+    <Content Include="Content\Illustrations\houn-18.jpg" />
+    <Content Include="Content\Illustrations\houn-19.jpg" />
+    <Content Include="Content\Illustrations\houn-20.jpg" />
+    <Content Include="Content\Illustrations\houn-21.jpg" />
+    <Content Include="Content\Illustrations\houn-22.jpg" />
+    <Content Include="Content\Illustrations\houn-23.jpg" />
+    <Content Include="Content\Illustrations\houn-24.jpg" />
+    <Content Include="Content\Illustrations\houn-25.jpg" />
+    <Content Include="Content\Illustrations\houn-26.jpg" />
+    <Content Include="Content\Illustrations\houn-27.jpg" />
+    <Content Include="Content\Illustrations\houn-28.jpg" />
+    <Content Include="Content\Illustrations\houn-29.jpg" />
+    <Content Include="Content\Illustrations\houn-30.jpg" />
+    <Content Include="Content\Illustrations\houn-31.jpg" />
+    <Content Include="Content\Illustrations\houn-32.jpg" />
+    <Content Include="Content\Illustrations\houn-33.jpg" />
+    <Content Include="Content\Illustrations\houn-34.jpg" />
+    <Content Include="Content\Illustrations\houn-35.jpg" />
+    <Content Include="Content\Illustrations\houn-36.jpg" />
+    <Content Include="Content\Illustrations\houn-37.jpg" />
+    <Content Include="Content\Illustrations\houn-38.jpg" />
+    <Content Include="Content\Illustrations\houn-39.jpg" />
+    <Content Include="Content\Illustrations\houn-40.jpg" />
+    <Content Include="Content\Illustrations\houn-41.jpg" />
+    <Content Include="Content\Illustrations\houn-42.jpg" />
+    <Content Include="Content\Illustrations\houn-43.jpg" />
+    <Content Include="Content\Illustrations\houn-44.jpg" />
+    <Content Include="Content\Illustrations\houn-45.jpg" />
+    <Content Include="Content\Illustrations\houn-46.jpg" />
+    <Content Include="Content\Illustrations\houn-47.jpg" />
+    <Content Include="Content\Illustrations\houn-48.jpg" />
+    <Content Include="Content\Illustrations\houn-49.jpg" />
+    <Content Include="Content\Illustrations\houn-50.jpg" />
+    <Content Include="Content\Illustrations\houn-51.jpg" />
+    <Content Include="Content\Illustrations\houn-52.jpg" />
+    <Content Include="Content\Illustrations\houn-53.jpg" />
+    <Content Include="Content\Illustrations\houn-54.jpg" />
+    <Content Include="Content\Illustrations\houn-55.jpg" />
+    <Content Include="Content\Illustrations\houn-56.jpg" />
+    <Content Include="Content\Illustrations\houn-57.jpg" />
+    <Content Include="Content\Illustrations\houn-58.jpg" />
+    <Content Include="Content\Illustrations\houn-59.jpg" />
+    <Content Include="Content\Illustrations\houn-60.jpg" />
+    <Content Include="Content\Illustrations\iden-01.jpg" />
+    <Content Include="Content\Illustrations\iden-02.jpg" />
+    <Content Include="Content\Illustrations\iden-03.jpg" />
+    <Content Include="Content\Illustrations\iden-04.jpg" />
+    <Content Include="Content\Illustrations\iden-05.jpg" />
+    <Content Include="Content\Illustrations\iden-06.jpg" />
+    <Content Include="Content\Illustrations\iden-07.jpg" />
+    <Content Include="Content\Illustrations\iden-21.jpg" />
+    <Content Include="Content\Illustrations\iden-22.jpg" />
+    <Content Include="Content\Illustrations\iden-23.jpg" />
+    <Content Include="Content\Illustrations\iden-24.jpg" />
+    <Content Include="Content\Illustrations\iden-25.jpg" />
+    <Content Include="Content\Illustrations\illu-01.jpg" />
+    <Content Include="Content\Illustrations\illu-02.jpg" />
+    <Content Include="Content\Illustrations\illu-03.jpg" />
+    <Content Include="Content\Illustrations\illu-04.jpg" />
+    <Content Include="Content\Illustrations\illu-05.jpg" />
+    <Content Include="Content\Illustrations\illu-06.jpg" />
+    <Content Include="Content\Illustrations\illu-07.jpg" />
+    <Content Include="Content\Illustrations\illu-08.jpg" />
+    <Content Include="Content\Illustrations\lady-01.jpg" />
+    <Content Include="Content\Illustrations\lady-02.jpg" />
+    <Content Include="Content\Illustrations\lady-03.jpg" />
+    <Content Include="Content\Illustrations\lady-04.jpg" />
+    <Content Include="Content\Illustrations\lady-05.jpg" />
+    <Content Include="Content\Illustrations\last-01.jpg" />
+    <Content Include="Content\Illustrations\last-02.jpg" />
+    <Content Include="Content\Illustrations\last-03.jpg" />
+    <Content Include="Content\Illustrations\lion-01.jpg" />
+    <Content Include="Content\Illustrations\lion-02.jpg" />
+    <Content Include="Content\Illustrations\lion-03.jpg" />
+    <Content Include="Content\Illustrations\lion-51.gif" />
+    <Content Include="Content\Illustrations\lysand01.jpg" />
+    <Content Include="Content\Illustrations\lysand02.jpg" />
+    <Content Include="Content\Illustrations\lysand03.jpg" />
+    <Content Include="Content\Illustrations\lysand04.jpg" />
+    <Content Include="Content\Illustrations\lysand05.jpg" />
+    <Content Include="Content\Illustrations\lysand06.jpg" />
+    <Content Include="Content\Illustrations\lysand07.jpg" />
+    <Content Include="Content\Illustrations\lysand08.jpg" />
+    <Content Include="Content\Illustrations\lysand09.jpg" />
+    <Content Include="Content\Illustrations\maza-01.jpg" />
+    <Content Include="Content\Illustrations\maza-02.jpg" />
+    <Content Include="Content\Illustrations\maza-03.jpg" />
+    <Content Include="Content\Illustrations\memo-jot.gif" />
+    <Content Include="Content\Illustrations\miss-01.jpg" />
+    <Content Include="Content\Illustrations\miss-02.jpg" />
+    <Content Include="Content\Illustrations\miss-03.jpg" />
+    <Content Include="Content\Illustrations\miss-04.jpg" />
+    <Content Include="Content\Illustrations\miss-05.jpg" />
+    <Content Include="Content\Illustrations\miss-06.jpg" />
+    <Content Include="Content\Illustrations\miss-07.jpg" />
+    <Content Include="Content\Illustrations\miss-11.gif" />
+    <Content Include="Content\Illustrations\miss-12.gif" />
+    <Content Include="Content\Illustrations\miss-13.gif" />
+    <Content Include="Content\Illustrations\miss-14.gif" />
+    <Content Include="Content\Illustrations\miss-50.jpg" />
+    <Content Include="Content\Illustrations\musg-01.jpg" />
+    <Content Include="Content\Illustrations\musg-02.jpg" />
+    <Content Include="Content\Illustrations\musg-03.jpg" />
+    <Content Include="Content\Illustrations\musg-04.jpg" />
+    <Content Include="Content\Illustrations\musg-05.jpg" />
+    <Content Include="Content\Illustrations\musg-06.jpg" />
+    <Content Include="Content\Illustrations\musg-11.jpg" />
+    <Content Include="Content\Illustrations\musg-12.jpg" />
+    <Content Include="Content\Illustrations\nava-01.jpg" />
+    <Content Include="Content\Illustrations\nava-02.jpg" />
+    <Content Include="Content\Illustrations\nava-03.jpg" />
+    <Content Include="Content\Illustrations\nava-04.jpg" />
+    <Content Include="Content\Illustrations\nava-05.jpg" />
+    <Content Include="Content\Illustrations\nava-06.jpg" />
+    <Content Include="Content\Illustrations\nava-07.jpg" />
+    <Content Include="Content\Illustrations\nava-08.jpg" />
+    <Content Include="Content\Illustrations\nava-09.jpg" />
+    <Content Include="Content\Illustrations\nava-10.jpg" />
+    <Content Include="Content\Illustrations\nava-11.jpg" />
+    <Content Include="Content\Illustrations\nava-12.jpg" />
+    <Content Include="Content\Illustrations\nava-13.jpg" />
+    <Content Include="Content\Illustrations\nava-14.jpg" />
+    <Content Include="Content\Illustrations\nava-15.jpg" />
+    <Content Include="Content\Illustrations\nava-21.gif" />
+    <Content Include="Content\Illustrations\nava-22.gif" />
+    <Content Include="Content\Illustrations\nava-23.gif" />
+    <Content Include="Content\Illustrations\nava-24.jpg" />
+    <Content Include="Content\Illustrations\nobl-01.jpg" />
+    <Content Include="Content\Illustrations\nobl-02.jpg" />
+    <Content Include="Content\Illustrations\nobl-03.jpg" />
+    <Content Include="Content\Illustrations\nobl-04.jpg" />
+    <Content Include="Content\Illustrations\nobl-05.jpg" />
+    <Content Include="Content\Illustrations\nobl-06.jpg" />
+    <Content Include="Content\Illustrations\nobl-07.jpg" />
+    <Content Include="Content\Illustrations\nobl-08.jpg" />
+    <Content Include="Content\Illustrations\nobl-21.jpg" />
+    <Content Include="Content\Illustrations\nobl-22.jpg" />
+    <Content Include="Content\Illustrations\nobl-23.jpg" />
+    <Content Include="Content\Illustrations\nobl-24.jpg" />
+    <Content Include="Content\Illustrations\nobl-25.jpg" />
+    <Content Include="Content\Illustrations\norw-01.jpg" />
+    <Content Include="Content\Illustrations\norw-02.jpg" />
+    <Content Include="Content\Illustrations\norw-03.jpg" />
+    <Content Include="Content\Illustrations\norw-04.jpg" />
+    <Content Include="Content\Illustrations\norw-05.jpg" />
+    <Content Include="Content\Illustrations\norw-06.jpg" />
+    <Content Include="Content\Illustrations\norw-07.jpg" />
+    <Content Include="Content\Illustrations\norw-50.jpg" />
+    <Content Include="Content\Illustrations\omundy01.jpg" />
+    <Content Include="Content\Illustrations\pag-sh.jpg" />
+    <Content Include="Content\Illustrations\prio-01.jpg" />
+    <Content Include="Content\Illustrations\prio-02.jpg" />
+    <Content Include="Content\Illustrations\prio-03.jpg" />
+    <Content Include="Content\Illustrations\prio-04.jpg" />
+    <Content Include="Content\Illustrations\prio-05.jpg" />
+    <Content Include="Content\Illustrations\prio-06.jpg" />
+    <Content Include="Content\Illustrations\prio-07.jpg" />
+    <Content Include="Content\Illustrations\prio-08.jpg" />
+    <Content Include="Content\Illustrations\prio-09.jpg" />
+    <Content Include="Content\Illustrations\prio-11.gif" />
+    <Content Include="Content\Illustrations\prio-12.gif" />
+    <Content Include="Content\Illustrations\prio-13.gif" />
+    <Content Include="Content\Illustrations\prio-50.jpg" />
+    <Content Include="Content\Illustrations\redc-01.jpg" />
+    <Content Include="Content\Illustrations\redc-02.jpg" />
+    <Content Include="Content\Illustrations\redc-03.jpg" />
+    <Content Include="Content\Illustrations\redc-04.jpg" />
+    <Content Include="Content\Illustrations\redc-05.jpg" />
+    <Content Include="Content\Illustrations\redc-06.jpg" />
+    <Content Include="Content\Illustrations\redh-01.jpg" />
+    <Content Include="Content\Illustrations\redh-02.jpg" />
+    <Content Include="Content\Illustrations\redh-03.jpg" />
+    <Content Include="Content\Illustrations\redh-04.jpg" />
+    <Content Include="Content\Illustrations\redh-05.jpg" />
+    <Content Include="Content\Illustrations\redh-06.jpg" />
+    <Content Include="Content\Illustrations\redh-07.jpg" />
+    <Content Include="Content\Illustrations\redh-08.jpg" />
+    <Content Include="Content\Illustrations\redh-09.jpg" />
+    <Content Include="Content\Illustrations\redh-10.jpg" />
+    <Content Include="Content\Illustrations\redh-21.jpg" />
+    <Content Include="Content\Illustrations\redh-22.jpg" />
+    <Content Include="Content\Illustrations\redh-23.jpg" />
+    <Content Include="Content\Illustrations\redh-24.jpg" />
+    <Content Include="Content\Illustrations\redh-25.jpg" />
+    <Content Include="Content\Illustrations\reig-01.jpg" />
+    <Content Include="Content\Illustrations\reig-02.jpg" />
+    <Content Include="Content\Illustrations\reig-03.jpg" />
+    <Content Include="Content\Illustrations\reig-04.jpg" />
+    <Content Include="Content\Illustrations\reig-05.jpg" />
+    <Content Include="Content\Illustrations\reig-06.jpg" />
+    <Content Include="Content\Illustrations\reig-07.jpg" />
+    <Content Include="Content\Illustrations\reig-11.gif" />
+    <Content Include="Content\Illustrations\reig-12.gif" />
+    <Content Include="Content\Illustrations\resi-01.jpg" />
+    <Content Include="Content\Illustrations\resi-02.jpg" />
+    <Content Include="Content\Illustrations\resi-03.jpg" />
+    <Content Include="Content\Illustrations\resi-04.jpg" />
+    <Content Include="Content\Illustrations\resi-05.jpg" />
+    <Content Include="Content\Illustrations\resi-06.jpg" />
+    <Content Include="Content\Illustrations\resi-07.jpg" />
+    <Content Include="Content\Illustrations\resi-11.gif" />
+    <Content Include="Content\Illustrations\resi-12.gif" />
+    <Content Include="Content\Illustrations\reti-01.jpg" />
+    <Content Include="Content\Illustrations\reti-02.jpg" />
+    <Content Include="Content\Illustrations\reti-03.jpg" />
+    <Content Include="Content\Illustrations\reti-04.jpg" />
+    <Content Include="Content\Illustrations\reti-05.jpg" />
+    <Content Include="Content\Illustrations\retu-cz.jpg" />
+    <Content Include="Content\Illustrations\rwilcox01.jpg" />
+    <Content Include="Content\Illustrations\rwilcox02.jpg" />
+    <Content Include="Content\Illustrations\rwilcox03.jpg" />
+    <Content Include="Content\Illustrations\rwilcox04.jpg" />
+    <Content Include="Content\Illustrations\scan-01.jpg" />
+    <Content Include="Content\Illustrations\scan-02.jpg" />
+    <Content Include="Content\Illustrations\scan-03.jpg" />
+    <Content Include="Content\Illustrations\scan-04.jpg" />
+    <Content Include="Content\Illustrations\scan-05.jpg" />
+    <Content Include="Content\Illustrations\scan-06.jpg" />
+    <Content Include="Content\Illustrations\scan-07.jpg" />
+    <Content Include="Content\Illustrations\scan-08.jpg" />
+    <Content Include="Content\Illustrations\scan-09.jpg" />
+    <Content Include="Content\Illustrations\scan-10.jpg" />
+    <Content Include="Content\Illustrations\scan-21.jpg" />
+    <Content Include="Content\Illustrations\scan-22.jpg" />
+    <Content Include="Content\Illustrations\scan-23.jpg" />
+    <Content Include="Content\Illustrations\scan-24.jpg" />
+    <Content Include="Content\Illustrations\scan-25.jpg" />
+    <Content Include="Content\Illustrations\scan-26.jpg" />
+    <Content Include="Content\Illustrations\seco-01.jpg" />
+    <Content Include="Content\Illustrations\seco-02.jpg" />
+    <Content Include="Content\Illustrations\seco-03.jpg" />
+    <Content Include="Content\Illustrations\seco-04.jpg" />
+    <Content Include="Content\Illustrations\seco-05.jpg" />
+    <Content Include="Content\Illustrations\seco-06.jpg" />
+    <Content Include="Content\Illustrations\seco-07.jpg" />
+    <Content Include="Content\Illustrations\seco-08.jpg" />
+    <Content Include="Content\Illustrations\seco-11.gif" />
+    <Content Include="Content\Illustrations\seco-12.gif" />
+    <Content Include="Content\Illustrations\seco-13.gif" />
+    <Content Include="Content\Illustrations\seco-50.jpg" />
+    <Content Include="Content\Illustrations\shos-01.jpg" />
+    <Content Include="Content\Illustrations\shos-02.jpg" />
+    <Content Include="Content\Illustrations\shos-03.jpg" />
+    <Content Include="Content\Illustrations\shos-04.jpg" />
+    <Content Include="Content\Illustrations\shos-05.jpg" />
+    <Content Include="Content\Illustrations\sign-00a.jpg" />
+    <Content Include="Content\Illustrations\sign-00b.jpg" />
+    <Content Include="Content\Illustrations\sign-01.gif" />
+    <Content Include="Content\Illustrations\sign-02.gif" />
+    <Content Include="Content\Illustrations\sign-03.gif" />
+    <Content Include="Content\Illustrations\sign-04.gif" />
+    <Content Include="Content\Illustrations\sign-05.gif" />
+    <Content Include="Content\Illustrations\sign-06.gif" />
+    <Content Include="Content\Illustrations\sign-07.gif" />
+    <Content Include="Content\Illustrations\sign-08.gif" />
+    <Content Include="Content\Illustrations\sign-09.gif" />
+    <Content Include="Content\Illustrations\sign-10.gif" />
+    <Content Include="Content\Illustrations\sign-11.gif" />
+    <Content Include="Content\Illustrations\sign-12.gif" />
+    <Content Include="Content\Illustrations\sign-13.gif" />
+    <Content Include="Content\Illustrations\sign-14.gif" />
+    <Content Include="Content\Illustrations\sign-15.gif" />
+    <Content Include="Content\Illustrations\sign-16.gif" />
+    <Content Include="Content\Illustrations\sign-17.gif" />
+    <Content Include="Content\Illustrations\sign-18.gif" />
+    <Content Include="Content\Illustrations\sign-19.gif" />
+    <Content Include="Content\Illustrations\sign-20.gif" />
+    <Content Include="Content\Illustrations\sign-21.gif" />
+    <Content Include="Content\Illustrations\sign-22.gif" />
+    <Content Include="Content\Illustrations\sign-23.gif" />
+    <Content Include="Content\Illustrations\sign-24.gif" />
+    <Content Include="Content\Illustrations\sign-t1.jpg" />
+    <Content Include="Content\Illustrations\sign-t2.jpg" />
+    <Content Include="Content\Illustrations\sign-t3.jpg" />
+    <Content Include="Content\Illustrations\sign-t4.jpg" />
+    <Content Include="Content\Illustrations\sign-t5.jpg" />
+    <Content Include="Content\Illustrations\sign-t6.jpg" />
+    <Content Include="Content\Illustrations\sign-t7.jpg" />
+    <Content Include="Content\Illustrations\sign-t8.jpg" />
+    <Content Include="Content\Illustrations\silv-01.jpg" />
+    <Content Include="Content\Illustrations\silv-02.jpg" />
+    <Content Include="Content\Illustrations\silv-03.jpg" />
+    <Content Include="Content\Illustrations\silv-04.jpg" />
+    <Content Include="Content\Illustrations\silv-05.jpg" />
+    <Content Include="Content\Illustrations\silv-06.jpg" />
+    <Content Include="Content\Illustrations\silv-07.jpg" />
+    <Content Include="Content\Illustrations\silv-08.jpg" />
+    <Content Include="Content\Illustrations\silv-09.jpg" />
+    <Content Include="Content\Illustrations\silv-11.jpg" />
+    <Content Include="Content\Illustrations\silv-12.gif" />
+    <Content Include="Content\Illustrations\sixn-01.jpg" />
+    <Content Include="Content\Illustrations\sixn-02.jpg" />
+    <Content Include="Content\Illustrations\sixn-03.jpg" />
+    <Content Include="Content\Illustrations\sixn-04.jpg" />
+    <Content Include="Content\Illustrations\sixn-05.jpg" />
+    <Content Include="Content\Illustrations\sixn-06.jpg" />
+    <Content Include="Content\Illustrations\sixn-07.jpg" />
+    <Content Include="Content\Illustrations\sixn-11.gif" />
+    <Content Include="Content\Illustrations\sixn-12.gif" />
+    <Content Include="Content\Illustrations\sixn-13.gif" />
+    <Content Include="Content\Illustrations\sixn-51.gif" />
+    <Content Include="Content\Illustrations\soli-01.jpg" />
+    <Content Include="Content\Illustrations\soli-02.jpg" />
+    <Content Include="Content\Illustrations\soli-03.jpg" />
+    <Content Include="Content\Illustrations\soli-04.jpg" />
+    <Content Include="Content\Illustrations\soli-05.jpg" />
+    <Content Include="Content\Illustrations\soli-06.jpg" />
+    <Content Include="Content\Illustrations\soli-07.jpg" />
+    <Content Include="Content\Illustrations\soli-50.jpg" />
+    <Content Include="Content\Illustrations\spec-01.jpg" />
+    <Content Include="Content\Illustrations\spec-02.jpg" />
+    <Content Include="Content\Illustrations\spec-03.jpg" />
+    <Content Include="Content\Illustrations\spec-04.jpg" />
+    <Content Include="Content\Illustrations\spec-05.jpg" />
+    <Content Include="Content\Illustrations\spec-06.jpg" />
+    <Content Include="Content\Illustrations\spec-07.jpg" />
+    <Content Include="Content\Illustrations\spec-08.jpg" />
+    <Content Include="Content\Illustrations\spec-09.jpg" />
+    <Content Include="Content\Illustrations\spec-21.jpg" />
+    <Content Include="Content\Illustrations\spec-22.jpg" />
+    <Content Include="Content\Illustrations\spec-23.jpg" />
+    <Content Include="Content\Illustrations\spec-24.jpg" />
+    <Content Include="Content\Illustrations\spec-25.jpg" />
+    <Content Include="Content\Illustrations\spec-26.jpg" />
+    <Content Include="Content\Illustrations\stoc-01.jpg" />
+    <Content Include="Content\Illustrations\stoc-02.jpg" />
+    <Content Include="Content\Illustrations\stoc-03.jpg" />
+    <Content Include="Content\Illustrations\stoc-04.jpg" />
+    <Content Include="Content\Illustrations\stoc-05.jpg" />
+    <Content Include="Content\Illustrations\stoc-06.jpg" />
+    <Content Include="Content\Illustrations\stoc-07.jpg" />
+    <Content Include="Content\Illustrations\stoc-11.gif" />
+    <Content Include="Content\Illustrations\stoc-12.jpg" />
+    <Content Include="Content\Illustrations\str-3gar.jpg" />
+    <Content Include="Content\Illustrations\str-lady.jpg" />
+    <Content Include="Content\Illustrations\stud-00.jpg" />
+    <Content Include="Content\Illustrations\stud-00b.jpg" />
+    <Content Include="Content\Illustrations\stud-00c.jpg" />
+    <Content Include="Content\Illustrations\stud-01.gif" />
+    <Content Include="Content\Illustrations\stud-02.gif" />
+    <Content Include="Content\Illustrations\stud-03.gif" />
+    <Content Include="Content\Illustrations\stud-04.gif" />
+    <Content Include="Content\Illustrations\stud-05.gif" />
+    <Content Include="Content\Illustrations\stud-06.gif" />
+    <Content Include="Content\Illustrations\stud-07.gif" />
+    <Content Include="Content\Illustrations\stud-08.gif" />
+    <Content Include="Content\Illustrations\stud-09.gif" />
+    <Content Include="Content\Illustrations\stud-10.gif" />
+    <Content Include="Content\Illustrations\stud-11.gif" />
+    <Content Include="Content\Illustrations\stud-12.gif" />
+    <Content Include="Content\Illustrations\stud-13.gif" />
+    <Content Include="Content\Illustrations\stud-14.gif" />
+    <Content Include="Content\Illustrations\stud-15.gif" />
+    <Content Include="Content\Illustrations\stud-16.gif" />
+    <Content Include="Content\Illustrations\stud-17.gif" />
+    <Content Include="Content\Illustrations\stud-18.gif" />
+    <Content Include="Content\Illustrations\stud-19.gif" />
+    <Content Include="Content\Illustrations\stud-20.gif" />
+    <Content Include="Content\Illustrations\stud-21.gif" />
+    <Content Include="Content\Illustrations\stud-22.gif" />
+    <Content Include="Content\Illustrations\stud-23.gif" />
+    <Content Include="Content\Illustrations\stud-24.gif" />
+    <Content Include="Content\Illustrations\suss-01.jpg" />
+    <Content Include="Content\Illustrations\suss-02.jpg" />
+    <Content Include="Content\Illustrations\suss-03.jpg" />
+    <Content Include="Content\Illustrations\suss-04.jpg" />
+    <Content Include="Content\Illustrations\thor-01.jpg" />
+    <Content Include="Content\Illustrations\thor-02.jpg" />
+    <Content Include="Content\Illustrations\thor-03.jpg" />
+    <Content Include="Content\Illustrations\thor-04.jpg" />
+    <Content Include="Content\Illustrations\thor-05.jpg" />
+    <Content Include="Content\Illustrations\thor-06.jpg" />
+    <Content Include="Content\Illustrations\thor-07.jpg" />
+    <Content Include="Content\Illustrations\twis-01.jpg" />
+    <Content Include="Content\Illustrations\twis-02.jpg" />
+    <Content Include="Content\Illustrations\twis-03.jpg" />
+    <Content Include="Content\Illustrations\twis-04.jpg" />
+    <Content Include="Content\Illustrations\twis-05.jpg" />
+    <Content Include="Content\Illustrations\twis-06.jpg" />
+    <Content Include="Content\Illustrations\twis-07.jpg" />
+    <Content Include="Content\Illustrations\twis-08.jpg" />
+    <Content Include="Content\Illustrations\twis-09.jpg" />
+    <Content Include="Content\Illustrations\twis-10.jpg" />
+    <Content Include="Content\Illustrations\twis-21.jpg" />
+    <Content Include="Content\Illustrations\twis-22.jpg" />
+    <Content Include="Content\Illustrations\twis-23.jpg" />
+    <Content Include="Content\Illustrations\twis-24.jpg" />
+    <Content Include="Content\Illustrations\twis-25.jpg" />
+    <Content Include="Content\Illustrations\twis-26.jpg" />
+    <Content Include="Content\Illustrations\vall-00.jpg" />
+    <Content Include="Content\Illustrations\vall-11a.jpg" />
+    <Content Include="Content\Illustrations\vall-11b.jpg" />
+    <Content Include="Content\Illustrations\vall-12a.jpg" />
+    <Content Include="Content\Illustrations\vall-13a.jpg" />
+    <Content Include="Content\Illustrations\vall-14a.jpg" />
+    <Content Include="Content\Illustrations\vall-14b.jpg" />
+    <Content Include="Content\Illustrations\vall-14c.jpg" />
+    <Content Include="Content\Illustrations\vall-15a.jpg" />
+    <Content Include="Content\Illustrations\vall-15b.jpg" />
+    <Content Include="Content\Illustrations\vall-15c.jpg" />
+    <Content Include="Content\Illustrations\vall-16a.jpg" />
+    <Content Include="Content\Illustrations\vall-17a.jpg" />
+    <Content Include="Content\Illustrations\vall-17b.jpg" />
+    <Content Include="Content\Illustrations\vall-17c.jpg" />
+    <Content Include="Content\Illustrations\vall-21a.jpg" />
+    <Content Include="Content\Illustrations\vall-22a.jpg" />
+    <Content Include="Content\Illustrations\vall-22b.jpg" />
+    <Content Include="Content\Illustrations\vall-22c.jpg" />
+    <Content Include="Content\Illustrations\vall-23a.jpg" />
+    <Content Include="Content\Illustrations\vall-23b.jpg" />
+    <Content Include="Content\Illustrations\vall-23c.jpg" />
+    <Content Include="Content\Illustrations\vall-24a.jpg" />
+    <Content Include="Content\Illustrations\vall-25a.jpg" />
+    <Content Include="Content\Illustrations\vall-26a.jpg" />
+    <Content Include="Content\Illustrations\vall-27a.jpg" />
+    <Content Include="Content\Illustrations\veil-01.jpg" />
+    <Content Include="Content\Illustrations\veil-02.jpg" />
+    <Content Include="Content\Illustrations\veil-03.jpg" />
+    <Content Include="Content\Illustrations\wist-01.jpg" />
+    <Content Include="Content\Illustrations\wist-02.jpg" />
+    <Content Include="Content\Illustrations\wist-03.jpg" />
+    <Content Include="Content\Illustrations\wist-04.jpg" />
+    <Content Include="Content\Illustrations\wist-05.jpg" />
+    <Content Include="Content\Illustrations\wist-06.jpg" />
+    <Content Include="Content\Illustrations\wist-07.jpg" />
+    <Content Include="Content\Illustrations\wist-08.jpg" />
+    <Content Include="Content\Illustrations\wist-09.jpg" />
+    <Content Include="Content\Illustrations\wist-10.jpg" />
+    <Content Include="Content\Illustrations\wist-50.jpg" />
+    <Content Include="Content\Illustrations\yell-01.jpg" />
+    <Content Include="Content\Illustrations\yell-02.jpg" />
+    <Content Include="Content\Illustrations\yell-03.jpg" />
+    <Content Include="Content\Illustrations\yell-04.jpg" />
+    <Content Include="Content\Illustrations\yell-05.jpg" />
+    <Content Include="Content\Illustrations\yell-06.jpg" />
+    <Content Include="Content\Illustrations\yell-07.jpg" />
+    <Content Include="Content\Illustrations\yell-11.gif" />
+    <Content Include="Content\Illustrations\yell-12.gif" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\Scraps.css" />
+    <Content Include="Content\Standard.css" />
+    <Content Include="Content\Menu.css" />
+    <Content Include="Services\Stories\3GAB.xml" />
+    <Content Include="Services\Stories\3GAR.xml" />
+    <Content Include="Services\Stories\3STU.xml" />
+    <Content Include="Services\Stories\ABBE.xml" />
+    <Content Include="Services\Stories\BERY.xml" />
+    <Content Include="Services\Stories\BLAC.xml" />
+    <Content Include="Services\Stories\BLAN.xml" />
+    <Content Include="Services\Stories\BLUE.xml" />
+    <Content Include="Services\Stories\BOSC.xml" />
+    <Content Include="Services\Stories\BRUC.xml" />
+    <Content Include="Services\Stories\CARD.xml" />
+    <Content Include="Services\Stories\CHAS.xml" />
+    <Content Include="Services\Stories\COPP.xml" />
+    <Content Include="Services\Stories\CREE.xml" />
+    <Content Include="Services\Stories\CROO.xml" />
+    <Content Include="Services\Stories\DANC.xml" />
+    <Content Include="Services\Stories\DEVI.xml" />
+    <Content Include="Services\Stories\DYIN.xml" />
+    <Content Include="Services\Stories\EMPT.xml" />
+    <Content Include="Services\Stories\ENGR.xml" />
+    <Content Include="Services\Stories\FINA.xml" />
+    <Content Include="Services\Stories\FIVE.xml" />
+    <Content Include="Services\Stories\GLOR.xml" />
+    <Content Include="Services\Stories\GOLD.xml" />
+    <Content Include="Services\Stories\GREE.xml" />
+    <Content Include="Services\Stories\HOUN.xml" />
+    <Content Include="Services\Stories\IDEN.xml" />
+    <Content Include="Services\Stories\ILLU.xml" />
+    <Content Include="Services\Stories\LADY.xml" />
+    <Content Include="Services\Stories\LAST.xml" />
+    <Content Include="Services\Stories\LION.xml" />
+    <Content Include="Services\Stories\MAZA.xml" />
+    <Content Include="Services\Stories\MISS.xml" />
+    <Content Include="Services\Stories\MUSG.xml" />
+    <Content Include="Services\Stories\NAVA.xml" />
+    <Content Include="Services\Stories\NOBL.xml" />
+    <Content Include="Services\Stories\NORW.xml" />
+    <Content Include="Services\Stories\PRIO.xml" />
+    <Content Include="Services\Stories\REDC.xml" />
+    <Content Include="Services\Stories\REDH.xml" />
+    <Content Include="Services\Stories\REIG.xml" />
+    <Content Include="Services\Stories\RESI.xml" />
+    <Content Include="Services\Stories\RETI.xml" />
+    <Content Include="Services\Stories\SCAN.xml" />
+    <Content Include="Services\Stories\SECO.xml" />
+    <Content Include="Services\Stories\SHOS.xml" />
+    <Content Include="Services\Stories\SIGN.xml" />
+    <Content Include="Services\Stories\SILV.xml" />
+    <Content Include="Services\Stories\SIXN.xml" />
+    <Content Include="Services\Stories\SOLI.xml" />
+    <Content Include="Services\Stories\SPEC.xml" />
+    <Content Include="Services\Stories\STOC.xml" />
+    <Content Include="Services\Stories\STUD.xml" />
+    <Content Include="Services\Stories\SUSS.xml" />
+    <Content Include="Services\Stories\THOR.xml" />
+    <Content Include="Services\Stories\TWIS.xml" />
+    <Content Include="Services\Stories\VALL.xml" />
+    <Content Include="Services\Stories\VEIL.xml" />
+    <Content Include="Services\Stories\WIST.xml" />
+    <Content Include="Services\Stories\YELL.xml" />
+    <Content Include="Scripts\Apdore-accordion.js" />
+    <Content Include="Content\Cano.css" />
+    <Content Include="Content\Images\animated-overlay.gif" />
+    <Content Include="Content\Images\BdP58VICMAAOpg8.jpg" />
+    <Content Include="Content\Images\BecaHxeIIAAUlDf.jpg" />
+    <Content Include="Content\Images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Scripts\Apdore-chunk.js" />
+    <Content Include="Scripts\Apdore-editorscripts.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\HolmesMVC from L00895.pubxml" />
+    <None Include="Properties\PublishProfiles\HolmesMVC.pubxml" />
+    <Content Include="Scripts\Apdore-timeline.js" />
+    <Content Include="Scripts\HideSeek\.editorconfig" />
+    <Content Include="Scripts\HideSeek\hideseek.jquery.json" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\HideSeek\jquery.hideseek.min.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Apdore-newappearance.js" />
+    <Content Include="Services\StoryXmlRetriever.svc" />
+    <Content Include="Views\Actor\Details.cshtml" />
+    <Content Include="Views\Actor\Edit.cshtml" />
+    <Content Include="Views\Actor\Delete.cshtml" />
+    <Content Include="Views\Character\Details.cshtml" />
+    <Content Include="Views\Character\Edit.cshtml" />
+    <Content Include="Views\Character\Delete.cshtml" />
+    <Content Include="Views\Episode\Details.cshtml" />
+    <Content Include="Views\Episode\Create.cshtml" />
+    <Content Include="Views\Episode\Edit.cshtml" />
+    <Content Include="Views\Episode\Delete.cshtml" />
+    <Content Include="Views\Actor\History.cshtml" />
+    <Content Include="Views\Actor\HistorySummary.cshtml" />
+    <Content Include="Views\Adaptation\Details.cshtml" />
+    <Content Include="Views\Adaptation\Create.cshtml" />
+    <Content Include="Views\Adaptation\Edit.cshtml" />
+    <Content Include="Views\Adaptation\Delete.cshtml" />
+    <Content Include="Views\Episode\SeasonBox.cshtml" />
+    <Content Include="Views\Appearance\PerEpisode.cshtml" />
+    <Content Include="Views\Appearance\Create.cshtml" />
+    <Content Include="Views\Appearance\Delete.cshtml" />
+    <Content Include="Views\Character\HistorySummary.cshtml" />
+    <Content Include="Views\Adaptation\SingleFilmDetails.cshtml" />
+    <Content Include="Views\Character\History.cshtml" />
+    <Content Include="Views\Adaptation\_PlayedBy.cshtml" />
+    <Content Include="Views\Appearance\_AppActor.cshtml" />
+    <Content Include="Views\Appearance\_AppChar.cshtml" />
+    <Content Include="Views\Story\Details.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Shared\DatabaseLinks.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Season\Details.cshtml" />
+    <Content Include="Views\Season\Create.cshtml" />
+    <Content Include="Views\Season\Edit.cshtml" />
+    <Content Include="Views\Season\Delete.cshtml" />
+    <Content Include="Views\Rename\Create.cshtml" />
+    <Content Include="Views\Rename\Delete.cshtml" />
+    <Content Include="Views\Honorific\Index.cshtml" />
+    <Content Include="Views\Honorific\Create.cshtml" />
+    <Content Include="Views\Honorific\Delete.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Home\RandomFact.cshtml" />
+    <Content Include="Views\Home\Scraps.cshtml" />
+    <Content Include="Views\Rename\CreateFull.cshtml" />
+    <Content Include="Views\Medium\Index.cshtml" />
+    <Content Include="Views\Medium\Details.cshtml" />
+    <Content Include="Views\Medium\Create.cshtml" />
+    <Content Include="Views\Medium\Edit.cshtml" />
+    <Content Include="Views\Medium\Delete.cshtml" />
+    <Content Include="Views\Reference\Index.cshtml" />
+    <Content Include="Views\Reference\Details.cshtml" />
+    <Content Include="Views\Reference\Create.cshtml" />
+    <Content Include="Views\Reference\Edit.cshtml" />
+    <Content Include="Views\Reference\Delete.cshtml" />
+    <Content Include="Views\Canon\Index.cshtml" />
+    <Content Include="Views\Appearance\MassAdd.cshtml" />
+    <Content Include="Views\Story\Chunk.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
+    <Content Include="Views\Adaptation\Index.cshtml" />
+    <Content Include="Views\Adaptation\CantDelete.cshtml" />
+    <Content Include="Views\Season\CantDelete.cshtml" />
+    <Content Include="Views\Episode\CantDelete.cshtml" />
+    <Content Include="Views\Actor\CantDelete.cshtml" />
+    <Content Include="Views\Character\CantDelete.cshtml" />
+    <Content Include="Views\Home\Analytics.cshtml" />
+    <Content Include="Views\Home\Toys.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Home\DataEntry.cshtml" />
+    <Content Include="Views\Home\Unlocked.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Filters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502181457490_initialmigration.resx">
+      <DependentUpon>201502181457490_initialmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502181517015_put limits back on actors.resx">
+      <DependentUpon>201502181517015_put limits back on actors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502251210263_user has preferred canon order.resx">
+      <DependentUpon>201502251210263_user has preferred canon order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503161512450_actor imdbname in database.resx">
+      <DependentUpon>201503161512450_actor imdbname in database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503301626341_option to translate episodes and adaptations.resx">
+      <DependentUpon>201503301626341_option to translate episodes and adaptations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503301831243_translations for season names.resx">
+      <DependentUpon>201503301831243_translations for season names.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58167</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61501/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,112 @@
+﻿@using HolmesMVC.Models.ViewModels
+@model AdaptView
+
+@{
+    ViewBag.Title = Model.DisplayName;
+    ViewBag.Episode = Model.Episodes.First();
+}
+<section class="leftfloatdetails">
+    <h2 class="detailscategory">Adaptation</h2>
+    <h2 class="detailsheader">@ViewBag.Title</h2>
+</section>
+<section class="rightfloatdetails">
+    @if (Model.HolmesActors.Any() && Model.HolmesActors.First().Pic != null)
+    {
+        <a href="@Url.Action("Details", "Actor", new { id = Model.HolmesActors.First().ID })"><img style="border: none;" src="@Model.HolmesActors.First().Pic" width="150"/></a>
+    }
+    else
+    {
+        <i>(no Holmes picture)</i>
+    }
+    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().Pic != null)
+    {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().Pic" width="150"/></a>}
+    else
+    {
+        <i>(no Watson picture)</i>
+    }<br/><br/>
+</section>
+<section class="leftfloatdetails">
+
+    <p>
+        This 
+    @switch (Model.MediumName)
+    {
+        case "Stage":
+        <text>Play was premiered</text>
+            break;
+        case "Radio":
+        <text>Radio Play was aired</text>
+            break;
+        case "Television":
+        <text>TV Film was aired</text>
+            break;
+        default:
+        <text>@Model.MediumName was released</text>
+            break;
+    }
+        on @ViewBag.Episode.Airdate.ToString("dd MMMM yyyy"), by  
+    @if (string.IsNullOrWhiteSpace(Model.Company))
+    {
+        <text>an unknown company.</text>
+    }
+    else
+    {
+        <text>@Model.Company.</text>
+    }
+        @if (Model.MediumName == "Television" || Model.MediumName == "Film")
+        {
+            var IMDbUrl = "http://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
+            <text><br />
+            IMDb: <a href = '@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
+        }
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Episode.Story))
+        {
+            <text><br /><br />
+            Canon basis: @ViewBag.Episode.Story1.Name</text>
+        }
+    </p>
+    <p>
+        Sherlock Holmes @Html.Partial("_PlayedBy", Model.HolmesActors)<br />
+        Dr. Watson @Html.Partial("_PlayedBy", Model.WatsonActors)
+    </p>
+
+    @if (Request.IsAuthenticated)
+    {
+        <p>@Html.ActionLink("Add episode", "Create", "Episode", new { Model.ID }, null) |
+        @Html.ActionLink("Edit episode", "Edit", "Episode", new { ViewBag.Episode.ID }, null)</p>
+    }
+    @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
+
+    <section id="timelineSection">
+        <!-- for the canvas JS -->
+        <input id="Year" type="hidden" value="@ViewBag.Episode.Airdate.Year"/>
+        <input id="Month" type="hidden" value="@ViewBag.Episode.Airdate.Month"/>
+        <div class="clear-fix"></div>
+        <canvas id="timeline">Turn on &lt;canvas&gt;.</canvas>
+    </section>
+
+</section>
+
+<section class="rightfloatdetails">
+    @Html.Action("PerEpisode", "Appearance", new { epId = ViewBag.Episode.ID })
+</section>
+<div class="clear-fix"></div>
+
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
+
+    <script>
+        try {
+            var canvas = $('#timeline')[0];
+            var ctx = canvas.getContext('2d');
+
+            var year = $("#Year").val();
+            var month = $("#Month").val();
+
+            drawTimeline(year, month, year, month, canvas, ctx, [year, month], false);
+        } catch (err) {
+            // shut up, IE9
+        }
+    </script>
+}

@@ -1,0 +1,168 @@
+﻿@model HolmesMVC.Models.ViewModels.SearchData
+
+@{
+    ViewBag.Title = "Adaptations";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (!Model.Episodes.Any() && !Model.Adaptations.Any())
+{
+    <h3>No results found.</h3>
+}
+else
+{
+    var episodesFilm = (from e in Model.Episodes orderby e.Year where e.EpCount == 1 && e.Medium == "Film" select e).ToList();
+    var adaptsSingleFilm = (from a in Model.Adaptations orderby a.Year where a.EpCount == 1 && (a.Medium == "Film" || a.Medium == "Television") select a).ToList();
+    var adaptsSingleRadio = (from a in Model.Adaptations orderby a.Year where a.EpCount == 1 && a.Medium == "Radio" select a).ToList();
+    var adaptsTV = (from a in Model.Adaptations orderby a.Year where a.EpCount > 1 && a.Medium == "Television" select a).ToList();
+    var adaptsFilm = (from a in Model.Adaptations orderby a.Year where a.EpCount > 1 && a.Medium == "Film" select a).ToList();
+    var adaptsRadio  = (from a in Model.Adaptations orderby a.Year where a.EpCount > 1 && a.Medium == "Radio" select a).ToList();
+    var adaptsOther = (from a in Model.Adaptations orderby a.Year where a.Medium != "Television" && a.Medium != "Film" && a.Medium != "Radio" select a).ToList();
+    
+    if (adaptsFilm.Any())
+    {
+        <h3>Film Series</h3>
+        <ul>
+            @foreach (var a in adaptsFilm)
+            {
+                <li>
+                @if (a.Holmes.Length > 0)
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                }
+                else
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                }
+                 @if (!string.IsNullOrEmpty(a.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
+                 }   
+                </li>
+            }
+        </ul>
+    }
+    
+    if (episodesFilm.Any() || adaptsSingleFilm.Any())
+    {
+        var allFilms = (from e in episodesFilm
+                       select new { ID = e.ID, Year = e.Year, Holmes = e.Holmes, Name = e.Name, Translation = e.Translation, Type = "Episode" }).ToList();
+        allFilms.AddRange(from e in adaptsSingleFilm
+                       select new { ID = e.ID, Year = e.Year, Holmes = e.Holmes, Name = e.Name, Translation = e.Translation, Type = "Adaptation" });
+        allFilms = allFilms.OrderBy(f => f.Year).ToList();
+            
+            <text>
+         <h3>Films</h3>
+         <ul>
+             @foreach (var e in allFilms)
+             {
+                 <li>
+                 @if (e.Holmes.Length > 0)
+                 {
+                     <text>@e.Year @e.Holmes: '@Html.ActionLink(e.Name, "Details", e.Type, new { id = e.ID }, null)'</text>
+                 }
+                 else
+                 {
+                     <text>@e.Year: '@Html.ActionLink(e.Name, "Details", e.Type, new { id = e.ID }, null)'</text>
+                 }
+                 @if (!string.IsNullOrEmpty(e.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
+                 }    
+                 </li>
+             }
+         </ul>
+</text>
+    }
+
+    if (adaptsTV.Any())
+    {
+        <h3>TV Series</h3>
+        <ul>
+            @foreach (var a in adaptsTV)
+            {
+            <li>
+                @if (a.Holmes.Length > 0)
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                }
+                else
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                }
+                 @if (!string.IsNullOrEmpty(a.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
+                 }   
+            </li>
+            }
+        </ul>
+    }
+
+    if (adaptsRadio.Any())
+    {
+        <h3>Radio Series</h3>
+        <ul>
+            @foreach (var a in adaptsRadio)
+            {
+                <li>
+                @if (a.Holmes.Length > 0)
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                }
+                else
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                }
+                 @if (!string.IsNullOrEmpty(a.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
+                 }   
+            </li>
+            }
+        </ul>
+    }
+
+    if (adaptsSingleRadio.Any())
+    {
+        <h3>Radio Plays</h3>
+        <ul>
+            @foreach (var a in adaptsSingleRadio)
+            {
+                <li>
+                @if (a.Holmes.Length > 0)
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                }
+                else
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                }
+                 @if (!string.IsNullOrEmpty(a.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
+                 }   
+            </li>
+            }
+        </ul>
+    }
+
+    if (adaptsOther.Any())
+    {
+        <h3>Other kinds of Series</h3>
+        <ul>
+            @foreach (var a in adaptsOther)
+            {
+                <li>
+                @if (a.Holmes.Length > 0)
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes, @a.Medium)</text>
+                }
+                else
+                {
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Medium)</text>
+                }
+                 @if (!string.IsNullOrEmpty(a.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
+                 }   
+            </li>
+            }
+        </ul>
+    }
+}

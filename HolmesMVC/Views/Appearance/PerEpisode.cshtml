@@ -1,0 +1,111 @@
+﻿@using HolmesMVC
+@model IEnumerable<HolmesMVC.Models.Appearance>
+
+
+@if (!Model.Any())
+{
+    <text><ul>
+        <li>No actor appearances found for episode ID: @ViewBag.EpId.</li>
+    </ul></text>
+}
+else
+{
+    var canonPage = Model.First().Episode1.Season1.Adaptation1.Name == "Canon";
+    var castTitle = canonPage ? "Characters" : "Cast";
+
+    <table class="lineddetails">
+        <tr>
+            <th colspan="3">@castTitle</th>
+        </tr>
+        @foreach (var appearance in Model)
+        {
+            var canonCharacter = Shared.IsCanon(appearance.Character1);
+            var charName = Shared.LongName(appearance.Character1);
+            var actorName = Shared.ShortName(appearance.Actor1);
+            <tr>
+                @if (canonPage)
+                {
+                    <td colspan="2">@Html.ActionLink(charName, "Details", "Character", new { ID = appearance.Character }, null)</td>
+                }
+                else
+                {
+                    <td>@if (actorName == "(mentioned)")
+                        {
+                        <text>(mentioned)</text>
+                        }
+                        else
+                        {
+                        @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { appearance.Actor1.ID }, null)
+                        }</td>
+                    <td class="castchar">as
+                        @if (canonCharacter)
+                        {
+                            if (null == Shared.CheckRename(appearance))
+                            {
+                            <b>@Html.ActionLink(Shared.LongName(appearance.Character1), "Details", "Character", new { ID = appearance.Character }, null)</b>
+                            }
+                            else
+                            {
+                            <b>@Html.ActionLink(Shared.CheckRename(appearance), "Details", "Character", new { ID = appearance.Character }, null)</b>
+                            }
+                        }
+                        else
+                        {
+                            if (null == Shared.CheckRename(appearance))
+                            {
+                            @Html.ActionLink(Shared.LongName(appearance.Character1), "Details", "Character", new { ID = appearance.Character }, null)
+                            }
+                            else
+                            {
+                            @Html.ActionLink(Shared.CheckRename(appearance), "Details", "Character", new { ID = appearance.Character }, null)
+                            }
+                        }
+                    </td>
+                }
+                @if (Request.IsAuthenticated && ViewBag.Locked == false)
+                {
+                    <td class="linedbutton">@Html.ActionLink("Delete", "Delete", new { appearance.ID })
+                        @if (!canonPage)
+                        {
+                            if (null == Shared.CheckRename(appearance))
+                            {
+                            <text>&nbsp;@Html.ActionLink("Rename", "Create", "Rename", new { appearance.ID }, null)</text>                          
+                            }
+                            else
+                            {
+                            <text>&nbsp;@Html.ActionLink("Unrename", "Delete", "Rename", new { appearance.ID }, null)</text>
+                            }
+                        }</td>
+                }
+            </tr>
+        }
+    </table>
+}
+@if (Request.IsAuthenticated && ViewBag.Locked == false)
+{
+    <div class="addappearlink">
+        @Html.ActionLink("Add appearance", "Create", "Appearance", new { ID = ViewBag.EpId }, null)
+    </div> 
+}
+
+<div>
+    @if (Request.IsAuthenticated)
+    {
+        <br />
+        if (ViewBag.Locked == true)
+        {
+        @Html.ActionLink("Unlock", "Unlock", "Episode", new { id = ViewBag.EpId }, null)
+        }
+        else
+        {
+        @Html.ActionLink("Lock", "Lock", "Episode", new { id = ViewBag.EpId }, null)
+        }
+    }
+    else
+    {
+        if (ViewBag.Locked != true)
+        {
+        <i>(cast list not finalised)</i>
+        }
+    }
+</div>
