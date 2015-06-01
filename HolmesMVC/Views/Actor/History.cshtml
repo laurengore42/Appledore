@@ -1,0 +1,16 @@
+﻿@using HolmesMVC;
+@using HolmesMVC.Enums
+@model HolmesMVC.Models.ViewModels.ActorHistory
+@{
+    var AirdateFormat = "{0:d MMM yyyy}";
+    if (Model.AirdatePrecision == DatePrecision.Month)
+    {
+        AirdateFormat = "{0:MMM yyyy}";
+    }
+    else if (Model.AirdatePrecision == DatePrecision.Year)
+    {
+        AirdateFormat = "{0:yyyy}";
+    }
+}
+
+<tr><td>@string.Format(AirdateFormat, Model.Airdate):</td><td>@Model.CharacterName</td><td>in @if (string.Equals(Model.AdaptName, Model.EpName)){<text>'@Html.ActionLink(Model.EpName, "Details", "Episode", new { id = Model.EpId }, null)'</text>}else{<text>@if (Model.MediumName != "Film"){<text>@Model.AdaptName @Model.SeasonCode</text>} '@Html.ActionLink(Model.EpName, "Details", "Episode", new { id = Model.EpId }, null)' @if (Model.EpTranslation != null && Model.EpTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@Model.EpTranslation</i></span> } </text>}</td></tr>

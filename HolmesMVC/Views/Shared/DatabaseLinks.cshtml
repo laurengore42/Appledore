@@ -1,0 +1,17 @@
+﻿@if (Request.IsAuthenticated)
+{
+    // don't let anonymous users edit the database
+    <text>
+<p class="dblinks">
+    @Html.ActionLink("Edit "+(string)ViewBag.Table, "Edit", (string)ViewBag.Table, new { ViewBag.ID }, null) |
+        @Html.ActionLink("Delete "+(string)ViewBag.Table, "Delete", (string)ViewBag.Table, new { ViewBag.ID }, null)
+
+    @if (ViewBag.Table != "Episode")
+    {
+        <text>| @Html.ActionLink("New " + (string)ViewBag.Table, "Create", (string)ViewBag.Table)</text>
+    } else {
+        <text>| @Html.ActionLink("New " + (string)ViewBag.Table, "Create", (string)ViewBag.Table, new { id = ViewBag.adaptId }, null)</text>
+    }
+    </p>
+    </text>
+}

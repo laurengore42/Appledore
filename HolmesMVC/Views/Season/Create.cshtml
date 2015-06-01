@@ -1,0 +1,53 @@
+﻿@model HolmesMVC.Models.Season
+
+@{
+    ViewBag.Title = "Create Season";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Season</legend>
+
+        <div class="editor-label">
+            Adaptation
+        </div>
+        <div class="editor-field">
+            @ViewBag.AdaptationName
+        </div>
+        
+        <input type="hidden" name="Adaptation" value="@Model.Adaptation"/>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AirOrder)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AirOrder)
+            @Html.ValidationMessageFor(model => model.AirOrder)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    
+}

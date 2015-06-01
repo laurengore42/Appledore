@@ -1,0 +1,17 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Character
+
+@{
+    ViewBag.Title = "Can't Delete";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>You can't delete @Model.Forename @Model.Surname because it still has Appearances:</p>
+
+@foreach (var a in Model.Appearances)
+{
+<text>
+<p>in '@Shared.DisplayName(a.Episode1)' by @Shared.ShortName(a.Actor1): @Html.ActionLink("Delete","Delete","Appearance", new {id = a.ID},null)
+</text>
+}

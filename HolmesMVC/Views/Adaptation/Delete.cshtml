@@ -1,0 +1,26 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Adaptation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this adaptation?</h3>
+<fieldset>
+    <legend>Adaptation</legend>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name), @Html.DisplayFor(model => model.Medium1.Name), @Html.DisplayFor(model => model.Company)
+    </div>
+    <div>
+        also known as '@Shared.DisplayName(Model)'
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" />
+    </p>
+}

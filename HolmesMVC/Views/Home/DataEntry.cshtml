@@ -1,0 +1,61 @@
+﻿@using HolmesMVC
+@using HolmesMVC.Models
+@{
+    ViewBag.Title = "Data Entry";
+}
+
+<div id="body">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+Pulling in IMDb info:
+<div>
+    @using (Html.BeginForm())
+    {
+        <input type="text" name="epId"/> <text> ep id <br/></text>
+        <textarea name="ImdbInput"></textarea>
+        <input type="submit" />
+    }
+</div>
+
+<hr/>
+        @{
+            List<IGrouping<string, Character>> dupeCharNames = ViewBag.dupeCharNames;
+            List<IGrouping<string, Actor>> dupeActNames = ViewBag.dupeActNames;
+        }
+<div>
+    Duplicate character names:
+    @if (dupeCharNames != null)
+    {
+        foreach (var charName in dupeCharNames)
+        {
+            var charIdsStr = string.Join(",", from c in charName select c.ID);
+            <li>@Html.ActionLink("Combine", "Combine", "Character", new { charIdStr = charIdsStr }, null) Potential duplicates: @foreach (Character c in charName)
+                                      {
+                                          <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ","&nbsp;")),"Details","Character", new { id = c.ID}, null) + </text>
+                                      }</li>
+                    
+        }
+    }
+    else
+    {
+        <text>None at the moment.</text>
+    }
+</div>
+<hr/>
+    <div>
+        Duplicate actor names:
+        @if (dupeActNames != null)
+        {
+            foreach (var actName in dupeActNames)
+            {
+                var actIdsStr = string.Join(",", from a in actName select a.ID);
+                    <li>@Html.ActionLink("Combine", "Combine", "Actor", new { actorIdStr = actIdsStr }, null) Potential duplicates: @foreach (Actor a in actName) { <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(a).Replace(" ","&nbsp;")),"Details","Actor", new { id = a.ID}, null) + </text> }</li>
+                }
+        }
+        else
+        {
+            <text>None at the moment.</text>
+        }
+    </div>
+    <hr/>

@@ -1,0 +1,100 @@
+﻿<style>
+    ul.ui-autocomplete {
+        background-color: white;
+        width: 150px;
+        border-radius: .25em;
+        padding-bottom: .25em;
+        padding-left: 1.75em;
+        border: 3px greenyellow solid;
+    }
+    
+    ul.ui-autocomplete li.ui-menu-item {
+        list-style: circle;
+        padding-left: 0;
+    }
+
+    ul.ui-autocomplete li.ui-menu-item a:link {
+        color: blue;
+    }
+    ul.ui-autocomplete li.ui-menu-item a:visited {
+        color: blue;
+    }
+    ul.ui-autocomplete li.ui-menu-item a:hover {
+        color: blue;
+    }
+    ul.ui-autocomplete li.ui-menu-item a:active {
+        color: blue;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var loadedUp = false;
+
+        var throwAway = setTimeout(function () {
+            if (loadedUp == false) {
+                $("#searchName").val("Loading...");
+                $("#searchName").attr('disabled', true);
+                $("#searchButton").attr('disabled', true);
+            }
+        }, 250);
+
+        var accentMap = {
+            "á": "a",
+            "à": "a",
+            "é": "e",
+            "è": "e",
+            "ö": "o",
+            "ô": "o",
+            "ō": "o",
+            "ø": "o"
+        };
+
+        var normalize = function (term) {
+            var ret = "";
+            for (var i = 0; i < term.length; i++) {
+                ret += accentMap[term.charAt(i)] || term.charAt(i);
+            }
+            return ret;
+        };
+
+        $.ajax({
+            url: "/Home/DeserialiseSearchStringForPartial",
+            datatype: "text",
+            async: true,
+            type: "GET",
+            success: function (data) {
+                var searchItems = data.split("¦");
+                $("#searchName").autocomplete({
+                    source: function( request, response ) {
+                        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+                        response( $.grep( searchItems, function( value ) {
+                            value = value.label || value.value || value;
+                            return matcher.test( value ) || matcher.test( normalize( value ) );
+                        }) );
+                    }
+                });
+                $("#searchName").bind("autocompleteselect", function (event, ui) {
+                    //assign value back to the form element
+                    if (ui.item) {
+                        $(event.target).val(ui.item.value);
+                    }
+                    //submit the form
+                    $(event.target.form).submit();
+                });
+                loadedUp = true;
+                $("#searchName").val("");
+                $("#searchName").removeAttr("disabled");
+                $("#searchButton").removeAttr("disabled");
+            },
+            error: function (x, t, m) {
+                document.write(x.responseText + "???" + t + ":" + m);
+            }
+        });
+    })
+</script>
+
+<form action="/Search/Index/" method="post">
+    <div class="searchdiv">
+        <input class="searchbox" id="searchName" name="query" type="text" />&nbsp;<input class="searchbutton" id="searchButton" type="submit" value="Search" /></div>
+</form>

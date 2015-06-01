@@ -1,0 +1,20 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Appearance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this appearance?</h3>
+
+<p>@Shared.ShortName(Model.Actor1) as @Shared.LongName(Model.Character1) in '@Model.Episode1.Title', @Shared.DisplayName(Model.Episode1.Season1.Adaptation1)</p>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to Episode", "Details","Episode", new { ID = Model.Episode } ,null)
+    </p>
+}

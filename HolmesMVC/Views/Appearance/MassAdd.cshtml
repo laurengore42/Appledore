@@ -1,0 +1,104 @@
+﻿@using HolmesMVC
+@using HolmesMVC.Models
+@using Microsoft.Ajax.Utilities
+@model HolmesMVC.Models.ViewModels.MassAdd
+
+@{
+    ViewBag.Title = "MassAdd for " + Shared.DisplayName(Model.Adaptation1);
+}
+        <h2>MassAdd</h2>
+        for @ViewBag.Title
+        <br/><br/>
+        <div>
+            @Html.ActionLink("Back to Adaptation", "Details", "Adaptation", new { id = Model.Adaptation }, null )
+        </div>
+        <br/><br/>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>MassAdd for @ViewBag.Title</legend>
+        @{
+            List<Episode> epList = ViewBag.Eps;
+            Episode ep1 = epList.First();
+        }
+
+        @Html.Partial("_AppActor", new Appearance { Actor = Model.Actor, Actor1 = Model.Actor1, Episode = ep1.ID, Episode1 = ep1 })
+        <div class="clear-fix"></div><br/>
+        
+        @Html.Partial("_AppChar", new Appearance { Character = Model.Character, Character1 = Model.Character1, Episode = ep1.ID, Episode1 = ep1 })
+        <div class="clear-fix"></div><br/>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Episodes, "Episodes")
+        </div>
+        <div>
+            <ul>
+                <li class="checklist"><input type="checkbox" name="checkallep" id="select-all"/> <label for="select-all">Select All</label></li>
+            <br/><br/>
+            @foreach (Episode ep in ViewBag.Eps)
+            {
+                var epName = ep.Title.IsNullOrWhiteSpace() ? ep.Story1.Name : ep.Title;
+                var epBoxId = "epBox" + ep.ID;
+                <text><li class="checklist"><input type="checkbox" name="episodes" id="@epBoxId" value="@ep.ID"/> <label for="@epBoxId">@epName</label></li></text>
+            }
+                </ul>
+        </div>
+
+
+        <p>
+            <input type="submit" value="Create" /> <input type="hidden" name="adaptation" value="@Model.Adaptation"/>
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/HideSeek/jquery.hideseek.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Apdore-newappearance.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#actorsearch').hideseek({
+                nodata: 'No results found',
+                highlight: true
+            });
+            $('#charsearch').hideseek({
+                nodata: 'No results found',
+                highlight: true
+            });
+        });
+
+        $('#select-all').click(function () {
+            if (this.checked) {
+                // Iterate each checkbox
+                $(':checkbox').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                // Iterate each checkbox
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+    </script>
+
+    <!-- Licensing for HideSeek plugin:
+
+       Copyright 2012 Dimitris Krestos
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+    -->
+}

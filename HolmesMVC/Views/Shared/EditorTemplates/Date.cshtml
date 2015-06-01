@@ -1,0 +1,9 @@
+﻿@model DateTime?
+
+@Html.TextBox(
+"",
+Model == null || ((DateTime)Model).ToString("dd MMM yyyy") == "01 Jan 0001"
+    ? null
+    : ((DateTime)Model).ToString("dd MMM yyyy"),
+new { @class = "ui-datepicker" }
+)

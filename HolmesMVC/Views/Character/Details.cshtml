@@ -1,0 +1,95 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.ViewModels.CharView
+
+@{
+    ViewBag.Title = Model.LongName;
+}
+
+<h2 class="detailscategory">Character</h2>
+
+@if (Model.Pics.Any())
+{
+    <figure class="actorpic">
+        <span id="actorPicSpan"></span>
+    </figure>
+}
+
+<h2 class="detailsheader">@Model.LongName</h2>
+
+<div>
+    <ul class="characterdetails">
+        @if (Model.AverageAge > 0)
+        {
+            <li>Average age: @Math.Round(Model.AverageAge) years</li>
+        }
+        @if (Model.Char.Wikipedia != null)
+        {
+            <li>Wikipedia: <a href="@Html.DisplayFor(model => model.Char.Wikipedia)">@Model.LongName</a></li>
+        }
+        else
+        {
+            <li>Wikipedia: <a href="@string.Format("http://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=" + Model.LongName)">@Model.LongName</a> <i>(link not verified)</i></li>
+        }
+    </ul>
+</div>
+
+@Html.Action("DatabaseLinks", "Home", new { table = "Character", id = Model.Char.ID })
+
+<div class="clear-fix"></div>
+
+<div>
+    <ul id="accordion">
+        @foreach (var historysummary in Model.AllSummaries)
+        {
+            <li class="bar">@historysummary.FirstYear ▷ @Html.Partial("HistorySummary", historysummary)
+            </li>
+
+            <li class="table">
+                <table class="lineddetails">
+                    @foreach (var h in historysummary.Histories)
+                    {
+                        @Html.Partial("History", h)
+                    }
+                </table>
+            </li>
+        }
+    </ul>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/scripts/Apdore-accordion.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var rnd = Math.floor(Math.random() * @Model.Pics.Count());
+
+            var picId = 0;
+            var picName = "";
+            var picUrl = "";
+
+            @{
+                var i = 0;
+            }
+            switch (rnd) {
+                @foreach (var pic in Model.Pics)
+                {
+                    <text>
+                    case @i:
+                        picId = @pic.ID;
+                        picName = '@pic.Name';
+                        picUrl = '@pic.Pic';
+                        break;
+                        </text>
+                    i++;
+                }
+            default:
+                break;
+            }
+
+            if (picId > 0) {
+                $('#actorPicSpan').html('<a href= "/Actor/' + picId + '"><img class="actorpic" src="' + picUrl + '" alt="@Shared.LongName(Model.Char)" title="@Shared.LongName(Model.Char)"/><br></a>'+picName);
+            }
+        });
+
+    </script>
+}

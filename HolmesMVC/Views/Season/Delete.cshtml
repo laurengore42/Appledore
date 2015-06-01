@@ -1,0 +1,32 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Season
+
+@{
+    ViewBag.Title = "Delete Season";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this season?</h3>
+<fieldset>
+    <legend>Season</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        Adaptation: '@Shared.DisplayName(Model.Adaptation1)'
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AirOrder): @Html.DisplayFor(model => model.AirOrder)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

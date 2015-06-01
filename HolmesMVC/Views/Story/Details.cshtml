@@ -1,0 +1,153 @@
+﻿@using HolmesMVC
+@using HolmesMVC.Models
+@model HolmesMVC.Models.ViewModels.StoryView
+@{
+    ViewBag.Title = Model.Episode.Story;
+}
+
+<link href="/Content/Cano.css" rel="stylesheet" />
+
+<section class="leftfloatdetails">
+    <h2 class="detailscategory">Story</h2>
+    <h2 class="detailsheader">@ViewBag.Title</h2>
+    <ul class="actordetails">
+        <li>Abbreviated: @Model.ID</li><br/>
+        @if (Model.BaringGouldEndString.Length > 0)
+        {
+            <text><li>Baring-Gould's dates: @Model.BaringGouldStartString to @Model.BaringGouldEndString</li></text>
+        }
+        else
+        {
+            <text><li>Baring-Gould's date: @Model.BaringGouldStartString</li></text>
+        }
+        @if (Model.KeefauverString.Length > 0)
+        {
+            <li>Keefauver's date: @Model.KeefauverString</li>
+        }
+        <br/><li>Published: @Model.Episode.Airdate.ToString("MMMM yyyy")</li>
+    </ul>
+    <p class="dblinks">
+        @if (Model.Episode.EpPrev > 0 || Model.Episode.EpPrevName != null)
+        {
+            <text>Previous: @Html.ActionLink(Model.Episode.EpPrevName, "Details", "Episode", new { ID = Model.Episode.EpPrev }, null)
+            <br />
+            </text>}
+        @if (Model.Episode.EpNext > 0 || Model.Episode.EpNextName != null)
+        {
+            <text>Next: @Html.ActionLink(Model.Episode.EpNextName, "Details", "Episode", new { ID = Model.Episode.EpNext }, null)</text>}
+    </p>
+
+    @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.Episode.EpId })
+    
+    <article>
+        <div class="adapteds">
+            <h3>Adaptations</h3>
+            <ul>
+                @{ var holmesId = (int)ViewBag.HolmesId; }
+                @foreach (Episode e in Model.Adapteds)
+                {
+                    string epName = Shared.DisplayName(e);
+                    epName = "'" + epName + "'";
+                    <li>
+                        @{
+                    var actorHolmes = Shared.PlayedBy(holmesId, e.Season1.Adaptation1).First();
+                        }
+                        @e.Airdate.ToString("yyyy"): @Html.ActionLink(epName, "Details", "Episode", new { id = e.ID }, null),@if (!string.IsNullOrEmpty(e.Translation)) { <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(Shared.ShortName(actorHolmes),"Details","Actor", new { id = actorHolmes.ID }, null)
+                    </li>
+                }
+            </ul>
+        </div>
+    </article>
+</section>
+
+<section class="rightfloatdetails">
+    @Html.Action("PerEpisode", "Appearance", new { Model.Episode.EpId })
+</section>
+
+<div class="clear-fix"></div>
+
+<section class="leftfloatdetails">
+    <article>
+        <div class="story">
+            Loading story text...
+        </div>
+    </article>
+</section>
+
+<input type="button" class="selButton" value="Extract chunk" style="display:none;" />
+
+<div class="clear-fix"></div>
+
+@section Scripts {
+    <script src="/Scripts/Apdore-chunk.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.story').mousemove(function(event) {
+                var textChunk = getSelectedText();
+                var button = $('.selButton');
+
+                if (textChunk.length <= 0) {
+                    button.hide();
+                    return;
+                }
+
+                button.css({
+                    "position": "fixed",
+                    "left": "2em",
+                    "top": "2em"
+                });
+
+                button.show();
+            });
+
+            $('.selButton').click(function() {
+                var storySection = $('.story');
+
+                var textChunk = getSelectedText();
+                if (textChunk.length <= 0) {
+                    return;
+                }
+
+                // Get whole story, full of misc tags
+                var wholeStory = storySection.html();
+
+                // Reduce story to text and *¦ coded line breaks
+                var storyWithoutTags = htmlTrim(wholeStory);
+
+                // Trim the chunk similarly
+                textChunk = htmlTrim(textChunk);
+
+                // Locate the chunk within the story
+                var chunkStart = storyWithoutTags.indexOf(textChunk);
+                var chunkLength = textChunk.length;
+
+                // Go to chunk page
+                var baseUrl = location.href.substring(0, location.href.indexOf('/', 14));
+                var newUrl = baseUrl + "/Story/@Model.ID" + "?start=" + chunkStart + "&length=" + chunkLength;
+                if (chunkStart > -1) {
+                    window.open(newUrl);
+                } else {
+                    alert("Chunk failed! Start " + chunkStart + " length " + chunkLength + ".");
+                }
+            });
+
+            $.ajax(
+            {
+                async: true,
+                type: "GET",
+                contentType: "application/xml",
+                dataType: "text",
+                url: "/Story/StoryXml",
+                data: "storyCode=@Model.ID",
+                success: function(content) {
+                    $('.story').html(content);
+                },
+                error: function (xhr, status, errorThrown) {
+                        $('.story').html(xhr.responseText);
+                }
+            });
+
+        });
+    </script>
+}

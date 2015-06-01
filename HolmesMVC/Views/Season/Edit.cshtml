@@ -1,0 +1,62 @@
+﻿@model HolmesMVC.Models.Season
+
+@{
+    ViewBag.Title = "Edit Season";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Season</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Translation) <i><a href="https://translate.google.com/#auto/en/@Model.Name">Automate</a></i>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Translation)
+            @Html.ValidationMessageFor(model => model.Translation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adaptation, "Adaptation")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Adaptation", String.Empty)
+            @Html.ValidationMessageFor(model => model.Adaptation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AirOrder)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AirOrder)
+            @Html.ValidationMessageFor(model => model.AirOrder)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    
+}

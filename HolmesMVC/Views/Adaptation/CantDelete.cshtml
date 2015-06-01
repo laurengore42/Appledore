@@ -1,0 +1,15 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Adaptation
+
+@{
+    ViewBag.Title = "Can't Delete";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>You can't delete '@Shared.DisplayName(Model)' because it still has Seasons:</p>
+
+@foreach (var s in Model.Seasons.OrderBy(s => s.AirOrder))
+{
+    <p>Season @s.AirOrder: @Html.ActionLink("Delete","Delete","Season",new { id = s.ID},null)</p>
+}

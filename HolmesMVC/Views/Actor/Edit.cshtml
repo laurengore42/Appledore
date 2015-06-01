@@ -1,0 +1,124 @@
+﻿@using HolmesMVC.Enums
+@model HolmesMVC.Models.Actor
+
+@{
+    ViewBag.Title = "Edit Actor";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Actor</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Forename)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Forename)
+            @Html.ValidationMessageFor(model => model.Forename)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Middlenames)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Middlenames)
+            @Html.ValidationMessageFor(model => model.Middlenames)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Surname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Surname)
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Birthdate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Birthdate, "Date")
+            <select name="BirthdatePrecision">
+                <option value="@((int)DatePrecision.Full)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Full)
+                                  {<text>selected</text>}>Full precision</option>
+                <option value="@((int)DatePrecision.Month)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Month)
+                                  {<text>selected</text>}>Accurate to month</option>
+                <option value="@((int)DatePrecision.Year)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Year)
+                                  {<text>selected</text>}>Accurate to year</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.Birthdate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Birthplace)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Birthplace)
+            @Html.ValidationMessageFor(model => model.Birthplace)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Deathdate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Deathdate, "Date")
+            <select name="DeathdatePrecision">
+                <option value="@((int)DatePrecision.Full)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Full)
+                                  {<text>selected</text>}>Full precision</option>
+                <option value="@((int)DatePrecision.Month)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Month)
+                                  {<text>selected</text>}>Accurate to month</option>
+                <option value="@((int)DatePrecision.Year)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Year)
+                                  {<text>selected</text>}>Accurate to year</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.Deathdate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pic, "Picture URL")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pic)
+            @Html.ValidationMessageFor(model => model.Pic)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IMDb, "IMDb name ID, e.g. nm0121651")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IMDb)
+            @Html.ValidationMessageFor(model => model.IMDb)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Wikipedia, "Wikipedia disambig, e.g. John Doe (actor)")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Wikipedia)
+            @Html.ValidationMessageFor(model => model.Wikipedia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IMDbName, "IMDb name, e.g. 'Larry Brantley (II)'. HOLMES ACTORS ONLY")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IMDbName)
+            @Html.ValidationMessageFor(model => model.IMDbName)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Apdore-editorscripts.js")
+}

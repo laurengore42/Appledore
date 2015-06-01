@@ -1,0 +1,156 @@
+﻿
+
+
+
+/* random scraps */
+
+
+
+
+.detailscategory {
+    color: #3B7034; /* 'Actor' above actor's name '*/
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+li .historysummary {
+    padding-bottom: 2px;
+}
+
+td .adaptseason {
+    padding-bottom: 1ex;
+}
+
+.inlinelabel {
+    display: inline;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+h3 .castheader {
+    margin-top: 25px;
+}
+
+td .castchar {
+    padding-left: 10px;
+}
+
+section .leftfloatdetails {
+    float: left;
+    padding: 0 20px 0 0;
+}
+
+section .rightfloatdetails {
+    float: right;
+    padding: 0 20px 0 20px;
+}
+
+.dblinks {
+    padding-left: 2.85em;
+}
+
+.canonlink {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+div .addappearlink {
+    padding-left: 20px;
+    margin-top: 1em;
+}
+
+div .searchdiv {
+    display: inline;
+    white-space: nowrap;
+}
+
+.ui-datepicker {
+    background-color: white; /* inexplicably transparent by default */
+}
+
+.lineddetails > tbody > tr {
+    white-space: nowrap;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+    .lineddetails > tbody > tr > td {
+        white-space: nowrap;
+        padding-right: 4px;
+    }
+
+.linedright {
+    text-align: right;
+}
+
+.linedbutton {
+    padding-left: 20px;
+}
+
+.popup {
+    display: none;
+    width: 250px;
+    padding: 5px 0 0 5px;
+    border: 1px solid lime;
+    border-radius: 10px;
+}
+
+    .popup > input {
+        width: 150px;
+    }
+
+#canoframe {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 35em;
+    min-height: 42em;
+    height: 100%;
+}
+
+
+.detailsheader {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.actordetails {
+    list-style: none;
+}
+
+.characterdetails {
+    list-style: none;
+}
+
+figure.actorpic {
+    float: right;
+    margin-top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+img.actorpic {
+    max-width: 350px;
+    max-height: 350px;
+}
+
+
+
+
+/* ugly hacks for ugly table-layout data index views */
+
+.truncate {
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.oneliner {
+    white-space: nowrap;
+}
+

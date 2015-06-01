@@ -1,0 +1,37 @@
+﻿@using HolmesMVC
+@model HolmesMVC.Models.Season
+
+@{
+    ViewBag.Title = "Season Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Season</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Adaptation1.Name)
+    </div>
+    <div class="display-field">
+        @Shared.DisplayName(Model.Adaptation1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AirOrder)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AirOrder)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

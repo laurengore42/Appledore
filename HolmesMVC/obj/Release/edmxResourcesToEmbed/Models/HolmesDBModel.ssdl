@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HolmesDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HolmesDBModelStoreContainer">
+    <EntitySet Name="Actors" EntityType="HolmesDBModel.Store.Actors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Adaptations" EntityType="HolmesDBModel.Store.Adaptations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Appearances" EntityType="HolmesDBModel.Store.Appearances" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Characters" EntityType="HolmesDBModel.Store.Characters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Episodes" EntityType="HolmesDBModel.Store.Episodes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Genders" EntityType="HolmesDBModel.Store.Genders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Honorifics" EntityType="HolmesDBModel.Store.Honorifics" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Media" EntityType="HolmesDBModel.Store.Media" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="References" EntityType="HolmesDBModel.Store.References" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Renames" EntityType="HolmesDBModel.Store.Renames" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Seasons" EntityType="HolmesDBModel.Store.Seasons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Species" EntityType="HolmesDBModel.Store.Species" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stories" EntityType="HolmesDBModel.Store.Stories" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Actors_Genders" Association="HolmesDBModel.Store.FK_Actors_Genders">
+      <End Role="Genders" EntitySet="Genders" />
+      <End Role="Actors" EntitySet="Actors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Actors_Species" Association="HolmesDBModel.Store.FK_Actors_Species">
+      <End Role="Species" EntitySet="Species" />
+      <End Role="Actors" EntitySet="Actors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Adaptations_Media" Association="HolmesDBModel.Store.FK_Adaptations_Media">
+      <End Role="Media" EntitySet="Media" />
+      <End Role="Adaptations" EntitySet="Adaptations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appearance_Actors1" Association="HolmesDBModel.Store.FK_Appearance_Actors1">
+      <End Role="Actors" EntitySet="Actors" />
+      <End Role="Appearances" EntitySet="Appearances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appearance_Characters" Association="HolmesDBModel.Store.FK_Appearance_Characters">
+      <End Role="Characters" EntitySet="Characters" />
+      <End Role="Appearances" EntitySet="Appearances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appearance_Episodes" Association="HolmesDBModel.Store.FK_Appearance_Episodes">
+      <End Role="Episodes" EntitySet="Episodes" />
+      <End Role="Appearances" EntitySet="Appearances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Characters_Genders" Association="HolmesDBModel.Store.FK_Characters_Genders">
+      <End Role="Genders" EntitySet="Genders" />
+      <End Role="Characters" EntitySet="Characters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Characters_Honorifics" Association="HolmesDBModel.Store.FK_Characters_Honorifics">
+      <End Role="Honorifics" EntitySet="Honorifics" />
+      <End Role="Characters" EntitySet="Characters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Characters_Species" Association="HolmesDBModel.Store.FK_Characters_Species">
+      <End Role="Species" EntitySet="Species" />
+      <End Role="Characters" EntitySet="Characters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Episodes_Seasons" Association="HolmesDBModel.Store.FK_Episodes_Seasons">
+      <End Role="Seasons" EntitySet="Seasons" />
+      <End Role="Episodes" EntitySet="Episodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Episodes_Stories" Association="HolmesDBModel.Store.FK_Episodes_Stories">
+      <End Role="Stories" EntitySet="Stories" />
+      <End Role="Episodes" EntitySet="Episodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_References_Episodes" Association="HolmesDBModel.Store.FK_References_Episodes">
+      <End Role="Episodes" EntitySet="Episodes" />
+      <End Role="References" EntitySet="References" />
+    </AssociationSet>
+    <AssociationSet Name="FK_References_Stories" Association="HolmesDBModel.Store.FK_References_Stories">
+      <End Role="Stories" EntitySet="Stories" />
+      <End Role="References" EntitySet="References" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Renames_Actors" Association="HolmesDBModel.Store.FK_Renames_Actors">
+      <End Role="Actors" EntitySet="Actors" />
+      <End Role="Renames" EntitySet="Renames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Renames_Adaptations" Association="HolmesDBModel.Store.FK_Renames_Adaptations">
+      <End Role="Adaptations" EntitySet="Adaptations" />
+      <End Role="Renames" EntitySet="Renames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Renames_Characters" Association="HolmesDBModel.Store.FK_Renames_Characters">
+      <End Role="Characters" EntitySet="Characters" />
+      <End Role="Renames" EntitySet="Renames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Renames_Honorifics" Association="HolmesDBModel.Store.FK_Renames_Honorifics">
+      <End Role="Honorifics" EntitySet="Honorifics" />
+      <End Role="Renames" EntitySet="Renames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seasons_Adaptations" Association="HolmesDBModel.Store.FK_Seasons_Adaptations">
+      <End Role="Adaptations" EntitySet="Adaptations" />
+      <End Role="Seasons" EntitySet="Seasons" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Forename" Type="nvarchar" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Birthdate" Type="date" />
+    <Property Name="Deathdate" Type="date" />
+    <Property Name="Pic" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Middlenames" Type="nvarchar" MaxLength="200" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="Species" Type="int" />
+    <Property Name="IMDb" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Wikipedia" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Birthplace" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Adaptations">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Medium" Type="int" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Appearances">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Actor" Type="int" Nullable="false" />
+    <Property Name="Character" Type="int" Nullable="false" />
+    <Property Name="Episode" Type="int" Nullable="false" />
+    <Property Name="Pic" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Characters">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Forename" Type="nvarchar" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="Species" Type="int" />
+    <Property Name="Honorific" Type="int" />
+    <Property Name="Wikipedia" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Episodes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Season" Type="int" Nullable="false" />
+    <Property Name="Story" Type="char" MaxLength="4" />
+    <Property Name="Airdate" Type="datetime" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Genders">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Honorifics">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Media">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="References">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Story" Type="char" Nullable="false" MaxLength="4" />
+    <Property Name="Episode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Renames">
+    <Key>
+      <PropertyRef Name="Adaptation" />
+      <PropertyRef Name="Character" />
+      <PropertyRef Name="Actor" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Adaptation" Type="int" Nullable="false" />
+    <Property Name="Character" Type="int" Nullable="false" />
+    <Property Name="Actor" Type="int" Nullable="false" />
+    <Property Name="Honorific" Type="int" />
+    <Property Name="Forename" Type="nvarchar" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Seasons">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Adaptation" Type="int" Nullable="false" />
+    <Property Name="AirOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Species">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Stories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="char" Nullable="false" MaxLength="4" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Actors_Genders">
+    <End Role="Genders" Type="HolmesDBModel.Store.Genders" Multiplicity="0..1" />
+    <End Role="Actors" Type="HolmesDBModel.Store.Actors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Actors">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Actors_Species">
+    <End Role="Species" Type="HolmesDBModel.Store.Species" Multiplicity="0..1" />
+    <End Role="Actors" Type="HolmesDBModel.Store.Actors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Species">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Actors">
+        <PropertyRef Name="Species" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Adaptations_Media">
+    <End Role="Media" Type="HolmesDBModel.Store.Media" Multiplicity="1" />
+    <End Role="Adaptations" Type="HolmesDBModel.Store.Adaptations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Media">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Adaptations">
+        <PropertyRef Name="Medium" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appearance_Actors1">
+    <End Role="Actors" Type="HolmesDBModel.Store.Actors" Multiplicity="1" />
+    <End Role="Appearances" Type="HolmesDBModel.Store.Appearances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actors">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appearances">
+        <PropertyRef Name="Actor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appearance_Characters">
+    <End Role="Characters" Type="HolmesDBModel.Store.Characters" Multiplicity="1" />
+    <End Role="Appearances" Type="HolmesDBModel.Store.Appearances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Characters">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appearances">
+        <PropertyRef Name="Character" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appearance_Episodes">
+    <End Role="Episodes" Type="HolmesDBModel.Store.Episodes" Multiplicity="1" />
+    <End Role="Appearances" Type="HolmesDBModel.Store.Appearances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Episodes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Appearances">
+        <PropertyRef Name="Episode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Characters_Genders">
+    <End Role="Genders" Type="HolmesDBModel.Store.Genders" Multiplicity="0..1" />
+    <End Role="Characters" Type="HolmesDBModel.Store.Characters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Characters">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Characters_Honorifics">
+    <End Role="Honorifics" Type="HolmesDBModel.Store.Honorifics" Multiplicity="0..1" />
+    <End Role="Characters" Type="HolmesDBModel.Store.Characters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Honorifics">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Characters">
+        <PropertyRef Name="Honorific" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Characters_Species">
+    <End Role="Species" Type="HolmesDBModel.Store.Species" Multiplicity="0..1" />
+    <End Role="Characters" Type="HolmesDBModel.Store.Characters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Species">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Characters">
+        <PropertyRef Name="Species" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Episodes_Seasons">
+    <End Role="Seasons" Type="HolmesDBModel.Store.Seasons" Multiplicity="1" />
+    <End Role="Episodes" Type="HolmesDBModel.Store.Episodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seasons">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Episodes">
+        <PropertyRef Name="Season" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Episodes_Stories">
+    <End Role="Stories" Type="HolmesDBModel.Store.Stories" Multiplicity="0..1" />
+    <End Role="Episodes" Type="HolmesDBModel.Store.Episodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Episodes">
+        <PropertyRef Name="Story" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_References_Episodes">
+    <End Role="Episodes" Type="HolmesDBModel.Store.Episodes" Multiplicity="1" />
+    <End Role="References" Type="HolmesDBModel.Store.References" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Episodes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="References">
+        <PropertyRef Name="Episode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_References_Stories">
+    <End Role="Stories" Type="HolmesDBModel.Store.Stories" Multiplicity="1" />
+    <End Role="References" Type="HolmesDBModel.Store.References" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stories">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="References">
+        <PropertyRef Name="Story" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Renames_Actors">
+    <End Role="Actors" Type="HolmesDBModel.Store.Actors" Multiplicity="1" />
+    <End Role="Renames" Type="HolmesDBModel.Store.Renames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actors">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Renames">
+        <PropertyRef Name="Actor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Renames_Adaptations">
+    <End Role="Adaptations" Type="HolmesDBModel.Store.Adaptations" Multiplicity="1" />
+    <End Role="Renames" Type="HolmesDBModel.Store.Renames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adaptations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Renames">
+        <PropertyRef Name="Adaptation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Renames_Characters">
+    <End Role="Characters" Type="HolmesDBModel.Store.Characters" Multiplicity="1" />
+    <End Role="Renames" Type="HolmesDBModel.Store.Renames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Characters">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Renames">
+        <PropertyRef Name="Character" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Renames_Honorifics">
+    <End Role="Honorifics" Type="HolmesDBModel.Store.Honorifics" Multiplicity="0..1" />
+    <End Role="Renames" Type="HolmesDBModel.Store.Renames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Honorifics">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Renames">
+        <PropertyRef Name="Honorific" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seasons_Adaptations">
+    <End Role="Adaptations" Type="HolmesDBModel.Store.Adaptations" Multiplicity="1" />
+    <End Role="Seasons" Type="HolmesDBModel.Store.Seasons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adaptations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Seasons">
+        <PropertyRef Name="Adaptation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

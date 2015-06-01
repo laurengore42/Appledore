@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HolmesDBModelStoreContainer" CdmEntityContainer="HolmesDBEntities">
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="HolmesDBModel.Actor">
+        <MappingFragment StoreEntitySet="Actors">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="Deathdate" ColumnName="Deathdate" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="Middlenames" ColumnName="Middlenames" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Species" ColumnName="Species" />
+          <ScalarProperty Name="IMDb" ColumnName="IMDb" />
+          <ScalarProperty Name="Wikipedia" ColumnName="Wikipedia" />
+          <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Adaptations">
+      <EntityTypeMapping TypeName="HolmesDBModel.Adaptation">
+        <MappingFragment StoreEntitySet="Adaptations">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appearances">
+      <EntityTypeMapping TypeName="HolmesDBModel.Appearance">
+        <MappingFragment StoreEntitySet="Appearances">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Actor" ColumnName="Actor" />
+          <ScalarProperty Name="Character" ColumnName="Character" />
+          <ScalarProperty Name="Episode" ColumnName="Episode" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Characters">
+      <EntityTypeMapping TypeName="HolmesDBModel.Character">
+        <MappingFragment StoreEntitySet="Characters">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Species" ColumnName="Species" />
+          <ScalarProperty Name="Honorific" ColumnName="Honorific" />
+          <ScalarProperty Name="Wikipedia" ColumnName="Wikipedia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Episodes">
+      <EntityTypeMapping TypeName="HolmesDBModel.Episode">
+        <MappingFragment StoreEntitySet="Episodes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Season" ColumnName="Season" />
+          <ScalarProperty Name="Story" ColumnName="Story" />
+          <ScalarProperty Name="Airdate" ColumnName="Airdate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="HolmesDBModel.Gender">
+        <MappingFragment StoreEntitySet="Genders">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Honorifics">
+      <EntityTypeMapping TypeName="HolmesDBModel.Honorific">
+        <MappingFragment StoreEntitySet="Honorifics">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Media">
+      <EntityTypeMapping TypeName="HolmesDBModel.Medium">
+        <MappingFragment StoreEntitySet="Media">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="References">
+      <EntityTypeMapping TypeName="HolmesDBModel.Reference">
+        <MappingFragment StoreEntitySet="References">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Story" ColumnName="Story" />
+          <ScalarProperty Name="Episode" ColumnName="Episode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Renames">
+      <EntityTypeMapping TypeName="HolmesDBModel.Rename">
+        <MappingFragment StoreEntitySet="Renames">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Adaptation" ColumnName="Adaptation" />
+          <ScalarProperty Name="Character" ColumnName="Character" />
+          <ScalarProperty Name="Actor" ColumnName="Actor" />
+          <ScalarProperty Name="Honorific" ColumnName="Honorific" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seasons">
+      <EntityTypeMapping TypeName="HolmesDBModel.Season">
+        <MappingFragment StoreEntitySet="Seasons">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Adaptation" ColumnName="Adaptation" />
+          <ScalarProperty Name="AirOrder" ColumnName="AirOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Species">
+      <EntityTypeMapping TypeName="HolmesDBModel.Species">
+        <MappingFragment StoreEntitySet="Species">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stories">
+      <EntityTypeMapping TypeName="HolmesDBModel.Story">
+        <MappingFragment StoreEntitySet="Stories">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

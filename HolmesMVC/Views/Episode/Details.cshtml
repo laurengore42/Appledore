@@ -1,0 +1,56 @@
+﻿@using HolmesMVC.Enums
+@using Microsoft.Ajax.Utilities
+@model HolmesMVC.Models.ViewModels.EpisodeView
+
+@{
+    ViewBag.Title = Model.DisplayName;
+}
+<section class="leftfloatdetails">
+    <h2 class="detailscategory">Episode</h2>
+    <h2 class="detailsheader">@ViewBag.Title
+    @if (Model.Translation != null && Model.Translation != string.Empty)
+    {
+        <span style="font-weight: normal; font-size: small;"><i>@Model.Translation</i></span>
+    }</h2>
+    <ul class="actordetails">
+        <li>Adaptation: @Html.ActionLink(Model.AdaptationName,"Details","Adaptation", new { id = Model.Adaptation }, null)@if (Model.AdaptationTranslation != null && Model.AdaptationTranslation != string.Empty){ <span style="font-weight: normal; font-size: small;"><i>@Model.AdaptationTranslation</i></span>}</li>
+        <li>Episode: @Html.DisplayFor(model => model.SeasonCode)</li>
+        @{
+            var airdateFormat = "dd MMMM yyyy";
+            if (Model.AirdatePrecision == DatePrecision.Month)
+            {
+                airdateFormat = "MMMM yyyy";
+            }
+            else if (Model.AirdatePrecision == DatePrecision.Year)
+            {
+                airdateFormat = "yyyy";
+            }
+        }
+        <li>Airdate: @Model.Airdate.ToString(airdateFormat)</li>
+        @if (!Model.Story.IsNullOrWhiteSpace())
+        { <text><li>Canon basis: @Html.ActionLink(Model.Story, "Details", "Story", new { id = Model.StoryCode }, null)</li></text> }
+        
+        @if (Model.MediumName == "Television" || Model.MediumName == "Film")
+        {
+            var IMDbUrl = "http://www.imdb.com/find?s=tt&q=" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy"); 
+    <text>        <li>IMDb: <a href = '@IMDbUrl'>@Model.DisplayName</a> <i>(link not verified)</i></li></text>}
+    </ul>
+    <p class="dblinks">
+        @if (Model.EpPrev > 0 || Model.EpPrevName != null)
+        {
+            <text>Previous: @Html.ActionLink(Model.EpPrevName, "Details", "Episode", new { ID = Model.EpPrev }, null) @if (Model.EpPrevTranslation != null && Model.EpPrevTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpPrevTranslation</i></span>}
+            <br />
+            </text>}
+        @if (Model.EpNext > 0 || Model.EpNextName != null)
+        {
+            <text>Next: @Html.ActionLink(Model.EpNextName, "Details", "Episode", new { ID = Model.EpNext }, null) @if (Model.EpNextTranslation != null && Model.EpNextTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpNextTranslation</i></span>}</text>}
+    </p>
+
+    @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.EpId })
+
+</section>
+<section class="rightfloatdetails">
+    @Html.Action("PerEpisode", "Appearance", new { Model.EpId })
+</section>
+
+<div class="clear-fix"></div>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Appledore</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!--       @if (Request.IsAuthenticated)
+               { <text>Layout start @DateTime.UtcNow</text> }
+         -->
+    <header>
+        <div class="content-wrapper">
+        @if(Request.IsAuthenticated) { <span>hi lastdbupdate is @ViewBag.lastdbupdate and you are @User.Identity.Name</span> }
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("Appledore", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <section id="search">
+                    @Html.Partial("_SearchPartial")
+                </section>
+            </div>
+            <div class="clear-fix"></div>
+            <div class="float-left">
+                <section id="menuPart">
+                    @Html.Action("Menu", "Home")
+                </section>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            <article>
+                @RenderBody()
+            </article>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Appledore</p>
+            </div>
+        </div>
+    </footer>
+    <!--    @if (Request.IsAuthenticated)
+            { <text>Layout end @DateTime.UtcNow</text> } -->
+</body>
+</html>

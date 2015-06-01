@@ -1,0 +1,63 @@
+﻿@model HolmesMVC.Models.ViewModels.StoryView
+@{
+    ViewBag.Title = "A quote from '" + Model.Episode.Story + "'";
+}
+
+<link href="/Content/Cano.css" rel="stylesheet" />
+
+<section class="leftfloatdetails">
+    <article>
+        <div class="storyChunk">
+        </div>
+        -- <i>@Html.ActionLink("'" + Model.Episode.Story + "'", "Details", "Story", new { id = Model.Episode.StoryCode }, null)</i>, Sir Arthur Conan Doyle
+    </article>
+</section>
+
+<div style="display: none" id="hiddenStory">Loading story text...</div>
+<div class="clear-fix"></div>
+
+@section Scripts {
+    <script src="/Scripts/Apdore-chunk.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax(
+            {
+                async: false,
+                type: "GET",
+                contentType: "application/xml",
+                dataType: "text",
+                url: "/Story/StoryXml",
+                data: "storyCode=@Model.ID",
+                success: function(content) {
+                    $('#hiddenStory').html(content);
+                },
+                error: function(xhr, status, errorThrown) {
+                        $('#hiddenStory').html(xhr.responseText);
+                }
+            });
+
+            var chunkSection = $('.storyChunk');
+            var storySection = $('#hiddenStory');
+
+            // This is the text and the tags
+            var wholeStory = storySection.html();
+
+            // Replace line-break tags with *¦
+            // Kill all other tags
+            var storyWithoutTags = htmlTrim(wholeStory);
+
+            // Take chunk out of story
+            var storyChunk = storyWithoutTags.substring(@Model.ChunkStart, @Model.ChunkStart + @Model.ChunkLength);
+            
+            // Put line breaks back in to chunk
+            var lineBreaker = storyChunk;
+            while (lineBreaker.indexOf("*¦") > -1) {
+                lineBreaker = lineBreaker.replace("*¦", "</p><p>");
+            }
+
+            // Print chunk
+            chunkSection.html("<p>"+lineBreaker+"</p>");
+        });
+    </script>
+}

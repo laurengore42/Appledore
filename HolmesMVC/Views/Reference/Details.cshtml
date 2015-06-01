@@ -1,0 +1,36 @@
+﻿@model HolmesMVC.Models.Reference
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Reference</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Story1.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Story1.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Episode1.Story)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Episode1.Story)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

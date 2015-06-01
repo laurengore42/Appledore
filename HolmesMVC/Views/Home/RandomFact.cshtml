@@ -1,0 +1,34 @@
+﻿@using HolmesMVC
+@using HolmesMVC.Models
+@model HolmesMVC.Models.ViewModels.RandomView
+
+<h3>A multi-actor:</h3>
+@Html.ActionLink(Shared.ShortName(Model.MultiActor.Actor),"Details","Actor", new { id = Model.MultiActor.Actor.ID }, null) played @foreach(var c in Model.MultiActor.Characters){ <text> @Html.ActionLink(Shared.LongName(c),"Details","Character",new { id = c.ID },null) and </text>}
+
+<h3>Today's birthdays:</h3>
+@if (!Model.BirthdayActors.Any())
+{
+    <text>None!</text>
+}
+else
+{
+    <table>
+    @foreach (var a in Model.BirthdayActors)
+     {
+        <tr><td>@Html.ActionLink(a.Name, "Details", "Actor", new { a.ID }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
+     }
+    </table>
+}
+
+<h3>Today's anniversaries:</h3>
+@if (!Model.AnnivEpisodes.Any())
+{
+    <text>None!</text>
+} else {
+    <table>
+@foreach (var e in Model.AnnivEpisodes)
+{
+        <tr><td>@Html.ActionLink(e.Name, "Details", "Episode", new { e.ID }, null) starring @e.Holmes </td><td> @((e.Airdate).ToString("d MMMM yyyy"))</td></tr>
+}
+    </table>
+}
