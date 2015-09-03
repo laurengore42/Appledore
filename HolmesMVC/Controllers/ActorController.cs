@@ -34,7 +34,7 @@
             {
                 // it's an external URL
             }
-            else if (actor.Pic != null)
+            else if (actorView.Pic != null)
             {
                 // it's an internal image name
                 actorView.Pic = @Url.Content("~/Content/Images/") + actorView.Pic;
