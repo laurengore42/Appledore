@@ -407,13 +407,39 @@
                 ViewBag.dupeCharNames = dupeCharNames;
             }
 
+
             var dupeActNames = (from a in Db.Actors
                                 where a.ID > 0
                                 orderby a.ID
-                                group a by (a.Forename ?? string.Empty) + " " + (a.Middlenames ?? string.Empty) + " " + a.Surname
+                                // don't use middle names, IMDb auto input misses them out
+                                group a by (a.Forename ?? string.Empty) + " " + a.Surname
                                     into grp
                                     where grp.Count() > 1
                                     select grp).ToList();
+            // Need something which says
+            // if they both have IMDb entries, and they're DIFFERENT,
+            // they're not dupes
+            // i.e. John Carr 1746979 and John Carr 6454142
+            foreach(var dupe in dupeActNames) {
+                var mainActor = dupe.First();
+                var mainActorID = mainActor.IMDb;
+                if (mainActorID != "") {
+                    var valid = false;
+                    foreach (var possible in dupe)
+                    {
+                        if (possible.IMDb == "" || possible.IMDb == mainActorID)
+                        {
+                            valid = true;
+                            break;
+                        }
+                    }
+                    if (!valid)
+                    {
+                        dupeActNames.Remove(dupe);
+                    }
+                }
+
+            }
             if (dupeActNames.Any())
             {
                 ViewBag.dupeActNames = dupeActNames;
