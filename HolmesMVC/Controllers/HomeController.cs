@@ -526,7 +526,22 @@
         [HttpGet]
         public ViewResult Scraps()
         {
-            return View();
+            var holmesId = Shared.GetHolmes(Db.Characters.ToList());
+            var adapts = from a in Db.Adaptations orderby a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate select a;
+
+            var holmesDictionary = new Dictionary<Int32, Actor>();
+
+            foreach (Adaptation a in adapts) {
+                var holmesList = Shared.PlayedBy(1, a);
+                foreach (Actor tempHolmes in holmesList) {
+                    if (tempHolmes.ID > 0 && !holmesDictionary.ContainsKey(tempHolmes.ID) && tempHolmes.Pic != null && tempHolmes.Pic != "")
+                    {
+                        holmesDictionary.Add(tempHolmes.ID, tempHolmes);
+                    };
+                };
+            };
+
+            return View(holmesDictionary);
         }
 
         [Stopwatch]
