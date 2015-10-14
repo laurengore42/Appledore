@@ -425,12 +425,12 @@
             foreach (var dupe in dupeActNamesForEnumeration)
             {
                 var mainActor = dupe.First();
-                var mainActorID = mainActor.IMDb;
-                if (mainActorID != "") {
+                var mainActorIMDb = mainActor.IMDb;
+                if (mainActorIMDb != "") {
                     var valid = false;
                     foreach (var possible in dupe)
                     {
-                        if (possible.ID != mainActor.ID && (possible.IMDb == null || possible.IMDb == "" || possible.IMDb == mainActorID))
+                        if (possible.ID != mainActor.ID && (possible.IMDb == null || possible.IMDb == "" || possible.IMDb == mainActorIMDb))
                         {
                             valid = true;
                             break;
