@@ -420,14 +420,17 @@
             // if they both have IMDb entries, and they're DIFFERENT,
             // they're not dupes
             // i.e. John Carr 1746979 and John Carr 6454142
-            foreach(var dupe in dupeActNames) {
+            var dupeActNamesForEnumeration = new List<IGrouping<String, Actor>>();
+            dupeActNamesForEnumeration.AddRange(dupeActNames);
+            foreach (var dupe in dupeActNamesForEnumeration)
+            {
                 var mainActor = dupe.First();
                 var mainActorID = mainActor.IMDb;
                 if (mainActorID != "") {
                     var valid = false;
                     foreach (var possible in dupe)
                     {
-                        if (possible.IMDb == "" || possible.IMDb == mainActorID)
+                        if (possible.ID != mainActor.ID && (possible.IMDb == null || possible.IMDb == "" || possible.IMDb == mainActorID))
                         {
                             valid = true;
                             break;
