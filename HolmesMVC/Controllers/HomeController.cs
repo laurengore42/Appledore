@@ -581,7 +581,7 @@
             // the menu at the top of the main layout
 
             // get the tables for the Data links
-            var holmesConn = WebConfigurationManager.ConnectionStrings["HolmesDBEntities"].ConnectionString;
+            var holmesConn = WebConfigurationManager.ConnectionStrings["HolmesDB"].ConnectionString;
             var tables = new DataTable("Tables");
             using (var conn = new SqlConnection(holmesConn))
             {

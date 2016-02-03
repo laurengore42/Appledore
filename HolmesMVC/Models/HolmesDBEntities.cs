@@ -12,7 +12,7 @@ namespace HolmesMVC.Models
         }
 
         public HolmesDBEntities()
-            : base("Name=HolmesDBEntities")
+            : base("Name=HolmesDB")
         {
         }
 

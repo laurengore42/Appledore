@@ -7,7 +7,7 @@
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("HolmesDBEntities")
+            : base("HolmesDB")
         {
         }
 
