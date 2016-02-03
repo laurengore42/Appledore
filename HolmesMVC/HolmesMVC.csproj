@@ -1214,15 +1214,14 @@
     <Content Include="Views\Appearance\_AppActor.cshtml" />
     <Content Include="Views\Appearance\_AppChar.cshtml" />
     <Content Include="Views\Story\Details.cshtml" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
+    <Content Include="web.config" />
+    <None Include="Web.template.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -1347,10 +1346,13 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <PropertyGroup>
+    <BuildDependsOn>
+      CustomWebConfigTransform;
+      $(BuildDependsOn);
+    </BuildDependsOn>
+  </PropertyGroup>
+  <Target Name="CustomWebConfigTransform">
+    <TransformXml source="Web.template.config" transform="Web.$(Configuration).config" destination="Web.config" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
 </Project>
