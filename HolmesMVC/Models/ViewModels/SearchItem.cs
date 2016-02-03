@@ -227,6 +227,8 @@
             var adaptQuery = from a in db.Adaptations
                              where (a.Name == null || a.Name != "Canon") 
                             && a.Medium1.Name != "Stage" // to_do_theatre
+                            && a.Seasons.Any()
+                            && a.Seasons.FirstOrDefault().Episodes.Any()
                             select new SearchAdapt
                             {
                                 ID = a.ID,
