@@ -530,21 +530,26 @@
         public ViewResult Scraps()
         {
             var holmesId = Shared.GetHolmes(Db.Characters.ToList());
-            var adapts = from a in Db.Adaptations orderby a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate select a;
 
-            var holmesDictionary = new Dictionary<Int32, Actor>();
+            var fullHolmesList = (from ad in Db.Adaptations
 
-            foreach (Adaptation a in adapts) {
-                var holmesList = Shared.PlayedBy(1, a);
-                foreach (Actor tempHolmes in holmesList) {
-                    if (tempHolmes.ID > 0 && !holmesDictionary.ContainsKey(tempHolmes.ID) && tempHolmes.Pic != null && tempHolmes.Pic != "")
-                    {
-                        holmesDictionary.Add(tempHolmes.ID, tempHolmes);
-                    };
-                };
-            };
+                                 // rough dating
+                                 orderby ad.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate
 
-            return View(holmesDictionary);
+                                 // this is actually Shared.PlayedBy unrolled
+                                 from ac in
+                                     (from a in ad.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
+                                      where a.Character == holmesId
+                                      group a by a.Actor1 into grp
+                                      orderby grp.Count() descending
+                                      select grp.Key)
+
+                                 // minimal validation for valid pictures
+                                  where ac.ID > 0 && ac.Pic != null && ac.Pic != ""
+
+                                  select ac).Distinct().ToList();
+
+            return View(fullHolmesList);
         }
 
         [Stopwatch]
