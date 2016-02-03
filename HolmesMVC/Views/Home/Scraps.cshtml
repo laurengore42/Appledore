@@ -1,26 +1,11 @@
 ﻿@{
     ViewBag.Title = "Scraps";
 
-    var holmesDictionary = Model as Dictionary<Int32, HolmesMVC.Models.Actor>;
-    foreach (Int32 key in holmesDictionary.Keys)
+    var holmesList = Model as List<HolmesMVC.Models.Actor>;
+    foreach (var actor in holmesList)
     {
-
-        try
-        {
-            HttpWebRequest request =
-        HttpWebRequest.Create(holmesDictionary[key].Pic) as HttpWebRequest;
-            
-            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-    <a href="/actor/@holmesDictionary[key].ID">
-        <img style="height:200px;" src="@holmesDictionary[key].Pic" alt="@holmesDictionary[key].Forename @holmesDictionary[key].Surname"></a>
-            }
-        }
-        catch
-        {
-        }
-
+    <a href="/actor/@actor.ID">
+        <img style="height:200px;" src="@actor.Pic" alt="@actor.Forename @actor.Surname"></a>
     }      
     
 }
