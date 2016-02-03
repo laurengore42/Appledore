@@ -531,23 +531,14 @@
         {
             var holmesId = Shared.GetHolmes(Db.Characters.ToList());
 
-            var fullHolmesList = (from ad in Db.Adaptations
-
-                                 // rough dating
-                                 orderby ad.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate
-
-                                 // this is actually Shared.PlayedBy unrolled
-                                 from ac in
-                                     (from a in ad.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
-                                      where a.Character == holmesId
-                                      group a by a.Actor1 into grp
-                                      orderby grp.Count() descending
-                                      select grp.Key)
-
-                                 // minimal validation for valid pictures
-                                  where ac.ID > 0 && ac.Pic != null && ac.Pic != ""
-
-                                  select ac).Distinct().ToList();
+            var fullHolmesList = (from app in Db.Appearances
+                                  where app.Character == holmesId
+                                  && app.Actor > 0
+                                  && app.Actor1.Pic != null
+                                  && app.Actor1.Pic != ""
+                                  group app by app.Actor into grp
+                                  orderby grp.FirstOrDefault().Episode1.Airdate
+                                  select grp.FirstOrDefault().Actor1).ToList();
 
             return View(fullHolmesList);
         }
