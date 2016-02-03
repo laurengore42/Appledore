@@ -12,3 +12,4 @@
 /HolmesMVC/obj/Debug/*
 HolmesMVC/web.debug.config
 HolmesMVC/web.release.config
+HolmesMVC/web.config
