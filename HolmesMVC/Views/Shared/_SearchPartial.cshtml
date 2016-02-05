@@ -33,9 +33,7 @@
 
         var throwAway = setTimeout(function () {
             if (loadedUp == false) {
-                $("#searchName").val("Loading...");
-                $("#searchName").attr('disabled', true);
-                $("#searchButton").attr('disabled', true);
+                $("#overlay").show();
             }
         }, 250);
 
@@ -83,9 +81,8 @@
                     $(event.target.form).submit();
                 });
                 loadedUp = true;
-                $("#searchName").val("");
-                $("#searchName").removeAttr("disabled");
-                $("#searchButton").removeAttr("disabled");
+
+                $("#overlay").hide();
             },
             error: function (x, t, m) {
                 document.write(x.responseText + "???" + t + ":" + m);
@@ -98,3 +95,31 @@
     <div class="searchdiv">
         <input class="searchbox" id="searchName" name="query" type="text" />&nbsp;<input class="searchbutton" id="searchButton" type="submit" value="Search" /></div>
 </form>
+
+<div id="overlay">
+    <h1>Loading...</h1>
+</div>
+
+<style>
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        filter: alpha(opacity=90);
+        -moz-opacity: 0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+        z-index: 10000;
+    }
+
+    #overlay h1 {
+        position: fixed;
+        top: 5%;
+        left: 5%;
+        color: #fff;
+        font-size: 72pt;
+    }
+</style>
