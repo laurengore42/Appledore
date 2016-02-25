@@ -15,12 +15,6 @@
         [AllowAnonymous]
         public ActionResult Index()
         {
-            // rare case where the application gets reset during a query
-            if (HttpContext.Application["SearchDataFull"] == null)
-            {
-                HttpContext.Application["SearchDataFull"] = Shared.GetSearchDataFull(Db);
-            }
-
             var results = (SearchData)new XmlSerializer(typeof(SearchData)).Deserialize(new StringReader(HttpContext.Application["SearchDataFull"].ToString()));
 
             return View(results);
