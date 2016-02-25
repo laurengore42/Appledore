@@ -29,13 +29,13 @@
 
 <script>
     $(document).ready(function () {
-        var loadedUp = false;
+        //var loadedUp = false;
 
-        var throwAway = setTimeout(function () {
-            if (loadedUp == false) {
-                $("#overlay").show();
-            }
-        }, 500);
+        //var throwAway = setTimeout(function () {
+        //    if (loadedUp == false) {
+        //        $("#overlay").show();
+        //    }
+        //}, 500);
 
         var accentMap = {
             "á": "a",
@@ -57,7 +57,7 @@
         };
 
         $.ajax({
-            url: "/Home/DeserialiseSearchStringForPartial",
+            url: "/Search/DeserialiseSearchStringForPartial",
             datatype: "text",
             async: true,
             type: "GET",
@@ -80,9 +80,9 @@
                     //submit the form
                     $(event.target.form).submit();
                 });
-                loadedUp = true;
+                //loadedUp = true;
 
-                $("#overlay").hide();
+                //$("#overlay").hide();
             },
             error: function (x, t, m) {
                 document.write(x.responseText + "???" + t + ":" + m);

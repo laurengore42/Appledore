@@ -45,7 +45,7 @@
                 "Search",
                 "Search/{id}",
                 new { controller = "Search", action = "Index" },
-                new { id = "(?!OuterSearch).*" }
+                new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial).*" }
             );
 
             // default route

@@ -16,15 +16,6 @@
 
     public static class Shared
     {
-        public static string GetSearchDataFull(HolmesDBEntities Db)
-        {
-            var sr = new StringWriter();
-            var sd = new SearchData();
-            sd.Populate(Db);
-            (new XmlSerializer(typeof(SearchData))).Serialize(sr, sd);
-
-            return sr.ToString();
-        }
 
         public static void SomethingChanged(HttpApplicationStateBase app)
         {

@@ -19,46 +19,6 @@
     [OutputCache(Duration = 1, VaryByCustom = "LastDbUpdate")]
     public class HomeController : HolmesDbController
     {
-        [AllowAnonymous]
-        public ContentResult DeserialiseSearchStringForPartial()
-        {
-            if (HttpContext.Application["SearchDataShort"] != null)
-            {
-                return Content(HttpContext.Application["SearchDataShort"].ToString());
-            }
-
-            string searchDataFull = (HttpContext.Application["SearchDataFull"] == null)
-                ? string.Empty
-                : HttpContext.Application["SearchDataFull"].ToString();
-
-            while (searchDataFull.Length < 1)
-            {
-                HttpContext.Application["SearchDataFull"] = Shared.GetSearchDataFull(Db);
-                searchDataFull = HttpContext.Application["SearchDataFull"].ToString();
-            }
-
-            var sd = (SearchData)new XmlSerializer(typeof(SearchData)).Deserialize(new StringReader(searchDataFull));
-
-            var siList = new List<string>();
-
-            siList.AddRange(from s in sd.Stories select s.Name);
-            siList.AddRange(from a in sd.Actors select (string.IsNullOrWhiteSpace(a.Forename) ? string.Empty : a.Forename + " ") + a.Surname);
-            siList.AddRange(from c in sd.Characters select (string.IsNullOrWhiteSpace(c.Honorific) ? string.Empty : c.Honorific + " ") + (string.IsNullOrWhiteSpace(c.Forename) ? string.Empty : c.Forename + " ") + c.Surname);
-            siList.AddRange(from r in sd.Renames select (string.IsNullOrWhiteSpace(r.Forename) ? string.Empty : r.Forename + " ") + r.Surname);
-            siList.AddRange(from e in sd.Episodes select e.Name);
-            siList.AddRange(from e in sd.Episodes select e.Translation);
-            siList.AddRange(from a in sd.Adaptations select a.Name);
-            siList.AddRange(from a in sd.Adaptations select a.Translation);
-
-            siList = siList.Distinct().ToList();
-            siList.Sort();
-
-            siList = (from s in siList select s.Replace("\"", "\\" + "\"")).ToList();
-            HttpContext.Application["SearchDataShort"] = string.Join("¦", siList);
-
-            return Content(HttpContext.Application["SearchDataShort"].ToString());
-        }
-
         [Stopwatch]
         [AllowAnonymous]
         public ActionResult Credits()
