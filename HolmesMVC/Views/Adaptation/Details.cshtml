@@ -25,11 +25,13 @@
     {
         <i>(no Holmes picture)</i>
     }
-    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().Pic != null)
-    {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().Pic" width="150"/></a>}
-    else
-    {
-        <i>(no Watson picture)</i>
+    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().ID != Model.HolmesActors.First().ID) {
+        if (Model.WatsonActors.First().Pic != null)
+        {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().Pic" width="150"/></a>}
+        else
+        {
+            <i>(no Watson picture)</i>
+        }
     }
 </section>
 <section class="leftfloatdetails">
