@@ -58,7 +58,7 @@
 
             // Get actor's appearances
             Histories = (from ap in actor.Appearances
-                           orderby ap.Episode1.Airdate ascending
+                           orderby ap.Episode1.Airdate, ap.Episode, ap.Character
                            select new ActorHistory(ap)).ToList();
 
             // Group episodes

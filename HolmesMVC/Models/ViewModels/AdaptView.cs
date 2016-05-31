@@ -19,7 +19,7 @@
             WatsonActors = Shared.PlayedBy("Watson", adapt);
 
             Episodes = (from e in adapt.Seasons.SelectMany(s => s.Episodes)
-                        orderby e.Airdate
+                        orderby e.Airdate, e.ID
                         select e).ToList();
 
             if (Episodes.Any())
