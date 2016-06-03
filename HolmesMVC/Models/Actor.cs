@@ -11,7 +11,7 @@ namespace HolmesMVC.Models
             this.Renames = new List<Rename>();
         }
 
-        public string _pic { get; set; }
+        private string _pic;
         private string _picCredit;
 
         public int ID { get; set; }
