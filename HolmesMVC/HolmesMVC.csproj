@@ -308,7 +308,11 @@
   <ItemGroup>
     <Content Include="Content\Accordion.css" />
     <Content Include="Content\ActorPhotos\brett-jeremy.jpg" />
+    <Content Include="Content\ActorPhotos\burke-david.jpg" />
+    <Content Include="Content\ActorPhotos\cumberbatch-benedict.jpg" />
     <Content Include="Content\ActorPhotos\hardwicke-edward.jpg" />
+    <Content Include="Content\ActorPhotos\liu-lucy.jpg" />
+    <Content Include="Content\ActorPhotos\miller-jonny-lee.jpg" />
     <Content Include="Content\ActorPhotos\vance-simon.jpg" />
     <Content Include="Content\CanoPics\danc-1.png" />
     <Content Include="Content\CanoPics\danc-2.png" />
