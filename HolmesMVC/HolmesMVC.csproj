@@ -1287,7 +1287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Photos\Actors\" />
+    <Folder Include="Content\ActorPhotos\Actors\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
