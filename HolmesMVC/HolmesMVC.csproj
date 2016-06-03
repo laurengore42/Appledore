@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201503301831243_translations for season names.Designer.cs">
       <DependentUpon>201503301831243_translations for season names.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606031000300_give credit for actor photos.cs" />
+    <Compile Include="Migrations\201606031000300_give credit for actor photos.Designer.cs">
+      <DependentUpon>201606031000300_give credit for actor photos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ToyHolmes.cs" />
     <Compile Include="Enums\CanonOrder.cs" />
@@ -1309,6 +1313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503301831243_translations for season names.resx">
       <DependentUpon>201503301831243_translations for season names.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606031000300_give credit for actor photos.resx">
+      <DependentUpon>201606031000300_give credit for actor photos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
