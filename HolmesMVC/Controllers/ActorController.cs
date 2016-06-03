@@ -30,16 +30,6 @@
 
             var actorView = new ActorView(actor);
 
-            if (actorView.Pic != null && actorView.Pic.Contains("."))
-            {
-                // it's an external URL
-            }
-            else if (actorView.Pic != null)
-            {
-                // it's an internal image name
-                actorView.Pic = @Url.Content("~/Content/Photos/Actors/") + actorView.Pic + ".jpg";
-            }
-
             return View(actorView);
         }
 
