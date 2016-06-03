@@ -51,7 +51,7 @@ namespace HolmesMVC.Models
                 }
                 else
                 {
-                    return "";
+                    return null;
                 }
             }
             set
