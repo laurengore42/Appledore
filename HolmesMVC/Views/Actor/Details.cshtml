@@ -9,11 +9,20 @@
 
     @if (Model.Pic != null)
     {
+        var picUrl = "";
         <figure class="actorpic">
-            <img class="actorpic" src="@Model.Pic" alt="@Model.ShortName" title="@Model.ShortName"/>
+            @if (Model.Pic.IndexOf('.') == -1)
+            {
+                picUrl = "/Content/Photos/Actors/" + Model.Pic + ".jpg";
+            }
+            else
+            {
+                picUrl =  Model.Pic;
+            }
+            <img class="actorpic" src="@picUrl" alt="@Model.ShortName" title="@Model.ShortName"/>
             @if (Model.PicCredit != null)
             {
-                <figcaption>Image credit: @Model.PicCredit</figcaption>
+                <figcaption><i>Image credit: @Model.PicCredit</i></figcaption>
             }
         </figure>
     }
