@@ -125,11 +125,6 @@
             {
                 return HttpNotFound();
             }
-            if (actor.Pic.IndexOf("/Content/ActorPhotos/") > -1)
-            {
-                actor.Pic = actor.Pic.Replace("/Content/ActorPhotos/", "");
-                actor.Pic = actor.Pic.Replace(".jpg", "");
-            }
 
             ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.Gender);
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.Species);
