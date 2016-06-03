@@ -12,6 +12,7 @@ namespace HolmesMVC.Models
         }
 
         private string _pic;
+        private string _picCredit;
 
         public int ID { get; set; }
         public string Forename { get; set; }
@@ -36,7 +37,28 @@ namespace HolmesMVC.Models
                 _pic = value;
             }
         }
-        public string PicCredit { get; set; }
+        public string PicCredit
+        {
+            get
+            {
+                if (_picCredit != null)
+                {
+                    return _picCredit;
+                }
+                else if (_pic != null)
+                {
+                    return "unknown - can you help?";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                _picCredit = value;
+            }
+        }
         public string Middlenames { get; set; }
         public Nullable<int> Gender { get; set; }
         public Nullable<int> Species { get; set; }
