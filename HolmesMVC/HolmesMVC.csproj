@@ -307,6 +307,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Accordion.css" />
+    <Content Include="Content\ActorPhotos\vance-simon.jpg" />
     <Content Include="Content\CanoPics\danc-1.png" />
     <Content Include="Content\CanoPics\danc-2.png" />
     <Content Include="Content\CanoPics\danc-3.png" />
@@ -1287,7 +1288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ActorPhotos\Actors\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
