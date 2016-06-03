@@ -45,7 +45,7 @@ namespace HolmesMVC.Models
                 {
                     return _picCredit;
                 }
-                else if (_pic != null)
+                else if (_pic != null && _pic.IndexOf('.') == -1)
                 {
                     return "unknown - can you help?";
                 }
