@@ -17,6 +17,7 @@ namespace HolmesMVC.Models
         public Nullable<System.DateTime> Birthdate { get; set; }
         public Nullable<System.DateTime> Deathdate { get; set; }
         public string Pic { get; set; }
+        public string PicCredit { get; set; }
         public string Middlenames { get; set; }
         public Nullable<int> Gender { get; set; }
         public Nullable<int> Species { get; set; }
