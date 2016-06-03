@@ -21,6 +21,9 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.Pic)
                 .HasMaxLength(1000);
 
+            this.Property(t => t.PicCredit)
+                .HasMaxLength(1000);
+
             this.Property(t => t.Middlenames)
                 .HasMaxLength(200);
 
@@ -41,6 +44,7 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.Birthdate).HasColumnName("Birthdate");
             this.Property(t => t.Deathdate).HasColumnName("Deathdate");
             this.Property(t => t.Pic).HasColumnName("Pic");
+            this.Property(t => t.PicCredit).HasColumnName("PicCredit");
             this.Property(t => t.Middlenames).HasColumnName("Middlenames");
             this.Property(t => t.Gender).HasColumnName("Gender");
             this.Property(t => t.Species).HasColumnName("Species");

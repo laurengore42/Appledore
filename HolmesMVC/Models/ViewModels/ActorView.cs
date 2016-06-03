@@ -21,6 +21,8 @@
 
         public string Pic { get; set; }
 
+        public string PicCredit { get; set; }
+
         public DateTime? Birthdate { get; set; }
 
         public DatePrecision BirthdatePrecision { get; set; }
@@ -43,6 +45,7 @@
         {
             ID = actor.ID;
             Pic = actor.Pic;
+            PicCredit = actor.PicCredit;
             Birthdate = actor.Birthdate;
             Birthplace = actor.Birthplace;
             BirthdatePrecision = (DatePrecision)actor.BirthdatePrecision;
