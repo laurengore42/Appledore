@@ -28,7 +28,7 @@ namespace HolmesMVC.Models
                 }
                 else
                 {
-                    return "/Content/Photos/Actors/" + _pic + ".jpg";
+                    return "/Content/ActorPhotos/" + _pic + ".jpg";
                 }
             }
             set
