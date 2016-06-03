@@ -11,12 +11,31 @@ namespace HolmesMVC.Models
             this.Renames = new List<Rename>();
         }
 
+        private string _pic;
+
         public int ID { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
         public Nullable<System.DateTime> Deathdate { get; set; }
-        public string Pic { get; set; }
+        public string Pic
+        {
+            get
+            {
+                if (_pic != null && _pic.IndexOf('.') > -1)
+                {
+                    return _pic;
+                }
+                else
+                {
+                    return "/Content/Photos/Actors/" + _pic + ".jpg";
+                }
+            }
+            set
+            {
+                _pic = value;
+            }
+        }
         public string PicCredit { get; set; }
         public string Middlenames { get; set; }
         public Nullable<int> Gender { get; set; }
