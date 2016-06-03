@@ -11,15 +11,7 @@
     {
         var picUrl = "";
         <figure class="actorpic">
-            @if (Model.Pic.IndexOf('.') == -1)
-            {
-                picUrl = "/Content/Photos/Actors/" + Model.Pic + ".jpg";
-            }
-            else
-            {
-                picUrl =  Model.Pic;
-            }
-            <img class="actorpic" src="@picUrl" alt="@Model.ShortName" title="@Model.ShortName"/>
+            <img class="actorpic" src="@Model.Pic" alt="@Model.ShortName" title="@Model.ShortName"/>
             @if (Model.PicCredit != null)
             {
                 <figcaption><i>Image credit: @Model.PicCredit</i></figcaption>
