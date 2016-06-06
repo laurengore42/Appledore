@@ -187,6 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BaconXml.cs" />
+    <Content Include="Content\ActorPhotos\placeholder.txt" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActorController.cs" />
     <Compile Include="Controllers\AdaptationController.cs" />
@@ -1287,7 +1288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ActorPhotos\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
