@@ -27,6 +27,10 @@ namespace HolmesMVC.Models
                 {
                     return _pic;
                 }
+                else if (_pic == null || _pic == "")
+                {
+                    return null;
+                }
                 else
                 {
                     return "/Content/ActorPhotos/" + _pic + ".jpg";
@@ -41,7 +45,7 @@ namespace HolmesMVC.Models
         {
             get
             {
-                if (_picCredit != null)
+                if (_picCredit != null && _picCredit != "")
                 {
                     return _picCredit;
                 }
