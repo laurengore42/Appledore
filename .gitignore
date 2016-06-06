@@ -12,3 +12,8 @@
 /HolmesMVC/web.debug.config
 /HolmesMVC/web.release.config
 /HolmesMVC/web.config
+
+
+# Project-specific ignores
+
+HolmesMVC/Content/ActorPhotos/*.jpg
