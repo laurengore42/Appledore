@@ -55,12 +55,12 @@
                     where ap.Actor > 0
                     && ap.Episode1.Season1.Adaptation1.Medium1.Name != "Stage" // to_do_theatre
                     && !ap.Actor1.Pic.IsNullOrWhiteSpace()
-                    group ap by new {ap.Actor, ap.Actor1.Forename, ap.Actor1.Surname, ap.Actor1.Pic} into grp
+                    group ap by new {ap.Actor, ap.Actor1.Forename, ap.Actor1.Surname, ap.Actor1.PicShow} into grp
                     select new CharPic
                                {
                                    ID = grp.Key.Actor,
                                    Name = grp.Key.Forename + " " + grp.Key.Surname,
-                                   Pic = grp.Key.Pic
+                                   PicShow = grp.Key.PicShow
                                })
                 .ToList();
 
@@ -91,6 +91,6 @@
 
         public string Name { get; set; }
 
-        public string Pic { get; set; }
+        public string PicShow { get; set; }
     }
 }

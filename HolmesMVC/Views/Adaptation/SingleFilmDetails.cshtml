@@ -10,16 +10,16 @@
     <h2 class="detailsheader">@ViewBag.Title</h2>
 </section>
 <section class="rightfloatdetails">
-    @if (Model.HolmesActors.Any() && Model.HolmesActors.First().Pic != null)
+    @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)
     {
-        <a href="@Url.Action("Details", "Actor", new { id = Model.HolmesActors.First().ID })"><img style="border: none;" src="@Model.HolmesActors.First().Pic" width="150"/></a>
+        <a href="@Url.Action("Details", "Actor", new { id = Model.HolmesActors.First().ID })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150"/></a>
     }
     else
     {
         <i>(no Holmes picture)</i>
     }
-    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().Pic != null)
-    {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().Pic" width="150"/></a>}
+    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().PicShow != null)
+    {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150"/></a>}
     else
     {
         <i>(no Watson picture)</i>
