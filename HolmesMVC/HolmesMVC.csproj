@@ -307,20 +307,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Accordion.css" />
-    <Content Include="Content\ActorPhotos\brett-jeremy.jpg" />
-    <Content Include="Content\ActorPhotos\burke-david.jpg" />
-    <Content Include="Content\ActorPhotos\cumberbatch-benedict.jpg" />
-    <Content Include="Content\ActorPhotos\fleming-ian.jpg" />
-    <Content Include="Content\ActorPhotos\freeman-martin.jpg" />
-    <Content Include="Content\ActorPhotos\hardwicke-edward.jpg" />
-    <Content Include="Content\ActorPhotos\liu-lucy.jpg" />
-    <Content Include="Content\ActorPhotos\merrison-clive.jpg" />
-    <Content Include="Content\ActorPhotos\miller-jonny-lee.jpg" />
-    <Content Include="Content\ActorPhotos\richardson-ian.jpg" />
-    <Content Include="Content\ActorPhotos\vance-simon.jpg" />
-    <Content Include="Content\ActorPhotos\williams-michael.jpg" />
-    <Content Include="Content\ActorPhotos\williams-rosalie.jpg" />
-    <Content Include="Content\ActorPhotos\wontner-arthur.jpg" />
     <Content Include="Content\CanoPics\danc-1.png" />
     <Content Include="Content\CanoPics\danc-2.png" />
     <Content Include="Content\CanoPics\danc-3.png" />
@@ -1301,6 +1287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ActorPhotos\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
