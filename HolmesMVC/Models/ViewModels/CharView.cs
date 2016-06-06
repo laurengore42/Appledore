@@ -23,7 +23,7 @@
                           // to_do_theatre
                           orderby ap.Episode1.Airdate ascending
                           select ap;
-            var groupedData = (from ap in dataGet
+            var groupedData = from ap in dataGet
                                group ap by
                                    new
                                        {
@@ -31,23 +31,21 @@
                                            ap.Episode1.Season1.Adaptation
                                        }
                                into grp
-                               select grp).ToList();
+                               select grp;
 
-            // Compute average age of an actor appearing as this character
-            var appearanceWithAge =
-                (from ap in dataGet where ap.Actor1.Birthdate != null select ap)
-                    .ToList();
-            if (appearanceWithAge.Any())
+            // Compute average age of an actor's first appearance as this character
+            AverageAge = -1;
+            var allFirstAppearancesWithAges = from grp in groupedData
+                                              where grp.First().Actor1.Birthdate != null
+                                              select grp.First();
+
+            if (allFirstAppearancesWithAges.Any())
             {
-                AverageAge = (from ap in appearanceWithAge
+                AverageAge = (from ap in allFirstAppearancesWithAges
                               select
                                   ((TimeSpan)
                                    (ap.Episode1.Airdate - ap.Actor1.Birthdate))
                                   .TotalDays).Average() / 365.26;
-            }
-            else
-            {
-                AverageAge = -1;
             }
 
             // Choose a pic from the actors available
