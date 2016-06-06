@@ -494,8 +494,7 @@
             var fullHolmesList = (from app in Db.Appearances
                                   where app.Character == holmesId
                                   && app.Actor > 0
-                                  && app.Actor1.Pic != null
-                                  && app.Actor1.Pic != ""
+                                  && app.Actor1.PicShow != null
                                   group app by app.Actor into grp
                                   orderby grp.FirstOrDefault().Episode1.Airdate
                                   select grp.FirstOrDefault().Actor1).ToList();
