@@ -54,6 +54,10 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.BirthdatePrecision).HasColumnName("BirthdatePrecision");
             this.Property(t => t.DeathdatePrecision).HasColumnName("DeathdatePrecision");
 
+            //Ignore fluff properties
+            this.Ignore(t => t.PicShow);
+            this.Ignore(t => t.PicCreditShow);
+
             // Relationships
             this.HasOptional(t => t.Gender1)
                 .WithMany(t => t.Actors)

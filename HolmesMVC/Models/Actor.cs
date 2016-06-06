@@ -11,58 +11,13 @@ namespace HolmesMVC.Models
             this.Renames = new List<Rename>();
         }
 
-        private string _pic;
-        private string _picCredit;
-
         public int ID { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
         public Nullable<System.DateTime> Deathdate { get; set; }
-        public string Pic
-        {
-            get
-            {
-                if (_pic != null && _pic.IndexOf('.') > -1)
-                {
-                    return _pic;
-                }
-                else if (_pic == null || _pic == "")
-                {
-                    return null;
-                }
-                else
-                {
-                    return "/Content/ActorPhotos/" + _pic + ".jpg";
-                }
-            }
-            set
-            {
-                _pic = value;
-            }
-        }
-        public string PicCredit
-        {
-            get
-            {
-                if (_picCredit != null && _picCredit != "")
-                {
-                    return _picCredit;
-                }
-                else if (_pic != null && _pic.IndexOf('.') == -1)
-                {
-                    return "unknown - can you help?";
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            set
-            {
-                _picCredit = value;
-            }
-        }
+        public string Pic { get; set; }
+        public string PicCredit { get; set; }
         public string Middlenames { get; set; }
         public Nullable<int> Gender { get; set; }
         public Nullable<int> Species { get; set; }
@@ -76,5 +31,42 @@ namespace HolmesMVC.Models
         public virtual Species Species1 { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }
+
+        public string PicShow
+        {
+            get
+            {
+                if (Pic != null && Pic.IndexOf('.') > -1)
+                {
+                    return Pic;
+                }
+                else if (Pic == null || Pic == "")
+                {
+                    return null;
+                }
+                else
+                {
+                    return "/Content/ActorPhotos/" + Pic + ".jpg";
+                }
+            }
+        }
+        public string PicCreditShow
+        {
+            get
+            {
+                if (PicCredit != null && PicCredit != "")
+                {
+                    return PicCredit;
+                }
+                else if (Pic != null && Pic.IndexOf('.') == -1)
+                {
+                    return "unknown - can you help?";
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -9,6 +9,8 @@
 
     public class ActorView
     {
+        private string _pic;
+
         public int ID { get; set; }
 
         public string ShortName { get; set; }
@@ -19,9 +21,9 @@
 
         public int? Age { get; set; }
 
-        public string Pic { get; set; }
+        public string PicShow { get; set; }
 
-        public string PicCredit { get; set; }
+        public string PicCreditShow { get; set; }
 
         public DateTime? Birthdate { get; set; }
 
@@ -44,8 +46,8 @@
         public ActorView(Actor actor)
         {
             ID = actor.ID;
-            Pic = actor.Pic;
-            PicCredit = actor.PicCredit;
+            PicShow = actor.PicShow;
+            PicCreditShow = actor.PicCreditShow;
             Birthdate = actor.Birthdate;
             Birthplace = actor.Birthplace;
             BirthdatePrecision = (DatePrecision)actor.BirthdatePrecision;
