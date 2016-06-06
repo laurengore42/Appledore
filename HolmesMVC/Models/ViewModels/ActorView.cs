@@ -9,8 +9,6 @@
 
     public class ActorView
     {
-        private string _pic;
-
         public int ID { get; set; }
 
         public string ShortName { get; set; }
