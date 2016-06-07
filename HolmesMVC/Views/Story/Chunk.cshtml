@@ -18,46 +18,5 @@
 
 @section Scripts {
     <script src="/Scripts/Apdore-StoryChunkFunctionality.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $.ajax(
-            {
-                async: false,
-                type: "GET",
-                contentType: "application/xml",
-                dataType: "text",
-                url: "/Story/StoryXml",
-                data: "storyCode=@Model.ID",
-                success: function(content) {
-                    $('#hiddenStory').html(content);
-                },
-                error: function(xhr, status, errorThrown) {
-                        $('#hiddenStory').html(xhr.responseText);
-                }
-            });
-
-            var chunkSection = $('.storyChunk');
-            var storySection = $('#hiddenStory');
-
-            // This is the text and the tags
-            var wholeStory = storySection.html();
-
-            // Replace line-break tags with *¦
-            // Kill all other tags
-            var storyWithoutTags = htmlTrim(wholeStory);
-
-            // Take chunk out of story
-            var storyChunk = storyWithoutTags.substring(@Model.ChunkStart, @Model.ChunkStart + @Model.ChunkLength);
-            
-            // Put line breaks back in to chunk
-            var lineBreaker = storyChunk;
-            while (lineBreaker.indexOf("*¦") > -1) {
-                lineBreaker = lineBreaker.replace("*¦", "</p><p>");
-            }
-
-            // Print chunk
-            chunkSection.html("<p>"+lineBreaker+"</p>");
-        });
-    </script>
+    <script src="/Scripts/Apdore-StoryChunkPageReady.js"></script>
 }

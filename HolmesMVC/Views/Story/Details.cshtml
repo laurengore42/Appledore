@@ -86,24 +86,5 @@
 
 @section Scripts {
     <script src="/Scripts/Apdore-StoryChunkFunctionality.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $.ajax(
-            {
-                async: true,
-                type: "GET",
-                contentType: "application/xml",
-                dataType: "text",
-                url: "/Story/StoryXml",
-                data: "storyCode=@Model.ID",
-                success: function(content) {
-                    $('.story').html(content);
-                },
-                error: function (xhr, status, errorThrown) {
-                        $('.story').html(xhr.responseText);
-                }
-            });
-        });
-    </script>
+    <script src="/Scripts/Apdore-StoryDetailsPageReady.js"></script>
 }
