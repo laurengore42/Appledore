@@ -24,7 +24,13 @@
         {
             <li>Keefauver's date: @Model.KeefauverString</li>
         }
-        <br/><li>Published: @Model.Episode.Airdate.ToString("MMMM yyyy")</li>
+        <br/>
+        <li>Published: @Model.Episode.Airdate.ToString("MMMM yyyy")
+        @if (Model.ID != "STUD" && Model.ID != "SIGN" && Model.ID != "HOUN" && Model.ID != "VALL")
+        {
+            <text> and in '@Model.Episode.SeasonName'</text>
+        }
+        </li>
     </ul>
     <p class="dblinks">
         @if (Model.Episode.EpPrev > 0 || Model.Episode.EpPrevName != null)
