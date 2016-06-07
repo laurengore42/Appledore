@@ -17,7 +17,7 @@
 
     public enum Villain
     {
-        NoCrime = 0,
+        None = 0,
         Theft = 1,
         Murder = 2,
         Blackmail = 3
@@ -25,10 +25,10 @@
 
     public enum Outcome
     {
-        NoCrime = 0,
-        Release = 1,
-        Escape = 2,
-        Arrest = 3,
+        None = 0,
+        Released = 1,
+        Escaped = 2,
+        Arrested = 3,
         Killed = 4
     }
 }
