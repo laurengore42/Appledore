@@ -29,6 +29,6 @@
         Released = 1,
         Escaped = 2,
         Arrested = 3,
-        Killed = 4
+        Died = 4
     }
 }
