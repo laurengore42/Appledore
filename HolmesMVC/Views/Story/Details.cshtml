@@ -31,6 +31,9 @@
             <text> and in '@Model.Episode.SeasonName'</text>
         }
         </li>
+        <br/>
+        <li>Crime: @Model.VillainType.ToString()</li>
+        <li>Outcome: @Model.OutcomeType.ToString()</li>
     </ul>
     <p class="dblinks">
         @if (Model.Episode.EpPrev > 0 || Model.Episode.EpPrevName != null)

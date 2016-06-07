@@ -24,6 +24,9 @@
 
             Date = rawEp.Story1.Date;
 
+            VillainType = rawEp.Story1.VillainType;
+            OutcomeType = rawEp.Story1.OutcomeType;
+
             BaringGouldStartString = Shared.VagueDate(
                 Date.BaringGouldStart,
                 (DatePrecision)Date.BaringGouldPrecision,
@@ -75,5 +78,9 @@
         public int ChunkStart { get; set; }
 
         public int ChunkLength { get; set; }
+
+        public Villain VillainType { get; set; }
+
+        public Outcome OutcomeType { get; set; }
     }
 }
