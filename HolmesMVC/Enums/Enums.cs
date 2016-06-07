@@ -20,6 +20,7 @@
         None = 0,
         Theft = 1,
         Murder = 2,
+        AttemptedMurder = 21,
         Blackmail = 3
     }
 
