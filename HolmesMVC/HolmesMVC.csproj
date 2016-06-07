@@ -1033,8 +1033,8 @@
     <Content Include="Content\Scraps.css" />
     <Content Include="Content\Standard.css" />
     <Content Include="Content\Menu.css" />
-    <Content Include="Scripts\Apdore-StoryChunkPageReady.js" />
-    <Content Include="Scripts\Apdore-StoryDetailsPageReady.js" />
+    <Content Include="Scripts\Apdore-StoryChunk.js" />
+    <Content Include="Scripts\Apdore-StoryDetails.js" />
     <Content Include="Services\Stories\3GAB.xml" />
     <Content Include="Services\Stories\3GAR.xml" />
     <Content Include="Services\Stories\3STU.xml" />
@@ -1167,7 +1167,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Scripts\Apdore-StoryChunkFunctionality.js" />
+    <Content Include="Scripts\Apdore-StoryHtmlTrim.js" />
     <Content Include="Scripts\Apdore-editorscripts.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
