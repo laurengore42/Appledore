@@ -518,14 +518,14 @@
         }
 
         [AllowAnonymous]
-        public ActionResult DatabaseLinks(string table, int id)
+        public ActionResult DatabaseLinks(string table, string id)
         {
             ViewBag.Table = table;
             ViewBag.ID = id;
 
             if (ViewBag.Table == "Episode")
             {
-                int epId = ViewBag.ID;
+                int epId = Int16.Parse(ViewBag.ID);
                 ViewBag.adaptId = (from e in Db.Episodes
                                    where e.ID == epId
                                    select e.Season1.Adaptation).FirstOrDefault();

@@ -200,6 +200,7 @@
     <Compile Include="Controllers\MediumController.cs" />
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.Designer.cs">
       <DependentUpon>201503301626341_option to translate episodes and adaptations.cs</DependentUpon>
@@ -212,10 +213,12 @@
     <Compile Include="Migrations\201606031000300_give credit for actor photos.Designer.cs">
       <DependentUpon>201606031000300_give credit for actor photos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606071204092_categorise stories by crime.cs" />
+    <Compile Include="Migrations\201606071204092_categorise stories by crime.Designer.cs">
+      <DependentUpon>201606071204092_categorise stories by crime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ToyHolmes.cs" />
-    <Compile Include="Enums\CanonOrder.cs" />
-    <Compile Include="Enums\DatePrecision.cs" />
     <Compile Include="HolmesDbController.cs" />
     <Compile Include="Migrations\201502251210263_user has preferred canon order.cs" />
     <Compile Include="Migrations\201502251210263_user has preferred canon order.Designer.cs">
@@ -1222,6 +1225,7 @@
     <Content Include="Views\Appearance\_AppChar.cshtml" />
     <Content Include="Views\Story\Details.cshtml" />
     <Content Include="web.config" />
+    <Content Include="Views\Story\Edit.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -1319,6 +1323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606031000300_give credit for actor photos.resx">
       <DependentUpon>201606031000300_give credit for actor photos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606071204092_categorise stories by crime.resx">
+      <DependentUpon>201606071204092_categorise stories by crime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
