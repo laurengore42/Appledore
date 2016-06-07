@@ -1033,6 +1033,8 @@
     <Content Include="Content\Scraps.css" />
     <Content Include="Content\Standard.css" />
     <Content Include="Content\Menu.css" />
+    <Content Include="Scripts\Apdore-StoryChunkPageReady.js" />
+    <Content Include="Scripts\Apdore-StoryDetailsPageReady.js" />
     <Content Include="Services\Stories\3GAB.xml" />
     <Content Include="Services\Stories\3GAR.xml" />
     <Content Include="Services\Stories\3STU.xml" />
