@@ -13,12 +13,8 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <!--       @if (Request.IsAuthenticated)
-               { <text>Layout start @DateTime.UtcNow</text> }
-         -->
     <header>
         <div class="content-wrapper">
-        @if(Request.IsAuthenticated) { <span>hi lastdbupdate is @ViewBag.lastdbupdate and you are @User.Identity.Name</span> }
             <div class="float-left">
                 <p class="site-title">@Html.ActionLink("Appledore", "Index", "Home")</p>
             </div>
