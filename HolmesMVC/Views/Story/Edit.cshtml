@@ -37,6 +37,8 @@
             <select name="VillainType">
                 <option value="@((int)Villain.None)" @if ((Villain)Model.VillainType == Villain.None)
                                   {<text>selected</text>}>@Villain.None.ToString()</option>
+                <option value="@((int)Villain.Abduction)" @if ((Villain)Model.VillainType == Villain.Abduction)
+                                  {<text>selected</text>}>@Villain.Abduction.ToString()</option>
                 <option value="@((int)Villain.Theft)" @if ((Villain)Model.VillainType == Villain.Theft)
                                   {<text>selected</text>}>@Villain.Theft.ToString()</option>
                 <option value="@((int)Villain.Murder)" @if ((Villain)Model.VillainType == Villain.Murder)
