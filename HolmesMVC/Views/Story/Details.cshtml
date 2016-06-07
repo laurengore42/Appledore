@@ -42,8 +42,9 @@
         {
             <text>Next: @Html.ActionLink(Model.Episode.EpNextName, "Details", "Episode", new { ID = Model.Episode.EpNext }, null)</text>}
     </p>
-
+    
     @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.Episode.EpId })
+    @Html.Action("DatabaseLinks", "Home", new { table = "Story", id = Model.ID })
     
     <article>
         <div class="adapteds">
