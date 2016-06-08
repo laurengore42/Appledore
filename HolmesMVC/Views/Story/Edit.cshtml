@@ -67,6 +67,8 @@
                                   {<text>selected</text>}>@Outcome.Arrested.ToString()</option>
                 <option value="@((int)Outcome.Died)" @if ((Outcome)Model.OutcomeType == Outcome.Died)
                                   {<text>selected</text>}>@Outcome.Died.ToString()</option>
+                <option value="@((int)Outcome.DiedInCustody)" @if ((Outcome)Model.OutcomeType == Outcome.DiedInCustody)
+                                  {<text>selected</text>}>@Outcome.DiedInCustody.ToString()</option>
                 <option value="@((int)Outcome.None)" @if ((Outcome)Model.OutcomeType == Outcome.None)
                                   {<text>selected</text>}>@Outcome.None.ToString()</option>
             </select>

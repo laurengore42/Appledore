@@ -33,6 +33,7 @@
         Escaped = 2,
         Arrested = 3,
         Died = 4,
+        DiedInCustody = 41,
         Unclear = 0
     }
 }
