@@ -17,20 +17,22 @@
 
     public enum Villain
     {
-        None = 0,
+        None = 99,
         Theft = 1,
         Abduction = 11,
         Murder = 2,
         AttemptedMurder = 21,
-        Blackmail = 3
+        Blackmail = 3,
+        Unclear = 0
     }
 
     public enum Outcome
     {
-        None = 0,
+        None = 99,
         Released = 1,
         Escaped = 2,
         Arrested = 3,
-        Died = 4
+        Died = 4,
+        Unclear = 0
     }
 }

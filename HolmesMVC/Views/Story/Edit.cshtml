@@ -35,8 +35,8 @@
         </div>
         <div class="editor-field">
             <select name="VillainType">
-                <option value="@((int)Villain.None)" @if ((Villain)Model.VillainType == Villain.None)
-                                  {<text>selected</text>}>@Villain.None.ToString()</option>
+                <option value="@((int)Villain.Unclear)" @if ((Villain)Model.VillainType == Villain.Unclear)
+                                  {<text>selected</text>}>@Villain.Unclear.ToString()</option>
                 <option value="@((int)Villain.Abduction)" @if ((Villain)Model.VillainType == Villain.Abduction)
                                   {<text>selected</text>}>@Villain.Abduction.ToString()</option>
                 <option value="@((int)Villain.Theft)" @if ((Villain)Model.VillainType == Villain.Theft)
@@ -47,6 +47,8 @@
                                   {<text>selected</text>}>@Villain.AttemptedMurder.ToString()</option>
                 <option value="@((int)Villain.Blackmail)" @if ((Villain)Model.VillainType == Villain.Blackmail)
                                   {<text>selected</text>}>@Villain.Blackmail.ToString()</option>
+                <option value="@((int)Villain.None)" @if ((Villain)Model.VillainType == Villain.None)
+                                  {<text>selected</text>}>@Villain.None.ToString()</option>
             </select>
         </div>
 
@@ -55,8 +57,8 @@
         </div>
         <div class="editor-field">
             <select name="OutcomeType">
-                <option value="@((int)Outcome.None)" @if ((Outcome)Model.OutcomeType == Outcome.None)
-                                  {<text>selected</text>}>@Outcome.None.ToString()</option>
+                <option value="@((int)Outcome.Unclear)" @if ((Outcome)Model.OutcomeType == Outcome.Unclear)
+                                  {<text>selected</text>}>@Outcome.Unclear.ToString()</option>
                 <option value="@((int)Outcome.Released)" @if ((Outcome)Model.OutcomeType == Outcome.Released)
                                   {<text>selected</text>}>@Outcome.Released.ToString()</option>
                 <option value="@((int)Outcome.Escaped)" @if ((Outcome)Model.OutcomeType == Outcome.Escaped)
@@ -65,6 +67,8 @@
                                   {<text>selected</text>}>@Outcome.Arrested.ToString()</option>
                 <option value="@((int)Outcome.Died)" @if ((Outcome)Model.OutcomeType == Outcome.Died)
                                   {<text>selected</text>}>@Outcome.Died.ToString()</option>
+                <option value="@((int)Outcome.None)" @if ((Outcome)Model.OutcomeType == Outcome.None)
+                                  {<text>selected</text>}>@Outcome.None.ToString()</option>
             </select>
         </div>
 
