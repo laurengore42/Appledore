@@ -24,6 +24,7 @@
         AttemptedMurder = 21,
         FrameForMurder = 22,
         Blackmail = 3,
+        Spying = 4,
         Unclear = 0
     }
 
