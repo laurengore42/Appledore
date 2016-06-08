@@ -22,6 +22,7 @@
         Abduction = 11,
         Murder = 2,
         AttemptedMurder = 21,
+        FrameForMurder = 22,
         Blackmail = 3,
         Unclear = 0
     }

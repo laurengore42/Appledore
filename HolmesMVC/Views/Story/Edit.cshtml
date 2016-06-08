@@ -45,6 +45,8 @@
                                   {<text>selected</text>}>@Villain.Murder.ToString()</option>
                 <option value="@((int)Villain.AttemptedMurder)" @if ((Villain)Model.VillainType == Villain.AttemptedMurder)
                                   {<text>selected</text>}>@Villain.AttemptedMurder.ToString()</option>
+                <option value="@((int)Villain.FrameForMurder)" @if ((Villain)Model.VillainType == Villain.FrameForMurder)
+                                  {<text>selected</text>}>@Villain.FrameForMurder.ToString()</option>
                 <option value="@((int)Villain.Blackmail)" @if ((Villain)Model.VillainType == Villain.Blackmail)
                                   {<text>selected</text>}>@Villain.Blackmail.ToString()</option>
                 <option value="@((int)Villain.None)" @if ((Villain)Model.VillainType == Villain.None)
