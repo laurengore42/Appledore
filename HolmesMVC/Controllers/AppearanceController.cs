@@ -35,8 +35,8 @@
             ViewBag.EpId = epId;
 
             // sort characters
-            var holmesId = Shared.GetHolmes(relevantApps.Select(a => a.Character1).ToList());
-            var watsonId = Shared.GetWatson(relevantApps.Select(a => a.Character1).ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             var hApps =
                 (from a in relevantApps where a.Character == holmesId select a)

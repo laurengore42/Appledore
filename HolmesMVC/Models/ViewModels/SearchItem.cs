@@ -132,7 +132,8 @@
         // in trying to cut down on the number of SQL statements linq runs, I have done horrible things
         public void Populate(HolmesDBEntities db)
         {
-            var holmesId = Shared.GetHolmes(db.Characters.ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             Stories = (from s in db.Stories
                        select new SearchStory
