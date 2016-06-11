@@ -234,34 +234,14 @@
             }
         }
 
-        public static int GetHolmes(List<Character> allCharacters)
+        public static int GetHolmes()
         {
-            var charId = (from c in allCharacters
-                          where
-                              c.Surname == "Holmes" && c.Forename == "Sherlock"
-                          select c.ID).FirstOrDefault();
-
-            if (charId <= 0)
-            {
-                return -1;
-            }
-
-            return charId;
+            return 1;
         }
 
-        public static int GetWatson(List<Character> allCharacters)
+        public static int GetWatson()
         {
-            var charId = (from c in allCharacters
-                          where
-                              c.Surname == "Watson" && c.Forename == "John"
-                          select c.ID).FirstOrDefault();
-
-            if (charId <= 0)
-            {
-                return -1;
-            }
-
-            return charId;
+            return 2;
         }
 
         public static List<Actor> PlayedBy(int charId, Adaptation adapt)
@@ -286,7 +266,7 @@
             switch (name)
             {
                 case "Holmes":
-                    charId = GetHolmes(allCharacters);
+                    charId = GetHolmes();
                     if (charId < 0)
                     {
                         return new List<Actor>();
@@ -294,7 +274,7 @@
 
                     break;
                 case "Watson":
-                    charId = GetWatson(allCharacters);
+                    charId = GetWatson();
                     if (charId < 0)
                     {
                         return new List<Actor>();

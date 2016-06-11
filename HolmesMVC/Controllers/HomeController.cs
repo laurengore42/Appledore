@@ -70,8 +70,8 @@
         [HttpPost]
         public string HolmesNum(string targetImdbName)
         {
-            var holmesId = Shared.GetHolmes(Db.Characters.ToList());
-            var watsonId = Shared.GetWatson(Db.Characters.ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             var stringOut = string.Empty;
 
@@ -261,7 +261,8 @@
         [Stopwatch]
         public ActionResult Analytics()
         {
-            var holmesId = Shared.GetHolmes(Db.Characters.ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             ViewBag.actCount = Db.Actors.Count();
             ViewBag.holCount =
@@ -435,7 +436,8 @@
             ViewBag.unlockedActor = unlockedCanonActors[rand];
             ViewBag.unlockedActorCount = unlockedCanonActors.Count();
 
-            var holmesId = Shared.GetHolmes(Db.Characters.ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             var unlockedHolmeses = (from a in unlockedCanonActors
                                     where (from ap in a.Appearances
@@ -489,7 +491,8 @@
         [HttpGet]
         public ViewResult Scraps()
         {
-            var holmesId = Shared.GetHolmes(Db.Characters.ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             var fullHolmesList = (from app in Db.Appearances
                                   where app.Character == holmesId

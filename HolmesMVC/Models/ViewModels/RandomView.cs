@@ -17,7 +17,8 @@
             var thisMonth = rightNow.Month;
             var thisDay = rightNow.Day;
 
-            var holmesId = Shared.GetHolmes(db.Characters.ToList());
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             var actorList = (from a in db.Actors
                              where null != a.Birthdate

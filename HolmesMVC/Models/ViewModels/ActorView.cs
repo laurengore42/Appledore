@@ -81,14 +81,14 @@
 
             // Get actor's opposites
 
-            var holmesID = 1;
-            var watsonID = 2;
+            var holmesId = Shared.GetHolmes();
+            var watsonId = Shared.GetWatson();
 
             HolmesActors = (from ap in
                                 (
                                 from ap in actor.Appearances
-                                where ap.Character == watsonID
-                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == holmesID)
+                                where ap.Character == watsonId
+                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == holmesId)
                                 select ap1
                                 )
                             group ap by ap.Actor1
@@ -98,8 +98,8 @@
             WatsonActors = (from ap in
                                 (
                                 from ap in actor.Appearances
-                                where ap.Character == holmesID
-                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == watsonID)
+                                where ap.Character == holmesId
+                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == watsonId)
                                 select ap1
                                 )
                             group ap by ap.Actor1

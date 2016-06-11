@@ -50,7 +50,7 @@
                 return View("Chunk", model);
             }
 
-            ViewBag.HolmesId = Shared.GetHolmes(Db.Characters.ToList());
+            ViewBag.HolmesId = Shared.GetHolmes();
             return View("Details", model);
         }
 
