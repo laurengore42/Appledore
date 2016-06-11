@@ -81,30 +81,30 @@
 
             // Get actor's opposites
 
-            var holmesID = Shared.GetHolmes(actor.Appearances.Select(a => a.Character1).ToList());
-            var watsonID = Shared.GetWatson(actor.Appearances.Select(a => a.Character1).ToList());
+            var holmesID = 1;
+            var watsonID = 2;
 
-            var myWatsonActors = (from ap in
-                                      (
-                                      from ap in actor.Appearances
-                                      where ap.Character == holmesID
-                                      from ap1 in ap.Episode1.Appearances.Where(a => a.Character == watsonID)
-                                      select ap1
-                                      )
-                                  group ap by ap.Actor1
-                                      into grp
-                                      select grp.Key).ToList();
+            HolmesActors = (from ap in
+                                (
+                                from ap in actor.Appearances
+                                where ap.Character == watsonID
+                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == holmesID)
+                                select ap1
+                                )
+                            group ap by ap.Actor1
+                                into grp
+                                select grp.Key).ToList();
 
-            var myHolmesActors = (from ap in
-                                      (
-                                      from ap in actor.Appearances
-                                      where ap.Character == watsonID
-                                      from ap1 in ap.Episode1.Appearances.Where(a => a.Character == holmesID)
-                                      select ap1
-                                      )
-                                  group ap by ap.Actor1
-                                      into grp
-                                      select grp.Key).ToList();
+            WatsonActors = (from ap in
+                                (
+                                from ap in actor.Appearances
+                                where ap.Character == holmesID
+                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == watsonID)
+                                select ap1
+                                )
+                            group ap by ap.Actor1
+                                into grp
+                                select grp.Key).ToList();
 
             if (actor.Appearances.Any())
             {
@@ -116,5 +116,9 @@
         public int YearOfFirstApp { get; set; }
 
         public int YearOfLastApp { get; set; }
+
+        public List<Actor> HolmesActors { get; set; }
+
+        public List<Actor> WatsonActors { get; set; }
     }
 }

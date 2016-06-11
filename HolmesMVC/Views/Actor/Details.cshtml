@@ -89,11 +89,17 @@
     </div>
     @Html.Action("DatabaseLinks", "Home", new { table = "Actor", id = Model.ID })
 
-    @{ 
-        //If the actor played Holmes or Watson, list who they played opposite   
-        
-        
-            
+    @if (Model.HolmesActors.Any() || Model.WatsonActors.Any()) {            
+    <div>
+        <ul>  
+            @foreach (HolmesMVC.Models.Actor w in Model.WatsonActors) {
+                <li>Played Holmes to <a href="/Actor/@w.ID">@w.Surname</a>'s Watson</li>
+            }                  
+            @foreach (HolmesMVC.Models.Actor h in Model.HolmesActors) {
+                <li>Played Watson to <a href="/Actor/@h.ID">@h.Surname</a>'s Holmes</li>
+            }  
+        </ul>
+    </div>                    
     }
 
     <section id="historysummary">
