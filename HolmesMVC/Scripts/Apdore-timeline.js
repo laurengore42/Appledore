@@ -84,6 +84,11 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
 
     canvas.height = blockWidth * heightRatio * 1.3; // one row of blocks, and space for text
 
+    // don't draw into future
+    if (endRoundedUp > yearNow) {
+        outerBlocks -= ((endRoundedUp - 1) - yearNow) / 5;
+    }
+
     // draw outer timeline box
     ctx.strokeStyle = "#aaaaaa";
     ctx.lineWidth = 1;
