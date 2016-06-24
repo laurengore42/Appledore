@@ -60,7 +60,9 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
     var outerBlocks = (endRoundedUp - startRoundedDown) / 5;
 
     var yearNow = (new Date()).getFullYear();
+    var monthNow = (new Date()).getMonth();
     yearNow = (Number)(yearNow);
+    monthNow = (Number)(monthNow + 1);
     if (startRoundedDown + (outerBlocks * 5) >= yearNow
         && endRoundedUp - 5 >= yearNow) { // there's a spare block in the Future
         outerBlocks--;
@@ -86,7 +88,7 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
 
     // don't draw into future
     if (endRoundedUp > yearNow) {
-        outerBlocks -= ((endRoundedUp - 1) - yearNow) / 5;
+        outerBlocks -= ((endRoundedUp - 1) - ((yearNow - 1) + monthNow/12)) / 5;
     }
 
     // draw outer timeline box
