@@ -140,46 +140,44 @@
     <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
 
     <script>
-        try {
-        // Canvas timelines
-        
-        var canvas = $('#timeline')[0];
-        var ctx = canvas.getContext('2d');
-
-        var startYear = 0;
-        var startMonth = 0;
-        var endYear = 0;
-        var endMonth = 0;
-
-        var spottyValues = "";
-        
-        @if (Model.Episodes.Any())
-        {
-         <text>
-        startYear = @Model.Episodes.First().Airdate.Year;
-        startMonth = @Model.Episodes.First().Airdate.Month;
-        endYear = @Model.Episodes.Last().Airdate.Year;
-        endMonth = @Model.Episodes.Last().Airdate.Month;
-        </text>
-            string spottyValues = "[";
-            foreach (var ep in Model.Episodes)
-            {
-                spottyValues += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
-            }
-            spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
-            spottyValues += "]";
-<text>
-        function spottyTimeline() {
-            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, @spottyValues, true);
-        }
         $(document).ready(function() {
-            spottyTimeline();
+            try {
+                var canvas = $('#timeline')[0];
+                var ctx = canvas.getContext('2d');
+
+                var startYear = 0;
+                var startMonth = 0;
+                var endYear = 0;
+                var endMonth = 0;
+
+                var spottyValues = "";
+
+                @if (Model.Episodes.Any())
+                {
+                 <text>
+                startYear = @Model.Episodes.First().Airdate.Year;
+                startMonth = @Model.Episodes.First().Airdate.Month;
+                endYear = @Model.Episodes.Last().Airdate.Year;
+                endMonth = @Model.Episodes.Last().Airdate.Month;
+                </text>
+                    string spottyValues = "[";
+                    foreach (var ep in Model.Episodes)
+                    {
+                        spottyValues += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
+                    }
+                    spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
+                    spottyValues += "]";
+                <text>
+                spottyValues = @spottyValues;
+                
+                // Canvas timelines
+                drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, true);
+                </text>
+                }
+            } catch (err) {
+                // shut up, IE9
+            }
         });
-</text>
-        }
-        } catch (err) {
-            // shut up, IE9
-        }
     </script>
 }
 
