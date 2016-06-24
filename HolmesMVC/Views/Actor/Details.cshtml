@@ -57,13 +57,20 @@
             else if (Model.Birthdate != null) {
                 <li>Born: @string.Format(birthdateFormat, Model.Birthdate)</li>
             }
-            else if (Model.YearOfFirstApp != null)
-            {
-                <li>Born: before @Model.YearOfFirstApp</li>
-            }
             @if (Model.Birthplace != null)
             {
                 <li>in @Model.Birthplace <a href="https://maps.google.com/maps?q=@Model.Birthplace"><i>(Map)</i></a></li>
+            }
+            @if (Model.YearOfFirstApp != null)
+            {
+                if (Model.YearOfLastApp != Model.YearOfFirstApp)
+                {
+                    <li>Active: @Model.YearOfFirstApp to @Model.YearOfLastApp</li>
+                }
+                else
+                {
+                    <li>Active: @Model.YearOfFirstApp</li>
+                }
             }
             @if (Model.Deathdate != null)
             {
