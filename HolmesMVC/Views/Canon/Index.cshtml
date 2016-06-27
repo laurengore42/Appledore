@@ -103,18 +103,13 @@ Choose a date system:<br />
                 </td>
             </tr>
             }
-            <tr>
-                @if (s.Date.BaringGouldStart > new DateTime(1891, 5, 1)
-                        && s.Date.BaringGouldStart < new DateTime(1893, 4, 1))
-                {
-                    <td><i>@Shared.VagueDate(s.Date.BaringGouldStart, (DatePrecision)s.Date.BaringGouldPrecision, false, true)</i></td>
-                    <td><i>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</i></td>
-                }
-                else
-                {
-                    <td>@Shared.VagueDate(s.Date.BaringGouldStart, (DatePrecision)s.Date.BaringGouldPrecision, false, true)</td>
-                    <td>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</td>
-                }
+            <tr>             
+                <td>
+                    @Shared.VagueDate(s.Date.BaringGouldStart, (DatePrecision)s.Date.BaringGouldPrecision, false, true)
+                </td>                
+                <td>
+                    @Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)
+                </td>
             </tr>
             lastDecade = decade;
             i++;
@@ -133,6 +128,7 @@ Choose a date system:<br />
             tenthYear = (int)Math.Floor((double)year / 10);
             decade = 10 * tenthYear;
             decadeString = decade + "s";
+            var isHiatus = false;
             if (i == 0 || (i > 0 && lastDecade != decade))
             {
             <tr>
@@ -145,14 +141,30 @@ Choose a date system:<br />
                 @if (s.Date.Keefauver > new DateTime(1891, 5, 1)
                         && s.Date.Keefauver < new DateTime(1893, 4, 1))
                 {
-                    <td><i>@Shared.VagueDate(s.Date.Keefauver, DatePrecision.Full, false, true)</i></td>
-                    <td><i>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</i></td>
-                }
-                else
-                {
-                    <td>@Shared.VagueDate(s.Date.Keefauver, DatePrecision.Full, false, true)</td>
-                    <td>@Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)</td>
-                }
+                    isHiatus = true;
+                }                
+                <td>
+                    @if (isHiatus)
+                    {
+                        <i>
+                    }
+                    @Shared.VagueDate(s.Date.Keefauver, DatePrecision.Full, false, true)
+                    @if (isHiatus)
+                    {
+                        </i>
+                    }
+                </td>                
+                <td>
+                    @if (isHiatus)
+                    {
+                        <i>
+                    }
+                    @Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)
+                    @if (isHiatus)
+                    {
+                        </i>
+                    }
+                </td>
             </tr>
             lastDecade = decade;
             i++;
