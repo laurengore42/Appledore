@@ -102,22 +102,15 @@ Choose a date system:<br />
             tenthYear = (int)Math.Floor((double)year / 10);
             decade = 10 * tenthYear;
             decadeString = decade + "s";
-            if (i > 0 && lastDecade != decade)
+            if (i == 0 || (i > 0 && lastDecade != decade))
             {
-        <text><tr>
+        <text>
+        <tr>
             <td colspan="2" class="adaptseason">
                 <h3>@decadeString</h3>
             </td>
-        </tr></text>
-            }
-            if (i == 0)
-            {
-        <text><tr>
-
-            <td colspan="2" class="adaptseason">
-                <h3>@decadeString</h3>
-            </td>
-        </tr></text>
+        </tr>
+        </text>
             }
         <text>
         <tr>
@@ -151,22 +144,15 @@ Choose a date system:<br />
             tenthYear = (int)Math.Floor((double)year / 10);
             decade = 10 * tenthYear;
             decadeString = decade + "s";
-            if (i > 0 && lastDecade != decade)
+            if (i == 0 || (i > 0 && lastDecade != decade))
             {
-        <text><tr>
+        <text>
+        <tr>
             <td colspan="2" class="adaptseason">
                 <h3>@decadeString</h3>
             </td>
-        </tr></text>
-            }
-            if (i == 0)
-            {
-        <text><tr>
-
-            <td colspan="2" class="adaptseason">
-                <h3>@decadeString</h3>
-            </td>
-        </tr></text>
+        </tr>
+        </text>
             }
         <text>
         <tr>
