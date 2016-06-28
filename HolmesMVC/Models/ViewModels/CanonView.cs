@@ -11,7 +11,6 @@
         {
             const int Publish = (int)CanonOrder.Published;
             const int Baring = (int)CanonOrder.Baring;
-            const int Keef = (int)CanonOrder.Keefauver;
 
             Adaptation = new AdaptView(adapt);
 
@@ -38,11 +37,6 @@
             EndYear[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).Last().Date.BaringGouldStart.Year;
             EndMonth[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).Last().Date.BaringGouldStart.Month;
 
-            StartYear[Keef] = Stories.OrderBy(a => a.Date.Keefauver).First().Date.Keefauver.Year;
-            StartMonth[Keef] = Stories.OrderBy(a => a.Date.Keefauver).First().Date.Keefauver.Month;
-            EndYear[Keef] = Stories.OrderBy(a => a.Date.Keefauver).Last().Date.Keefauver.Year;
-            EndMonth[Keef] = Stories.OrderBy(a => a.Date.Keefauver).Last().Date.Keefauver.Month;
-
 
             EpisodeDateString[Publish] = string.Empty;
             foreach (var ep in Adaptation.Episodes.OrderBy(a => a.Airdate))
@@ -62,16 +56,6 @@
 
             EpisodeDateString[Baring] = EpisodeDateString[Baring].Substring(0, EpisodeDateString[Baring].Length - 2);
             EpisodeDateString[Baring] = "[" + EpisodeDateString[Baring] + "]";
-
-
-            EpisodeDateString[Keef] = string.Empty;
-            foreach (var ep in Stories.OrderBy(a => a.Date.Keefauver))
-            {
-                EpisodeDateString[Keef] += ep.Date.Keefauver.Year + ", " + ep.Date.Keefauver.Month + ", ";
-            }
-
-            EpisodeDateString[Keef] = EpisodeDateString[Keef].Substring(0, EpisodeDateString[Keef].Length - 2);
-            EpisodeDateString[Keef] = "[" + EpisodeDateString[Keef] + "]";
         }
 
         public int UserCanonOrder { get; set; }

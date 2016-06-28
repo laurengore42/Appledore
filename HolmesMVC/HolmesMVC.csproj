@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201606071204092_categorise stories by crime.Designer.cs">
       <DependentUpon>201606071204092_categorise stories by crime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606280857479_bye Brad.cs" />
+    <Compile Include="Migrations\201606280857479_bye Brad.Designer.cs">
+      <DependentUpon>201606280857479_bye Brad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ToyHolmes.cs" />
     <Compile Include="HolmesDbController.cs" />
@@ -1326,6 +1330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606071204092_categorise stories by crime.resx">
       <DependentUpon>201606071204092_categorise stories by crime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606280857479_bye Brad.resx">
+      <DependentUpon>201606280857479_bye Brad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

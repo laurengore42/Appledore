@@ -20,10 +20,6 @@
         {
             <text><li>Baring-Gould's date: @Model.BaringGouldStartString</li></text>
         }
-        @if (Model.KeefauverString.Length > 0)
-        {
-            <li>Keefauver's date: @Model.KeefauverString</li>
-        }
         <br/>
         <li>Published: @Model.Episode.Airdate.ToString("MMMM yyyy")
         @if (Model.ID != "STUD" && Model.ID != "SIGN" && Model.ID != "HOUN" && Model.ID != "VALL")
