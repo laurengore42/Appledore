@@ -46,12 +46,6 @@
                 BaringGouldEndString = string.Empty;
             }
 
-            KeefauverString = Shared.VagueDate(
-                    Date.Keefauver,
-                    DatePrecision.Full,
-                    true,
-                    false);
-
             // these episodes are all the adaptations of that story
             Adapteds = (from e in story.Episodes
                         where
@@ -70,8 +64,6 @@
         public string BaringGouldStartString { get; set; }
 
         public string BaringGouldEndString { get; set; }
-
-        public string KeefauverString { get; set; }
 
         public List<Episode> Adapteds { get; set; }
 

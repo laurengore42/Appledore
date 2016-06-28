@@ -21,7 +21,6 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.Story).HasColumnName("Story");
             this.Property(t => t.BaringGouldStart).HasColumnName("BaringGouldStart");
             this.Property(t => t.BaringGouldEnd).HasColumnName("BaringGouldEnd");
-            this.Property(t => t.Keefauver).HasColumnName("Keefauver");
             this.Property(t => t.Watson).HasColumnName("Watson");
             this.Property(t => t.BaringGouldPrecision).HasColumnName("BaringGouldPrecision");
 
