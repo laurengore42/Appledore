@@ -1,10 +1,4 @@
-﻿function randomHexColor() {
-    var color = parseInt(Math.random() * 16777215);
-    color = "#" + color.toString(16);
-    return color;
-}
-
-function roundByFives(value, up) {
+﻿function roundByFives(value, up) {
     if (value % 5 == 0) {
         return value;
     }
@@ -96,7 +90,7 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
     ctx.lineWidth = 1;
     ctx.strokeRect(0, 0, outerBlocks * blockWidth, blockWidth * heightRatio);
 
-    var color = randomHexColor();
+    var color = 'green';
     if (spotty == true) {
         for (var j = 0; j < episodes.length; j += 2) {
             drawEpLine(startRoundedDown, episodes[j], episodes[j + 1], ctx, blockWidth, heightRatio, color);
