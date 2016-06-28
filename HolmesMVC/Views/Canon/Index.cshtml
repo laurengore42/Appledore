@@ -16,7 +16,6 @@
 
     const int Publish = (int)CanonOrder.Published;
     const int Baring = (int)CanonOrder.Baring;
-    const int Keef = (int)CanonOrder.Keefauver;
 }
 
 <h2 class="detailscategory">Adaptation</h2>
@@ -32,18 +31,13 @@
 }
 @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.Adaptation.ID })
 
-@if (Model.Adaptation.Episodes.Any())
-{
-    <div id="timelinecontainer">
-        <canvas id="timeline">Turn on &lt;canvas&gt;.</canvas>
-    </div>
-}
-
-<br />
+<div id="timelinecontainer">
 Choose a date system:<br />
-<input type="button" value="Publication" onclick="changeTheDates(@Publish);" />
-<input type="button" value="Baring-Gould" onclick="changeTheDates(@Baring);" />
-<input type="button" value="Keefauver" onclick="changeTheDates(@Keef);" />
+<input type="button" value="Baring-Gould" onclick="changeTheDates(@Baring);" /><br />
+    <canvas id="timeline1">Turn on &lt;canvas&gt;.</canvas><br />
+<input type="button" value="Publication" onclick="changeTheDates(@Publish);" /><br />
+    <canvas id="timeline2">Turn on &lt;canvas&gt;.</canvas><br />
+</div>
 
 <!-- Publication order -->
 
@@ -117,118 +111,36 @@ Choose a date system:<br />
     }
 </table>
 
-<!-- Keefauver order -->
-
-<table id="KeefOrder" style="display: none">
-    @{
-        i = 0;
-        foreach (var s in Model.Stories.OrderBy(a => a.Date.Keefauver))
-        {
-            year = s.Date.Keefauver.Year;
-            tenthYear = (int)Math.Floor((double)year / 10);
-            decade = 10 * tenthYear;
-            decadeString = decade + "s";
-            var isHiatus = false;
-            if (i == 0 || (i > 0 && lastDecade != decade))
-            {
-            <tr>
-                <td colspan="2" class="adaptseason">
-                    <h3>@decadeString</h3>
-                </td>
-            </tr>
-            }
-            <tr>
-                @if (s.Date.Keefauver > new DateTime(1891, 5, 1)
-                        && s.Date.Keefauver < new DateTime(1893, 4, 1))
-                {
-                    isHiatus = true;
-                }                
-                <td>
-                    @if (isHiatus)
-                    {
-                        <i>
-                    }
-                    @Shared.VagueDate(s.Date.Keefauver, DatePrecision.Full, false, true)
-                    @if (isHiatus)
-                    {
-                        </i>
-                    }
-                </td>                
-                <td>
-                    @if (isHiatus)
-                    {
-                        <i>
-                    }
-                    @Html.ActionLink(s.Name, "Details", "Story", new { s.ID }, null)
-                    @if (isHiatus)
-                    {
-                        </i>
-                    }
-                </td>
-            </tr>
-            lastDecade = decade;
-            i++;
-        }
-    }
-</table>
-
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
 
     <script>
         $(document).ready(function() {
             changeTheDates(@Model.UserCanonOrder);
+            
+            $('#startYearSpan').text(@Model.StartYear[Publish]);
+            spottyTimeline(@Model.StartYear[Baring], @Model.StartMonth[Baring], @Model.EndYear[Publish], @Model.EndMonth[Publish], 'timeline1', @Model.EpisodeDateString[Baring]);
+            spottyTimeline(@Model.StartYear[Baring], @Model.StartMonth[Baring], @Model.EndYear[Publish], @Model.EndMonth[Publish], 'timeline2', @Model.EpisodeDateString[Publish]);
         });
 
         function changeTheDates(sysNum) {
             $('#PubOrder').hide(); 
-            $('#BaringOrder').hide(); 
-            $('#KeefOrder').hide();
-            var startYear;
-            var startMonth;
-            var endYear;
-            var endMonth;
+            $('#BaringOrder').hide();
             switch (sysNum) {
                 case @(Baring) :
                     $('#BaringOrder').show();
-                    startYear = @Model.StartYear[Baring];
-                    startMonth = @Model.StartMonth[Baring];
-                    endYear = @Model.EndYear[Baring];
-                    endMonth = @Model.EndMonth[Baring];
-                    break;
-                case @(Keef) :
-                    $('#KeefOrder').show();
-                    startYear = @Model.StartYear[Keef];
-                    startMonth = @Model.StartMonth[Keef];
-                    endYear = @Model.EndYear[Keef];
-                    endMonth = @Model.EndMonth[Keef];
                     break;
                 default :
                     $('#PubOrder').show();
-                    startYear = @Model.StartYear[Publish];
-                    startMonth = @Model.StartMonth[Publish];
-                    endYear = @Model.EndYear[Publish];
-                    endMonth = @Model.EndMonth[Publish];
             }
-            $('#startYearSpan').text(startYear);
-            spottyTimeline(startYear, startMonth, endYear, endMonth);
         }
 
-        function spottyTimeline(startYear, startMonth, endYear, endMonth) {
-            var canvas = $('#timeline')[0];
+        function spottyTimeline(startYear, startMonth, endYear, endMonth, canvasID, episodeDateString) {
+            var canvas = $('#' + canvasID)[0];
             var ctx = canvas.getContext('2d');
-
-            if ($('#PubOrder').is(":visible")) {
-                drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx,
-                    @Model.EpisodeDateString[Publish], true);
-                } else if ($('#BaringOrder').is(":visible")) {
-                    drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx,
-                        @Model.EpisodeDateString[Baring], true);
-                } else if ($('#KeefOrder').is(":visible")) {
-                    drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx,
-                        @Model.EpisodeDateString[Keef], true);
-                }
-    }
+            
+            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, episodeDateString, true);
+        }
     </script>
 }
 
