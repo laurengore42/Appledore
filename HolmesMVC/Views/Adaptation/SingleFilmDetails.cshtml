@@ -62,7 +62,7 @@
         @if (!string.IsNullOrWhiteSpace(ViewBag.Episode.Story))
         {
             <text><br /><br />
-            Canon basis: @ViewBag.Episode.Story1.Name</text>
+            Canon basis: @Html.ActionLink(Model.Episodes.First().Story1.Name, "Details", "Story", new { id = Model.Episodes.First().Story}, null)</text>
         }
     </p>
     <p>
