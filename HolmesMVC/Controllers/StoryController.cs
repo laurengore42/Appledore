@@ -40,13 +40,10 @@
                 return HttpNotFound();
             }
 
-            var model = new StoryView(story);
+            var model = new StoryView(story, start, length);
 
-            if (start >= 0 && length >= 0)
+            if (model.ChunkXml != null)
             {
-                model.ChunkStart = start;
-                model.ChunkLength = length;
-
                 return View("Chunk", model);
             }
 

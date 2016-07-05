@@ -12,16 +12,9 @@
 
 <section class="leftfloatdetails">
     <article>
-        <div class="storyChunk">
-        </div>
+        <div class="storyChunk">@Html.Raw(Model.ChunkXml)</div>
         -- <i>@Html.ActionLink("'" + Model.Episode.Story + "'", "Details", "Story", new { id = Model.Episode.StoryCode }, null)</i>, Sir Arthur Conan Doyle
     </article>
 </section>
 
-<div style="display: none" id="hiddenStory">Loading story text...</div>
 <div class="clear-fix"></div>
-
-@section Scripts {
-    <script src="/Scripts/Apdore-StoryHtmlTrim.js"></script>
-    <script src="/Scripts/Apdore-StoryChunk.js"></script>
-}
