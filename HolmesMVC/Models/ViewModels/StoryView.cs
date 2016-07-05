@@ -57,7 +57,7 @@
                             && e.Season1.Adaptation1.Medium1.Name != "Stage" // to_do_theatre
                         select e).OrderBy(e => e.Airdate).ToList();
 
-            GetChunkXml(chunkStart, chunkLength);
+            GetChunk(chunkStart, chunkLength);
         }
 
         public string ID { get; set; }
@@ -77,10 +77,12 @@
         public Outcome OutcomeType { get; set; }
 
         public string ChunkXml { get; set; }
+        public string ChunkText { get; set; }
 
-        private void GetChunkXml(int chunkStart, int chunkLength)
+        private void GetChunk(int chunkStart, int chunkLength)
         {
             ChunkXml = null;
+            ChunkText = null;
             if (chunkStart >= 0 && chunkLength >= 0)
             {
                 var storyXml = GetStoryXml();
@@ -94,6 +96,12 @@
                         linebreaker = linebreaker.Replace("*¦", "</p><p>");
                     }
                     ChunkXml = "<p>" + linebreaker + "</p>";
+                    ChunkText = Regex.Replace(ChunkXml, @"<.*?>", " ");
+                    while (ChunkText.Contains("  "))
+                    {
+                        ChunkText = ChunkText.Replace("  ", " ");
+                    }
+                    ChunkText = ChunkText.Trim();
                 }
             }
         }
