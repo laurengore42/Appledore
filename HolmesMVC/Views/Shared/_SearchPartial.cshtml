@@ -36,53 +36,57 @@
         //        $("#overlay").show();
         //    }
         //}, 500);
-
-        var accentMap = {
-            "á": "a",
-            "à": "a",
-            "é": "e",
-            "è": "e",
-            "ö": "o",
-            "ô": "o",
-            "ō": "o",
-            "ø": "o"
-        };
-
-        var normalize = function (term) {
-            var ret = "";
-            for (var i = 0; i < term.length; i++) {
-                ret += accentMap[term.charAt(i)] || term.charAt(i);
+        
+        var normalize = function (input, accentMap) {
+            var output = input;
+            if (accentMap != null) {
+                Object.keys(accentMap).forEach(function (e, i, a) {
+                    output = output.replace(e, accentMap[e]);
+                });
             }
-            return ret;
+            return output;
         };
 
         $.ajax({
-            url: "/Search/DeserialiseSearchStringForPartial",
+            url: "/Search/GetAccentDictionaryAsJson",
             datatype: "text",
             async: true,
             type: "GET",
             success: function (data) {
-                var searchItems = data.split("¦");
-                $("#searchName").autocomplete({
-                    source: function( request, response ) {
-                        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-                        response( $.grep( searchItems, function( value ) {
-                            value = value.label || value.value || value;
-                            return matcher.test( value ) || matcher.test( normalize( value ) );
-                        }) );
-                    }
-                });
-                $("#searchName").bind("autocompleteselect", function (event, ui) {
-                    //assign value back to the form element
-                    if (ui.item) {
-                        $(event.target).val(ui.item.value);
-                    }
-                    //submit the form
-                    $(event.target.form).submit();
-                });
-                //loadedUp = true;
+                var accentMap = JSON.parse(data);
 
-                //$("#overlay").hide();
+                $.ajax({
+                    url: "/Search/DeserialiseSearchStringForPartial",
+                    datatype: "text",
+                    async: true,
+                    type: "GET",
+                    success: function (data) {
+                        var searchItems = data.split("¦");
+                        $("#searchName").autocomplete({
+                            source: function (request, response) {
+                                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                                response($.grep(searchItems, function (value) {
+                                    value = value.label || value.value || value;
+                                    return matcher.test(value) || matcher.test(normalize(value, accentMap));
+                                }));
+                            }
+                        });
+                        $("#searchName").bind("autocompleteselect", function (event, ui) {
+                            //assign value back to the form element
+                            if (ui.item) {
+                                $(event.target).val(ui.item.value);
+                            }
+                            //submit the form
+                            $(event.target.form).submit();
+                        });
+                        //loadedUp = true;
+
+                        //$("#overlay").hide();
+                    },
+                    error: function (x, t, m) {
+                        document.write(x.responseText + "???" + t + ":" + m);
+                    }
+                });
             },
             error: function (x, t, m) {
                 document.write(x.responseText + "???" + t + ":" + m);

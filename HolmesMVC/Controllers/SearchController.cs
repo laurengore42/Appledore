@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Web.Mvc;
     using System.Xml.Serialization;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
 
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
@@ -22,6 +24,14 @@
             (new XmlSerializer(typeof(SearchData))).Serialize(sr, sd);
 
             return sr.ToString();
+        }
+
+        [AllowAnonymous]
+        public ContentResult GetAccentDictionaryAsJson()
+        {
+            var ad = Shared.GetAccentDictionary();
+            string json = JsonConvert.SerializeObject(ad, new KeyValuePairConverter());
+            return Content(json);
         }
 
         [AllowAnonymous]
