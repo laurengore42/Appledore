@@ -40,12 +40,12 @@
                 new { id = @"\w+" }
             );
 
-            // Search route - everything but Search/OuterSearch
+            // Search route
             routes.MapRoute(
                 "Search",
                 "Search/{id}",
                 new { controller = "Search", action = "Index" },
-                new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial).*" }
+                new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial|GetAccentDictionaryAsJson).*" }
             );
 
             // default route

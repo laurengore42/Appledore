@@ -33,10 +33,22 @@
 
         public bool NameListContainsQuery(string query, string[] names)
         {
+            if (string.IsNullOrEmpty(query))
+            {
+                return false;
+            }
+
             // turn %20 into ' '
             query = HttpUtility.HtmlDecode(query).ToLower().Replace("\"", string.Empty);
 
-            return string.Join(" ", names).ToLower().Contains(query);
+            // join names
+            var nameString = string.Join(" ", names).ToLower();
+
+            // process for accent marks
+            nameString = Shared.NormaliseString(nameString);
+            query = Shared.NormaliseString(query);
+
+            return nameString.Contains(query);
         }
 
         public void DoSearch(string query)
