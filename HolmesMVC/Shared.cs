@@ -7,6 +7,8 @@
     using System.Linq;
     using System.Web;
     using System.Xml.Serialization;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
 
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
@@ -337,6 +339,13 @@
                                                     ,{ 'ō', 'o' }
                                                     ,{ 'ø', 'o' }
                                                 };
+        }
+
+        public static string GetAccentDictionaryAsJson()
+        {
+            var ad = GetAccentDictionary();
+            string json = JsonConvert.SerializeObject(ad, new KeyValuePairConverter());
+            return json;
         }
 
         public static string NormaliseString(string input)
