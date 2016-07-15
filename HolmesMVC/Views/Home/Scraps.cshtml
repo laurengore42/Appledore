@@ -25,8 +25,20 @@
 
     foreach (var ad in Model.AdaptationList)
     {
-        var timelineID = "timeline" + ad.ID.ToString();
-        <canvas id="@timelineID"></canvas>
+        var episodes = ad.Seasons.SelectMany(s => s.Episodes);
+        if (episodes.Any())
+        {
+            string spottyValues = "[";
+            foreach (var ep in episodes)
+            {
+                spottyValues += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
+            }
+            spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
+            spottyValues += "]";
+
+            int endYear = DateTime.Now.Year + 10;
+    <canvas data-startyear="1890" data-startmonth="1" data-endyear="@endYear" data-endmonth="12" data-spottyvalues="@spottyValues" class="timelineCanvas">Turn on &lt;canvas&gt;.</canvas>
+        }
     }
 }
 
@@ -34,45 +46,4 @@
 
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
-    
-    <script>
-        $(document).ready(function() {
-            
-            var canvas;
-            var ctx;
-            
-            var startYear = 1890;
-            var startMonth = 1;
-            var endYear = (new Date()).getFullYear() + 10;
-            var endMonth = 12;
-
-            var spottyValues = "";
-
-            @foreach (var ad in Model.AdaptationList)
-            {
-                var episodes = ad.Seasons.SelectMany(s => s.Episodes);
-                    if (episodes.Any())
-                    {
-                        string spottyValues = "[";
-                        foreach (var ep in episodes)
-                        {
-                            spottyValues += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
-                        }
-                        spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
-                        spottyValues += "]";
-                        
-                        var timelineID = "#timeline" + ad.ID.ToString();
-                     <text>
-                        try {
-                            canvas = $('@timelineID')[0];
-                            ctx = canvas.getContext('2d');
-                            spottyValues = @spottyValues;
-                            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, true);
-                        } catch (err) {
-                        }
-                    </text>
-                }
-            }
-        });
-    </script>
 }
