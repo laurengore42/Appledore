@@ -15,14 +15,15 @@
             {
                 <select class="adaptTimelineSelect">
                     <option value=""></option>
-                    @foreach (var ad in Model)
+                    @foreach (HolmesMVC.Models.Adaptation ad in Model)
                     {
                         var name = HolmesMVC.Shared.DisplayName(ad);
                         if (ad.Translation != null)
                         {
                             name = name + " (" + ad.Translation + ")";
                         }
-                        <option value="@ad.ID">@name</option>
+                        int startYear = ad.Seasons.SelectMany(s => s.Episodes).OrderBy(e => e.Airdate).First().Airdate.Year;
+                        <option value="@ad.ID">@startYear: @name</option>
                     }
                 </select>
             }
