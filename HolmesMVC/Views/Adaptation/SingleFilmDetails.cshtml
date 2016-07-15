@@ -78,11 +78,8 @@
     @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
 
     <section id="timelineSection">
-        <!-- for the canvas JS -->
-        <input id="Year" type="hidden" value="@ViewBag.Episode.Airdate.Year"/>
-        <input id="Month" type="hidden" value="@ViewBag.Episode.Airdate.Month"/>
         <div class="clear-fix"></div>
-        <canvas id="timeline">Turn on &lt;canvas&gt;.</canvas>
+        <canvas class="timelineCanvas" data-startyear="@ViewBag.Episode.Airdate.Year" data-startmonth="@ViewBag.Episode.Airdate.Month" data-endyear="@ViewBag.Episode.Airdate.Year" data-endmonth="@ViewBag.Episode.Airdate.Month" data-spottyvalues="[@ViewBag.Episode.Airdate.Year, @ViewBag.Episode.Airdate.Month]" data-isspotty="false">Turn on &lt;canvas&gt;.</canvas>
     </section>
 
 </section>
@@ -95,20 +92,4 @@
 
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            try {
-                var canvas = $('#timeline')[0];
-                var ctx = canvas.getContext('2d');
-
-                var year = $("#Year").val();
-                var month = $("#Month").val();
-
-                drawTimeline(year, month, year, month, canvas, ctx, [year, month], false);
-            } catch (err) {
-                // shut up, IE9
-            }
-        }
-    </script>
 }
