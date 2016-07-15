@@ -125,7 +125,7 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
     }
 }
 
-$(document).ready(function () {
+function redrawCanvases() {
     $('canvas.timelineCanvas').each(function () {
         try {
             var canvas = this;
@@ -144,4 +144,8 @@ $(document).ready(function () {
         } catch (err) {
         }
     });
+}
+
+$(document).ready(function () {
+    redrawCanvases();
 });

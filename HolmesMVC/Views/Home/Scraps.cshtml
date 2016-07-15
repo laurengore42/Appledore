@@ -20,12 +20,28 @@
     }      
         *@
     
+    for (int i = 0; i < 5; i++) {
+        <select class="adaptTimelineSelect">
+            <option value=""></option>
+        @foreach (var ad in Model.AdaptationList)
+        {
+            var name = HolmesMVC.Shared.DisplayName(ad);
+            if (ad.Translation != null)
+            {
+                name = name + " (" + ad.Translation + ")";
+            }
+            <option value="@ad.ID">@name</option>
+        }
+        </select>
+    }
     
     // Visual representation of adaptation timelines against each other
 
     foreach (var ad in Model.AdaptationList)
     {
         var episodes = ad.Seasons.SelectMany(s => s.Episodes);
+        int startYear = episodes.OrderBy(e => e.Airdate).First().Airdate.Year;
+        int endYear = episodes.OrderBy(e => e.Airdate).Last().Airdate.Year;
         if (episodes.Any())
         {
             string spottyValues = "[";
@@ -36,8 +52,12 @@
             spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
             spottyValues += "]";
 
-            int endYear = DateTime.Now.Year + 10;
-    <canvas data-startyear="1890" data-startmonth="1" data-endyear="@endYear" data-endmonth="12" data-spottyvalues="@spottyValues" class="timelineCanvas">Turn on &lt;canvas&gt;.</canvas>
+            string divID = "timelinediv" + ad.ID.ToString();
+            string canvasID = "timeline" + ad.ID.ToString();
+            <div id="@divID" class="timelineDiv" style="display:none;">
+                <h3>@HolmesMVC.Shared.DisplayName(ad)</h3>
+                <canvas id="@canvasID" data-firstepisode="@startYear" data-lastepisode="@endYear" data-startyear="@startYear" data-startmonth="1" data-endyear="@endYear" data-endmonth="12" data-spottyvalues="@spottyValues" class="timelineCanvas" style="display:none;">Turn on &lt;canvas&gt;.</canvas>
+            </div>
         }
     }
 }
@@ -45,5 +65,6 @@
 
 
 @section Scripts {
+    <script type="text/javascript" src="~/Scripts/Apdore-multitimeline.js"></script>
     <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
 }
