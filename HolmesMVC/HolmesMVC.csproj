@@ -194,6 +194,7 @@
     <Compile Include="Controllers\AppearanceController.cs" />
     <Compile Include="Controllers\CanonController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\ToysController.cs" />
     <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HonorificController.cs" />
@@ -1042,6 +1043,7 @@
     <Content Include="Content\Standard.css" />
     <Content Include="Content\Menu.css" />
     <Content Include="Scripts\Apdore-StoryDetails.js" />
+    <Content Include="Scripts\Apdore-multitimeline.js" />
     <Content Include="Services\Stories\3GAB.xml" />
     <Content Include="Services\Stories\3GAR.xml" />
     <Content Include="Services\Stories\3STU.xml" />
@@ -1229,6 +1231,7 @@
     <Content Include="Views\Story\Details.cshtml" />
     <Content Include="web.config" />
     <Content Include="Views\Story\Edit.cshtml" />
+    <Content Include="Views\Toys\MultiTimelineToy.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -1267,7 +1270,7 @@
     <Content Include="Views\Honorific\Delete.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\RandomFact.cshtml" />
-    <Content Include="Views\Home\Scraps.cshtml" />
+    <Content Include="Views\Toys\Scraps.cshtml" />
     <Content Include="Views\Rename\CreateFull.cshtml" />
     <Content Include="Views\Medium\Index.cshtml" />
     <Content Include="Views\Medium\Details.cshtml" />
@@ -1290,7 +1293,7 @@
     <Content Include="Views\Actor\CantDelete.cshtml" />
     <Content Include="Views\Character\CantDelete.cshtml" />
     <Content Include="Views\Home\Analytics.cshtml" />
-    <Content Include="Views\Home\Toys.cshtml" />
+    <Content Include="Views\Toys\HolmesNumToy.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Home\DataEntry.cshtml" />
     <Content Include="Views\Home\Unlocked.cshtml" />
