@@ -501,7 +501,13 @@
                                   orderby grp.FirstOrDefault().Episode1.Airdate
                                   select grp.FirstOrDefault().Actor1).ToList();
 
-            var model = new ScrapsView { FullHolmesList = holmesList };
+            var adaptList = (from ad in Db.Adaptations
+                             where ad.Seasons.Any()
+                             && ad.Seasons.FirstOrDefault().Episodes.Any()
+                             orderby ad.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate
+                             select ad).ToList();
+
+            var model = new ScrapsView { HolmesPictureList = holmesList, AdaptationList = adaptList };
 
             return View(model);
         }

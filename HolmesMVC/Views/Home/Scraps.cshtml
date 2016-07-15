@@ -1,4 +1,5 @@
-﻿@model HolmesMVC.Models.ViewModels.ScrapsView
+﻿@using HolmesMVC.Models.ViewModels
+@model ScrapsView
 
 @{
     ViewBag.Title = "Scraps";    
@@ -12,7 +13,7 @@
     // Holding this in storage til I decide what to do with it
     // Pictorial collage of Holmes actors 
         @*
-    foreach (var actor in Model.FullHolmesList)
+    foreach (var actor in Model.HolmesPictureList)
     {
     <a href="/actor/@actor.ID">
         <img style="height:200px;" src="@actor.PicShow" alt="@actor.Forename @actor.Surname"></a>
@@ -22,14 +23,63 @@
     
     // Visual representation of adaptation timelines against each other
 
-    foreach (var actor in Model.FullHolmesList)
+    foreach (var ad in Model.AdaptationList)
     {
-        HolmesMVC.Models.ViewModels.ActorView aview = new HolmesMVC.Models.ViewModels.ActorView(actor);
-        @aview.YearOfFirstApp<text> til </text>@aview.YearOfLastApp<br />
+        var timelineID = "timeline" + ad.ID.ToString();
+        <canvas id="@timelineID"></canvas>
     }
 }
 
 
 
 @section Scripts {
+    <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            
+            var canvas;
+            var ctx;
+
+            var startYear = 0;
+            var startMonth = 0;
+            var endYear = 0;
+            var endMonth = 0;
+
+            var spottyValues = "";
+
+            @foreach (var ad in Model.AdaptationList)
+            {
+                var episodes = ad.Seasons.SelectMany(s => s.Episodes).ToList();
+                    if (episodes.Any())
+                    {
+                        string spottyValues = "[";
+                        foreach (var ep in episodes)
+                        {
+                            spottyValues += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
+                        }
+                        spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
+                        spottyValues += "]";
+                        
+                        var timelineID = "#timeline" + ad.ID.ToString();
+                     <text>
+                        try {
+                            canvas = $('@timelineID')[0];
+                            ctx = canvas.getContext('2d');
+                            startYear = @episodes.First().Airdate.Year;
+                            startMonth = @episodes.First().Airdate.Month;
+                            endYear = @episodes.Last().Airdate.Year;
+                            endMonth = @episodes.Last().Airdate.Month;
+                            spottyValues = @spottyValues;
+                
+                        // Canvas timelines
+                            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, true);
+                        } catch (err) {
+                            // shut up, IE9
+                        }
+                    </text>
+                }
+            }
+        });
+    </script>
 }
