@@ -48,45 +48,33 @@
         };
 
         $.ajax({
-            url: "/Search/GetAccentDictionaryAsJson",
+            url: "/Search/DeserialiseSearchStringForPartial",
             datatype: "text",
             async: true,
             type: "GET",
             success: function (data) {
-                var accentMap = JSON.parse(data);
-
-                $.ajax({
-                    url: "/Search/DeserialiseSearchStringForPartial",
-                    datatype: "text",
-                    async: true,
-                    type: "GET",
-                    success: function (data) {
-                        var searchItems = data.split("¦");
-                        $("#searchName").autocomplete({
-                            source: function (request, response) {
-                                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                                response($.grep(searchItems, function (value) {
-                                    value = value.label || value.value || value;
-                                    return matcher.test(value) || matcher.test(normalize(value, accentMap));
-                                }));
-                            }
-                        });
-                        $("#searchName").bind("autocompleteselect", function (event, ui) {
-                            //assign value back to the form element
-                            if (ui.item) {
-                                $(event.target).val(ui.item.value);
-                            }
-                            //submit the form
-                            $(event.target.form).submit();
-                        });
-                        loadedUp = true;
-
-                        $("#overlay").hide();
-                    },
-                    error: function (x, t, m) {
-                        document.write(x.responseText + "???" + t + ":" + m);
+                var accentMap = JSON.parse('@Html.Raw(Model.AccentMap)');
+                var searchItems = data.split("¦");
+                $("#searchName").autocomplete({
+                    source: function (request, response) {
+                        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                        response($.grep(searchItems, function (value) {
+                            value = value.label || value.value || value;
+                            return matcher.test(value) || matcher.test(normalize(value, accentMap));
+                        }));
                     }
                 });
+                $("#searchName").bind("autocompleteselect", function (event, ui) {
+                    //assign value back to the form element
+                    if (ui.item) {
+                        $(event.target).val(ui.item.value);
+                    }
+                    //submit the form
+                    $(event.target.form).submit();
+                });
+                loadedUp = true;
+
+                $("#overlay").hide();
             },
             error: function (x, t, m) {
                 document.write(x.responseText + "???" + t + ":" + m);

@@ -23,7 +23,11 @@
                     @Html.Partial("_LoginPartial")
                 </section>
                 <section id="search">
-                    @Html.Partial("_SearchPartial")
+                    @{
+                        var accentMapRawData = HolmesMVC.Shared.GetAccentDictionaryAsJson();
+                        var model = new { AccentMap = accentMapRawData };
+                    }
+                    @Html.Partial("_SearchPartial", model)
                 </section>
             </div>
             <div class="clear-fix"></div>
