@@ -50,7 +50,7 @@
 
             @foreach (var ad in Model.AdaptationList)
             {
-                var episodes = ad.Seasons.SelectMany(s => s.Episodes).ToList();
+                var episodes = ad.Seasons.SelectMany(s => s.Episodes);
                     if (episodes.Any())
                     {
                         string spottyValues = "[";
