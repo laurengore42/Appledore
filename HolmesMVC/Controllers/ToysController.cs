@@ -276,6 +276,8 @@
             var adaptList = (from ad in Db.Adaptations
                              where ad.Seasons.Any()
                              && ad.Seasons.FirstOrDefault().Episodes.Any()
+                             && ad.Medium1.Name != "Literature"
+                             && ad.Medium1.Name != "Stage" //to_do_theatre
                              orderby ad.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate
                              select ad).ToList();
 
