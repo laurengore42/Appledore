@@ -124,3 +124,19 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
         ctx.fillText(newYear, i * blockWidth, blockWidth * heightRatio * 1.3);
     }
 }
+
+$(document).ready(function () {
+    $('canvas.timelineCanvas').each(function () {
+        try {
+            var canvas = this;
+            var ctx = canvas.getContext('2d');
+            var startYear = canvas.attributes["data-startyear"].value;
+            var startMonth = canvas.attributes["data-startmonth"].value;
+            var endYear = canvas.attributes["data-endyear"].value;
+            var endMonth = canvas.attributes["data-endmonth"].value;
+            var spottyValues = JSON.parse(canvas.attributes["data-spottyvalues"].value);
+            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, true);
+        } catch (err) {
+        }
+    });
+});

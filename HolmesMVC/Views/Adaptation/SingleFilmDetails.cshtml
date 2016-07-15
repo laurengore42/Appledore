@@ -97,16 +97,18 @@
     <script type="text/javascript" src="~/Scripts/Apdore-timeline.js"></script>
 
     <script>
-        try {
-            var canvas = $('#timeline')[0];
-            var ctx = canvas.getContext('2d');
+        $(document).ready(function () {
+            try {
+                var canvas = $('#timeline')[0];
+                var ctx = canvas.getContext('2d');
 
-            var year = $("#Year").val();
-            var month = $("#Month").val();
+                var year = $("#Year").val();
+                var month = $("#Month").val();
 
-            drawTimeline(year, month, year, month, canvas, ctx, [year, month], false);
-        } catch (err) {
-            // shut up, IE9
+                drawTimeline(year, month, year, month, canvas, ctx, [year, month], false);
+            } catch (err) {
+                // shut up, IE9
+            }
         }
     </script>
 }
