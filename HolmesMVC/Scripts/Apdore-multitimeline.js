@@ -29,7 +29,7 @@ $(document).ready(function () {
         $('canvas.timelineCanvas').hide();
         $('select.adaptTimelineSelect').each(function () {
             var adaptID = this.options[this.selectedIndex].value;
-            if (adaptID != "") {
+            if (adaptID > 0) {
                 var divID = '#timelinediv' + adaptID;
                 var canvasID = '#timeline' + adaptID;
                 $(divID).show();

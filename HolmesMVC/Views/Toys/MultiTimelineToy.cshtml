@@ -13,8 +13,9 @@
 
             @for (int i = 0; i < 5; i++)
             {
-                <select class="adaptTimelineSelect">
-                    <option value=""></option>
+                var selectID = "timelineSelect" + i.ToString();
+                <select class="adaptTimelineSelect" id="@selectID">
+                    <option value="0"></option>
                     @foreach (HolmesMVC.Models.Adaptation ad in Model)
                     {
                         var name = HolmesMVC.Shared.DisplayName(ad);
@@ -26,7 +27,14 @@
                         <option value="@ad.ID">@startYear: @name</option>
                     }
                 </select>
+                <a href="example.com" onclick="clearSelect(event, '@selectID');" class="adaptTimelineClear">Clear</a><br />
             }
+            <script>
+                function clearSelect(e, id) {
+                    e.preventDefault();
+                    $('#' + id).val('0').change();
+                }
+            </script>
 
             @foreach (HolmesMVC.Models.Adaptation ad in Model)
             {
