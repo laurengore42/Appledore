@@ -2,7 +2,7 @@
     <ul id="menu">
         <li class="canonlink">@Html.ActionLink("Canon", "Index", "Canon")</li>
         <li>@Html.ActionLink("Adaptations","Index","Adaptation")</li>
-            <li>@Html.ActionLink("Toys","Toys","Home")</li> <!-- mainly HolmesNum at the moment -->
+            <li>@Html.ActionLink("Toys","Toys","Home")</li> @* mainly HolmesNum at the moment *@
         <li>@Html.ActionLink("Credits", "Credits", "Home")</li>
         @if (Request.IsAuthenticated) // only I get to see the TABLES OF POWER
         {<li>¦¦¦</li>
@@ -16,10 +16,10 @@
                     }
                 </ul>
             </li>
-            <li>@Html.ActionLink("scraps","Scraps","Home")</li> <!-- sandbox testing area -->
-            <li>@Html.ActionLink("unlocked","Unlocked","Home")</li> <!-- pages that need their data finalising -->
-            <li>@Html.ActionLink("dataentry","DataEntry","Home")</li> <!-- pulling from IMDb and killing dupes -->
-            <li>@Html.ActionLink("analytics","Analytics","Home")</li> <!-- scraps that have graduated -->
+            <li>@Html.ActionLink("scraps","Scraps","Home")</li> @* sandbox testing area *@
+            <li>@Html.ActionLink("unlocked","Unlocked","Home")</li> @* pages that need their data finalising *@
+            <li>@Html.ActionLink("dataentry","DataEntry","Home")</li> @* pulling from IMDb and killing dupes *@
+            <li>@Html.ActionLink("analytics","Analytics","Home")</li> @* scraps that have graduated *@
         }
     </ul>
 </nav>
