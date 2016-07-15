@@ -40,11 +40,11 @@
             
             var canvas;
             var ctx;
-
-            var startYear = 0;
-            var startMonth = 0;
-            var endYear = 0;
-            var endMonth = 0;
+            
+            var startYear = 1890;
+            var startMonth = 1;
+            var endYear = (new Date()).getFullYear() + 10;
+            var endMonth = 12;
 
             var spottyValues = "";
 
@@ -66,16 +66,9 @@
                         try {
                             canvas = $('@timelineID')[0];
                             ctx = canvas.getContext('2d');
-                            startYear = @episodes.First().Airdate.Year;
-                            startMonth = @episodes.First().Airdate.Month;
-                            endYear = @episodes.Last().Airdate.Year;
-                            endMonth = @episodes.Last().Airdate.Month;
                             spottyValues = @spottyValues;
-                
-                        // Canvas timelines
                             drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, true);
                         } catch (err) {
-                            // shut up, IE9
                         }
                     </text>
                 }
