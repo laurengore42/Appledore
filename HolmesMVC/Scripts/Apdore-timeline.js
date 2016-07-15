@@ -135,7 +135,12 @@ $(document).ready(function () {
             var endYear = canvas.attributes["data-endyear"].value;
             var endMonth = canvas.attributes["data-endmonth"].value;
             var spottyValues = JSON.parse(canvas.attributes["data-spottyvalues"].value);
-            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, true);
+
+            var isSpotty = true;
+            if (canvas.attributes["data-isspotty"]) {
+                isSpotty = canvas.attributes["data-isspotty"].value == "true";
+            }
+            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, isSpotty);
         } catch (err) {
         }
     });
