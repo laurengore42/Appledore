@@ -2,6 +2,7 @@
 {
     public class ScrapsView
     {
-        public System.Collections.Generic.List<Actor> FullHolmesList;
+        public System.Collections.Generic.List<Actor> HolmesPictureList;
+        public System.Collections.Generic.List<Adaptation> AdaptationList;
     }
 }
