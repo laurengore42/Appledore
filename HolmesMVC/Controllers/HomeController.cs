@@ -492,17 +492,18 @@
         public ViewResult Scraps()
         {
             var holmesId = Shared.GetHolmes();
-            var watsonId = Shared.GetWatson();
 
-            var fullHolmesList = (from app in Db.Appearances
+            var holmesList = (from app in Db.Appearances
                                   where app.Character == holmesId
                                   && app.Actor > 0
-                                  && app.Actor1.PicShow != null
+                                  && app.Actor1.Pic != null && app.Actor1.Pic != ""
                                   group app by app.Actor into grp
                                   orderby grp.FirstOrDefault().Episode1.Airdate
                                   select grp.FirstOrDefault().Actor1).ToList();
 
-            return View(fullHolmesList);
+            var model = new ScrapsView { FullHolmesList = holmesList };
+
+            return View(model);
         }
 
         [Stopwatch]
