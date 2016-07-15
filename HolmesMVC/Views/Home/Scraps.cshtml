@@ -1,18 +1,35 @@
-﻿@{
-    ViewBag.Title = "Scraps";
+﻿@model HolmesMVC.Models.ViewModels.ScrapsView
 
-    var holmesList = Model as List<HolmesMVC.Models.Actor>;
-    foreach (var actor in holmesList)
-    {
-    <a href="/actor/@actor.ID">
-        <img style="height:200px;" src="@actor.PicShow" alt="@actor.Forename @actor.Surname"></a>
-    }      
-    
+@{
+    ViewBag.Title = "Scraps";    
 }
 
 <div id="body">
     <h2>@ViewBag.Title</h2>
 </div>
+
+@{    
+    // Holding this in storage til I decide what to do with it
+    // Pictorial collage of Holmes actors 
+        @*
+    foreach (var actor in Model.FullHolmesList)
+    {
+    <a href="/actor/@actor.ID">
+        <img style="height:200px;" src="@actor.PicShow" alt="@actor.Forename @actor.Surname"></a>
+    }      
+        *@
+    
+    
+    // Visual representation of adaptation timelines against each other
+
+    foreach (var actor in Model.FullHolmesList)
+    {
+        HolmesMVC.Models.ViewModels.ActorView aview = new HolmesMVC.Models.ViewModels.ActorView(actor);
+        @aview.YearOfFirstApp<text> til </text>@aview.YearOfLastApp<br />
+    }
+}
+
+
 
 @section Scripts {
 }

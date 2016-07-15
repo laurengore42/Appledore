@@ -222,6 +222,7 @@
       <DependentUpon>201606280857479_bye Brad.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\MultiActor.cs" />
+    <Compile Include="Models\ViewModels\ScrapsView.cs" />
     <Compile Include="Models\ViewModels\ToyHolmes.cs" />
     <Compile Include="HolmesDbController.cs" />
     <Compile Include="Migrations\201502251210263_user has preferred canon order.cs" />
