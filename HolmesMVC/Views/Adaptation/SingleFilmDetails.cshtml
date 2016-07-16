@@ -5,10 +5,6 @@
     ViewBag.Title = Model.DisplayName;
     ViewBag.Episode = Model.Episodes.First();
 }
-<section class="leftfloatdetails">
-    <h2 class="detailscategory">Adaptation</h2>
-    <h2 class="detailsheader">@ViewBag.Title</h2>
-</section>
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)
     {
@@ -26,7 +22,8 @@
     }<br/><br/>
 </section>
 <section class="leftfloatdetails">
-
+    <h2 class="detailscategory">Adaptation</h2>
+    <h2 class="detailsheader">@ViewBag.Title</h2>
     <p>
         This 
     @switch (Model.MediumName)
@@ -83,6 +80,8 @@
     </section>
 
 </section>
+
+<div class="clear-fix"></div>
 
 <section class="rightfloatdetails">
     @Html.Action("PerEpisode", "Appearance", new { epId = ViewBag.Episode.ID })

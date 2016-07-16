@@ -6,16 +6,6 @@
     ViewBag.Title = Model.DisplayName;
 }
 
-<section class="leftfloatdetails">
-<h2 class="detailscategory">Adaptation</h2>
-<h2 class="detailsheader">@ViewBag.Title
-    @if (!string.IsNullOrEmpty(Model.Translation))
-    {
-        <span style="font-weight: normal; font-size: small;"><br /><i>@Model.Translation</i></span>
-    }
-    </h2>
-</section>
-
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)
     {
@@ -35,6 +25,13 @@
     }
 </section>
 <section class="leftfloatdetails">
+<h2 class="detailscategory">Adaptation</h2>
+<h2 class="detailsheader">@ViewBag.Title
+    @if (!string.IsNullOrEmpty(Model.Translation))
+    {
+        <span style="font-weight: normal; font-size: small;"><br /><i>@Model.Translation</i></span>
+    }
+    </h2>
 <p>
     This @Model.MediumName adaptation
     @if (Model.Episodes.Any())
