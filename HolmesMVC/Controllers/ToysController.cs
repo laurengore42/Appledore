@@ -246,17 +246,7 @@
         [Stopwatch]
         public ViewResult Scraps()
         {
-            var holmesId = Shared.GetHolmes();
-
-            var holmesList = (from app in Db.Appearances
-                                  where app.Character == holmesId
-                                  && app.Actor > 0
-                                  && app.Actor1.Pic != null && app.Actor1.Pic != ""
-                                  group app by app.Actor into grp
-                                  orderby grp.FirstOrDefault().Episode1.Airdate
-                                  select grp.FirstOrDefault().Actor1).ToList();
-
-            var model = new ScrapsView { HolmesPictureList = holmesList };
+            var model = new ScrapsView { };
 
             return View(model);
         }
@@ -282,6 +272,23 @@
                              select ad).ToList();
 
             return View(adaptList);
+        }
+
+        [AllowAnonymous]
+        [Stopwatch]
+        public ActionResult PhotoCollageToy()
+        {
+            var holmesId = Shared.GetHolmes();
+
+            var holmesList = (from app in Db.Appearances
+                              where app.Character == holmesId
+                              && app.Actor > 0
+                              && app.Actor1.Pic != null && app.Actor1.Pic != ""
+                              group app by app.Actor into grp
+                              orderby grp.FirstOrDefault().Episode1.Airdate
+                              select grp.FirstOrDefault().Actor1).ToList();
+
+            return View(holmesList);
         }
     }
 }

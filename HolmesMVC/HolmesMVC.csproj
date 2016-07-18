@@ -1232,6 +1232,7 @@
     <Content Include="web.config" />
     <Content Include="Views\Story\Edit.cshtml" />
     <Content Include="Views\Toys\MultiTimelineToy.cshtml" />
+    <Content Include="Views\Toys\PhotoCollageToy.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
