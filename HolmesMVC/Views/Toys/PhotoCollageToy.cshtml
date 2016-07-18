@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Toys";
+}
+
+<div id="body">
+    <h2>@ViewBag.Title</h2>
+
+    <div>
+        <h3>Holmes Photo Collage</h3>
+        <br />
+        <div>
+            @foreach (HolmesMVC.Models.Actor actor in Model)
+    {
+    <a href="/actor/@actor.ID">
+        <img style="height:200px;" src="@actor.PicShow" alt="@actor.Forename @actor.Surname"></a>
+    }  
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+}

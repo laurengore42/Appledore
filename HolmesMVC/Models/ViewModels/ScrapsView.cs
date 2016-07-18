@@ -2,6 +2,5 @@
 {
     public class ScrapsView
     {
-        public System.Collections.Generic.List<Actor> HolmesPictureList;
     }
 }
