@@ -13,7 +13,7 @@
             <img class="actorpic" src="@Model.PicShow" alt="@Model.ShortName" title="@Model.ShortName"/>
         @if (Model.PicCreditShow != null)
         {
-                <figcaption><i>@Model.PicCreditShow</i></figcaption>
+                <figcaption><i>@Html.Raw(Model.PicCreditShow)</i></figcaption>
         }
         </figure>
     }
