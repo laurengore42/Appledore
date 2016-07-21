@@ -56,7 +56,7 @@ namespace HolmesMVC.Models
             {
                 if (PicCredit != null && PicCredit != "")
                 {
-                    return "© " + PicCredit;
+                    return "&copy; " + PicCredit;
                 }
                 else if (Pic != null && Pic.IndexOf('.') == -1)
                 {
