@@ -174,7 +174,15 @@
 
         public static string DisplayName(Episode e)
         {
-            return e.Title ?? (e.Story == null ? "Error in Episode DisplayName!" : e.Story1.Name);
+            if (!e.Title.IsNullOrWhiteSpace())
+            {
+                return e.Title;
+            }
+            if (!e.Story.IsNullOrWhiteSpace())
+            {
+                return e.Story1.Name;
+            }
+            return "Error in Episode DisplayName!";
         }
 
         // returns '1984 Granada TV'
