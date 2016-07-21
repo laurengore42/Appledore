@@ -56,11 +56,11 @@ namespace HolmesMVC.Models
             {
                 if (PicCredit != null && PicCredit != "")
                 {
-                    return PicCredit;
+                    return "© " + PicCredit;
                 }
                 else if (Pic != null && Pic.IndexOf('.') == -1)
                 {
-                    return "unknown - can you help?";
+                    return "image credit: " + "unknown - can you help?";
                 }
                 else
                 {
