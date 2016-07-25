@@ -30,7 +30,6 @@
 </div>
 
 @section Scripts {
-    @* Don't check in the Google API key *@
-    <script src="https://maps.googleapis.com/maps/api/js?key=" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=@System.Configuration.ConfigurationManager.AppSettings["GoogleMapsAPIKey"]"></script>
     @Scripts.Render("~/Scripts/Apdore-googlemaps.js")
 }
