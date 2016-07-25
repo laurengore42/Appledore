@@ -1042,6 +1042,7 @@
     <Content Include="Content\Scraps.css" />
     <Content Include="Content\Standard.css" />
     <Content Include="Content\Menu.css" />
+    <Content Include="Scripts\Apdore-googlemaps.js" />
     <Content Include="Scripts\Apdore-StoryDetails.js" />
     <Content Include="Scripts\Apdore-multitimeline.js" />
     <Content Include="Services\Stories\3GAB.xml" />
