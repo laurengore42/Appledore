@@ -290,5 +290,22 @@
 
             return View(holmesList);
         }
+
+        [AllowAnonymous]
+        [Stopwatch]
+        public ActionResult MapPinToy()
+        {
+            var holmesId = Shared.GetHolmes();
+
+            var holmesList = (from app in Db.Appearances
+                              where app.Character == holmesId
+                              && app.Actor > 0
+                              && app.Actor1.Birthplace != null && app.Actor1.Birthplace != ""
+                              group app by app.Actor into grp
+                              orderby grp.FirstOrDefault().Episode1.Airdate
+                              select grp.FirstOrDefault().Actor1).ToList();
+
+            return View(holmesList);
+        }
     }
 }
