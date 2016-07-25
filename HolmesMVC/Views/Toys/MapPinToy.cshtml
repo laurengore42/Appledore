@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Toys";
+}
+
+<div id="body">
+    <h2>@ViewBag.Title</h2>
+
+    <div>
+        <h3>Holmes Birthplace Map</h3>
+        <br />
+        <div>
+            <div id="map-canvas" style="height:600px; width: 800px;"></div>
+            @{
+                List<String> alreadyMapped = new List<string>();
+                alreadyMapped.Add("London"); // we have multiple mapping points within London
+            }
+            @foreach (HolmesMVC.Models.Actor a in Model)
+            {
+                if (!alreadyMapped.Contains(a.Birthplace))
+                {
+                    alreadyMapped.Add(a.Birthplace);
+                    <div class="actorPin" style="display:none;">                      
+                        <span class="actorLink">@Html.ActionLink(HolmesMVC.Shared.ShortName(a),"Details","Actor",new { a.ID }, null)</span>    
+                        <span class="actorBirthplace">@a.Birthplace</span>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @* Don't check in the Google API key *@
+    <script src="https://maps.googleapis.com/maps/api/js?key=" type="text/javascript"></script>
+    @Scripts.Render("~/Scripts/Apdore-googlemaps.js")
+}
