@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HolmesMVC.Models
 {
@@ -25,12 +29,47 @@ namespace HolmesMVC.Models
         public string IMDbName { get; set; }
         public string Wikipedia { get; set; }
         public string Birthplace { get; set; }
+        public string SyncedBirthplace { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public int BirthdatePrecision { get; set; }
         public int DeathdatePrecision { get; set; }
         public virtual Gender Gender1 { get; set; }
         public virtual Species Species1 { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }
+
+        public string SyncBirthplace()
+        {
+            if (Birthplace == SyncedBirthplace)
+            {
+                return "Success";
+            }
+
+            try
+            {
+                Latitude = 0;
+                Longitude = 0;
+                GoogleGeocode.GeocodeResponse latlng = GoogleGeocode.Geocode(System.Configuration.ConfigurationManager.AppSettings["GoogleMapsAPIKey"], Birthplace);
+                double tempLat = 0;
+                double tempLng = 0;
+                if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out tempLat) && Double.TryParse(latlng.Position.Lng, out tempLng))
+                {
+                    Latitude = tempLat;
+                    Longitude = tempLng;
+                    SyncedBirthplace = Birthplace;
+                }
+                else 
+                {
+                    return "Geocoding failed: " + latlng.ErrorMessage;
+                }
+            } catch (Exception ex) 
+            {
+                return ex.Message;
+            }
+
+            return "Success";
+        }
 
         public string PicShow
         {
