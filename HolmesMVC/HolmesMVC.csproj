@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="GoogleGeocode.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.Designer.cs">
       <DependentUpon>201503301626341_option to translate episodes and adaptations.cs</DependentUpon>
@@ -221,6 +222,14 @@
     <Compile Include="Migrations\201606280857479_bye Brad.cs" />
     <Compile Include="Migrations\201606280857479_bye Brad.Designer.cs">
       <DependentUpon>201606280857479_bye Brad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608101137447_actor birthplace sync.cs" />
+    <Compile Include="Migrations\201608101137447_actor birthplace sync.Designer.cs">
+      <DependentUpon>201608101137447_actor birthplace sync.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608101140092_null latlng is OK.cs" />
+    <Compile Include="Migrations\201608101140092_null latlng is OK.Designer.cs">
+      <DependentUpon>201608101140092_null latlng is OK.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ScrapsView.cs" />
@@ -1338,6 +1347,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606280857479_bye Brad.resx">
       <DependentUpon>201606280857479_bye Brad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608101137447_actor birthplace sync.resx">
+      <DependentUpon>201608101137447_actor birthplace sync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608101140092_null latlng is OK.resx">
+      <DependentUpon>201608101140092_null latlng is OK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,37 +14,26 @@ function placePins() {
 
     $('.actorPin').each(function () {
         var link = $(this).find('.actorLink').html();
+        var actorLat = $(this).find('.actorLat').html();
+        var actorLong = $(this).find('.actorLong').html();
         var birthplace = $(this).find('.actorBirthplace').text();
 
-        // bias
-        if (birthplace.indexOf(",") == -1) {
-            birthplace = birthplace + ", UK";
-        }
-
-        geocoder.geocode({ 'address': birthplace }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-
-                var pin = new google.maps.Marker({
-                    position: results[0].geometry.location,
-                    map: map
-                });
-                pins.push(pin);
-                var infoWindow = new google.maps.InfoWindow({
-                    content: link + ', ' + birthplace
-                });
-                google.maps.event.addListener(pin, "click", function () {
-                    infoWindow.open(map, pin);
-                });
-                if (!setCenter) {
-                    map.setCenter(results[0].geometry.location);
-                    setCenter = true;
-                }
-
-            } else {
-                alert("Geocode was not successful for the following reason: " + status);
-            }
+        var pin = new google.maps.Marker({
+            position: new google.maps.LatLng(actorLat, actorLong),
+            map: map
+        })
+        pins.push(pin);
+        var infoWindow = new google.maps.InfoWindow({
+            content: link + ', ' + birthplace
         });
-    })
+        google.maps.event.addListener(pin, "click", function () {
+            infoWindow.open(map, pin);
+        });
+        if (!setCenter) {
+            map.setCenter(new google.maps.LatLng(actorLat, actorLong));
+            setCenter = true;
+        }
+    });
 
     var startLat = 51;
     var startLong = 0;

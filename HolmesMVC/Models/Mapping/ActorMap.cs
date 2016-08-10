@@ -51,6 +51,9 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.IMDb).HasColumnName("IMDb");
             this.Property(t => t.Wikipedia).HasColumnName("Wikipedia");
             this.Property(t => t.Birthplace).HasColumnName("Birthplace");
+            this.Property(t => t.SyncedBirthplace).HasColumnName("SyncedBirthplace");
+            this.Property(t => t.Latitude).HasColumnName("Latitude");
+            this.Property(t => t.Longitude).HasColumnName("Longitude");
             this.Property(t => t.BirthdatePrecision).HasColumnName("BirthdatePrecision");
             this.Property(t => t.DeathdatePrecision).HasColumnName("DeathdatePrecision");
 
