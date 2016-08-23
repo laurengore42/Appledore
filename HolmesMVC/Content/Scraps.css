@@ -53,7 +53,7 @@ section .rightfloatdetails {
     padding-left: 2.85em;
 }
 
-.canonlink {
+.menulinks li:first-child {
     padding-left: 0;
     margin-left: 0;
 }
