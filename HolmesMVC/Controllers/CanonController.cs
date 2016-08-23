@@ -31,5 +31,11 @@
             return View("Index", new CanonView(adapt, profile));
         }
 
+        [Stopwatch]
+        [AllowAnonymous]
+        public ActionResult Search()
+        {
+            return View();
+        }
     }
 }

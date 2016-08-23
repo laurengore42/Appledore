@@ -1244,6 +1244,7 @@
     <Content Include="Views\Toys\MultiTimelineToy.cshtml" />
     <Content Include="Views\Toys\PhotoCollageToy.cshtml" />
     <Content Include="Views\Toys\MapPinToy.cshtml" />
+    <Content Include="Views\Canon\Search.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
