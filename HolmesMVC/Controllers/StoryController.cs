@@ -30,7 +30,6 @@
             return RedirectToAction("Index", "Canon");
         }
         
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Details(string id = null, int start = -1, int length = -1)
         {

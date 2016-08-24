@@ -243,7 +243,6 @@
             }
         }
 
-        [Stopwatch]
         public ViewResult Scraps()
         {
             var model = new ScrapsView { };
@@ -252,7 +251,6 @@
         }
 
         [AllowAnonymous]
-        [Stopwatch]
         [HttpGet]
         public ActionResult HolmesNumToy()
         {
@@ -260,7 +258,6 @@
         }
 
         [AllowAnonymous]
-        [Stopwatch]
         public ActionResult MultiTimelineToy()
         {
             var adaptList = (from ad in Db.Adaptations
@@ -275,7 +272,6 @@
         }
 
         [AllowAnonymous]
-        [Stopwatch]
         public ActionResult PhotoCollageToy()
         {
             var holmesId = Shared.GetHolmes();
@@ -292,7 +288,6 @@
         }
 
         [AllowAnonymous]
-        [Stopwatch]
         public ActionResult MapPinToy()
         {
             var holmesId = Shared.GetHolmes();
