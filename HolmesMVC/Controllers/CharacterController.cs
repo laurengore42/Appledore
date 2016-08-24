@@ -13,7 +13,6 @@
         //
         // GET: /Character/Details/5
 
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Details(int id = 0)
         {

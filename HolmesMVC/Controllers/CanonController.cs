@@ -11,7 +11,6 @@
         //
         // GET: /Canon/
 
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -31,7 +30,6 @@
             return View("Index", new CanonView(adapt, profile));
         }
 
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Search()
         {

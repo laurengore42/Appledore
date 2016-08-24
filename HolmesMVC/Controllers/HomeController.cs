@@ -18,14 +18,12 @@
     [OutputCache(Duration = 1, VaryByCustom = "LastDbUpdate")]
     public class HomeController : HolmesDbController
     {
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Credits()
         {
             return View();
         }
 
-        [Stopwatch]
         public ActionResult Analytics()
         {
             var holmesId = Shared.GetHolmes();
@@ -119,7 +117,6 @@
             return RedirectToAction("Details", "Episode", new { id = epId });
         }
 
-        [Stopwatch]
         [HttpGet]
         public ViewResult DataEntry()
         {
@@ -179,7 +176,6 @@
             return View();
         }
 
-        [Stopwatch]
         [HttpGet]
         public ViewResult Unlocked()
         {
@@ -254,7 +250,6 @@
             return View();
         }
 
-        [Stopwatch]
         [AllowAnonymous]
         public ViewResult Index()
         {

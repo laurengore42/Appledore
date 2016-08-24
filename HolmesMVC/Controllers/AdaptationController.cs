@@ -11,7 +11,6 @@
 
     public class AdaptationController : HolmesDbController
     {
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -23,7 +22,6 @@
         //
         // GET: /Adaptation/Details/5
 
-        [Stopwatch]
         [AllowAnonymous]
         public ActionResult Details(int id = 0)
         {
