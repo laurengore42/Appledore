@@ -1058,6 +1058,7 @@
     <Content Include="Services\Stories\3GAR.xml" />
     <Content Include="Services\Stories\3STU.xml" />
     <Content Include="Services\Stories\ABBE.xml" />
+    <Content Include="Services\Stories\ALL.xml" />
     <Content Include="Services\Stories\BERY.xml" />
     <Content Include="Services\Stories\BLAC.xml" />
     <Content Include="Services\Stories\BLAN.xml" />
