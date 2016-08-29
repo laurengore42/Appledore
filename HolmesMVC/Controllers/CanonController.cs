@@ -5,6 +5,11 @@
 
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
+    using System;
+    using System.Xml;
+    using System.Web.Hosting;
+    using System.Collections.Generic;
+    using System.Xml.Linq;
 
     public class CanonController : HolmesDbController
     {
@@ -31,9 +36,34 @@
         }
 
         [AllowAnonymous]
-        public ActionResult Search()
+        public ActionResult Search(string query)
         {
-            return View();
+            CanonSearchView model = new CanonSearchView();
+
+            if (query != null)
+            {
+                model.Query = query.ToLower();
+                
+                var xmlDoc = new XDocument();
+
+                var storyUrl = HostingEnvironment.MapPath("~/Services/Stories/ALL.xml");
+
+                if (storyUrl != null)
+                {
+                    xmlDoc = XDocument.Load(storyUrl);
+
+                    model.Nodes = (from item in xmlDoc.Descendants("p")
+                                   where item.Value.ToLower().Contains(model.Query)
+                                   select new CanonSearchNode
+                                   {
+                                       Story = "STUD",
+                                       Snippet = item.Value
+                                   }
+                                ).ToList();
+                }
+            }
+
+            return View(model);
         }
     }
 }
