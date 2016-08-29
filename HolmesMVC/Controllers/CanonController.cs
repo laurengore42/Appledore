@@ -42,8 +42,6 @@
 
             if (query != null)
             {
-                model.Query = query.ToLower();
-                
                 var xmlDoc = new XDocument();
 
                 var storyUrl = HostingEnvironment.MapPath("~/Services/Stories/ALL.xml");
@@ -52,18 +50,47 @@
                 {
                     xmlDoc = XDocument.Load(storyUrl);
 
-                    model.Nodes = (from item in xmlDoc.Descendants("p")
-                                   where item.Value.ToLower().Contains(model.Query)
-                                   select new CanonSearchNode
-                                   {
-                                       Story = "STUD",
-                                       Snippet = item.Value
-                                   }
-                                ).ToList();
+                    var reverseQuery = query;
+                    reverseQuery.Reverse();
+                    if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
+                    {
+                        query = query.Replace("\"", String.Empty);
+                        model.Query = "\"" + query + "\"";
+                        model.Nodes.AddRange(GetRelevantNodes(xmlDoc, query));
+                    }
+                    else
+                    {
+                        var splitQuery = query.Split(' ');
+                        model.Query = String.Join(", ", splitQuery);
+                        foreach (var keyword in splitQuery)
+                        {
+                            model.Nodes.AddRange(GetRelevantNodes(xmlDoc, keyword));
+                        }
+                    }
                 }
             }
 
             return View(model);
+        }
+
+        private List<CanonSearchNode> GetRelevantNodes(XDocument xmlDoc, string query)
+        {
+            List<CanonSearchNode> nodes = new List<CanonSearchNode>();
+            if (String.IsNullOrEmpty(query) || xmlDoc == null) {
+                return nodes;
+            }
+
+            query = query.ToLower();
+            nodes = (from item in xmlDoc.Descendants("p")
+                     where item.Value.ToLower().Contains(query)
+                     select new CanonSearchNode
+                     {
+                         Story = "STUD",
+                         Snippet = item.Value
+                     }
+                                ).ToList();
+
+            return nodes;
         }
     }
 }

@@ -9,31 +9,21 @@
     /// </summary>
     /// <param name="text"></param>
     /// <param name="keywords">Comma-separated list of strings to be highlighted</param>
-    /// <param name="cssClass">The Css color to apply</param>
-    /// <param name="fullMatch">false for returning all matches, true for whole word matches only</param>
+    /// <param name="cssColor">The Css color to apply</param>
     /// <returns>string</returns>
-    public string HighlightKeyWords(string text, string keywords, string cssClass, bool fullMatch)
+    public string HighlightKeyWords(string text, string keywords, string cssColor)
     {
-      if (text == String.Empty || keywords == String.Empty || cssClass == String.Empty)
-        return text;
-      var words = keywords.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-      if (!fullMatch)
+        if (text == String.Empty || keywords == String.Empty || cssColor == String.Empty)
+            return text;
+        var words = keywords.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
         return words.Select(word => word.Trim()).Aggregate(text,
                      (current, pattern) =>
-                     Regex.Replace(current, 
+                     Regex.Replace(current,
                                      pattern,
-                                       string.Format("<span style=\"background-color:{0}\">{1}</span>", 
-                                       cssClass, 
+                                       string.Format("<span style=\"background-color:{0}\">{1}</span>",
+                                       cssColor,
                                        "$0"),
                                        RegexOptions.IgnoreCase));
-      return words.Select(word => "\\b" + word.Trim() + "\\b")
-                  .Aggregate(text,(current, pattern) => 
-                            Regex.Replace(current, 
-                            pattern,
-                              string.Format("<span style=\"background-color:{0}\">{1}</span>", 
-                              cssClass, 
-                              "$0"),                                           
-                              RegexOptions.IgnoreCase));
 
     }
 }
@@ -41,9 +31,17 @@
 
 @model HolmesMVC.Models.ViewModels.CanonSearchView
 
-<h2 class="detailscategory">Search</h2>
+@if (Model.Query.IndexOf('"') > -1) {
+<h2 class="detailscategory">Search for @Model.Query</h2>
+} else {
+<h2 class="detailscategory">Search for '@Model.Query'</h2>
+}
 
 @foreach (var node in Model.Nodes)
 {
-    <text>...</text>@Html.Raw(HighlightKeyWords(node.Snippet,Model.Query,"yellow",false))<text>...</text><br /><br />
+    if (Model.Query.IndexOf('"') > -1) {
+    <text>...</text>@Html.Raw(HighlightKeyWords(node.Snippet,Model.Query.Replace("\"",String.Empty),"yellow"))<text>...</text><br /><br />
+    } else {
+    <text>...</text>@Html.Raw(HighlightKeyWords(node.Snippet,Model.Query.Replace(' ',','),"yellow"))<text>...</text><br /><br />
+    }
 }
