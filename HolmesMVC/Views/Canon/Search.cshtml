@@ -1,11 +1,10 @@
 ﻿@using System.Xml;
 @using System.Text.RegularExpressions;
 
-
-@* credit to mikesdotnetting.com for the highlighting function *@
 @functions{
     /// <summary>
     /// Wraps matched strings in HTML span elements styled with a background-color
+    /// Credit to Mike Brind at mikesdotnetting.com
     /// </summary>
     /// <param name="text"></param>
     /// <param name="keywords">Comma-separated list of strings to be highlighted</param>
@@ -26,6 +25,22 @@
                                        RegexOptions.IgnoreCase));
 
     }
+    
+    public string ExcerptText(string text) 
+    {
+        int locationOfFirstKeyword = text.IndexOf('<');
+        if (locationOfFirstKeyword > 30) {
+            text = "..." + text.Substring(locationOfFirstKeyword - 30, text.Length - (locationOfFirstKeyword - 30));
+        }
+
+        string reverseText = new string(text.Reverse().ToArray());
+        int locationOfLastKeyword = text.Length - reverseText.IndexOf('>');
+        if (text.Length > locationOfLastKeyword + 30) {
+            text = text.Substring(0, locationOfLastKeyword + 30) + "...";
+        }
+        
+        return text;
+    }
 }
 
 
@@ -39,9 +54,15 @@
 
 @foreach (var node in Model.Nodes)
 {
+    string highlightedSnippet;
+    
     if (Model.Query.IndexOf('"') > -1) {
-    <text>...</text>@Html.Raw(HighlightKeyWords(node.Snippet,Model.Query.Replace("\"",String.Empty),"yellow"))<text>...</text><br /><br />
-    } else {
-    <text>...</text>@Html.Raw(HighlightKeyWords(node.Snippet,Model.Query.Replace(' ',','),"yellow"))<text>...</text><br /><br />
+        highlightedSnippet = HighlightKeyWords(node.Snippet, Model.Query.Replace("\"", String.Empty), "yellow");
     }
+    else
+    {
+        highlightedSnippet = HighlightKeyWords(node.Snippet, Model.Query.Replace(' ', ','), "yellow");
+    }
+    
+    @Html.Raw(ExcerptText(highlightedSnippet))<br /><br />
 }

@@ -50,8 +50,7 @@
                 {
                     xmlDoc = XDocument.Load(storyUrl);
 
-                    var reverseQuery = query;
-                    reverseQuery.Reverse();
+                    var reverseQuery = new string(query.Reverse().ToArray());
                     if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
                     {
                         query = query.Replace("\"", String.Empty);
