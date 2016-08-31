@@ -67,6 +67,20 @@
                         }
                     }
                 }
+
+                var unsortedNodes = model.Nodes;
+                var sortedNodes = new List<CanonSearchNode>();
+
+                var sortedStories = (from e in Db.Episodes
+                                     where e.Season1.Adaptation1.Name == "Canon"
+                                     select e.Story).ToList();
+
+                foreach (var s in sortedStories)
+                {
+                    sortedNodes.AddRange(unsortedNodes.Where(n => n.Story.ID == s));
+                }
+
+                model.Nodes = sortedNodes;
             }
 
             return View(model);
