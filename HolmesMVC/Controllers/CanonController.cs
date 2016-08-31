@@ -5,11 +5,6 @@
 
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
-    using System;
-    using System.Xml;
-    using System.Web.Hosting;
-    using System.Collections.Generic;
-    using System.Xml.Linq;
 
     public class CanonController : HolmesDbController
     {
@@ -38,85 +33,9 @@
         [AllowAnonymous]
         public ActionResult Search(string query)
         {
-            CanonSearchView model = new CanonSearchView();
-
-            if (query != null)
-            {
-                var xmlDoc = new XDocument();
-
-                var storyUrl = HostingEnvironment.MapPath("~/Services/Stories/ALL.xml");
-
-                if (storyUrl != null)
-                {
-                    xmlDoc = XDocument.Load(storyUrl);
-
-                    var reverseQuery = new string(query.Reverse().ToArray());
-                    if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
-                    {
-                        query = query.Replace("\"", String.Empty);
-                        model.Query = "\"" + query + "\"";
-                        model.Nodes.AddRange(GetRelevantNodes(xmlDoc, query));
-                    }
-                    else
-                    {
-                        var splitQuery = query.Split(' ');
-                        model.Query = String.Join(", ", splitQuery);
-                        foreach (var keyword in splitQuery)
-                        {
-                            model.Nodes.AddRange(GetRelevantNodes(xmlDoc, keyword));
-                        }
-                    }
-                }
-
-                var unsortedNodes = model.Nodes;
-                var sortedNodes = new List<CanonSearchNode>();
-
-                var sortedStories = (from e in Db.Episodes
-                                     where e.Season1.Adaptation1.Name == "Canon"
-                                     select e.Story).ToList();
-
-                foreach (var s in sortedStories)
-                {
-                    sortedNodes.AddRange(unsortedNodes.Where(n => n.Story.ID == s));
-                }
-
-                model.Nodes = sortedNodes;
-            }
+            CanonSearchView model = new CanonSearchView(Db, query);
 
             return View(model);
-        }
-
-        private List<CanonSearchNode> GetRelevantNodes(XDocument xmlDoc, string query)
-        {
-            List<CanonSearchNode> nodes = new List<CanonSearchNode>();
-            if (String.IsNullOrEmpty(query) || xmlDoc == null) {
-                return nodes;
-            }
-
-            Dictionary<String, Story> nodeNames = GetNodeNames();
-            query = query.ToLower();
-            nodes = (from item in xmlDoc.Descendants("p")
-                     where item.Value.ToLower().Contains(query)
-                     select new CanonSearchNode
-                     {
-                         Story = nodeNames[item.Ancestors("story").Descendants("title").First().Value.ToLower().Trim()],
-                         Snippet = item.Value
-                     }
-                                ).ToList();
-
-            return nodes;
-        }
-
-        private Dictionary<String, Story> GetNodeNames()
-        {
-            Dictionary<String, Story> nodeNames = new Dictionary<String, Story>();
-
-            foreach (var s in Db.Stories)
-            {
-                nodeNames.Add(s.Name.ToLower().Trim(), s);
-            }
-
-            return nodeNames;
         }
     }
 }
