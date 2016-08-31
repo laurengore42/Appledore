@@ -95,6 +95,7 @@
             terminatorCharacters.Add('?');
             terminatorCharacters.Add('"');
             terminatorCharacters.Add('\'');
+            terminatorCharacters.Add('—');
             return terminatorCharacters;
         }
 
@@ -111,12 +112,12 @@
         private string TrimEndToWord(string text)
         {
             var rT = new string(text.Reverse().ToArray());
-            rT = TrimStartToWord(rT, true);
+            rT = TrimStartToWord(rT, true, false);
             text = new string(rT.Reverse().ToArray());
             return text;
         }
 
-        private string TrimStartToWord(string text, bool reversed)
+        private string TrimStartToWord(string text, bool reversed, bool ellipsis)
         {
             List<char> terminatorCharacters = MainTerminatorCharacters();
             if (reversed)
@@ -140,12 +141,18 @@
             {
                 text = text.Substring(1, text.Length - 1);
             }
+
+            if (ellipsis)
+            {
+                text = "..." + text;
+            }
+
             return text;
         }
 
         private string TrimBothEndsToWord(string text)
         {
-            text = TrimStartToWord(text, false);
+            text = TrimStartToWord(text, false, false);
             if (text[0].ToString() != text[0].ToString().ToUpper())
             {
                 text = "..." + text;
@@ -186,12 +193,12 @@
                 {
                     textArray[i] = TrimBothEndsToWord(textArray[i]);
                 }
-                textArray[textArray.Length - 1] = TrimStartToWord(textArray[textArray.Length - 1], false);
+                textArray[textArray.Length - 1] = TrimStartToWord(textArray[textArray.Length - 1], false, true);
 
                 text = string.Join("<br /><br />", textArray);
             }
 
-            // Trim ends down to within proximity of the keywords
+            // Trim ends to within proximity of the keywords
 
             int startOfKeyword = text.IndexOf(startPattern);
             if (startOfKeyword > excerptBufferSize)
@@ -207,7 +214,7 @@
                 text = text.Substring(0, endOfKeyword + excerptBufferSize);
             }
 
-            // Trim down to nearest word-ending
+            // Trim ends to nearest word-ending
 
             text = TrimBothEndsToWord(text);
 
