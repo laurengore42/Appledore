@@ -79,12 +79,13 @@
                 return nodes;
             }
 
+            Dictionary<String, Story> nodeNames = GetNodeNames();
             query = query.ToLower();
             nodes = (from item in xmlDoc.Descendants("p")
                      where item.Value.ToLower().Contains(query)
                      select new CanonSearchNode
                      {
-                         Story = GetStory(item.Ancestors("story").Descendants("title").First().Value),
+                         Story = nodeNames[item.Ancestors("story").Descendants("title").First().Value.ToLower().Trim()],
                          Snippet = item.Value
                      }
                                 ).ToList();
@@ -92,21 +93,16 @@
             return nodes;
         }
 
-        private Story GetStory(string StoryTitle)
+        private Dictionary<String, Story> GetNodeNames()
         {
-            Story myStory = null;
-            StoryTitle = StoryTitle.Trim();
+            Dictionary<String, Story> nodeNames = new Dictionary<String, Story>();
 
-            var stories = (from s in Db.Stories
-                           where s.Name == StoryTitle
-                           select s).ToList();
-
-            if (stories.Any())
+            foreach (var s in Db.Stories)
             {
-                myStory = stories.First();
+                nodeNames.Add(s.Name.ToLower().Trim(), s);
             }
 
-            return myStory;
+            return nodeNames;
         }
     }
 }

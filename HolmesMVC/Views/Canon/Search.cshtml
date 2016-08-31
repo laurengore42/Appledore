@@ -47,21 +47,24 @@
 @model HolmesMVC.Models.ViewModels.CanonSearchView
 
 @if (string.IsNullOrEmpty(Model.Query)) {
-    
+    ViewBag.Title = "Canon Search";
     <text>no query</text>
     
 } else {
-
+    
 if (Model.Query.IndexOf('"') > -1) {
-<h2 class="detailscategory">Search for @Model.Query</h2>
+    ViewBag.Title = "Canon Search for " + Model.Query;
 } else {
-<h2 class="detailscategory">Search for '@Model.Query'</h2>
+    ViewBag.Title = "Canon Search for '" + Model.Query + "'";
 }
+
+<h2 class="detailscategory">@ViewBag.Title</h2>
 
 <br /><br />
 
 HolmesMVC.Models.Story previousStory = null;
-foreach (var node in Model.Nodes.OrderBy(n => n.Story.ID))
+
+foreach (var node in Model.Nodes.OrderBy(n => n.Story.Episodes.First().Airdate))
 {
     if (previousStory != null && node.Story.ID != previousStory.ID)
     {
