@@ -174,8 +174,8 @@
                 // More than one keyword in the excerpt
                 // Cut out extraneous text between the keywords
 
-                string excerptingPattern = endPattern + "(.{0," + excerptBufferSize + "})(.{" + excerptBufferSize * 2 + ",9999}?)(.{0," + excerptBufferSize + "})" + startPattern;
-                text = Regex.Replace(text, excerptingPattern, endPattern + "$1" + "|" + "$3" + startPattern);
+                string excerptingPattern = endPattern + "(.{" + excerptBufferSize + "}).{" + excerptBufferSize * 2 + ",9999}?(.{" + excerptBufferSize + "})" + startPattern;
+                text = Regex.Replace(text, excerptingPattern, endPattern + "$1" + "|" + "$2" + startPattern);
 
                 // Trim the raw edges of the cuts to nearest word-ending
 
@@ -274,7 +274,7 @@
 
                 foreach (var node in Nodes)
                 {
-                    string highlightedSnippet;
+                    string highlightedSnippet = node.Snippet;
 
                     if (Query.IndexOf('"') > -1)
                     {
