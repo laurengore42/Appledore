@@ -84,12 +84,29 @@
                      where item.Value.ToLower().Contains(query)
                      select new CanonSearchNode
                      {
-                         Story = "STUD",
+                         Story = GetStory(item.Ancestors("story").Descendants("title").First().Value),
                          Snippet = item.Value
                      }
                                 ).ToList();
 
             return nodes;
+        }
+
+        private Story GetStory(string StoryTitle)
+        {
+            Story myStory = null;
+            StoryTitle = StoryTitle.Trim();
+
+            var stories = (from s in Db.Stories
+                           where s.Name == StoryTitle
+                           select s).ToList();
+
+            if (stories.Any())
+            {
+                myStory = stories.First();
+            }
+
+            return myStory;
         }
     }
 }
