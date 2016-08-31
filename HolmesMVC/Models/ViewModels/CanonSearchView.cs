@@ -204,7 +204,7 @@
                 // More than one keyword in the excerpt
                 // Cut out extraneous text between the keywords
 
-                string excerptingPattern = endPattern + "(.{" + excerptBufferSize + "}).{" + excerptBufferSize * 2 + ",9999}?(.{" + excerptBufferSize + "})" + startPattern;
+                string excerptingPattern = endPattern + "(.{" + excerptBufferSize + "})[^<>]{" + excerptBufferSize * 2 + ",9999}?(.{" + excerptBufferSize + "})" + startPattern;
                 text = Regex.Replace(text, excerptingPattern, endPattern + "$1" + "|" + "$2" + startPattern);
 
                 // Trim the raw edges of the cuts to nearest word-ending
