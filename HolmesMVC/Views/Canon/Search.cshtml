@@ -46,7 +46,13 @@
 
 @model HolmesMVC.Models.ViewModels.CanonSearchView
 
-@if (Model.Query.IndexOf('"') > -1) {
+@if (string.IsNullOrEmpty(Model.Query)) {
+    
+    <text>no query</text>
+    
+} else {
+
+if (Model.Query.IndexOf('"') > -1) {
 <h2 class="detailscategory">Search for @Model.Query</h2>
 } else {
 <h2 class="detailscategory">Search for '@Model.Query'</h2>
@@ -54,10 +60,8 @@
 
 <br /><br />
 
-@{
-    HolmesMVC.Models.Story previousStory = null;
-}
-@foreach (var node in Model.Nodes.OrderBy(n => n.Story.ID))
+HolmesMVC.Models.Story previousStory = null;
+foreach (var node in Model.Nodes.OrderBy(n => n.Story.ID))
 {
     if (previousStory != null && node.Story.ID != previousStory.ID)
     {
@@ -79,7 +83,8 @@
     previousStory = node.Story;
         
 }
-    @if (previousStory != null)
+    if (previousStory != null)
     {
         <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br /><br /><br />
     }
+}
