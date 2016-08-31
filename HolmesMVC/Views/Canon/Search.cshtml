@@ -1,26 +1,11 @@
 ﻿@model HolmesMVC.Models.ViewModels.CanonSearchView
 
-@if (string.IsNullOrEmpty(Model.Query))
-{
-    ViewBag.Title = "Canon Search";
-
-}
-else
-{
-
-    if (Model.Query.IndexOf('"') > -1)
-    {
-        ViewBag.Title = "Canon Search for " + Model.Query;
-    }
-    else
-    {
-        ViewBag.Title = "Canon Search for '" + Model.Query + "'";
-    }
-}
+    @{ ViewBag.Title = "Canon Search"; }
 
 <h2 class="detailscategory">@ViewBag.Title</h2>
+
 <form action="/Canon/Search/">
-    <input type="text" name="query" />
+    <input type="text" name="query" value="@Model.Query" />
     <input type="submit" value="Search" />
 </form>
 
