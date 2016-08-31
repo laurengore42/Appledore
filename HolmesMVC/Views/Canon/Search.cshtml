@@ -25,29 +25,44 @@
                                        RegexOptions.IgnoreCase));
 
     }
-
-    private string TrimEndToWord(string text)
-    {
-        var rT = new string(text.Reverse().ToArray());
-        rT = TrimStartToWord(rT);
-        text = new string(rT.Reverse().ToArray());
-        return text;
-    }
-
-    private string TrimStartToWord(string text)
-    {
+    
+    private List<char> MainTerminatorCharacters() {
         List<char> terminatorCharacters = new List<char>();
         terminatorCharacters.Add('<');
         terminatorCharacters.Add('>');
         terminatorCharacters.Add('!');
-        terminatorCharacters.Add(',');
         terminatorCharacters.Add('.');
         terminatorCharacters.Add('?');
-        terminatorCharacters.Add(':');
-        terminatorCharacters.Add(';');
         terminatorCharacters.Add('"');
         terminatorCharacters.Add('\'');
+        return terminatorCharacters;
+    }
+
+    private List<char> AdditionalTerminatorCharacters()
+    {
+        List<char> terminatorCharacters = new List<char>();
+        terminatorCharacters.Add(',');
+        terminatorCharacters.Add(':');
+        terminatorCharacters.Add(';');
         terminatorCharacters.Add('-');
+        return terminatorCharacters;
+    }
+
+    private string TrimEndToWord(string text)
+    {
+        var rT = new string(text.Reverse().ToArray());
+        rT = TrimStartToWord(rT, true);
+        text = new string(rT.Reverse().ToArray());
+        return text;
+    }
+
+    private string TrimStartToWord(string text, bool reversed)
+    {
+        List<char> terminatorCharacters = MainTerminatorCharacters();
+        if (reversed)
+        {
+            terminatorCharacters.AddRange(AdditionalTerminatorCharacters());
+        }
 
         foreach (char c in terminatorCharacters)
         {
@@ -64,6 +79,25 @@
         else if (text.IndexOf(" ") == 0)
         {
             text = text.Substring(1, text.Length - 1);
+        }
+        return text;
+    }
+
+    private string TrimBothEndsToWord(string text)
+    {
+        text = TrimStartToWord(text, false);
+        if (text[0].ToString() != text[0].ToString().ToUpper()) {
+            text = "..." + text;
+        }
+        text = TrimEndToWord(text);
+        List<char> terminatorCharacters = MainTerminatorCharacters();
+        if (!terminatorCharacters.Contains(text[text.Length - 1])) {
+            text = text + "...";
+        }
+        terminatorCharacters = AdditionalTerminatorCharacters();
+        if (terminatorCharacters.Contains(text[text.Length - 4]))
+        {
+            text = text.Substring(0, text.Length - 4) + "...";
         }
         return text;
     }
@@ -88,10 +122,9 @@
             textArray[0] = TrimEndToWord(textArray[0]);
             for (var i = 0; i < textArray.Length - 1; i++)
             {
-                textArray[i] = TrimStartToWord(textArray[i]);
-                textArray[i] = TrimEndToWord(textArray[i]);
+                textArray[i] = TrimBothEndsToWord(textArray[i]);
             }
-            textArray[textArray.Length - 1] = TrimStartToWord(textArray[textArray.Length - 1]);
+            textArray[textArray.Length - 1] = TrimStartToWord(textArray[textArray.Length - 1], false);
 
             text = string.Join("<br /><br />", textArray);
         }
@@ -114,8 +147,7 @@
 
         // Trim down to nearest word-ending
 
-        text = TrimStartToWord(text);
-        text = TrimEndToWord(text);
+        text = TrimBothEndsToWord(text);
 
         return text;
     }
