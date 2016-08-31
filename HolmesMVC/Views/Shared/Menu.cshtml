@@ -1,18 +1,11 @@
 ﻿<nav>
-    <ul id="menu" class="menulinks">        
-        @if (Request.IsAuthenticated) // still working on this one
-        {
+    <ul id="menu" class="menulinks">
         <li><a>Canon</a>
             <ul>
                 <li>@Html.ActionLink("Stories", "Index", "Canon")</li>
                 <li>@Html.ActionLink("Search", "Search", "Canon")</li>
             </ul>
         </li>
-        }
-        else
-        {
-        <li>@Html.ActionLink("Canon", "Index", "Canon")</li>
-        }
         <li>@Html.ActionLink("Adaptations","Index","Adaptation")</li>
         <li><a>Toys</a>
             <ul>
