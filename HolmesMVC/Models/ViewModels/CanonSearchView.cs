@@ -2,6 +2,7 @@
 {
 
     using System.Collections.Generic;
+    using System.Linq;
 
     public class CanonSearchView
     {
@@ -18,9 +19,9 @@
 
     public class CanonSearchNode
     {
-        public string Story;
-
         public string Snippet;
+
+        public Story Story;
     }
 
 }

@@ -52,8 +52,18 @@
 <h2 class="detailscategory">Search for '@Model.Query'</h2>
 }
 
-@foreach (var node in Model.Nodes)
+<br /><br />
+
+@{
+    HolmesMVC.Models.Story previousStory = null;
+}
+@foreach (var node in Model.Nodes.OrderBy(n => n.Story.ID))
 {
+    if (previousStory != null && node.Story.ID != previousStory.ID)
+    {
+        <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br /><br /><br />
+    }
+    
     string highlightedSnippet;
     
     if (Model.Query.IndexOf('"') > -1) {
@@ -65,4 +75,11 @@
     }
     
     @Html.Raw(ExcerptText(highlightedSnippet))<br /><br />
+    
+    previousStory = node.Story;
+        
 }
+    @if (previousStory != null)
+    {
+        <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br /><br /><br />
+    }
