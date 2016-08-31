@@ -21,6 +21,40 @@
 
         private int excerptBufferSize = 40;
         private string highlightColor = "yellow";
+        private List<char> _mainTerminatorCharacters;
+        private List<char> _additionalTerminatorCharacters;
+
+        private List<char> MainTerminatorCharacters()
+        {
+            if (_mainTerminatorCharacters == null)
+            {
+                List<char> terminatorCharacters = new List<char>();
+                terminatorCharacters.Add('<');
+                terminatorCharacters.Add('>');
+                terminatorCharacters.Add('!');
+                terminatorCharacters.Add('.');
+                terminatorCharacters.Add('?');
+                terminatorCharacters.Add('"');
+                terminatorCharacters.Add('\'');
+                terminatorCharacters.Add('—');
+                _mainTerminatorCharacters = terminatorCharacters;
+            }
+            return _mainTerminatorCharacters;
+        }
+
+        private List<char> AdditionalTerminatorCharacters()
+        {
+            if (_additionalTerminatorCharacters == null)
+            {
+                List<char> terminatorCharacters = new List<char>();
+                terminatorCharacters.Add(',');
+                terminatorCharacters.Add(':');
+                terminatorCharacters.Add(';');
+                terminatorCharacters.Add('-');
+                _additionalTerminatorCharacters = terminatorCharacters;
+            }
+            return _additionalTerminatorCharacters;
+        }
 
         #endregion
 
@@ -85,41 +119,33 @@
 
         }
 
-        private List<char> MainTerminatorCharacters()
-        {
-            List<char> terminatorCharacters = new List<char>();
-            terminatorCharacters.Add('<');
-            terminatorCharacters.Add('>');
-            terminatorCharacters.Add('!');
-            terminatorCharacters.Add('.');
-            terminatorCharacters.Add('?');
-            terminatorCharacters.Add('"');
-            terminatorCharacters.Add('\'');
-            terminatorCharacters.Add('—');
-            return terminatorCharacters;
-        }
-
-        private List<char> AdditionalTerminatorCharacters()
-        {
-            List<char> terminatorCharacters = new List<char>();
-            terminatorCharacters.Add(',');
-            terminatorCharacters.Add(':');
-            terminatorCharacters.Add(';');
-            terminatorCharacters.Add('-');
-            return terminatorCharacters;
-        }
-
-        private string TrimEndToWord(string text)
+        private string TrimEndToWord(string text, bool blockEllipsis)
         {
             var rT = new string(text.Reverse().ToArray());
             rT = TrimStartToWord(rT, true, false);
             text = new string(rT.Reverse().ToArray());
+
+            if (!blockEllipsis)
+            {
+                List<char> terminatorCharacters = MainTerminatorCharacters();
+                if (!terminatorCharacters.Contains(text[text.Length - 1]))
+                {
+                    text = text + "...";
+                }
+                terminatorCharacters = AdditionalTerminatorCharacters();
+                if (terminatorCharacters.Contains(text[text.Length - 4]))
+                {
+                    text = text.Substring(0, text.Length - 4) + "...";
+                }
+            }
             return text;
         }
 
-        private string TrimStartToWord(string text, bool reversed, bool ellipsis)
+        private string TrimStartToWord(string text, bool reversed, bool forceEllipsis)
         {
             List<char> terminatorCharacters = MainTerminatorCharacters();
+            var ellipsis = forceEllipsis;
+
             if (reversed)
             {
                 terminatorCharacters.AddRange(AdditionalTerminatorCharacters());
@@ -133,13 +159,24 @@
                 }
             }
 
-            if (text.IndexOf(" ") != 0)
+            var startsWithSpace = text.IndexOf(" ") == 0;
+
+            if (!startsWithSpace)
             {
+                if (text.IndexOf(' ') > 0)
+                {
+                    var prevChar = text[text.IndexOf(' ') - 1];
+                    if (!terminatorCharacters.Contains(prevChar)) 
+                    {
+                        ellipsis = true;
+                    }
+                }
                 text = text.Substring(text.IndexOf(' ') + 1, text.Length - (text.IndexOf(' ') + 1));
             }
-            else if (text.IndexOf(" ") == 0)
+            else
             {
                 text = text.Substring(1, text.Length - 1);
+                ellipsis = true;
             }
 
             if (ellipsis)
@@ -153,21 +190,7 @@
         private string TrimBothEndsToWord(string text)
         {
             text = TrimStartToWord(text, false, false);
-            if (text[0].ToString() != text[0].ToString().ToUpper())
-            {
-                text = "..." + text;
-            }
-            text = TrimEndToWord(text);
-            List<char> terminatorCharacters = MainTerminatorCharacters();
-            if (!terminatorCharacters.Contains(text[text.Length - 1]))
-            {
-                text = text + "...";
-            }
-            terminatorCharacters = AdditionalTerminatorCharacters();
-            if (terminatorCharacters.Contains(text[text.Length - 4]))
-            {
-                text = text.Substring(0, text.Length - 4) + "...";
-            }
+            text = TrimEndToWord(text, false);
             return text;
         }
 
@@ -188,7 +211,7 @@
 
                 String[] textArray = text.Split('|');
 
-                textArray[0] = TrimEndToWord(textArray[0]);
+                textArray[0] = TrimEndToWord(textArray[0], true);
                 for (var i = 0; i < textArray.Length - 1; i++)
                 {
                     textArray[i] = TrimBothEndsToWord(textArray[i]);
