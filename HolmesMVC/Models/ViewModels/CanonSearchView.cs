@@ -121,7 +121,8 @@
 
         private string TrimEndToWord(string text, bool blockEllipsis)
         {
-            var rT = new string(text.Reverse().ToArray());
+            var rT = text;
+            rT = new string(rT.Reverse().ToArray());
             rT = TrimStartToWord(rT, true, false);
             text = new string(rT.Reverse().ToArray());
 
@@ -143,7 +144,9 @@
 
         private string TrimStartToWord(string text, bool reversed, bool forceEllipsis)
         {
-            List<char> terminatorCharacters = MainTerminatorCharacters();
+            List<char> terminatorCharacters = new List<char>();
+            terminatorCharacters.AddRange(MainTerminatorCharacters());
+
             var ellipsis = forceEllipsis;
 
             if (reversed)
@@ -229,7 +232,8 @@
                 text = text.Substring(startOfKeyword - excerptBufferSize, text.Length - (startOfKeyword - excerptBufferSize));
             }
 
-            string reverseText = new string(text.Reverse().ToArray());
+            string reverseText = text;
+            reverseText = new string(reverseText.Reverse().ToArray());
             endPattern = new string(endPattern.Reverse().ToArray());
             int endOfKeyword = text.Length - (reverseText.IndexOf(endPattern));
             if (text.Length > endOfKeyword + excerptBufferSize)
@@ -270,7 +274,8 @@
                 {
                     xmlDoc = XDocument.Load(storyUrl);
 
-                    var reverseQuery = new string(query.Reverse().ToArray());
+                    string reverseQuery = query;
+                    reverseQuery = new string(reverseQuery.Reverse().ToArray());
                     if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
                     {
                         query = query.Replace("\"", String.Empty);
