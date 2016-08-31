@@ -25,7 +25,7 @@
                                        RegexOptions.IgnoreCase));
 
     }
-    
+
     private string TrimEndToWord(string text)
     {
         var rT = new string(text.Reverse().ToArray());
@@ -33,7 +33,7 @@
         text = new string(rT.Reverse().ToArray());
         return text;
     }
-    
+
     private string TrimStartToWord(string text)
     {
         List<char> terminatorCharacters = new List<char>();
@@ -48,13 +48,15 @@
         terminatorCharacters.Add('"');
         terminatorCharacters.Add('\'');
         terminatorCharacters.Add('-');
-        
-        foreach (char c in terminatorCharacters) {
-            if (text.IndexOf(c) == 0) {
+
+        foreach (char c in terminatorCharacters)
+        {
+            if (text.IndexOf(c) == 0)
+            {
                 return text;
             }
         }
-        
+
         if (text.IndexOf(" ") != 0)
         {
             text = text.Substring(text.IndexOf(' ') + 1, text.Length - (text.IndexOf(' ') + 1));
@@ -78,7 +80,7 @@
 
             string excerptingPattern = endPattern + "(.{0," + bufferSize + "})(.{" + bufferSize * 2 + ",9999}?)(.{0," + bufferSize + "})" + startPattern;
             text = Regex.Replace(text, excerptingPattern, endPattern + "$1" + "|" + "$3" + startPattern);
-            
+
             // Trim the raw edges of the cuts to nearest word-ending
 
             String[] textArray = text.Split('|');
@@ -93,7 +95,7 @@
 
             text = string.Join("<br /><br />", textArray);
         }
-        
+
         // Trim ends down to within proximity of the keywords
 
         int startOfKeyword = text.IndexOf(startPattern);
@@ -109,12 +111,12 @@
         {
             text = text.Substring(0, endOfKeyword + bufferSize);
         }
-        
+
         // Trim down to nearest word-ending
 
         text = TrimStartToWord(text);
         text = TrimEndToWord(text);
-        
+
         return text;
     }
 }
@@ -122,53 +124,72 @@
 
 @model HolmesMVC.Models.ViewModels.CanonSearchView
 
-@if (string.IsNullOrEmpty(Model.Query)) {
-    ViewBag.Title = "Canon Search";
-    <text>no query</text>
-    
-} else {
-    
-if (Model.Query.IndexOf('"') > -1) {
-    ViewBag.Title = "Canon Search for " + Model.Query;
-} else {
-    ViewBag.Title = "Canon Search for '" + Model.Query + "'";
-}
-
-<h2 class="detailscategory">@ViewBag.Title</h2>
-
-<br /><br />
-
-HolmesMVC.Models.Story previousStory = null;
-
-foreach (var node in Model.Nodes.OrderBy(n => n.Story.Episodes.First().Airdate))
+@if (string.IsNullOrEmpty(Model.Query))
 {
-    if (previousStory != null && node.Story.ID != previousStory.ID)
+    ViewBag.Title = "Canon Search";
+
+}
+else
+{
+
+    if (Model.Query.IndexOf('"') > -1)
     {
-        <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br /><br /><hr /><br />
-    }
-    
-    int excerptBufferSize = 40;
-    string excerptHighlightColour = "yellow";
-    
-    string highlightedSnippet;
-    
-    if (Model.Query.IndexOf('"') > -1) {
-        highlightedSnippet = HighlightKeyWords(node.Snippet, Model.Query.Replace("\"", String.Empty), excerptHighlightColour);
+        ViewBag.Title = "Canon Search for " + Model.Query;
     }
     else
     {
-        highlightedSnippet = HighlightKeyWords(node.Snippet, Model.Query.Replace(' ', ','), excerptHighlightColour);
+        ViewBag.Title = "Canon Search for '" + Model.Query + "'";
     }
-
-    string excerptedSnippet = ExcerptText(highlightedSnippet, excerptBufferSize, excerptHighlightColour);
-    
-    @Html.Raw(excerptedSnippet)<br /><br />
-    
-    previousStory = node.Story;
-        
 }
+
+<h2 class="detailscategory">@ViewBag.Title</h2>
+<form action="/Canon/Search/">
+    <input type="text" name="query" />
+    <input type="submit" value="Search" />
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Query))
+{
+    <br />
+
+    HolmesMVC.Models.Story previousStory = null;
+
+    foreach (var node in Model.Nodes.OrderBy(n => n.Story.Episodes.First().Airdate))
+    {
+        if (previousStory != null && node.Story.ID != previousStory.ID)
+        {
+    <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br />
+    <br />
+    <hr />
+    <br />
+        }
+
+        int excerptBufferSize = 40;
+        string excerptHighlightColour = "yellow";
+
+        string highlightedSnippet;
+
+        if (Model.Query.IndexOf('"') > -1)
+        {
+            highlightedSnippet = HighlightKeyWords(node.Snippet, Model.Query.Replace("\"", String.Empty), excerptHighlightColour);
+        }
+        else
+        {
+            highlightedSnippet = HighlightKeyWords(node.Snippet, Model.Query.Replace(' ', ','), excerptHighlightColour);
+        }
+
+        string excerptedSnippet = ExcerptText(highlightedSnippet, excerptBufferSize, excerptHighlightColour);
+    
+    @Html.Raw(excerptedSnippet)<br />
+    <br />
+    
+        previousStory = node.Story;
+
+    }
     if (previousStory != null)
     {
-        <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br /><br /><br />
+    <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br />
+    <br />
+    <br />
     }
 }
