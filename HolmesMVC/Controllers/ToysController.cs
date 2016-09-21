@@ -245,6 +245,25 @@
 
         public ViewResult Scraps()
         {
+            // How about an expansion of the HolmesNum to generate a network?
+            // Inspired by talking to Ian Rennie about connections between Holmeses
+            // 'here's one for you: Jeremy Brett was in Mad Dogs And Englishmen with C Thomas Howell, who was in the show Smith with JLM.'
+
+            // Colour code the links for closeness, rather than showing the intermediate non-Holmes actors
+            // Make it so you can click on one to see the details
+            // I'm envisaging something like the navigation map on my tablet for Elite Dangerous star charts
+            // The links are the important thing, not the layout. Is there a library to make them fit on the page / bounce around until they fit?
+
+            // This is going to be computation heavy, so store the links in a new database table and have a recalculate action you can call on demand
+            // e.g. when you've added someone new
+            // Initially might need to make a few links by hand and work on the display / on the network drawing
+            // then we can think about using the Bacon code to generate links
+
+            // Perhaps two views: closeness of net, and chronological...ness, which means we'll need dates on the links
+            // They'll be similar but not identical: actors have to both be alive, to appear together
+            // (unless they are Basil Rathbone who managed to be in TGMD anyway)
+            // Basically we're looking to chase back the lineage of the character into the very early days of film
+
             var model = new ScrapsView { };
 
             return View(model);
