@@ -1,0 +1,36 @@
+﻿@model HolmesMVC.Models.HolmesLink
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>HolmesLink</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Airdate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Airdate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AirdatePrecision)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AirdatePrecision)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
