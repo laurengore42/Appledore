@@ -231,6 +231,14 @@
     <Compile Include="Migrations\201608101140092_null latlng is OK.Designer.cs">
       <DependentUpon>201608101140092_null latlng is OK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.cs" />
+    <Compile Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.Designer.cs">
+      <DependentUpon>201609220841199_HolmesLink and HolmesLinkAppearance table add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HolmesLink.cs" />
+    <Compile Include="Models\HolmesLinkAppearance.cs" />
+    <Compile Include="Models\Mapping\HolmesLinkAppearanceMap.cs" />
+    <Compile Include="Models\Mapping\HolmesLinkMap.cs" />
     <Compile Include="Models\ViewModels\CanonSearchView.cs" />
     <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ScrapsView.cs" />
@@ -1356,6 +1364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608101140092_null latlng is OK.resx">
       <DependentUpon>201608101140092_null latlng is OK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.resx">
+      <DependentUpon>201609220841199_HolmesLink and HolmesLinkAppearance table add.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
