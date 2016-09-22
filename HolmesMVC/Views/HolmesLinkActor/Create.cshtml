@@ -1,4 +1,4 @@
-﻿@model HolmesMVC.Models.HolmesLinkAppearance
+﻿@model HolmesMVC.Models.HolmesLinkActor
 
 @{
     ViewBag.Title = "Create";
@@ -11,22 +11,22 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>HolmesLinkAppearance</legend>
+        <legend>HolmesLinkActor</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.HolmesLinkActor)
+            @Html.LabelFor(model => model.Actor)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.HolmesLinkActor)
-            @Html.ValidationMessageFor(model => model.HolmesLinkActor)
+            @Html.EditorFor(model => model.Actor)
+            @Html.ValidationMessageFor(model => model.Actor)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.HolmesLink)
+            @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.HolmesLink)
-            @Html.ValidationMessageFor(model => model.HolmesLink)
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
 
         <p>

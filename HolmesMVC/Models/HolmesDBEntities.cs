@@ -62,5 +62,7 @@ namespace HolmesMVC.Models
         public DbSet<HolmesLink> HolmesLinks { get; set; }
 
         public DbSet<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
+
+        public DbSet<HolmesLinkActor> HolmesLinkActors { get; set; }
     }
 }
