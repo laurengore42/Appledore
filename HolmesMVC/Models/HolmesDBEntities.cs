@@ -30,6 +30,9 @@ namespace HolmesMVC.Models
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Species> Species { get; set; }
         public DbSet<Story> Stories { get; set; }
+        public DbSet<HolmesLink> HolmesLinks { get; set; }
+        public DbSet<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
+        public DbSet<HolmesLinkActor> HolmesLinkActors { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
@@ -52,17 +55,14 @@ namespace HolmesMVC.Models
             modelBuilder.Configurations.Add(new SeasonMap());
             modelBuilder.Configurations.Add(new SpeciesMap());
             modelBuilder.Configurations.Add(new StoryMap());
+            modelBuilder.Configurations.Add(new HolmesLinkMap());
+            modelBuilder.Configurations.Add(new HolmesLinkAppearanceMap());
+            modelBuilder.Configurations.Add(new HolmesLinkActorMap());
             modelBuilder.Configurations.Add(new UserProfileMap());
             modelBuilder.Configurations.Add(new webpages_MembershipMap());
             modelBuilder.Configurations.Add(new webpages_OAuthMembershipMap());
             modelBuilder.Configurations.Add(new webpages_RolesMap());
             modelBuilder.Configurations.Add(new webpages_UsersInRolesMap());
         }
-
-        public DbSet<HolmesLink> HolmesLinks { get; set; }
-
-        public DbSet<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
-
-        public DbSet<HolmesLinkActor> HolmesLinkActors { get; set; }
     }
 }

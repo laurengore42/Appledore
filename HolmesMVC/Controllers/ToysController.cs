@@ -264,7 +264,7 @@
             // (unless they are Basil Rathbone who managed to be in TGMD anyway)
             // Basically we're looking to chase back the lineage of the character into the very early days of film
 
-            var model = new ScrapsView { };
+            var model = new ScrapsView { HolmesLinks = Db.HolmesLinks.ToList() };
 
             return View(model);
         }
