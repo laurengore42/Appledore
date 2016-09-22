@@ -15,7 +15,13 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Airdate).HasColumnName("Airdate");
             this.Property(t => t.Title).HasColumnName("Title");
+            this.Property(t => t.Episode).HasColumnName("Episode");
             this.Property(t => t.AirdatePrecision).HasColumnName("AirdatePrecision");
+
+            // Relationships
+            this.HasOptional(t => t.Episode1)
+                .WithMany(t => t.HolmesLinks)
+                .HasForeignKey(d => d.Episode);
         }
     }
 }
