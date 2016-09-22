@@ -58,5 +58,9 @@ namespace HolmesMVC.Models
             modelBuilder.Configurations.Add(new webpages_RolesMap());
             modelBuilder.Configurations.Add(new webpages_UsersInRolesMap());
         }
+
+        public DbSet<HolmesLink> HolmesLinks { get; set; }
+
+        public DbSet<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
     }
 }

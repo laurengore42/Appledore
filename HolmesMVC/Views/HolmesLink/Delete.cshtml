@@ -1,0 +1,40 @@
+﻿@model HolmesMVC.Models.HolmesLink
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>HolmesLink</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Airdate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Airdate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AirdatePrecision)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AirdatePrecision)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

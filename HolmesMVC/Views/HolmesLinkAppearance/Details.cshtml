@@ -1,0 +1,29 @@
+﻿@model HolmesMVC.Models.HolmesLinkAppearance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>HolmesLinkAppearance</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Actor)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Actor)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HolmesLink)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HolmesLink)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
