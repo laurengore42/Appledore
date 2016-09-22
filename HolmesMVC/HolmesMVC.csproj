@@ -246,6 +246,10 @@
     <Compile Include="Migrations\201609222237251_HolmesLink episode link.Designer.cs">
       <DependentUpon>201609222237251_HolmesLink episode link.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609222245222_HolmesLink airdate nullable for when taken from Episode.cs" />
+    <Compile Include="Migrations\201609222245222_HolmesLink airdate nullable for when taken from Episode.Designer.cs">
+      <DependentUpon>201609222245222_HolmesLink airdate nullable for when taken from Episode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
@@ -1401,6 +1405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609222237251_HolmesLink episode link.resx">
       <DependentUpon>201609222237251_HolmesLink episode link.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609222245222_HolmesLink airdate nullable for when taken from Episode.resx">
+      <DependentUpon>201609222245222_HolmesLink airdate nullable for when taken from Episode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
