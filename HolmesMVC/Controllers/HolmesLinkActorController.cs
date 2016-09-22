@@ -9,31 +9,32 @@ using HolmesMVC.Models;
 
 namespace HolmesMVC.Controllers
 {
-    public class HolmesLinkController : HolmesDbController
+    public class HolmesLinkActorController : HolmesDbController
     {
+
         //
-        // GET: /HolmesLink/
+        // GET: /HolmesLinkActor/
 
         public ActionResult Index()
         {
-            return View(Db.HolmesLinks.ToList());
+            return View(Db.HolmesLinkActors.ToList());
         }
 
         //
-        // GET: /HolmesLink/Details/5
+        // GET: /HolmesLinkActor/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            HolmesLink holmeslink = Db.HolmesLinks.Find(id);
-            if (holmeslink == null)
+            HolmesLinkActor holmeslinkactor = Db.HolmesLinkActors.Find(id);
+            if (holmeslinkactor == null)
             {
                 return HttpNotFound();
             }
-            return View(holmeslink);
+            return View(holmeslinkactor);
         }
 
         //
-        // GET: /HolmesLink/Create
+        // GET: /HolmesLinkActor/Create
 
         public ActionResult Create()
         {
@@ -41,73 +42,73 @@ namespace HolmesMVC.Controllers
         }
 
         //
-        // POST: /HolmesLink/Create
+        // POST: /HolmesLinkActor/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HolmesLink holmeslink)
+        public ActionResult Create(HolmesLinkActor holmeslinkactor)
         {
             if (ModelState.IsValid)
             {
-                Db.HolmesLinks.Add(holmeslink);
+                Db.HolmesLinkActors.Add(holmeslinkactor);
                 Db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(holmeslink);
+            return View(holmeslinkactor);
         }
 
         //
-        // GET: /HolmesLink/Edit/5
+        // GET: /HolmesLinkActor/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            HolmesLink holmeslink = Db.HolmesLinks.Find(id);
-            if (holmeslink == null)
+            HolmesLinkActor holmeslinkactor = Db.HolmesLinkActors.Find(id);
+            if (holmeslinkactor == null)
             {
                 return HttpNotFound();
             }
-            return View(holmeslink);
+            return View(holmeslinkactor);
         }
 
         //
-        // POST: /HolmesLink/Edit/5
+        // POST: /HolmesLinkActor/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HolmesLink holmeslink)
+        public ActionResult Edit(HolmesLinkActor holmeslinkactor)
         {
             if (ModelState.IsValid)
             {
-                Db.Entry(holmeslink).State = EntityState.Modified;
+                Db.Entry(holmeslinkactor).State = EntityState.Modified;
                 Db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(holmeslink);
+            return View(holmeslinkactor);
         }
 
         //
-        // GET: /HolmesLink/Delete/5
+        // GET: /HolmesLinkActor/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            HolmesLink holmeslink = Db.HolmesLinks.Find(id);
-            if (holmeslink == null)
+            HolmesLinkActor holmeslinkactor = Db.HolmesLinkActors.Find(id);
+            if (holmeslinkactor == null)
             {
                 return HttpNotFound();
             }
-            return View(holmeslink);
+            return View(holmeslinkactor);
         }
 
         //
-        // POST: /HolmesLink/Delete/5
+        // POST: /HolmesLinkActor/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            HolmesLink holmeslink = Db.HolmesLinks.Find(id);
-            Db.HolmesLinks.Remove(holmeslink);
+            HolmesLinkActor holmeslinkactor = Db.HolmesLinkActors.Find(id);
+            Db.HolmesLinkActors.Remove(holmeslinkactor);
             Db.SaveChanges();
             return RedirectToAction("Index");
         }

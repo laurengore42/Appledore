@@ -11,8 +11,8 @@ namespace HolmesMVC.Models
     {
         public Actor()
         {
+            this.HolmesLinkActors = new List<HolmesLinkActor>();
             this.Appearances = new List<Appearance>();
-            this.HolmesLinkAppearances = new List<HolmesLinkAppearance>();
             this.Renames = new List<Rename>();
         }
 
@@ -37,8 +37,8 @@ namespace HolmesMVC.Models
         public int DeathdatePrecision { get; set; }
         public virtual Gender Gender1 { get; set; }
         public virtual Species Species1 { get; set; }
+        public virtual ICollection<HolmesLinkActor> HolmesLinkActors { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
-        public virtual ICollection<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }
 
         public string SyncBirthplace()

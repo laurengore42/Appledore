@@ -12,15 +12,15 @@ namespace HolmesMVC.Models.Mapping
 
             // Properties
             // Table & Column Mappings
-            this.ToTable("Appearances");
+            this.ToTable("HolmesLinkAppearances");
             this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Actor).HasColumnName("Actor");
+            this.Property(t => t.HolmesLinkActor).HasColumnName("HolmesLinkActor");
             this.Property(t => t.HolmesLink).HasColumnName("HolmesLink");
 
             // Relationships
-            this.HasRequired(t => t.Actor1)
+            this.HasRequired(t => t.HolmesLinkActor1)
                 .WithMany(t => t.HolmesLinkAppearances)
-                .HasForeignKey(d => d.Actor);
+                .HasForeignKey(d => d.HolmesLinkActor);
             this.HasRequired(t => t.HolmesLink1)
                 .WithMany(t => t.HolmesLinkAppearances)
                 .HasForeignKey(d => d.HolmesLink);

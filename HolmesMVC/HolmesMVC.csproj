@@ -194,8 +194,6 @@
     <Compile Include="Controllers\AppearanceController.cs" />
     <Compile Include="Controllers\CanonController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
-    <Compile Include="Controllers\HolmesLinkAppearanceController.cs" />
-    <Compile Include="Controllers\HolmesLinkController.cs" />
     <Compile Include="Controllers\ToysController.cs" />
     <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -237,8 +235,10 @@
     <Compile Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.Designer.cs">
       <DependentUpon>201609220841199_HolmesLink and HolmesLinkAppearance table add.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
+    <Compile Include="Models\Mapping\HolmesLinkActorMap.cs" />
     <Compile Include="Models\Mapping\HolmesLinkAppearanceMap.cs" />
     <Compile Include="Models\Mapping\HolmesLinkMap.cs" />
     <Compile Include="Models\ViewModels\CanonSearchView.cs" />
@@ -1257,16 +1257,6 @@
     <Content Include="Views\Toys\PhotoCollageToy.cshtml" />
     <Content Include="Views\Toys\MapPinToy.cshtml" />
     <Content Include="Views\Canon\Search.cshtml" />
-    <Content Include="Views\HolmesLink\Index.cshtml" />
-    <Content Include="Views\HolmesLink\Details.cshtml" />
-    <Content Include="Views\HolmesLink\Create.cshtml" />
-    <Content Include="Views\HolmesLink\Edit.cshtml" />
-    <Content Include="Views\HolmesLink\Delete.cshtml" />
-    <Content Include="Views\HolmesLinkAppearance\Index.cshtml" />
-    <Content Include="Views\HolmesLinkAppearance\Details.cshtml" />
-    <Content Include="Views\HolmesLinkAppearance\Create.cshtml" />
-    <Content Include="Views\HolmesLinkAppearance\Edit.cshtml" />
-    <Content Include="Views\HolmesLinkAppearance\Delete.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
