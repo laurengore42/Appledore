@@ -194,6 +194,9 @@
     <Compile Include="Controllers\AppearanceController.cs" />
     <Compile Include="Controllers\CanonController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\HolmesLinkActorController.cs" />
+    <Compile Include="Controllers\HolmesLinkAppearanceController.cs" />
+    <Compile Include="Controllers\HolmesLinkController.cs" />
     <Compile Include="Controllers\ToysController.cs" />
     <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -234,6 +237,10 @@
     <Compile Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.cs" />
     <Compile Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.Designer.cs">
       <DependentUpon>201609220841199_HolmesLink and HolmesLinkAppearance table add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609222144363_HolmesLink with proper actors.cs" />
+    <Compile Include="Migrations\201609222144363_HolmesLink with proper actors.Designer.cs">
+      <DependentUpon>201609222144363_HolmesLink with proper actors.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
@@ -1257,6 +1264,21 @@
     <Content Include="Views\Toys\PhotoCollageToy.cshtml" />
     <Content Include="Views\Toys\MapPinToy.cshtml" />
     <Content Include="Views\Canon\Search.cshtml" />
+    <Content Include="Views\HolmesLink\Index.cshtml" />
+    <Content Include="Views\HolmesLink\Details.cshtml" />
+    <Content Include="Views\HolmesLink\Create.cshtml" />
+    <Content Include="Views\HolmesLink\Edit.cshtml" />
+    <Content Include="Views\HolmesLink\Delete.cshtml" />
+    <Content Include="Views\HolmesLinkActor\Index.cshtml" />
+    <Content Include="Views\HolmesLinkActor\Details.cshtml" />
+    <Content Include="Views\HolmesLinkActor\Create.cshtml" />
+    <Content Include="Views\HolmesLinkActor\Edit.cshtml" />
+    <Content Include="Views\HolmesLinkActor\Delete.cshtml" />
+    <Content Include="Views\HolmesLinkAppearance\Index.cshtml" />
+    <Content Include="Views\HolmesLinkAppearance\Details.cshtml" />
+    <Content Include="Views\HolmesLinkAppearance\Create.cshtml" />
+    <Content Include="Views\HolmesLinkAppearance\Edit.cshtml" />
+    <Content Include="Views\HolmesLinkAppearance\Delete.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -1369,6 +1391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609220841199_HolmesLink and HolmesLinkAppearance table add.resx">
       <DependentUpon>201609220841199_HolmesLink and HolmesLinkAppearance table add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609222144363_HolmesLink with proper actors.resx">
+      <DependentUpon>201609222144363_HolmesLink with proper actors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
