@@ -1,4 +1,6 @@
-﻿@model HolmesMVC.Models.HolmesLink
+﻿@using HolmesMVC.Enums
+
+@model HolmesMVC.Models.HolmesLink
 
 @{
     ViewBag.Title = "Create";
@@ -14,10 +16,28 @@
         <legend>HolmesLink</legend>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.Episode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Episode)
+            @Html.ValidationMessageFor(model => model.Episode)
+        </div>
+        
+        <div class="editor-label">
             @Html.LabelFor(model => model.Airdate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Airdate)
+            @Html.EditorFor(model => model.Airdate, "Date")
+            <select name="AirdatePrecision">
+                <option value="@((int)DatePrecision.Full)" @if (Model != null && Model.AirdatePrecision == (int)DatePrecision.Full)
+                                  {<text>selected</text>}>Full precision</option>
+                <option value="@((int)DatePrecision.Month)" @if (Model != null && Model.AirdatePrecision == (int)DatePrecision.Month)
+                                  {<text>selected</text>}>Accurate to month</option>
+                <option value="@((int)DatePrecision.Season)" @if (Model != null && Model.AirdatePrecision == (int)DatePrecision.Season)
+                                  {<text>selected</text>}>Accurate to season</option>
+                <option value="@((int)DatePrecision.Year)" @if (Model != null && Model.AirdatePrecision == (int)DatePrecision.Year)
+                                  {<text>selected</text>}>Accurate to year</option>
+            </select>
             @Html.ValidationMessageFor(model => model.Airdate)
         </div>
 
@@ -27,14 +47,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Title)
             @Html.ValidationMessageFor(model => model.Title)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AirdatePrecision)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AirdatePrecision)
-            @Html.ValidationMessageFor(model => model.AirdatePrecision)
         </div>
 
         <p>

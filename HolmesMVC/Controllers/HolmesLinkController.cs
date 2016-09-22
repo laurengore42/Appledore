@@ -11,6 +11,7 @@ namespace HolmesMVC.Controllers
 {
     public class HolmesLinkController : HolmesDbController
     {
+
         //
         // GET: /HolmesLink/
 
