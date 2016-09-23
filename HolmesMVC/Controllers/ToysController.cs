@@ -254,6 +254,8 @@
             // I'm envisaging something like the navigation map on my tablet for Elite Dangerous star charts
             // The links are the important thing, not the layout. Is there a library to make them fit on the page / bounce around until they fit?
 
+            // // Answer: yes there is, check out d3.js http://bl.ocks.org/mbostock/4062045 and Dracula https://www.graphdracula.net/
+
             // This is going to be computation heavy, so store the links in a new database table and have a recalculate action you can call on demand
             // e.g. when you've added someone new
             // Initially might need to make a few links by hand and work on the display / on the network drawing
