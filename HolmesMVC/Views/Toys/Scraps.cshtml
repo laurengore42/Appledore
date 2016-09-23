@@ -10,22 +10,22 @@
     <h2>@ViewBag.Title</h2>
 </div>
 
-@section Scripts {
 
     <ul>
     @foreach (var link in Model.HolmesLinks) {
         <li>
-        if (link.Episode1 != null)
+        @if (link.Episode != null)
         {
-            @Shared.DisplayName(link.Episode1)
+            @Shared.DisplayName(link.Episode1)<text> </text>@link.Episode1.Airdate.ToShortDateString()
         } else {
-            @link.Title
+            DateTime date = (DateTime)link.Airdate;
+            @link.Title<text> </text>@date.ToShortDateString()
         }
         : 
         @foreach (var app in link.HolmesLinkAppearances) {
-            if (app.HolmesLinkActor1 != null) 
+            if (app.HolmesLinkActor1.Actor1 != null) 
             {
-                @Shared.DisplayName(app.HolmesLinkActor1.Actor1)
+                @Shared.ShortName(app.HolmesLinkActor1.Actor1)
             } else {
                 @app.HolmesLinkActor1.Name
             }
@@ -35,4 +35,5 @@
     }
         </ul>
 
+@section Scripts {
 }
