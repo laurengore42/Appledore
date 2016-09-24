@@ -347,6 +347,7 @@
 
                         if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
                         {
+                            linkList.Add("{\"source\": \"" + act.ID + "\", \"target\": \"" + linkedActor.ID + "\", \"value\": 5}");
                         }
                     }
                 }
