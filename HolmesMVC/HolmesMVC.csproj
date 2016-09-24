@@ -1084,6 +1084,9 @@
     <Content Include="Scripts\Apdore-googlemaps.js" />
     <Content Include="Scripts\Apdore-StoryDetails.js" />
     <Content Include="Scripts\Apdore-multitimeline.js" />
+    <Content Include="Scripts\graffle.js" />
+    <Content Include="Scripts\graph.js" />
+    <Content Include="Scripts\raphael-min.js" />
     <Content Include="Services\Stories\3GAB.xml" />
     <Content Include="Services\Stories\3GAR.xml" />
     <Content Include="Services\Stories\3STU.xml" />

@@ -1,4 +1,5 @@
 ﻿@using HolmesMVC
+@using HolmesMVC.Models
 @using HolmesMVC.Models.ViewModels
 @model ScrapsView
 
@@ -6,27 +7,91 @@
     ViewBag.Title = "Scraps";    
 }
 
-<div id="body">
     <h2>@ViewBag.Title</h2>
-</div>
 
+    
+    <div id="canvas"></div>
+        
+    <script>
 
+    var redraw;
+    var height = 1000;
+    var width = 1000;
+
+    /* only do all this when document has finished loading (needed for RaphaelJS */
+    window.onload = function() {
+
+        var g = new Graph();
+
+        @{
+            string[] blockedNames = { } ;
+            
+            foreach (HolmesLinkActor act in Model.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
+            {
+                var myName = act.Name;
+                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
+                {
+                    myName = Shared.ShortName(act.Actor1);
+                }
+                foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink1).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
+                {
+                    if (linkedActor.ID > act.ID) {
+                        var theirName = linkedActor.Name;
+                            if (string.IsNullOrEmpty(theirName) && linkedActor.Actor1 != null) {
+                                theirName = Shared.ShortName(linkedActor.Actor1);
+                            }
+                        
+                        if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName)) {
+                        
+                        <text>
+        g.addEdge("@myName", "@theirName");
+        </text>
+                    }
+                    }
+                }
+                    
+            }            
+            }
+
+        /* layout the graph using the Spring layout implementation */
+        var layouter = new Graph.Layout.Spring(g);
+        layouter.layout();
+    
+        /* draw the graph using the RaphaelJS draw implementation */
+        var renderer = new Graph.Renderer.Raphael('canvas', g, width, height);
+        renderer.draw();
+    
+        redraw = function() {
+            layouter.layout();
+            renderer.draw();
+        };
+    };
+
+        </script>
+
+    <div id="list">
     <ul>
-    @foreach (var link in Model.HolmesLinks) {
+    @foreach (var link in Model.HolmesLinks)
+    {
         <li>
         @if (link.Episode != null)
         {
             @Shared.DisplayName(link.Episode1)<text> </text>@link.Episode1.Airdate.ToShortDateString()
-        } else {
+        }
+        else
+        {
             DateTime date = (DateTime)link.Airdate;
             @link.Title<text> </text>@date.ToShortDateString()
         }
         : 
-        @foreach (var app in link.HolmesLinkAppearances) {
-            if (app.HolmesLinkActor1.Actor1 != null) 
+        @foreach (var app in link.HolmesLinkAppearances)
+        {
+            if (app.HolmesLinkActor1.Actor1 != null)
             {
                 @Shared.ShortName(app.HolmesLinkActor1.Actor1)
-            } else {
+            }
+            else
+            {
                 @app.HolmesLinkActor1.Name
             }
             <text> and </text>
@@ -34,6 +99,12 @@
             </li>
     }
         </ul>
+        </div>
 
 @section Scripts {
+    
+    <script type="text/javascript" src="/Scripts/raphael-min.js"></script>
+    <script type="text/javascript" src="/Scripts/graffle.js"></script>
+    <script type="text/javascript" src="/Scripts/graph.js"></script>
+
 }
