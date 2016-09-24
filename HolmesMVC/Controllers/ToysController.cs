@@ -245,6 +245,9 @@
 
         public ViewResult Scraps()
         {
+            var holmesID = Shared.GetHolmes();
+            var watsonID = Shared.GetWatson();
+            
             // How about an expansion of the HolmesNum to generate a network?
             // Inspired by talking to Ian Rennie about connections between Holmeses
             // 'here's one for you: Jeremy Brett was in Mad Dogs And Englishmen with C Thomas Howell, who was in the show Smith with JLM.'
@@ -270,7 +273,21 @@
 
             var nodeList = new List<string>();
 
-            foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
+            var holmesActors = Db.Actors.Where(a => a.Appearances.Where(ap => ap.Character == holmesID).Any()).ToList();
+            var holmesLinkActors = Db.HolmesLinkActors.ToList();
+
+            foreach (var h in holmesActors)
+            {
+                if (!holmesLinkActors.Where(hla => hla.Actor == h.ID).Any())
+                {
+                    var newHLA = new HolmesLinkActor();
+                    newHLA.Actor = h.ID;
+                    Db.HolmesLinkActors.Add(newHLA);
+                }
+            }
+            Db.SaveChanges();
+
+            foreach (HolmesLinkActor act in holmesLinkActors)
             {
                 var myName = act.Name;
                 if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
@@ -283,8 +300,6 @@
                 int appledoreActorID = act.Actor ?? 0;
                 if (appledoreActorID > 0)
                 {
-                    var holmesID = Shared.GetHolmes();
-                    var watsonID = Shared.GetWatson();
                     if (Db.Appearances.Where(app => app.Actor == appledoreActorID).Where(app => app.Character == holmesID).Any())
                     {
                         playedHolmes = true;
@@ -307,7 +322,7 @@
 
                 if (!blockedNames.Contains(myName))
                 {
-                    nodeList.Add("{\"id\": \"" + myName + "\", \"group\": " + groupID + "}");
+                    nodeList.Add("{\"id\": \"" + act.ID + "\", \"name\": \"" + myName.Replace("'","") + "\", \"group\": " + groupID + "}");
                 }
             }
 
@@ -332,7 +347,6 @@
 
                         if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
                         {
-                            linkList.Add("{\"source\": \"" + myName + "\", \"target\": \"" + theirName + "\", \"value\": 2}");
                         }
                     }
                 }
