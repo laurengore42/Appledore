@@ -277,9 +277,37 @@
                 {
                     myName = Shared.ShortName(act.Actor1);
                 }
+
+                var playedHolmes = false;
+                var playedWatson = false;
+                int appledoreActorID = act.Actor ?? 0;
+                if (appledoreActorID > 0)
+                {
+                    var holmesID = Shared.GetHolmes();
+                    var watsonID = Shared.GetWatson();
+                    if (Db.Appearances.Where(app => app.Actor == appledoreActorID).Where(app => app.Character == holmesID).Any())
+                    {
+                        playedHolmes = true;
+                    }
+                    else if (Db.Appearances.Where(app => app.Actor == appledoreActorID).Where(app => app.Character == watsonID).Any())
+                    {
+                        playedWatson = true;
+                    }
+                }
+
+                var groupID = 3;
+                if (playedWatson)
+                {
+                    groupID = 2;
+                }
+                if (playedHolmes)
+                {
+                    groupID = 1;
+                }
+
                 if (!blockedNames.Contains(myName))
                 {
-                    nodeList.Add("{\"id\": \"" + myName + "\", \"group\": 1}");
+                    nodeList.Add("{\"id\": \"" + myName + "\", \"group\": " + groupID + "}");
                 }
             }
 
