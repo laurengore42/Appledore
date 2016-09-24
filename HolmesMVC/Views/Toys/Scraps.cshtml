@@ -4,14 +4,10 @@
 @model ScrapsView
 
 @{
-    ViewBag.Title = "Scraps";    
+    ViewBag.Title = "Scraps";
 }
 
     <h2>@ViewBag.Title</h2>
-
-        @{
-            string[] blockedNames = { } ;
-            }
 
 <h2>d3.js Force Directed</h2>
 <!-- Credit to http://bl.ocks.org/mbostock/4062045 -->
@@ -31,6 +27,10 @@
 </style>
 
 <svg width="960" height="600"></svg>
+
+@section Scripts {
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    
 <script>
 
     function ticked() {
@@ -73,48 +73,7 @@
         .force("charge", d3.forceManyBody())
         .force("center", d3.forceCenter(width / 2, height / 2));
 
-    @{ var nodeList = new List<string>(); }
-    
-    @foreach (HolmesLinkActor act in Model.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
-            {
-                var myName = act.Name;
-                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
-                {
-                    myName = Shared.ShortName(act.Actor1);
-                }
-            if (!blockedNames.Contains(myName)) {
-                nodeList.Add("{\"id\": \"" + myName + "\", \"group\": 1}");
-            }
-        }
-
-    @{ var linkList = new List<string>(); }
-
-    @foreach (HolmesLinkActor act in Model.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
-            {
-                var myName = act.Name;
-                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
-                {
-                    myName = Shared.ShortName(act.Actor1);
-                }
-                foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink1).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
-                {
-                    if (linkedActor.ID > act.ID) {
-                        var theirName = linkedActor.Name;
-                            if (string.IsNullOrEmpty(theirName) && linkedActor.Actor1 != null) {
-                                theirName = Shared.ShortName(linkedActor.Actor1);
-                            }
-
-                            if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
-                            {
-                                linkList.Add("{\"source\": \""+myName+"\", \"target\": \""+theirName+"\", \"value\": 2}");
-                            }
-                    }
-                }
-            }
-
-    @{ var jsonString = "{ \"nodes\" : [ " + string.Join(", ", nodeList) + " ] , \"links\" : [ " + string.Join(", ", linkList) + " ] }"; }
-
-    var myJson = '@Html.Raw(jsonString)';        
+    var myJson = '@Html.Raw(Model.HolmesLinks)';
 
     var graph = JSON.parse(myJson);
 
@@ -151,7 +110,4 @@
     });
 
 </script>
-
-@section Scripts {
-    <script src="https://d3js.org/d3.v4.min.js"></script>
 }

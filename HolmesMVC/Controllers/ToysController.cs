@@ -254,7 +254,7 @@
             // I'm envisaging something like the navigation map on my tablet for Elite Dangerous star charts
             // The links are the important thing, not the layout. Is there a library to make them fit on the page / bounce around until they fit?
 
-            // // Answer: yes there is, check out d3.js http://bl.ocks.org/mbostock/4062045 and Dracula https://www.graphdracula.net/
+            // Answer: yes there is, check out d3.js http://bl.ocks.org/mbostock/4062045
 
             // This is going to be computation heavy, so store the links in a new database table and have a recalculate action you can call on demand
             // e.g. when you've added someone new
@@ -266,7 +266,53 @@
             // (unless they are Basil Rathbone who managed to be in TGMD anyway)
             // Basically we're looking to chase back the lineage of the character into the very early days of film
 
-            var model = new ScrapsView { HolmesLinks = Db.HolmesLinks.ToList() };
+            string[] blockedNames = { };
+
+            var nodeList = new List<string>();
+
+            foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
+            {
+                var myName = act.Name;
+                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
+                {
+                    myName = Shared.ShortName(act.Actor1);
+                }
+                if (!blockedNames.Contains(myName))
+                {
+                    nodeList.Add("{\"id\": \"" + myName + "\", \"group\": 1}");
+                }
+            }
+
+            var linkList = new List<string>();
+
+            foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
+            {
+                var myName = act.Name;
+                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
+                {
+                    myName = Shared.ShortName(act.Actor1);
+                }
+                foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink1).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
+                {
+                    if (linkedActor.ID > act.ID)
+                    {
+                        var theirName = linkedActor.Name;
+                        if (string.IsNullOrEmpty(theirName) && linkedActor.Actor1 != null)
+                        {
+                            theirName = Shared.ShortName(linkedActor.Actor1);
+                        }
+
+                        if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
+                        {
+                            linkList.Add("{\"source\": \"" + myName + "\", \"target\": \"" + theirName + "\", \"value\": 2}");
+                        }
+                    }
+                }
+            }
+
+            var jsonString = "{ \"nodes\" : [ " + string.Join(", ", nodeList) + " ] , \"links\" : [ " + string.Join(", ", linkList) + " ] }";  
+
+            var model = new ScrapsView { HolmesLinks = jsonString };
 
             return View(model);
         }
