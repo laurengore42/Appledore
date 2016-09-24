@@ -4,6 +4,6 @@
 
     public class ScrapsView
     {
-        public List<HolmesLink> HolmesLinks { get; set; }
+        public string HolmesLinks { get; set; }
     }
 }
