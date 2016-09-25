@@ -269,13 +269,14 @@
             // (unless they are Basil Rathbone who managed to be in TGMD anyway)
             // Basically we're looking to chase back the lineage of the character into the very early days of film
 
-            string[] blockedNames = { };
+            string[] blockedNames = { "Nobody" };
 
             var nodeList = new List<string>();
 
             var holmesActors = Db.Actors.Where(a => a.Appearances.Where(ap => ap.Character == holmesID).Any()).ToList();
             var holmesLinkActors = Db.HolmesLinkActors.ToList();
 
+            var updated = false;
             foreach (var h in holmesActors)
             {
                 if (!holmesLinkActors.Where(hla => hla.Actor == h.ID).Any())
@@ -283,9 +284,13 @@
                     var newHLA = new HolmesLinkActor();
                     newHLA.Actor = h.ID;
                     Db.HolmesLinkActors.Add(newHLA);
+                    updated = true;
                 }
             }
-            Db.SaveChanges();
+            if (updated)
+            {
+                Db.SaveChanges();
+            }
 
             foreach (HolmesLinkActor act in holmesLinkActors)
             {
