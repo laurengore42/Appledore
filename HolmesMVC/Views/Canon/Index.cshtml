@@ -63,12 +63,15 @@ Choose a date system:<br />
                     seasontext = e.Season1.Name;
                 }
                 <tr>
-                    <td colspan="2" class="adaptseason">
+                    <td colspan="3" class="adaptseason">
                         <h3>@seasontext</h3>
                     </td>
                 </tr>
             }
             <tr>
+                <td>
+                    @Html.Raw(i + 1)
+                </td>
                 <td>@Shared.VagueDate(e.Airdate, DatePrecision.Month, true, false)</td>
                 <td>@Html.ActionLink(e.Story1.Name, "Details", "Story", new { e.Story1.ID }, null)</td>
             </tr>
@@ -92,12 +95,15 @@ Choose a date system:<br />
             if (i == 0 || (i > 0 && lastDecade != decade))
             {
             <tr>
-                <td colspan="2" class="adaptseason">
+                <td colspan="3" class="adaptseason">
                     <h3>@decadeString</h3>
                 </td>
             </tr>
             }
             <tr>             
+                <td>
+                    @Html.Raw(i + 1)
+                </td>
                 <td>
                     @Shared.VagueDate(s.Date.BaringGouldStart, (DatePrecision)s.Date.BaringGouldPrecision, false, true)
                 </td>                
