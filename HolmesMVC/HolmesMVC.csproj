@@ -21,6 +21,8 @@
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1273,7 +1275,9 @@
     <Content Include="Views\Appearance\_AppActor.cshtml" />
     <Content Include="Views\Appearance\_AppChar.cshtml" />
     <Content Include="Views\Story\Details.cshtml" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Story\Edit.cshtml" />
     <Content Include="Views\Toys\MultiTimelineToy.cshtml" />
     <Content Include="Views\Toys\PhotoCollageToy.cshtml" />
@@ -1297,9 +1301,11 @@
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
