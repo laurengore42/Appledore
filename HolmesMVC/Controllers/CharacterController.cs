@@ -142,7 +142,7 @@
             {
                 return HttpNotFound();
             }
-            if (character.Appearances.Any())
+            if (character.Appearances.Any() || character.Renames.Any())
             {
                 return View("CantDelete", character);
             }
