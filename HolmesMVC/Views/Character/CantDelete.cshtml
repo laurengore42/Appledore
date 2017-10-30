@@ -2,16 +2,33 @@
 @model HolmesMVC.Models.Character
 
 @{
-    ViewBag.Title = "Can't Delete";
+	ViewBag.Title = "Can't Delete";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<p>You can't delete @Model.Forename @Model.Surname because it still has Appearances:</p>
-
-@foreach (var a in Model.Appearances)
+@if (Model.Appearances.Any())
 {
-<text>
-<p>in '@Shared.DisplayName(a.Episode1)' by @Shared.ShortName(a.Actor1): @Html.ActionLink("Delete","Delete","Appearance", new {id = a.ID},null)
-</text>
+	<p>You can't delete @Model.Forename @Model.Surname because it still has Appearances:</p>
+
+	foreach (var a in Model.Appearances)
+	{
+		<text>
+			<p>
+				in '@Shared.DisplayName(a.Episode1)' by @Shared.ShortName(a.Actor1): @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
+		</text>
+	}
+}
+
+@if (Model.Renames.Any())
+{
+<p>You can't delete @Model.Forename @Model.Surname because it still has Renames:</p>
+
+	foreach (var r in Model.Renames)
+	{
+		<text>
+			<p>
+				in '@Shared.DisplayName(r.Adaptation1)' played by @Shared.ShortName(r.Actor1), called @Shared.DisplayName(r.Character1): @Html.ActionLink("Delete", "Delete", "Rename", new { id = r.ID }, null)
+		</text>
+	}
 }
