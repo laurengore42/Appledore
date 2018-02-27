@@ -11,6 +11,7 @@
 /HolmesMVC/bin/HolmesMVC.dll.config
 /HolmesMVC/bin/HolmesMVC.pdb
 /HolmesMVC/obj/Debug/*
+/HolmesMVC/obj/*/*.resources
 /HolmesMVC/web.debug.config
 /HolmesMVC/web.release.config
 /HolmesMVC/web.config
