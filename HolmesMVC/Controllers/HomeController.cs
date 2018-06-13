@@ -60,28 +60,24 @@
 
             // recombine into actor-char pairs
             var imdbPairs = new List<string>();
-            for (int i = 0; i < imdbSplit.Count(); i += 2)
+            for (int i = 0; i < imdbSplit.Count(); i++)
             {
-                imdbPairs.Add(imdbSplit[i] + imdbSplit[i + 1]);
-            }
-
-            // trim IMDb's whitespace and formatting
-            var imdbTrimmedPairs = new List<string>();
-            foreach (var pair in imdbPairs)
-            {
-                var encodedPair = WebUtility.UrlEncode(pair);
-                encodedPair = encodedPair.Substring(encodedPair.IndexOf("%09"));
-                encodedPair = encodedPair.Replace("%09", string.Empty);
-                encodedPair = encodedPair.Replace("...", "¦");
-                encodedPair = WebUtility.UrlDecode(encodedPair);
-                imdbTrimmedPairs.Add(encodedPair);
+                var imdbSubSplit = imdbSplit[i].Split(new[] { "\t" }, StringSplitOptions.None);
+                var imdbPair = imdbSubSplit[0];
+                if (imdbSubSplit.Length >= 4)
+                {
+                    imdbPair += "¦" + imdbSubSplit[3];
+                }
+                if (!string.IsNullOrWhiteSpace(imdbPair)) {
+                    imdbPairs.Add(imdbPair);
+                }
             }
 
             // we are now left with e.g. 'Ben Syder¦Sherlock Holmes'
             // statistically characters and actors are usually New,
             // so create them
             // we already have a mechanism for fixing dupes here
-            foreach (var pair in imdbTrimmedPairs)
+            foreach (var pair in imdbPairs)
             {
                 var actor = pair.Split('¦')[0];
                 var character = pair.Split('¦')[1];
