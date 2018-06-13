@@ -3,6 +3,7 @@
 @import url('Accordion.css');
 @import url('Login.css');
 @import url('Scraps.css');
+@import url('SearchPartial.css');
 
 html {
     background-color: #C9EFD2; /* header and space below footer */

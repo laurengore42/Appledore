@@ -1083,6 +1083,7 @@
     <Content Include="Content\Scraps.css" />
     <Content Include="Content\Standard.css" />
     <Content Include="Content\Menu.css" />
+    <Content Include="Content\SearchPartial.css" />
     <Content Include="Scripts\Apdore-googlemaps.js" />
     <Content Include="Scripts\Apdore-StoryDetails.js" />
     <Content Include="Scripts\Apdore-multitimeline.js" />
