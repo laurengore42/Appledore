@@ -20,3 +20,4 @@
 # Project-specific ignores
 
 HolmesMVC/Content/ActorPhotos/*.jpg
+.vs/HolmesMVC/DesignTimeBuild/.dtbcache
