@@ -327,7 +327,7 @@
 
                 if (!blockedNames.Contains(myName))
                 {
-                    nodeList.Add("{\"id\": \"" + act.ID + "\", \"name\": \"" + myName.Replace("'","") + "\", \"group\": " + groupID + "}");
+                    nodeList.Add("{\"id\": \"" + act.ID + "\", \"name\": \"" + myName.Replace("'","").ToUpper() + "\", \"group\": " + groupID + "}");
                 }
             }
 
