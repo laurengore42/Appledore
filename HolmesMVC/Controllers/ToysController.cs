@@ -35,7 +35,7 @@
             var errorCode = BaconXmlTools.IntegerHolmesNumber("Jeremy Brett (I)", targetImdbName);
             if (errorCode == -2)
             {
-                return "Could not find anyone called '" + oldName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='http://www.imdb.com/find?s=nm&q=" + oldName + "'>click here</a>";
+                return "Could not find anyone called '" + oldName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q=" + oldName + "'>click here</a>";
             }
 
             if (errorCode == -1)
@@ -149,7 +149,7 @@
                 if (errorCode == -2)
                 {
                     return "Could not find anyone called '" + oldName
-                           + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='http://www.imdb.com/find?s=nm&q="
+                           + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q="
                            + oldName + "'>click here</a>";
                 }
 

@@ -32,7 +32,7 @@
         
         @if (Model.MediumName == "Television" || Model.MediumName == "Film")
         {
-            var IMDbUrl = "http://www.imdb.com/find?s=tt&q=" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy"); 
+            var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy"); 
     <text>        <li>IMDb: <a href = '@IMDbUrl'>@Model.DisplayName</a> <i>(link not verified)</i></li></text>}
     </ul>
     <p class="dblinks">

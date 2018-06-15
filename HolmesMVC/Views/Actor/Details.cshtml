@@ -78,19 +78,19 @@
             }
             @if (Model.IMDb != null)
             {
-                <li>IMDb: <a href="http://www.imdb.com/name/@Html.DisplayFor(model => model.IMDb)">@Model.ShortName</a></li>
+                <li>IMDb: <a href="https://www.imdb.com/name/@Html.DisplayFor(model => model.IMDb)">@Model.ShortName</a></li>
             }
             else
             {
-                <li>IMDb: <a href="@string.Format("http://www.imdb.com/find?q=" + Model.ShortName + "&s=all#nm")">@Model.ShortName</a> <i>(link not verified)</i></li>
+                <li>IMDb: <a href="@string.Format("https://www.imdb.com/find?q=" + Model.ShortName + "&s=all#nm")">@Model.ShortName</a> <i>(link not verified)</i></li>
             }
             @if (Model.Wikipedia != null)
             {
-                <li>Wikipedia: <a href="http://en.wikipedia.org/wiki/@Html.DisplayFor(model => model.Wikipedia)">@Model.Wikipedia</a></li>
+                <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/@Html.DisplayFor(model => model.Wikipedia)">@Model.Wikipedia</a></li>
             }
             else
             {
-                <li>Wikipedia: <a href="@string.Format("http://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=" + Model.ShortName)">@Model.ShortName</a> <i>(link not verified)</i></li>
+                <li>Wikipedia: <a href="@string.Format("https://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=" + Model.ShortName)">@Model.ShortName</a> <i>(link not verified)</i></li>
             }
         </ul>
     </div>

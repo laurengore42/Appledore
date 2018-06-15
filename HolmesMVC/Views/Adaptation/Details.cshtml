@@ -49,7 +49,7 @@
     }
 @if (Model.DisplayName != "Canon" && (Model.MediumName == "Television" || Model.MediumName == "Film"))
 {
-    <text><br/>IMDb: <a href="@string.Format("http://www.imdb.com/find?q=" + Model.DisplayName + " " + Model.DateOfFirstEpisode.Year + "")">@Model.DisplayName</a> <i>(link not verified)</i></text>
+    <text><br/>IMDb: <a href="@string.Format("https://www.imdb.com/find?q=" + Model.DisplayName + " " + Model.DateOfFirstEpisode.Year + "")">@Model.DisplayName</a> <i>(link not verified)</i></text>
 }
 </p>
 @if (Model.DisplayName != "Canon")
