@@ -41,7 +41,7 @@
         {
             var uri =
                 new Uri(
-                    "http://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
+                    "https://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
                     + "&a=" + holmesImdbName
                     + "&b=" + targetImdbName
                     + "&u=3&p=38b99ce9ec87&gm=0xef3ef7f");
@@ -102,7 +102,7 @@
         {
             var uri =
                 new Uri(
-                    "http://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
+                    "https://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
                     + "&a=" + holmesImdbName
                     + "&b=" + targetImdbName
                     + "&u=1&p=38b99ce9ec87&gm=0xef3ef7f");

@@ -16,7 +16,7 @@
         [HttpGet]
         public string StoryXml(string storyCode)
         {
-            var uri = new Uri("http://appledore.azurewebsites.net/services/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
+            var uri = new Uri("https://appledore.azurewebsites.net/services/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
 
             var xr = new XmlDocument();
             xr.Load(WebRequest.Create(uri).GetResponse().GetResponseStream());

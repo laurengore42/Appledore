@@ -52,7 +52,7 @@
     }
         @if (Model.MediumName == "Television" || Model.MediumName == "Film")
         {
-            var IMDbUrl = "http://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
+            var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
             <text><br />
             IMDb: <a href = '@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
         }
