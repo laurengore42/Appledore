@@ -129,10 +129,11 @@
             }
 
             var titleForenames = (from c in Db.Characters
-                                  join h in Db.Honorifics on c.Forename equals h.Name
-                                  where c.ID > 0
-                                  orderby c.ID
-                                  select c).ToList();
+								  join h in Db.Honorifics on 1 equals 1
+								  where c.ID > 0 && c.Honorific == null && c.Forename.StartsWith(h.Name)
+								  orderby c.ID
+								  select c)
+								  .ToList();
             if (titleForenames.Any())
             {
                 ViewBag.titleForenames = titleForenames;
