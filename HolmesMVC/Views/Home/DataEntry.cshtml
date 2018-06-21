@@ -18,11 +18,30 @@ Pulling in IMDb info:
     }
 </div>
 
-<hr/>
-        @{
-            List<IGrouping<string, Character>> dupeCharNames = ViewBag.dupeCharNames;
-            List<IGrouping<string, Actor>> dupeActNames = ViewBag.dupeActNames;
+<hr />
+@{
+    List<Character> titleForenames = ViewBag.titleForenames;
+    List<IGrouping<string, Character>> dupeCharNames = ViewBag.dupeCharNames;
+    List<IGrouping<string, Actor>> dupeActNames = ViewBag.dupeActNames;
+}
+<div>
+    Possible incorrect forenames:
+    @if (titleForenames != null)
+    {
+        foreach (var c in titleForenames)
+        {
+    <li>
+        @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ", "&nbsp;")), "Details", "Character", new { id = c.ID }, null)
+    </li>
+
         }
+    }
+    else
+    {
+        <text>None at the moment.</text>
+    }
+</div>
+<hr />
 <div>
     Duplicate character names:
     @if (dupeCharNames != null)

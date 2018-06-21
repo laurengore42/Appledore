@@ -128,6 +128,16 @@
                 ViewBag.dupeCharNames = dupeCharNames;
             }
 
+            var titleForenames = (from c in Db.Characters
+                                  join h in Db.Honorifics on c.Forename equals h.Name
+                                  where c.ID > 0
+                                  orderby c.ID
+                                  select c).ToList();
+            if (titleForenames.Any())
+            {
+                ViewBag.titleForenames = titleForenames;
+            }
+
 
             var dupeActNames = (from a in Db.Actors
                                 where a.ID > 0
