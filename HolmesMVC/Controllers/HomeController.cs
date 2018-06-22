@@ -130,13 +130,13 @@
 
             var titleForenames = (from c in Db.Characters
 								  join h in Db.Honorifics on 1 equals 1
-								  where c.ID > 0 && c.Honorific == null && c.Forename.StartsWith(h.Name + " ")
+								  where c.ID > 0 && c.Honorific == null && c.Forename != "" && c.Forename.StartsWith(h.Name + " ")
 								  orderby c.ID
 								  select c)
 								  .Union
 								 (from c in Db.Characters
 								  join h in Db.Honorifics on 1 equals 1
-								  where c.ID > 0 && c.Honorific == null && c.Forename == h.Name
+								  where c.ID > 0 && c.Honorific == null && c.Forename != "" && c.Forename == h.Name
 								  orderby c.ID
 								  select c)
 								  .ToList();
