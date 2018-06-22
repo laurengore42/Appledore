@@ -42,17 +42,28 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.IMDb, "IMDb name ID, e.g. nm0121651")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IMDb)
+            @Html.ValidationMessageFor(model => model.IMDb)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.Birthdate)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Birthdate, "Date")
             <select name="BirthdatePrecision">
-                <option value="@((int)DatePrecision.Full)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Full)
-                                  {<text>selected</text>}>Full precision</option>
-                <option value="@((int)DatePrecision.Month)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Month)
-                                  {<text>selected</text>}>Accurate to month</option>
-                <option value="@((int)DatePrecision.Year)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Year)
-                                  {<text>selected</text>}>Accurate to year</option>
+                <option value="@((int)DatePrecision.Full)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Full) { <text> selected</text>}>
+                    Full precision
+                </option>
+                <option value="@((int)DatePrecision.Month)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Month) { <text> selected</text>}>
+                    Accurate to month
+                </option>
+                <option value="@((int)DatePrecision.Year)" @if ((DatePrecision)Model.BirthdatePrecision == DatePrecision.Year) { <text> selected</text>}>
+                    Accurate to year
+                </option>
             </select>
             @Html.ValidationMessageFor(model => model.Birthdate)
         </div>
@@ -71,12 +82,15 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Deathdate, "Date")
             <select name="DeathdatePrecision">
-                <option value="@((int)DatePrecision.Full)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Full)
-                                  {<text>selected</text>}>Full precision</option>
-                <option value="@((int)DatePrecision.Month)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Month)
-                                  {<text>selected</text>}>Accurate to month</option>
-                <option value="@((int)DatePrecision.Year)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Year)
-                                  {<text>selected</text>}>Accurate to year</option>
+                <option value="@((int)DatePrecision.Full)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Full) { <text> selected</text>}>
+                    Full precision
+                </option>
+                <option value="@((int)DatePrecision.Month)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Month) { <text> selected</text>}>
+                    Accurate to month
+                </option>
+                <option value="@((int)DatePrecision.Year)" @if ((DatePrecision)Model.DeathdatePrecision == DatePrecision.Year) { <text> selected</text>}>
+                    Accurate to year
+                </option>
             </select>
             @Html.ValidationMessageFor(model => model.Deathdate)
         </div>
@@ -95,14 +109,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.PicCredit)
             @Html.ValidationMessageFor(model => model.PicCredit)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IMDb, "IMDb name ID, e.g. nm0121651")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IMDb)
-            @Html.ValidationMessageFor(model => model.IMDb)
         </div>
 
         <div class="editor-label">
