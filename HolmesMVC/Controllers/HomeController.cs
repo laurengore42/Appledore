@@ -62,6 +62,8 @@
             imdbInput = imdbInput.Replace("Rest of cast listed alphabetically:", "");
             Regex asPattern = new Regex(@" \(as .*\)");
             imdbInput = asPattern.Replace(imdbInput, "");
+            Regex numberedPattern = new Regex(@" #\d+");
+            imdbInput = numberedPattern.Replace(imdbInput, "");
 
             // split into lines
             var imdbSplit = imdbInput.Split(new[] { "\r\n" }, StringSplitOptions.None);
