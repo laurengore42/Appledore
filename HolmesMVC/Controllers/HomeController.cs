@@ -55,6 +55,11 @@
         [HttpPost]
         public ActionResult DataEntry(int epId, string imdbInput)
         {
+            // kill IMDb cruft
+            imdbInput = imdbInput.Replace(" (credit only)", "");
+            imdbInput = imdbInput.Replace(" (uncredited)", "");
+            imdbInput = imdbInput.Replace("Rest of cast listed alphabetically:", "");
+
             // split into lines
             var imdbSplit = imdbInput.Split(new[] { "\r\n" }, StringSplitOptions.None);
 
