@@ -8,6 +8,7 @@
     using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Text.RegularExpressions;
     using System.Web.Configuration;
     using System.Web.Mvc;
     using System.Xml.Serialization;
@@ -59,6 +60,8 @@
             imdbInput = imdbInput.Replace(" (credit only)", "");
             imdbInput = imdbInput.Replace(" (uncredited)", "");
             imdbInput = imdbInput.Replace("Rest of cast listed alphabetically:", "");
+            Regex asPattern = new Regex(@" \(as .*\)");
+            imdbInput = asPattern.Replace(imdbInput, "");
 
             // split into lines
             var imdbSplit = imdbInput.Split(new[] { "\r\n" }, StringSplitOptions.None);
