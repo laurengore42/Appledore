@@ -43,6 +43,14 @@
                 : rename.Surname;
         }
 
+        public static string SortForename(Appearance app)
+        {
+            var rename = GetRename(app);
+            return (rename == null)
+                ? app.Character1.Forename
+                : rename.Forename;
+        }
+
         public static string VagueDate(DateTime? nullableDate, DatePrecision precision, bool longMonth, bool longDay)
         {
             if (null == nullableDate)

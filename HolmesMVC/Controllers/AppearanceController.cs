@@ -53,8 +53,8 @@
                            where !Shared.IsCanon(a.Character1)
                            select a).ToList();
 
-            canonApps = canonApps.OrderBy(a => Shared.SortSurname(a)).ToList();
-            uncanonApps = uncanonApps.OrderBy(a => Shared.SortSurname(a)).ToList();
+            canonApps = canonApps.OrderBy(a => Shared.SortSurname(a)).ThenBy(a => Shared.SortForename(a)).ToList();
+            uncanonApps = uncanonApps.OrderBy(a => Shared.SortSurname(a)).ThenBy(a => Shared.SortForename(a)).ToList();
 
             relevantApps.Clear();
             relevantApps.AddRange(hApps);
