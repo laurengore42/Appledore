@@ -45,6 +45,18 @@
                 });
         }
 
+        public static string SortSurname(Appearance app)
+        {
+            var rename = (from r in app.Episode1.Season1.Adaptation1.Renames
+                          where
+                              r.Actor == app.Actor
+                              && r.Character == app.Character
+                          select r).FirstOrDefault();
+            return (rename == null)
+                ? app.Character1.Surname
+                : rename.Surname;
+        }
+
         public static string VagueDate(DateTime? nullableDate, DatePrecision precision, bool longMonth, bool longDay)
         {
             if (null == nullableDate)

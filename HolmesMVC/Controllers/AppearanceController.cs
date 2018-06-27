@@ -48,12 +48,13 @@
                          where
                              a.Character != holmesId && a.Character != watsonId
                              && Shared.IsCanon(a.Character1)
-                         orderby a.Character1.Surname, a.Character1.Forename
                          select a).ToList();
             var uncanonApps = (from a in relevantApps
                            where !Shared.IsCanon(a.Character1)
-                           orderby a.Character1.Surname, a.Character1.Forename
                            select a).ToList();
+
+            canonApps = canonApps.OrderBy(a => Shared.SortSurname(a)).ToList();
+            uncanonApps = uncanonApps.OrderBy(a => Shared.SortSurname(a)).ToList();
 
             relevantApps.Clear();
             relevantApps.AddRange(hApps);
