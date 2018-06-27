@@ -35,6 +35,10 @@ li.checklist { /* have to use a class because no :parent selector */
     text-align: left;
 }
 
+span.strong {
+    font-weight: 700;
+}
+
 a { /* links */
     color: green;
     outline: none;
