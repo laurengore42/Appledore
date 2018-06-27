@@ -26,13 +26,18 @@
             app["SearchDataShort"] = null;
         }
 
+        public static Rename GetRename(Appearance app)
+        {
+            return (from r in app.Episode1.Season1.Adaptation1.Renames
+                    where
+                        r.Actor == app.Actor
+                        && r.Character == app.Character
+                    select r).FirstOrDefault();
+        }
+
         public static string CheckRename(Appearance app)
         {
-            var rename = (from r in app.Episode1.Season1.Adaptation1.Renames
-                          where
-                              r.Actor == app.Actor
-                              && r.Character == app.Character
-                          select r).FirstOrDefault();
+            var rename = GetRename(app);
             return (rename == null)
                 ? null
                 : LongName(new Character
@@ -47,11 +52,7 @@
 
         public static string SortSurname(Appearance app)
         {
-            var rename = (from r in app.Episode1.Season1.Adaptation1.Renames
-                          where
-                              r.Actor == app.Actor
-                              && r.Character == app.Character
-                          select r).FirstOrDefault();
+            var rename = GetRename(app);
             return (rename == null)
                 ? app.Character1.Surname
                 : rename.Surname;
