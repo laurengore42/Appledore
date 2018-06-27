@@ -35,21 +35,6 @@
                     select r).FirstOrDefault();
         }
 
-        public static string CheckRename(Appearance app)
-        {
-            var rename = GetRename(app);
-            return (rename == null)
-                ? null
-                : LongName(new Character
-                {
-                    Honorific = rename.Honorific,
-                    Honorific1 =
-                        rename.Honorific1,
-                    Forename = rename.Forename,
-                    Surname = rename.Surname
-                });
-        }
-
         public static string SortSurname(Appearance app)
         {
             var rename = GetRename(app);
@@ -170,6 +155,21 @@
             var surname = character.Surname ?? string.Empty;
 
             return BuildName(new[] { honorific, forename, surname }, ' ');
+        }
+
+        // returns 'Professor James Moriarty'
+        public static string LongName(Rename rename)
+        {
+            return (rename == null)
+                ? null
+                : LongName(new Character
+                {
+                    Honorific = rename.Honorific,
+                    Honorific1 =
+                        rename.Honorific1,
+                    Forename = rename.Forename,
+                    Surname = rename.Surname
+                });
         }
 
         // returns 'Moriarty, Professor James'

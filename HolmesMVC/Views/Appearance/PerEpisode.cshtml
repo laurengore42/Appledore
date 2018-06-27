@@ -22,6 +22,7 @@ else
             var canonCharacter = Shared.IsCanon(appearance.Character1);
             var charName = Shared.LongName(appearance.Character1);
             var actorName = Shared.ShortName(appearance.Actor1);
+            var rename = Shared.GetRename(appearance);
             <tr>
                 @if (canonPage)
                 {
@@ -45,13 +46,13 @@ else
                                 <text>class="strong"</text>
                             }
                             >
-                            @if (null == Shared.CheckRename(appearance))
+                            @if (null == rename)
                             {
                                 @Html.ActionLink(Shared.LongName(appearance.Character1), "Details", "Character", new { ID = appearance.Character }, null)
                             }
                             else
                             {
-                                @Html.ActionLink(Shared.CheckRename(appearance), "Details", "Character", new { ID = appearance.Character }, null)
+                                @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { ID = appearance.Character }, null)
                             }
                     </span>
                     </td>
@@ -61,7 +62,7 @@ else
                     <td class="linedbutton">@Html.ActionLink("Delete", "Delete", new { appearance.ID })
                         @if (!canonPage)
                         {
-                            if (null == Shared.CheckRename(appearance))
+                            if (null == rename)
                             {
                             <text>&nbsp;@Html.ActionLink("Rename", "Create", "Rename", new { appearance.ID }, null)</text>                          
                             }

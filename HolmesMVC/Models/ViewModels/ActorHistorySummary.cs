@@ -14,7 +14,8 @@
             
             var sampleApp = histories.First();
 
-            CharacterName = Shared.CheckRename(sampleApp) ?? Shared.LongName(sampleApp.Character1);
+            var rename = Shared.GetRename(sampleApp);
+            CharacterName = null == rename ? Shared.LongName(sampleApp.Character1) : Shared.LongName(rename);
             MediumName = sampleApp.Episode1.Season1.Adaptation1.Medium1.Name;
             AdaptName = sampleApp.Episode1.Season1.Adaptation1.Name
                         ?? Shared.DisplayName(
