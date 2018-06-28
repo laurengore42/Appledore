@@ -13,9 +13,9 @@ namespace HolmesMVC.Models
         }
 
         public int ID { get; set; }
-        public int? Actor { get; set; }
+        public int? ActorID { get; set; }
         public string Name { get; set; }
-        public virtual Actor Actor1 { get; set; }
+        public virtual Actor Actor { get; set; }
         public virtual ICollection<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
     }
 }

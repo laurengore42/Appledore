@@ -28,10 +28,10 @@
 
         public static Rename GetRename(Appearance app)
         {
-            return (from r in app.Episode1.Season1.Adaptation1.Renames
+            return (from r in app.Episode.Season.Adaptation.Renames
                     where
-                        r.Actor == app.Actor
-                        && r.Character == app.Character
+                        r.ActorID == app.ActorID
+                        && r.CharacterID == app.CharacterID
                     select r).FirstOrDefault();
         }
 
@@ -39,7 +39,7 @@
         {
             var rename = GetRename(app);
             return (rename == null)
-                ? app.Character1.Surname
+                ? app.Character.Surname
                 : rename.Surname;
         }
 
@@ -47,7 +47,7 @@
         {
             var rename = GetRename(app);
             return (rename == null)
-                ? app.Character1.Forename
+                ? app.Character.Forename
                 : rename.Forename;
         }
 
@@ -112,7 +112,7 @@
         public static bool IsCanon(Character c)
         {
             return (from a in c.Appearances
-                    where a.Episode1.Season1.Adaptation1.Name == "Canon"
+                    where a.Episode.Season.Adaptation.Name == "Canon"
                     select a).Any();
         }
 
@@ -146,9 +146,9 @@
         public static string ShortName(Character character)
         {
             var forename = character.Forename;
-            if (string.IsNullOrWhiteSpace(forename) && character.Honorific != null)
+            if (string.IsNullOrWhiteSpace(forename) && character.HonorificID != null)
             {
-                forename = character.Honorific1.Name;
+                forename = character.Honorific.Name;
             }
 
             var surname = character.Surname;
@@ -158,7 +158,7 @@
         // returns 'Professor James Moriarty'
         public static string LongName(Character character)
         {
-            var honorific = character.Honorific1 != null ? character.Honorific1.Name : string.Empty;
+            var honorific = character.Honorific != null ? character.Honorific.Name : string.Empty;
             var forename = character.Forename ?? string.Empty;
             var surname = character.Surname ?? string.Empty;
 
@@ -172,9 +172,9 @@
                 ? null
                 : LongName(new Character
                 {
-                    Honorific = rename.Honorific,
-                    Honorific1 =
-                        rename.Honorific1,
+                    HonorificID = rename.HonorificID,
+                    Honorific =
+                        rename.Honorific,
                     Forename = rename.Forename,
                     Surname = rename.Surname
                 });
@@ -184,12 +184,12 @@
         public static string DisplayName(Character c)
         {
             return !c.Forename.IsNullOrWhiteSpace()
-                       ? c.Honorific != null
-                             ? c.Surname + ", " + c.Honorific1.Name + " "
+                       ? c.HonorificID != null
+                             ? c.Surname + ", " + c.Honorific.Name + " "
                                + c.Forename
                              : c.Surname + ", " + c.Forename
-                       : c.Honorific != null
-                             ? c.Surname + ", " + c.Honorific1.Name
+                       : c.HonorificID != null
+                             ? c.Surname + ", " + c.Honorific.Name
                              : c.Surname;
         }
 
@@ -199,9 +199,9 @@
             {
                 return e.Title;
             }
-            if (!e.Story.IsNullOrWhiteSpace())
+            if (!e.StoryID.IsNullOrWhiteSpace())
             {
-                return e.Story1.Name;
+                return e.Story.Name;
             }
             return "Error in Episode DisplayName!";
         }
@@ -220,7 +220,7 @@
                 return a.Seasons.First().Episodes.First().Title;
             }
 
-            var medium = a.Medium1.Name;
+            var medium = a.Medium.Name;
             if (medium == "Television")
             {
                 medium = "TV"; // special case
@@ -238,18 +238,18 @@
         public static string GetSeasonCode(Episode thisepisode)
         {
             var episodeNumber =
-                (from e in thisepisode.Season1.Episodes
+                (from e in thisepisode.Season.Episodes
                  where e.Airdate < thisepisode.Airdate
                  select e).Count() + 1;
 
-            if (thisepisode.Season1.Adaptation1.Seasons.Count() == 1)
+            if (thisepisode.Season.Adaptation.Seasons.Count() == 1)
             {
                 return episodeNumber.ToString(CultureInfo.InvariantCulture);
             }
 
             return (episodeNumber < 10)
-                       ? thisepisode.Season1.AirOrder + "x0" + episodeNumber
-                       : thisepisode.Season1.AirOrder + "x" + episodeNumber;
+                       ? thisepisode.Season.AirOrder + "x0" + episodeNumber
+                       : thisepisode.Season.AirOrder + "x" + episodeNumber;
         }
 
         public static string Times(int count)
@@ -278,15 +278,15 @@
         public static List<Actor> PlayedBy(int charId, Adaptation adapt)
         {
             return (from a in adapt.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
-                    where a.Character == charId
-                    group a by a.Actor1 into grp
+                    where a.CharacterID == charId
+                    group a by a.Actor into grp
                     orderby grp.Count() descending
                     select grp.Key).ToList();
         }
 
         public static List<Actor> PlayedBy(string name, Adaptation adapt)
         {
-            var allCharacters = adapt.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances).Select(a => a.Character1).ToList();
+            var allCharacters = adapt.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances).Select(a => a.Character).ToList();
 
             if (!allCharacters.Any())
             {

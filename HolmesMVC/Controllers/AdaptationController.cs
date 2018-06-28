@@ -63,7 +63,7 @@
                 return RedirectToAction("Details","Adaptation", new {id = adaptation.ID});
             }
 
-            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.Medium);
+            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);
             return View(adaptation);
         }
 
@@ -77,7 +77,7 @@
             {
                 return HttpNotFound();
             }
-            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.Medium);
+            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);
             return View(adaptation);
         }
 
@@ -95,7 +95,7 @@
 
                 return RedirectToAction("Details", new { adaptation.ID });
             }
-            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.Medium);
+            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);
             return View(adaptation);
         }
 
