@@ -57,11 +57,11 @@
             }
 
             var adapt =
-                Db.Adaptations.Find(appearance.Episode.Season.AdaptationID);
+                Db.Adaptations.Find(appearance.Episode1.Season1.Adaptation);
 
-            var actor = Db.Actors.Find(appearance.ActorID);
+            var actor = Db.Actors.Find(appearance.Actor);
 
-            var character = Db.Characters.Find(appearance.CharacterID);
+            var character = Db.Characters.Find(appearance.Character);
 
             if (adapt == null || actor == null || character == null)
             {
@@ -70,12 +70,12 @@
 
             var rename = new Rename
                              {
-                                 AdaptationID = adapt.ID,
-                                 Adaptation = adapt,
-                                 ActorID = actor.ID,
-                                 Actor = actor,
-                                 CharacterID = character.ID,
-                                 Character = character
+                                 Adaptation = adapt.ID,
+                                 Adaptation1 = adapt,
+                                 Actor = actor.ID,
+                                 Actor1 = actor,
+                                 Character = character.ID,
+                                 Character1 = character
                              };
             ViewBag.Honorific = new SelectList(Db.Honorifics, "ID", "Name");
 
@@ -91,7 +91,7 @@
         {
             if (ModelState.IsValid)
             {
-                var adapt = rename.AdaptationID;
+                var adapt = rename.Adaptation;
                 Db.Renames.Add(rename);
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
                 return RedirectToAction(
@@ -116,13 +116,13 @@
             }
 
             var adapt =
-                Db.Adaptations.Find(appearance.Episode.Season.AdaptationID);
+                Db.Adaptations.Find(appearance.Episode1.Season1.Adaptation);
 
-            var actor = Db.Actors.Find(appearance.ActorID);
+            var actor = Db.Actors.Find(appearance.Actor);
 
-            var character = Db.Characters.Find(appearance.CharacterID);
+            var character = Db.Characters.Find(appearance.Character);
 
-            var rename = (from r in Db.Renames where r.AdaptationID == adapt.ID && r.ActorID == actor.ID && r.CharacterID == character.ID select r).FirstOrDefault();
+            var rename = (from r in Db.Renames where r.Adaptation == adapt.ID && r.Actor == actor.ID && r.Character == character.ID select r).FirstOrDefault();
             if (rename == null)
             {
                 return HttpNotFound();
@@ -146,18 +146,18 @@
             }
 
             var adapt =
-                Db.Adaptations.Find(appearance.Episode.Season.AdaptationID);
+                Db.Adaptations.Find(appearance.Episode1.Season1.Adaptation);
 
-            var actor = Db.Actors.Find(appearance.ActorID);
+            var actor = Db.Actors.Find(appearance.Actor);
 
-            var character = Db.Characters.Find(appearance.CharacterID);
+            var character = Db.Characters.Find(appearance.Character);
 
             if (adapt == null || actor == null || character == null)
             {
                 throw new ArgumentException("Failure while trying to delete rename for appearance " + id + "!");
             }
 
-            var rename = (from r in Db.Renames where r.AdaptationID == adapt.ID && r.ActorID == actor.ID && r.CharacterID == character.ID select r).FirstOrDefault();
+            var rename = (from r in Db.Renames where r.Adaptation == adapt.ID && r.Actor == actor.ID && r.Character == character.ID select r).FirstOrDefault();
             if (rename == null)
             {
                 throw new ArgumentException("Failure while trying to delete rename for appearance " + id + "!");

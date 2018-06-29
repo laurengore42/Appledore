@@ -83,25 +83,25 @@
                     // they're in Appledore!
                     // are they a Holmes or a Watson?
                     var isAHolmes = (from ap in dbActor.Appearances
-                                     where ap.CharacterID == holmesId
+                                     where ap.Character == holmesId
                                      select ap).Any();
                     var isAWatson = (from ap in dbActor.Appearances
-                                     where ap.CharacterID == watsonId
+                                     where ap.Character == watsonId
                                      select ap).Any();
 
-                    var dbApp = dbActor.Appearances.OrderBy(a => a.Episode.Airdate).First();
-                    var dbAdapt = dbApp.Episode.Season.Adaptation;
+                    var dbApp = dbActor.Appearances.OrderBy(a => a.Episode1.Airdate).First();
+                    var dbAdapt = dbApp.Episode1.Season1.Adaptation1;
                     var dbRename = Shared.GetRename(dbApp);
-                    var charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
+                    var charName = null == dbRename ? Shared.LongName(dbApp.Character1) : Shared.LongName(dbRename);
 
                     if (isAHolmes)
                     {
                         dbApp = (from ap in dbActor.Appearances
-                                    where ap.CharacterID == holmesId
+                                    where ap.Character == holmesId
                                  select ap).First();
-                        dbAdapt = dbApp.Episode.Season.Adaptation;
+                        dbAdapt = dbApp.Episode1.Season1.Adaptation1;
                         dbRename = Shared.GetRename(dbApp);
-                        charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
+                        charName = null == dbRename ? Shared.LongName(dbApp.Character1) : Shared.LongName(dbRename);
 
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
                         stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "'.";
@@ -112,11 +112,11 @@
                     if (isAWatson)
                     {
                         dbApp = (from ap in dbActor.Appearances
-                                 where ap.CharacterID == watsonId
+                                 where ap.Character == watsonId
                                  select ap).First();
-                        dbAdapt = dbApp.Episode.Season.Adaptation;
+                        dbAdapt = dbApp.Episode1.Season1.Adaptation1;
                         dbRename = Shared.GetRename(dbApp);
-                        charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
+                        charName = null == dbRename ? Shared.LongName(dbApp.Character1) : Shared.LongName(dbRename);
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
                         stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + Shared.ShortName(new AdaptView(dbAdapt).HolmesActors.First()) + "</a> as Sherlock Holmes.";
                         stringOut += "<br><br>" + actorName + "'s Holmes number is 1.";
@@ -161,9 +161,9 @@
                 // get holmes list
                 var holmeses = (from a in Db.Appearances
                                 where
-                                    a.CharacterID == holmesId
-                                    && a.Actor.IMDbName != null
-                                select new ToyHolmes { ID = a.ActorID, Name = a.Actor.IMDbName }).Distinct().ToList();
+                                    a.Character == holmesId
+                                    && a.Actor1.IMDbName != null
+                                select new ToyHolmes { ID = a.Actor, Name = a.Actor1.IMDbName }).Distinct().ToList();
 
                 var r = new Random();
                 holmeses = holmeses.OrderBy(x => r.Next()).ToList();
@@ -273,16 +273,16 @@
 
             var nodeList = new List<string>();
 
-            var holmesActors = Db.Actors.Where(a => a.Appearances.Where(ap => ap.CharacterID == holmesID).Any()).ToList();
+            var holmesActors = Db.Actors.Where(a => a.Appearances.Where(ap => ap.Character == holmesID).Any()).ToList();
             var holmesLinkActors = Db.HolmesLinkActors.ToList();
 
             var updated = false;
             foreach (var h in holmesActors)
             {
-                if (!holmesLinkActors.Where(hla => hla.ActorID == h.ID).Any())
+                if (!holmesLinkActors.Where(hla => hla.Actor == h.ID).Any())
                 {
                     var newHLA = new HolmesLinkActor();
-                    newHLA.ActorID = h.ID;
+                    newHLA.Actor = h.ID;
                     Db.HolmesLinkActors.Add(newHLA);
                     updated = true;
                 }
@@ -295,21 +295,21 @@
             foreach (HolmesLinkActor act in holmesLinkActors)
             {
                 var myName = act.Name;
-                if (string.IsNullOrEmpty(myName) && act.Actor != null)
+                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
                 {
-                    myName = Shared.ShortName(act.Actor);
+                    myName = Shared.ShortName(act.Actor1);
                 }
 
                 var playedHolmes = false;
                 var playedWatson = false;
-                int appledoreActorID = act.ActorID ?? 0;
+                int appledoreActorID = act.Actor ?? 0;
                 if (appledoreActorID > 0)
                 {
-                    if (Db.Appearances.Where(app => app.ActorID == appledoreActorID).Where(app => app.CharacterID == holmesID).Any())
+                    if (Db.Appearances.Where(app => app.Actor == appledoreActorID).Where(app => app.Character == holmesID).Any())
                     {
                         playedHolmes = true;
                     }
-                    else if (Db.Appearances.Where(app => app.ActorID == appledoreActorID).Where(app => app.CharacterID == watsonID).Any())
+                    else if (Db.Appearances.Where(app => app.Actor == appledoreActorID).Where(app => app.Character == watsonID).Any())
                     {
                         playedWatson = true;
                     }
@@ -333,21 +333,21 @@
 
             var linkList = new List<string>();
 
-            foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor).Distinct())
+            foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
             {
                 var myName = act.Name;
-                if (string.IsNullOrEmpty(myName) && act.Actor != null)
+                if (string.IsNullOrEmpty(myName) && act.Actor1 != null)
                 {
-                    myName = Shared.ShortName(act.Actor);
+                    myName = Shared.ShortName(act.Actor1);
                 }
-                foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor).Distinct())
+                foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink1).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor1).Distinct())
                 {
                     if (linkedActor.ID > act.ID)
                     {
                         var theirName = linkedActor.Name;
-                        if (string.IsNullOrEmpty(theirName) && linkedActor.Actor != null)
+                        if (string.IsNullOrEmpty(theirName) && linkedActor.Actor1 != null)
                         {
-                            theirName = Shared.ShortName(linkedActor.Actor);
+                            theirName = Shared.ShortName(linkedActor.Actor1);
                         }
 
                         if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
@@ -378,8 +378,8 @@
             var adaptList = (from ad in Db.Adaptations
                              where ad.Seasons.Any()
                              && ad.Seasons.FirstOrDefault().Episodes.Any()
-                             && ad.Medium.Name != "Literature"
-                             && ad.Medium.Name != "Stage" //to_do_theatre
+                             && ad.Medium1.Name != "Literature"
+                             && ad.Medium1.Name != "Stage" //to_do_theatre
                              orderby ad.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate
                              select ad).ToList();
 
@@ -392,12 +392,12 @@
             var holmesId = Shared.GetHolmes();
 
             var holmesList = (from app in Db.Appearances
-                              where app.CharacterID == holmesId
-                              && app.ActorID > 0
-                              && app.Actor.Pic != null && app.Actor.Pic != ""
-                              group app by app.ActorID into grp
-                              orderby grp.FirstOrDefault().Episode.Airdate
-                              select grp.FirstOrDefault().Actor).ToList();
+                              where app.Character == holmesId
+                              && app.Actor > 0
+                              && app.Actor1.Pic != null && app.Actor1.Pic != ""
+                              group app by app.Actor into grp
+                              orderby grp.FirstOrDefault().Episode1.Airdate
+                              select grp.FirstOrDefault().Actor1).ToList();
 
             return View(holmesList);
         }
@@ -408,12 +408,12 @@
             var holmesId = Shared.GetHolmes();
 
             var holmesList = (from app in Db.Appearances
-                              where app.CharacterID == holmesId
-                              && app.ActorID > 0
-                              && app.Actor.Birthplace != null && app.Actor.Birthplace != ""
-                              group app by app.ActorID into grp
-                              orderby grp.FirstOrDefault().Episode.Airdate
-                              select grp.FirstOrDefault().Actor).ToList();
+                              where app.Character == holmesId
+                              && app.Actor > 0
+                              && app.Actor1.Birthplace != null && app.Actor1.Birthplace != ""
+                              group app by app.Actor into grp
+                              orderby grp.FirstOrDefault().Episode1.Airdate
+                              select grp.FirstOrDefault().Actor1).ToList();
 
             return View(holmesList);
         }

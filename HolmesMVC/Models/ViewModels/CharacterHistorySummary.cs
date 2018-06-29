@@ -13,31 +13,31 @@
             Times = Shared.Times(groupedApps.Count());
 
             FirstYear =
-                groupedApps.OrderBy(a => a.Episode.Airdate)
+                groupedApps.OrderBy(a => a.Episode1.Airdate)
                     .First()
-                    .Episode.Airdate.Year;
+                    .Episode1.Airdate.Year;
             LastYear =
-                groupedApps.OrderBy(a => a.Episode.Airdate)
+                groupedApps.OrderBy(a => a.Episode1.Airdate)
                     .Last()
-                    .Episode.Airdate.Year;
+                    .Episode1.Airdate.Year;
 
             var sampleApp = groupedApps.First();
-            ActorName = Shared.ShortName(sampleApp.Actor);
-            MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
-            AdaptName = Shared.DisplayName(sampleApp.Episode.Season.Adaptation);
-            AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
+            ActorName = Shared.ShortName(sampleApp.Actor1);
+            MediumName = sampleApp.Episode1.Season1.Adaptation1.Medium1.Name;
+            AdaptName = Shared.DisplayName(sampleApp.Episode1.Season1.Adaptation1);
+            AdaptTranslation = sampleApp.Episode1.Season1.Adaptation1.Translation;
 
-            var rename = (from r in sampleApp.Episode.Season.Adaptation.Renames
-                              where r.ActorID == ActorId
-                              && r.CharacterID == sampleApp.CharacterID
+            var rename = (from r in sampleApp.Episode1.Season1.Adaptation1.Renames
+                              where r.Actor == ActorId
+                              && r.Character == sampleApp.Character
                               select r).FirstOrDefault();
             if (null != rename)
             {
                 Rename = Shared.LongName(new Character
                     {
                         Forename = rename.Forename,
-                        HonorificID = rename.HonorificID,
                         Honorific = rename.Honorific,
+                        Honorific1 = rename.Honorific1,
                         Surname = rename.Surname
                     });
             }

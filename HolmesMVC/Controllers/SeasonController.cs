@@ -38,7 +38,7 @@
                 return HttpNotFound();
             }
 
-            var existingSeasons = from s in Db.Seasons where s.AdaptationID == id select s.AirOrder;
+            var existingSeasons = from s in Db.Seasons where s.Adaptation == id select s.AirOrder;
             int newSeasonAirOrder = 1;
             if (existingSeasons.Any())
             {
@@ -46,7 +46,7 @@
             }
 
             var model = new Season();
-            model.AdaptationID = id;
+            model.Adaptation = id;
             model.AirOrder = newSeasonAirOrder;
 
             ViewBag.AdaptationName = Shared.DisplayName(adapt);
@@ -63,7 +63,7 @@
         {
             if (ModelState.IsValid)
             {
-                var id = season.AdaptationID;
+                var id = season.Adaptation;
                 Db.Seasons.Add(season);
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
                 return RedirectToAction("Create", "Episode", new { ID = id });
@@ -94,7 +94,7 @@
                                   )
                               }).ToList();
 
-            ViewBag.Adaptation = new SelectList(listAdapts, "Value", "Text", season.AdaptationID);
+            ViewBag.Adaptation = new SelectList(listAdapts, "Value", "Text", season.Adaptation);
 
             return View(season);
         }
@@ -110,7 +110,7 @@
             {
                 Db.Entry(season).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
-                return RedirectToAction("Details", "Adaptation", new { id = season.AdaptationID} );
+                return RedirectToAction("Details", "Adaptation", new { id = season.Adaptation} );
             }
             ViewBag.Adaptation = GetAdaptList();
             return View(season);
@@ -143,7 +143,7 @@
             Season season = Db.Seasons.Find(id);
             Db.Seasons.Remove(season);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
-            return RedirectToAction("Details", "Adaptation", new { id = season.AdaptationID });
+            return RedirectToAction("Details", "Adaptation", new { id = season.Adaptation });
         }
 
         private List<SelectListItem> GetAdaptList()

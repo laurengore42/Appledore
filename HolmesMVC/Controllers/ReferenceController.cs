@@ -13,7 +13,7 @@
 
         public ActionResult Index()
         {
-            var references = Db.References.Include(r => r.Episode).Include(r => r.Story);
+            var references = Db.References.Include(r => r.Episode1).Include(r => r.Story1);
             return View(references.ToList());
         }
 
@@ -54,8 +54,8 @@
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.EpisodeID);
-            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", reference.StoryID);
+            ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.Episode);
+            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", reference.Story);
             return View(reference);
         }
 
@@ -69,8 +69,8 @@
             {
                 return HttpNotFound();
             }
-            ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.EpisodeID);
-            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", reference.StoryID);
+            ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.Episode);
+            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", reference.Story);
             return View(reference);
         }
 
@@ -87,8 +87,8 @@
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
                 return RedirectToAction("Index");
             }
-            ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.EpisodeID);
-            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", reference.StoryID);
+            ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.Episode);
+            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", reference.Story);
             return View(reference);
         }
 

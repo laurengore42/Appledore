@@ -32,8 +32,8 @@
                               ).ToList();
             var epList = (from e in db.Episodes
                           where 
-                          e.Season.Adaptation.Medium.Name != "Stage"
-                          && e.Season.Adaptation.Name != "Canon"
+                          e.Season1.Adaptation1.Medium1.Name != "Stage"
+                          && e.Season1.Adaptation1.Name != "Canon"
                           && e.Airdate.Month == thisMonth
                           && e.Airdate.Day == thisDay
                           && e.AirdatePrecision == FullPrecision
@@ -44,27 +44,27 @@
                              ).ToList();
 
             var canonChars = from ap in db.Appearances
-                             where ap.Episode.Season.Adaptation.Name == "Canon"
-                             && ap.CharacterID > 0
-                             select ap.CharacterID;
+                             where ap.Episode1.Season1.Adaptation1.Name == "Canon"
+                             && ap.Character > 0
+                             select ap.Character;
 
             var canonApps = from ap in db.Appearances
-                            where canonChars.Contains(ap.CharacterID)
-                            && ap.Episode.Season.Adaptation.Medium.Name != "Stage"
-                            group ap by ap.ActorID into grp
+                            where canonChars.Contains(ap.Character)
+                            && ap.Episode1.Season1.Adaptation1.Medium1.Name != "Stage"
+                            group ap by ap.Actor into grp
                             select grp;
             
             var multiCharActors = (from ap in canonApps
-                                   where ap.Select(a => a.CharacterID).Distinct().Count() > 1
-                                   && ap.FirstOrDefault().ActorID > 0
-                                   select ap.FirstOrDefault().Actor).OrderBy(a => a.Surname).ToList();
+                                   where ap.Select(a => a.Character).Distinct().Count() > 1
+                                   && ap.FirstOrDefault().Actor > 0
+                                   select ap.FirstOrDefault().Actor1).OrderBy(a => a.Surname).ToList();
             MultiActor = new MultiActor();
             MultiActor.Actor =
                 multiCharActors[(new Random()).Next(multiCharActors.Count())];
             MultiActor.Characters =
                                      (from ap in db.Appearances
-                                      where ap.ActorID == MultiActor.Actor.ID
-                                      select ap.Character).Distinct().ToList();
+                                      where ap.Actor == MultiActor.Actor.ID
+                                      select ap.Character1).Distinct().ToList();
         }
 
         public MultiActor MultiActor { get; set; }

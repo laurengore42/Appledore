@@ -7,9 +7,9 @@ namespace HolmesMVC.Models
     {
         public int ID { get; set; }
         public string Description { get; set; }
-        public string StoryID { get; set; }
-        public int EpisodeID { get; set; }
-        public virtual Episode Episode { get; set; }
-        public virtual Story Story { get; set; }
+        public string Story { get; set; }
+        public int Episode { get; set; }
+        public virtual Episode Episode1 { get; set; }
+        public virtual Story Story1 { get; set; }
     }
 }

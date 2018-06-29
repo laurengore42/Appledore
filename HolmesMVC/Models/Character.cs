@@ -14,14 +14,14 @@ namespace HolmesMVC.Models
         public int ID { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
-        public Nullable<int> GenderID { get; set; }
-        public Nullable<int> SpeciesID { get; set; }
-        public Nullable<int> HonorificID { get; set; }
+        public Nullable<int> Gender { get; set; }
+        public Nullable<int> Species { get; set; }
+        public Nullable<int> Honorific { get; set; }
         public string Wikipedia { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
-        public virtual Gender Gender { get; set; }
-        public virtual Honorific Honorific { get; set; }
-        public virtual Species Species { get; set; }
+        public virtual Gender Gender1 { get; set; }
+        public virtual Honorific Honorific1 { get; set; }
+        public virtual Species Species1 { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }
     }
 }

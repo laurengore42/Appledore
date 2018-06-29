@@ -32,23 +32,23 @@
 
             ViewBag.actCount = Db.Actors.Count();
             ViewBag.holCount =
-                Db.Appearances.Where(a => a.CharacterID == holmesId)
-                    .GroupBy(a => a.ActorID)
+                Db.Appearances.Where(a => a.Character == holmesId)
+                    .GroupBy(a => a.Actor)
                     .Count();
 
             ViewBag.fadaCount =
-                Db.Episodes.Count(e => e.Season.Adaptation.Medium.Name == "Film");
+                Db.Episodes.Count(e => e.Season1.Adaptation1.Medium1.Name == "Film");
             ViewBag.tadaCount =
-                Db.Adaptations.Count(a => a.Medium.Name == "Television");
+                Db.Adaptations.Count(a => a.Medium1.Name == "Television");
             ViewBag.radaCount =
-                Db.Adaptations.Count(a => a.Medium.Name == "Radio");
+                Db.Adaptations.Count(a => a.Medium1.Name == "Radio");
 
             ViewBag.chaCount = Db.Characters.Count();
             ViewBag.canCount = Db.Stories.Count();
 
             ViewBag.canChaCount = (from a in Db.Appearances
-                                   where a.Episode.Season.Adaptation.Name == "Canon"
-                                   select a.CharacterID).Distinct().Count();
+                                   where a.Episode1.Season1.Adaptation1.Name == "Canon"
+                                   select a.Character).Distinct().Count();
             
             return View();
         }
@@ -108,12 +108,12 @@
                 // Create an appearance!
                 Db.Appearances.Add(new Appearance
                 {
-                    CharacterID = charId,
-                    Character = Db.Characters.Find(charId),
-                    ActorID = actorId,
-                    Actor = Db.Actors.Find(actorId),
-                    EpisodeID = epId,
-                    Episode = Db.Episodes.Find(epId)
+                    Character = charId,
+                    Character1 = Db.Characters.Find(charId),
+                    Actor = actorId,
+                    Actor1 = Db.Actors.Find(actorId),
+                    Episode = epId,
+                    Episode1 = Db.Episodes.Find(epId)
                 });
                 Db.SaveChanges();
             }
@@ -129,7 +129,7 @@
             var dupeCharNames = (from c in Db.Characters
                                  where c.ID > 0
                                  orderby c.ID
-                                 group c by (c.HonorificID == null ? string.Empty : (c.Honorific.Name + " ")) + (c.Forename == null || c.Forename.Length < 1 ? string.Empty : c.Forename + " ") + c.Surname
+                                 group c by (c.Honorific == null ? string.Empty : (c.Honorific1.Name + " ")) + (c.Forename == null || c.Forename.Length < 1 ? string.Empty : c.Forename + " ") + c.Surname
                                      into grp
                                      where grp.Count() > 1
                                      select grp).ToList();
@@ -140,13 +140,13 @@
 
             var titleForenames = (from c in Db.Characters
 								  join h in Db.Honorifics on 1 equals 1
-								  where c.ID > 0 && c.HonorificID == null && c.Forename != "" && c.Forename.StartsWith(h.Name + " ")
+								  where c.ID > 0 && c.Honorific == null && c.Forename != "" && c.Forename.StartsWith(h.Name + " ")
 								  orderby c.ID
 								  select c)
 								  .Union
 								 (from c in Db.Characters
 								  join h in Db.Honorifics on 1 equals 1
-								  where c.ID > 0 && c.HonorificID == null && c.Forename != "" && c.Forename == h.Name
+								  where c.ID > 0 && c.Honorific == null && c.Forename != "" && c.Forename == h.Name
 								  orderby c.ID
 								  select c)
 								  .ToList();
@@ -208,13 +208,13 @@
                                        && a.Surname != "extra"
                                        && (from ap in a.Appearances
                                            where
-                                               (from ap2 in ap.Character.Appearances
-                                                    where ap2.Episode.Season.Adaptation.Name != null
-                                                    && ap2.Episode.Season.Adaptation.Name == "Canon"
+                                               (from ap2 in ap.Character1.Appearances
+                                                    where ap2.Episode1.Season1.Adaptation1.Name != null
+                                                    && ap2.Episode1.Season1.Adaptation1.Name == "Canon"
                                                     select ap2.ID).Any()
-                                               && !ap.Actor.Surname.Contains("the dog")
-                                               && (ap.Episode.Season.Adaptation.Medium.Name == "Television"
-                                                   || ap.Episode.Season.Adaptation.Medium.Name == "Film")
+                                               && !ap.Actor1.Surname.Contains("the dog")
+                                               && (ap.Episode1.Season1.Adaptation1.Medium1.Name == "Television"
+                                                   || ap.Episode1.Season1.Adaptation1.Medium1.Name == "Film")
                                            select ap).Any()
                                        select a).ToList();
 
@@ -228,9 +228,9 @@
             var unlockedHolmeses = (from a in unlockedCanonActors
                                     where (from ap in a.Appearances
                                            where
-                                               ap.CharacterID == holmesId
-                                               && ap.Episode.Season.Adaptation
-                                                      .Medium.Name != "Stage" // to_do_theatre
+                                               ap.Character == holmesId
+                                               && ap.Episode1.Season1.Adaptation1
+                                                      .Medium1.Name != "Stage" // to_do_theatre
                                            select ap).Any()
                                     select a).ToList();
 
@@ -243,10 +243,10 @@
 
             var unlockedFilms = (from e in Db.Episodes
                                  where 
-                                 e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
-                                 && e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1
+                                 e.Season1.Adaptation1.Medium1.Name != "Stage" // to_do_theatre
+                                 && e.Season1.Adaptation1.Seasons.SelectMany(s => s.Episodes).Count() == 1
                                  && !(from a in e.Appearances
-                                      where a.ActorID == 0 && a.CharacterID == 0
+                                      where a.Actor == 0 && a.Character == 0
                                       select a.ID).Any()
                                  select e).ToList();
             if (unlockedFilms.Any())
@@ -259,9 +259,9 @@
             {
                 var unlockedEpisodes = (from e in Db.Episodes
                                        where
-                                           e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
+                                           e.Season1.Adaptation1.Medium1.Name != "Stage" // to_do_theatre
                                            && !(from a in e.Appearances
-                                                where a.ActorID == 0 && a.CharacterID == 0
+                                                where a.Actor == 0 && a.Character == 0
                                                 select a.ID).Any()
                                        select e).ToList();
 
@@ -298,7 +298,7 @@
                 int epId = Int16.Parse(ViewBag.ID);
                 ViewBag.adaptId = (from e in Db.Episodes
                                    where e.ID == epId
-                                   select e.Season.AdaptationID).FirstOrDefault();
+                                   select e.Season1.Adaptation).FirstOrDefault();
             }
 
             return PartialView();

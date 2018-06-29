@@ -168,7 +168,7 @@
                           select new SearchChar
                                                              {
                                                                  ID = c.ID,
-                                                                 Honorific = c.HonorificID == null ? string.Empty : c.Honorific.Name, 
+                                                                 Honorific = c.Honorific == null ? string.Empty : c.Honorific1.Name, 
                                                                  Forename = c.Forename,
                                                                  Surname = c.Surname
                                                              }).ToList();
@@ -176,61 +176,61 @@
             var renameQuery = from r in db.Renames 
                        select new SearchRename
                                                        {
-                                                           Honorific = r.HonorificID == null ? string.Empty : r.Honorific.Name, 
+                                                           Honorific = r.Honorific == null ? string.Empty : r.Honorific1.Name, 
                                                            Forename = r.Forename,
                                                            Surname = r.Surname, 
-                                                           AdaptId = r.AdaptationID, 
-                                                           AdaptTranslation = r.Adaptation.Translation,
+                                                           AdaptId = r.Adaptation, 
+                                                           AdaptTranslation = r.Adaptation1.Translation,
                                                            AdaptName = (
 
                                                            // oh my god
-                                                           !(null == r.Adaptation.Name || string.Empty == r.Adaptation.Name)
-                            ? r.Adaptation.Name.Replace("\"", string.Empty)
-                            : (r.Adaptation.Seasons.Count() == 1 && r.Adaptation.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                ? (null == r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                   || string.Empty == r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                    ? r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                    : r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                : (r.Adaptation.Company + " " + (r.Adaptation.Medium.Name == "Television" ? "TV" : r.Adaptation.Medium.Name))
+                                                           !(null == r.Adaptation1.Name || string.Empty == r.Adaptation1.Name)
+                            ? r.Adaptation1.Name.Replace("\"", string.Empty)
+                            : (r.Adaptation1.Seasons.Count() == 1 && r.Adaptation1.Seasons.FirstOrDefault().Episodes.Count() == 1)
+                                ? (null == r.Adaptation1.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
+                                   || string.Empty == r.Adaptation1.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
+                                    ? r.Adaptation1.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story1.Name
+                                    : r.Adaptation1.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
+                                : (r.Adaptation1.Company + " " + (r.Adaptation1.Medium1.Name == "Television" ? "TV" : r.Adaptation1.Medium1.Name))
 
                                                             ).Replace("\"", string.Empty),
 
-                                                           Character = r.CharacterID, 
+                                                           Character = r.Character, 
                                                            OldName =
-                                                                (r.Character.HonorificID == null ? string.Empty : r.Character.Honorific.Name + " ")
-                                                                + (r.Character.Forename == null || r.Character.Forename == string.Empty ? string.Empty : r.Character.Forename + " ")
-                                                                + r.Character.Surname
+                                                                (r.Character1.Honorific == null ? string.Empty : r.Character1.Honorific1.Name + " ")
+                                                                + (r.Character1.Forename == null || r.Character1.Forename == string.Empty ? string.Empty : r.Character1.Forename + " ")
+                                                                + r.Character1.Surname
                                                        };
             var stringit = renameQuery.ToString();
             Renames = renameQuery.ToList();
 
             var episodeQuery = from e in db.Episodes 
-                               where (e.Season.Adaptation.Name == null || e.Season.Adaptation.Name != "Canon") // these are 'Stories'
-                                    && e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
-                                    && e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() > 1 // exclude single-film, put those in 'Adapts'
+                               where (e.Season1.Adaptation1.Name == null || e.Season1.Adaptation1.Name != "Canon") // these are 'Stories'
+                                    && e.Season1.Adaptation1.Medium1.Name != "Stage" // to_do_theatre
+                                    && e.Season1.Adaptation1.Seasons.SelectMany(s => s.Episodes).Count() > 1 // exclude single-film, put those in 'Adapts'
                                select new SearchEp
                                                          {
                                                              ID = e.ID, 
                                                              Year = e.Airdate.Year,
-                                                             EpCount = e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count(),
-                                                             Medium = e.Season.Adaptation.Medium.Name,
+                                                             EpCount = e.Season1.Adaptation1.Seasons.SelectMany(s => s.Episodes).Count(),
+                                                             Medium = e.Season1.Adaptation1.Medium1.Name,
                                                              Holmes = (from ap in e.Appearances
-                                                                           where ap.CharacterID == holmesId
+                                                                           where ap.Character == holmesId
                                                                            select ap).Any()
                                                                            ? (from ap in e.Appearances
-                                                                              where ap.CharacterID == holmesId
-                                                                              group ap by ap.ActorID into grp
+                                                                              where ap.Character == holmesId
+                                                                              group ap by ap.Actor into grp
                                                                               orderby grp.Count() descending 
-                                                                              select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
+                                                                              select grp.FirstOrDefault().Actor1.Surname).FirstOrDefault()
                                                                            : string.Empty,
                                                              Translation = (e.Translation == null || e.Translation == string.Empty || e.Translation.Length == 0)
                                                                             ? string.Empty
                                                                             : e.Translation.Replace("\"", string.Empty),
                                                              Name = (
                                                                      (e.Title == null || e.Title == string.Empty || e.Title.Length == 0)
-                                                                      ? (e.StoryID == null || e.StoryID == string.Empty || e.StoryID.Length == 0)
+                                                                      ? (e.Story == null || e.Story == string.Empty || e.Story.Length == 0)
                                                                          ? string.Empty
-                                                                         : e.Story.Name
+                                                                         : e.Story1.Name
                                                                       : e.Title
                                                                     ).Replace("\"", string.Empty).Replace("\\" + "\"", string.Empty)
                                                          };
@@ -239,7 +239,7 @@
 
             var adaptQuery = from a in db.Adaptations
                              where (a.Name == null || a.Name != "Canon") 
-                            && a.Medium.Name != "Stage" // to_do_theatre
+                            && a.Medium1.Name != "Stage" // to_do_theatre
                             && a.Seasons.Any()
                             && a.Seasons.FirstOrDefault().Episodes.Any()
                             select new SearchAdapt
@@ -247,16 +247,16 @@
                                 ID = a.ID,
                                 Year = a.Seasons.OrderBy(s => s.AirOrder).FirstOrDefault().Episodes.OrderBy(e => e.Airdate).FirstOrDefault().Airdate.Year,
                                 EpCount = a.Seasons.SelectMany(s => s.Episodes).Count(),
-                                Medium = a.Medium.Name,
+                                Medium = a.Medium1.Name,
                                 
                                                              Holmes = (from ap in a.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
-                                                                           where ap.CharacterID == holmesId
+                                                                           where ap.Character == holmesId
                                                                            select ap).Any()
                                                                            ? (from ap in a.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
-                                                                              where ap.CharacterID == holmesId
-                                                                              group ap by ap.ActorID into grp
+                                                                              where ap.Character == holmesId
+                                                                              group ap by ap.Actor into grp
                                                                               orderby grp.Count() descending
-                                                                              select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
+                                                                              select grp.FirstOrDefault().Actor1.Surname).FirstOrDefault()
                                                                            : string.Empty,
                                 Translation = (a.Translation == null || a.Translation == string.Empty || a.Translation.Length == 0)
                                                ? string.Empty
@@ -271,9 +271,9 @@
                             : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
                                 ? (null == a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
                                    || string.Empty == a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                    ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
+                                    ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story1.Name
                                     : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                : (a.Company + " " + (a.Medium1.Name == "Television" ? "TV" : a.Medium1.Name))
                                 ).Replace("\"", string.Empty)
                             };
             var stringit3 = adaptQuery.ToString();

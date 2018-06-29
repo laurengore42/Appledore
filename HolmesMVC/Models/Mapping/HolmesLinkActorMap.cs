@@ -14,13 +14,13 @@ namespace HolmesMVC.Models.Mapping
             // Table & Column Mappings
             this.ToTable("HolmesLinkActors");
             this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.ActorID).HasColumnName("Actor");
+            this.Property(t => t.Actor).HasColumnName("Actor");
             this.Property(t => t.Name).HasColumnName("Name");
 
             // Relationships
-            this.HasOptional(t => t.Actor)
+            this.HasOptional(t => t.Actor1)
                 .WithMany(t => t.HolmesLinkActors)
-                .HasForeignKey(d => d.ActorID);
+                .HasForeignKey(d => d.Actor);
 
         }
     }

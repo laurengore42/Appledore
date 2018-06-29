@@ -25,13 +25,13 @@
         public RenameView(Rename r)
         {
             ID = r.ID;
-            AdaptId = r.AdaptationID;
-            AdaptName = Shared.DisplayName(r.Adaptation);
-            ActorId = r.ActorID;
-            ActorName = Shared.ShortName(r.Actor);
-            CharId = r.CharacterID;
-            CharName = Shared.LongName(r.Character);
-            Honorific = r.HonorificID == null ? null : r.Honorific.Name;
+            AdaptId = r.Adaptation;
+            AdaptName = Shared.DisplayName(r.Adaptation1);
+            ActorId = r.Actor;
+            ActorName = Shared.ShortName(r.Actor1);
+            CharId = r.Character;
+            CharName = Shared.LongName(r.Character1);
+            Honorific = r.Honorific == null ? null : r.Honorific1.Name;
             Forename = r.Forename;
             Surname = r.Surname;
         }

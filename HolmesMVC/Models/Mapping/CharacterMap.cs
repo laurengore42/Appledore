@@ -26,21 +26,21 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Forename).HasColumnName("Forename");
             this.Property(t => t.Surname).HasColumnName("Surname");
-            this.Property(t => t.GenderID).HasColumnName("Gender");
-            this.Property(t => t.SpeciesID).HasColumnName("Species");
-            this.Property(t => t.HonorificID).HasColumnName("Honorific");
+            this.Property(t => t.Gender).HasColumnName("Gender");
+            this.Property(t => t.Species).HasColumnName("Species");
+            this.Property(t => t.Honorific).HasColumnName("Honorific");
             this.Property(t => t.Wikipedia).HasColumnName("Wikipedia");
 
             // Relationships
-            this.HasOptional(t => t.Gender)
+            this.HasOptional(t => t.Gender1)
                 .WithMany(t => t.Characters)
-                .HasForeignKey(d => d.GenderID);
-            this.HasOptional(t => t.Honorific)
+                .HasForeignKey(d => d.Gender);
+            this.HasOptional(t => t.Honorific1)
                 .WithMany(t => t.Characters)
-                .HasForeignKey(d => d.HonorificID);
-            this.HasOptional(t => t.Species)
+                .HasForeignKey(d => d.Honorific);
+            this.HasOptional(t => t.Species1)
                 .WithMany(t => t.Characters)
-                .HasForeignKey(d => d.SpeciesID);
+                .HasForeignKey(d => d.Species);
 
         }
     }

@@ -71,8 +71,8 @@
                 var apps = Db.Characters.Find(character).Appearances;
                 foreach (var app in apps)
                 {
-                    app.CharacterID = oneTrueCharId;
-                    app.Character = oneTrueChar;
+                    app.Character = oneTrueCharId;
+                    app.Character1 = oneTrueChar;
                 }
             }
 
@@ -106,9 +106,9 @@
             {
                 return HttpNotFound();
             }
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", character.GenderID);
-            ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
-            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);
+            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", character.Gender);
+            ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.Honorific);
+            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.Species);
             return View(character);
         }
 
@@ -126,9 +126,9 @@
 
                 return RedirectToRoute("Details", new { controller = "Character", id = character.ID });
             }
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", character.GenderID);
-            ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
-            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);
+            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", character.Gender);
+            ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.Honorific);
+            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.Species);
             return View(character);
         }
 

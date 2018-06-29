@@ -8,17 +8,17 @@
     {
         public ActorHistory(Appearance ap)
         {
-            Airdate = ap.Episode.Airdate;
-            AirdatePrecision = (DatePrecision)ap.Episode.AirdatePrecision;
+            Airdate = ap.Episode1.Airdate;
+            AirdatePrecision = (DatePrecision)ap.Episode1.AirdatePrecision;
             var rename = Shared.GetRename(ap);
-            CharacterName = null == rename ? Shared.LongName(ap.Character) : Shared.LongName(rename);
-            EpId = ap.EpisodeID;
-            AdaptName = ap.Episode.Season.Adaptation.Name
-                        ?? Shared.DisplayName(ap.Episode.Season.Adaptation);
-            EpName = Shared.DisplayName(ap.Episode);
-            EpTranslation = ap.Episode.Translation;
-            SeasonCode = Shared.GetSeasonCode(ap.Episode);
-            MediumName = ap.Episode.Season.Adaptation.Medium.Name;
+            CharacterName = null == rename ? Shared.LongName(ap.Character1) : Shared.LongName(rename);
+            EpId = ap.Episode;
+            AdaptName = ap.Episode1.Season1.Adaptation1.Name
+                        ?? Shared.DisplayName(ap.Episode1.Season1.Adaptation1);
+            EpName = Shared.DisplayName(ap.Episode1);
+            EpTranslation = ap.Episode1.Translation;
+            SeasonCode = Shared.GetSeasonCode(ap.Episode1);
+            MediumName = ap.Episode1.Season1.Adaptation1.Medium1.Name;
         }
 
         public DateTime Airdate { get; set; }

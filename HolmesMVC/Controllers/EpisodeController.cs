@@ -24,18 +24,18 @@
                 return HttpNotFound();
             }
 
-            var canon = Shared.DisplayName(episode.Season.Adaptation) == "Canon";
+            var canon = Shared.DisplayName(episode.Season1.Adaptation1) == "Canon";
 
             // the Canon case
             if (canon)
             {
-                return RedirectToAction("Details","Story", new {id = episode.StoryID});
+                return RedirectToAction("Details","Story", new {id = episode.Story});
             }
 
             // the single-film case
-            if (episode.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1)
+            if (episode.Season1.Adaptation1.Seasons.SelectMany(s => s.Episodes).Count() == 1)
             {
-                return RedirectToAction("Details","Adaptation",new {ID = episode.Season.AdaptationID});
+                return RedirectToAction("Details","Adaptation",new {ID = episode.Season1.Adaptation});
             }
 
             return View(new EpisodeView(episode));
@@ -81,8 +81,8 @@
                 return RedirectToRoute("Details", new { controller = "Episode", id = episode.ID });
             }
 
-            ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.SeasonID);
-            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.StoryID);
+            ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.Season);
+            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.Story);
             return View(new EpisodeView(episode));
         }
 
@@ -107,9 +107,9 @@
                                      )
                                  }).ToList();
 
-            ViewBag.Adaptation = new SelectList(listAdapts, "Value", "Text", episode.Season.AdaptationID);
+            ViewBag.Adaptation = new SelectList(listAdapts, "Value", "Text", episode.Season1.Adaptation);
             
-            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.StoryID);
+            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.Story);
             return View(new EpisodeView(episode));
         }
 
@@ -127,8 +127,8 @@
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
                 return RedirectToAction("Details", "Episode", new { ID = id });
             }
-            ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.SeasonID);
-            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.StoryID);
+            ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.Season);
+            ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.Story);
             return View( new EpisodeView(episode));
         }
 
@@ -195,7 +195,7 @@
         public ActionResult DeleteConfirmed(int id)
         {
             var episode = Db.Episodes.Find(id);
-            var adaptId = episode.Season.AdaptationID;
+            var adaptId = episode.Season1.Adaptation;
             Db.Episodes.Remove(episode);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
             return RedirectToAction("Details","Adaptation", new {ID = adaptId});
@@ -205,9 +205,9 @@
         {
             var episode = Db.Episodes.Find(id);
             var lockApp = new Appearance();
-            lockApp.Actor = Db.Actors.Find(0);
-            lockApp.Character = Db.Characters.Find(0);
-            lockApp.Episode = episode;
+            lockApp.Actor1 = Db.Actors.Find(0);
+            lockApp.Character1 = Db.Characters.Find(0);
+            lockApp.Episode1 = episode;
             Db.Appearances.Add(lockApp);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
@@ -218,8 +218,8 @@
         {
             var episode = Db.Episodes.Find(id);
             var lockApp = (from a in episode.Appearances
-                          where a.ActorID == 0
-                          && a.CharacterID == 0
+                          where a.Actor == 0
+                          && a.Character == 0
                           select a).First();
             Db.Appearances.Remove(lockApp);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);

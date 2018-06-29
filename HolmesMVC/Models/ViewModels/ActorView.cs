@@ -61,21 +61,21 @@
 
             // Get actor's appearances
             Histories = (from ap in actor.Appearances
-                           orderby ap.Episode.Airdate, ap.EpisodeID, ap.CharacterID
+                           orderby ap.Episode1.Airdate, ap.Episode, ap.Character
                            select new ActorHistory(ap)).ToList();
 
             // Group episodes
             Summaries = (from ap in actor.Appearances
                                    group ap by new
                                    {
-                                       ap.Episode.Season.AdaptationID,
-                                       ap.CharacterID
+                                       ap.Episode1.Season1.Adaptation,
+                                       ap.Character
                                    }
                                        into grp
-                                       orderby grp.Min(a => a.Episode.Airdate)
+                                       orderby grp.Min(a => a.Episode1.Airdate)
                                        select new ActorHistorySummary(
-                                               grp.Key.AdaptationID,
-                                               grp.Key.CharacterID,
+                                               grp.Key.Adaptation,
+                                               grp.Key.Character,
                                                grp.ToList()
                                            )).ToList();
 
@@ -87,29 +87,29 @@
             HolmesActors = (from ap in
                                 (
                                 from ap in actor.Appearances
-                                where ap.CharacterID == watsonId
-                                from ap1 in ap.Episode.Appearances.Where(a => a.CharacterID == holmesId)
+                                where ap.Character == watsonId
+                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == holmesId)
                                 select ap1
                                 )
-                            group ap by ap.Actor
+                            group ap by ap.Actor1
                                 into grp
                                 select grp.Key).ToList();
 
             WatsonActors = (from ap in
                                 (
                                 from ap in actor.Appearances
-                                where ap.CharacterID == holmesId
-                                from ap1 in ap.Episode.Appearances.Where(a => a.CharacterID == watsonId)
+                                where ap.Character == holmesId
+                                from ap1 in ap.Episode1.Appearances.Where(a => a.Character == watsonId)
                                 select ap1
                                 )
-                            group ap by ap.Actor
+                            group ap by ap.Actor1
                                 into grp
                                 select grp.Key).ToList();
 
             if (actor.Appearances.Any())
             {
-                YearOfFirstApp = actor.Appearances.OrderBy(a => a.Episode.Airdate).First().Episode.Airdate.Year;
-                YearOfLastApp = actor.Appearances.OrderBy(a => a.Episode.Airdate).Last().Episode.Airdate.Year;
+                YearOfFirstApp = actor.Appearances.OrderBy(a => a.Episode1.Airdate).First().Episode1.Airdate.Year;
+                YearOfLastApp = actor.Appearances.OrderBy(a => a.Episode1.Airdate).Last().Episode1.Airdate.Year;
             }
         }
 

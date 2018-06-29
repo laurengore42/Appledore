@@ -6,12 +6,12 @@
     {
         public CharacterHistory(Appearance ap)
         {
-            EpId = ap.EpisodeID;
-            EpName = Shared.DisplayName(ap.Episode);
-            EpTranslation = ap.Episode.Translation;
-            AdaptName = Shared.DisplayName(ap.Episode.Season.Adaptation);
+            EpId = ap.Episode;
+            EpName = Shared.DisplayName(ap.Episode1);
+            EpTranslation = ap.Episode1.Translation;
+            AdaptName = Shared.DisplayName(ap.Episode1.Season1.Adaptation1);
 
-            var airdatePrecision = (DatePrecision)ap.Episode.AirdatePrecision;
+            var airdatePrecision = (DatePrecision)ap.Episode1.AirdatePrecision;
             var airdateFormat = "dd MMM yyyy";
             switch (airdatePrecision)
             {
@@ -23,7 +23,7 @@
                     break;
             }
 
-            AirdateString = ap.Episode.Airdate.ToString(airdateFormat);
+            AirdateString = ap.Episode1.Airdate.ToString(airdateFormat);
         }
 
         public string AirdateString { get; set; }

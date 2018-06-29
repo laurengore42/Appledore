@@ -24,8 +24,8 @@ namespace HolmesMVC.Models
         public string Pic { get; set; }
         public string PicCredit { get; set; }
         public string Middlenames { get; set; }
-        public Nullable<int> GenderID { get; set; }
-        public Nullable<int> SpeciesID { get; set; }
+        public Nullable<int> Gender { get; set; }
+        public Nullable<int> Species { get; set; }
         public string IMDb { get; set; }
         public string IMDbName { get; set; }
         public string Wikipedia { get; set; }
@@ -35,8 +35,8 @@ namespace HolmesMVC.Models
         public double? Longitude { get; set; }
         public int BirthdatePrecision { get; set; }
         public int DeathdatePrecision { get; set; }
-        public virtual Gender Gender { get; set; }
-        public virtual Species Species { get; set; }
+        public virtual Gender Gender1 { get; set; }
+        public virtual Species Species1 { get; set; }
         public virtual ICollection<HolmesLinkActor> HolmesLinkActors { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }

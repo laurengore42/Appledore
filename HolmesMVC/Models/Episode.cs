@@ -13,15 +13,15 @@ namespace HolmesMVC.Models
         }
 
         public int ID { get; set; }
-        public int SeasonID { get; set; }
-        public string StoryID { get; set; }
+        public int Season { get; set; }
+        public string Story { get; set; }
         public System.DateTime Airdate { get; set; }
         public string Title { get; set; }
         public string Translation { get; set; }
         public int AirdatePrecision { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
-        public virtual Season Season { get; set; }
-        public virtual Story Story { get; set; }
+        public virtual Season Season1 { get; set; }
+        public virtual Story Story1 { get; set; }
         public virtual ICollection<Reference> References { get; set; }
         public virtual ICollection<HolmesLink> HolmesLinks { get; set; }
     }

@@ -73,8 +73,8 @@
                 var apps = Db.Actors.Find(actor).Appearances;
                 foreach (var app in apps)
                 {
-                    app.ActorID = oneTrueActorId;
-                    app.Actor = oneTrueActor;
+                    app.Actor = oneTrueActorId;
+                    app.Actor1 = oneTrueActor;
                 }
             }
 
@@ -125,8 +125,8 @@
                 return HttpNotFound();
             }
 
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.GenderID);
-            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
+            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.Gender);
+            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.Species);
             return View(actor);
         }
 
@@ -144,8 +144,8 @@
 
                 return RedirectToRoute("Details", new { controller = "Actor", id = actor.ID });
             }
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.GenderID);
-            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
+            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.Gender);
+            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.Species);
             return View(actor);
         }
 

@@ -14,7 +14,7 @@
 
             Adaptation = new AdaptView(adapt);
 
-            Stories = (from s in adapt.Seasons.SelectMany(s => s.Episodes).Select(e => e.Story)
+            Stories = (from s in adapt.Seasons.SelectMany(s => s.Episodes).Select(e => e.Story1)
                        select s).ToList();
 
             UserCanonOrder = profile.PreferredCanonOrder;

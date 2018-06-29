@@ -15,14 +15,14 @@
         public ActionResult PerEpisode(int epId = -1)
         {
             var relevantApps = (from a in Db.Appearances
-                                where a.EpisodeID == epId
-                                && (a.ActorID != 0
-                                || a.CharacterID != 0)
+                                where a.Episode == epId
+                                && (a.Actor != 0
+                                || a.Character != 0)
                                 select a).ToList();
             var lockApp = from a in Db.Appearances
-                          where a.EpisodeID == epId
-                          && a.ActorID == 0
-                          && a.CharacterID == 0
+                          where a.Episode == epId
+                          && a.Actor == 0
+                          && a.Character == 0
                           select a;
             ViewBag.Locked = lockApp.Any();
             if (!relevantApps.Any())
@@ -31,7 +31,7 @@
                 return PartialView(new List<Appearance>());
             }
 
-            var adaptation = relevantApps.First().Episode.Season.AdaptationID;
+            var adaptation = relevantApps.First().Episode1.Season1.Adaptation;
             ViewBag.EpId = epId;
 
             // sort characters
@@ -39,18 +39,18 @@
             var watsonId = Shared.GetWatson();
 
             var hApps =
-                (from a in relevantApps where a.CharacterID == holmesId select a)
+                (from a in relevantApps where a.Character == holmesId select a)
                     .ToList();
             var wApps =
-                (from a in relevantApps where a.CharacterID == watsonId select a)
+                (from a in relevantApps where a.Character == watsonId select a)
                     .ToList();
             var canonApps = (from a in relevantApps
                          where
-                             a.CharacterID != holmesId && a.CharacterID != watsonId
-                             && Shared.IsCanon(a.Character)
+                             a.Character != holmesId && a.Character != watsonId
+                             && Shared.IsCanon(a.Character1)
                          select a).ToList();
             var uncanonApps = (from a in relevantApps
-                           where !Shared.IsCanon(a.Character)
+                           where !Shared.IsCanon(a.Character1)
                            select a).ToList();
 
             canonApps = canonApps.OrderBy(a => Shared.SortSurname(a)).ThenBy(a => Shared.SortForename(a)).ToList();
@@ -121,9 +121,9 @@
             foreach (var epId in model.Episodes)
             {
                 var existApp = (from a in Db.Appearances
-                                where a.EpisodeID == epId
-                                && a.ActorID == model.Actor
-                                && a.CharacterID == model.Character
+                                where a.Episode == epId
+                                && a.Actor == model.Actor
+                                && a.Character == model.Character
                                 select a).Any();
 
                 // Silently fail if trying to add duplicate appearance
@@ -134,9 +134,9 @@
 
                 var appearance = new Appearance
                                          {
-                                             EpisodeID = epId,
-                                             ActorID = model.Actor,
-                                             CharacterID = model.Character
+                                             Episode = epId,
+                                             Actor = model.Actor,
+                                             Character = model.Character
                                          };
                 Db.Appearances.Add(appearance);
             }
@@ -161,19 +161,19 @@
 
             var appearance = new Appearance
             {
-                Episode = episode,
-                EpisodeID = episode.ID
+                Episode1 = episode,
+                Episode = episode.ID
             };
 
-            var adapt = episode.Season.Adaptation;
+            var adapt = episode.Season1.Adaptation1;
             if (Shared.DisplayName(adapt) == "Canon")
             {
-                appearance.ActorID = 0;
+                appearance.Actor = 0;
             }
             else if (actor > 0)
             {
-                appearance.ActorID = actor;
-                appearance.Actor = Db.Actors.Find(actor);
+                appearance.Actor = actor;
+                appearance.Actor1 = Db.Actors.Find(actor);
             }
             else
             {
@@ -182,8 +182,8 @@
 
             if (character > 0)
             {
-                appearance.CharacterID = character;
-                appearance.Character = Db.Characters.Find(character);
+                appearance.Character = character;
+                appearance.Character1 = Db.Characters.Find(character);
             }
             else
             {
@@ -202,11 +202,11 @@
                 return View(appearance);
             }
 
-            var epId = appearance.EpisodeID;
+            var id = appearance.Episode;
             Db.Appearances.Add(appearance);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Episode", new { ID = epId });
+            return RedirectToAction("Details", "Episode", new { ID = id });
         }
 
         public List<SelectListItem> ActorList()
@@ -254,7 +254,7 @@
         public ActionResult DeleteConfirmed(int id)
         {
             var appearance = Db.Appearances.Find(id);
-            var epId = appearance.EpisodeID;
+            var epId = appearance.Episode;
             Db.Appearances.Remove(appearance);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
