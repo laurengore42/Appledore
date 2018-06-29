@@ -19,16 +19,16 @@
             // the canon 'episode', i.e. story
             var rawEp = (from e in story.Episodes
                          where
-                             null != e.Season1.Adaptation1.Name
-                             && e.Season1.Adaptation1.Name == "Canon"
+                             null != e.Season.Adaptation.Name
+                             && e.Season.Adaptation.Name == "Canon"
                          select e).FirstOrDefault();
 
             Episode = new EpisodeView(rawEp);
 
-            Date = rawEp.Story1.Date;
+            Date = rawEp.Story.Date;
 
-            VillainType = rawEp.Story1.VillainType;
-            OutcomeType = rawEp.Story1.OutcomeType;
+            VillainType = rawEp.Story.VillainType;
+            OutcomeType = rawEp.Story.OutcomeType;
 
             BaringGouldStartString = Shared.VagueDate(
                 Date.BaringGouldStart,
@@ -52,9 +52,9 @@
             // these episodes are all the adaptations of that story
             Adapteds = (from e in story.Episodes
                         where
-                            (null == e.Season1.Adaptation1.Name
-                             || e.Season1.Adaptation1.Name != "Canon")
-                            && e.Season1.Adaptation1.Medium1.Name != "Stage" // to_do_theatre
+                            (null == e.Season.Adaptation.Name
+                             || e.Season.Adaptation.Name != "Canon")
+                            && e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
                         select e).OrderBy(e => e.Airdate).ToList();
 
             GetChunk(chunkStart, chunkLength);

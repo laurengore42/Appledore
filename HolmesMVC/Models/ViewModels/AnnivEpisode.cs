@@ -10,7 +10,7 @@
             ID = e.ID;
             Airdate = e.Airdate;
             Name = Shared.DisplayName(e);
-            var HolmesActor = Shared.PlayedBy(holmesId, e.Season1.Adaptation1).FirstOrDefault();
+            var HolmesActor = Shared.PlayedBy(holmesId, e.Season.Adaptation).FirstOrDefault();
             Holmes = HolmesActor == null ? "(nobody)" : HolmesActor.Surname;
         }
 

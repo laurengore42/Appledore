@@ -12,7 +12,7 @@
             ID = adapt.ID;
             DisplayName = Shared.DisplayName(adapt);
             Translation = adapt.Translation;
-            MediumName = adapt.Medium1.Name;
+            MediumName = adapt.Medium.Name;
             Company = adapt.Company;
 
             HolmesActors = Shared.PlayedBy("Holmes", adapt);

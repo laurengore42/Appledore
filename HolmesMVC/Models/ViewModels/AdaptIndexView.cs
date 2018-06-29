@@ -9,7 +9,7 @@
         {
             ID = adapt.ID;
             DisplayName = Shared.DisplayName(adapt);
-            MediumName = adapt.Medium1.Name;
+            MediumName = adapt.Medium.Name;
 
             // uses pre-calculated holmesId to reduce loading times
             var starActor = Shared.PlayedBy(holmesId, adapt).FirstOrDefault();

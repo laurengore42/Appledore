@@ -11,7 +11,7 @@ namespace HolmesMVC.Models.Mapping
             this.HasKey(t => t.ID);
 
             // Properties
-            this.Property(t => t.Story)
+            this.Property(t => t.StoryID)
                 .IsRequired()
                 .IsFixedLength()
                 .HasMaxLength(4);
@@ -20,16 +20,16 @@ namespace HolmesMVC.Models.Mapping
             this.ToTable("References");
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Description).HasColumnName("Description");
-            this.Property(t => t.Story).HasColumnName("Story");
-            this.Property(t => t.Episode).HasColumnName("Episode");
+            this.Property(t => t.StoryID).HasColumnName("Story");
+            this.Property(t => t.EpisodeID).HasColumnName("Episode");
 
             // Relationships
-            this.HasRequired(t => t.Episode1)
+            this.HasRequired(t => t.Episode)
                 .WithMany(t => t.References)
-                .HasForeignKey(d => d.Episode);
-            this.HasRequired(t => t.Story1)
+                .HasForeignKey(d => d.EpisodeID);
+            this.HasRequired(t => t.Story)
                 .WithMany(t => t.References)
-                .HasForeignKey(d => d.Story);
+                .HasForeignKey(d => d.StoryID);
 
         }
     }

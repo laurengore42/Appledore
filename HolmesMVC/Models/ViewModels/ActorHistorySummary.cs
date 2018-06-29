@@ -15,12 +15,12 @@
             var sampleApp = histories.First();
 
             var rename = Shared.GetRename(sampleApp);
-            CharacterName = null == rename ? Shared.LongName(sampleApp.Character1) : Shared.LongName(rename);
-            MediumName = sampleApp.Episode1.Season1.Adaptation1.Medium1.Name;
-            AdaptName = sampleApp.Episode1.Season1.Adaptation1.Name
+            CharacterName = null == rename ? Shared.LongName(sampleApp.Character) : Shared.LongName(rename);
+            MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
+            AdaptName = sampleApp.Episode.Season.Adaptation.Name
                         ?? Shared.DisplayName(
-                            sampleApp.Episode1.Season1.Adaptation1);
-            AdaptTranslation = sampleApp.Episode1.Season1.Adaptation1.Translation;
+                            sampleApp.Episode.Season.Adaptation);
+            AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
         }
 
         public int AdaptId { get; set; }

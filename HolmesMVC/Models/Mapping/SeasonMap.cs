@@ -16,13 +16,13 @@ namespace HolmesMVC.Models.Mapping
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Translation).HasColumnName("Translation");
-            this.Property(t => t.Adaptation).HasColumnName("Adaptation");
+            this.Property(t => t.AdaptationID).HasColumnName("Adaptation");
             this.Property(t => t.AirOrder).HasColumnName("AirOrder");
 
             // Relationships
-            this.HasRequired(t => t.Adaptation1)
+            this.HasRequired(t => t.Adaptation)
                 .WithMany(t => t.Seasons)
-                .HasForeignKey(d => d.Adaptation);
+                .HasForeignKey(d => d.AdaptationID);
 
         }
     }
