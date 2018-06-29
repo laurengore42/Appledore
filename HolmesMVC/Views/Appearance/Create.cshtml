@@ -16,14 +16,14 @@
         <legend>Appearance</legend>
         <br />
         <div class="editor-field">
-            <label class="inlinelabel">Episode</label>: @Shared.DisplayName(Model.Episode1.Season1.Adaptation1): @Shared.GetSeasonCode(Model.Episode1)
-            @if (String.IsNullOrWhiteSpace(Model.Episode1.Title))
+            <label class="inlinelabel">Episode</label>: @Shared.DisplayName(Model.Episode.Season.Adaptation): @Shared.GetSeasonCode(Model.Episode)
+            @if (String.IsNullOrWhiteSpace(Model.Episode.Title))
             {
-                <text>'@Model.Episode1.Story1.Name'</text>
+                <text>'@Model.Episode.Story.Name'</text>
             }
             else
             {
-                <text>'@Model.Episode1.Title'</text>
+                <text>'@Model.Episode.Title'</text>
             }
         </div>
 
@@ -47,13 +47,13 @@
             <input type="submit" value="Create" />
         </p>
         <span class="hidden">
-            @Html.EditorFor(model => model.Episode)
+            @Html.EditorFor(model => model.EpisodeID)
         </span>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to Episode", "Details", "Episode", new { Model.Episode1.ID }, null)
+    @Html.ActionLink("Back to Episode", "Details", "Episode", new { Model.Episode.ID }, null)
 </div>
 
 @section Scripts {

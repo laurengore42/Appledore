@@ -15,35 +15,35 @@
         <legend>Rename</legend>
 
         <div>
-            @Html.LabelFor(model => model.Adaptation, "Adaptation")
+            @Html.LabelFor(model => model.AdaptationID, "Adaptation")
         </div>
         <div>
-            @Shared.DisplayName(Model.Adaptation1)
-            @Html.HiddenFor(model => model.Adaptation, "Adaptation")
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.Character, "in Canon")
-        </div>
-        <div>
-            @Shared.LongName(Model.Character1)
-            @Html.HiddenFor(model => model.Character, "Character")
+            @Shared.DisplayName(Model.Adaptation)
+            @Html.HiddenFor(model => model.AdaptationID, "Adaptation")
         </div>
 
         <div>
-            @Html.LabelFor(model => model.Actor, "Actor")
+            @Html.LabelFor(model => model.CharacterID, "in Canon")
         </div>
         <div>
-            @Shared.ShortName(Model.Actor1)
-            @Html.HiddenFor(model => model.Actor, "Actor")
+            @Shared.LongName(Model.Character)
+            @Html.HiddenFor(model => model.CharacterID, "Character")
         </div>
 
         <div>
-            @Html.LabelFor(model => model.Honorific, "Honorific1")
+            @Html.LabelFor(model => model.ActorID, "Actor")
+        </div>
+        <div>
+            @Shared.ShortName(Model.Actor)
+            @Html.HiddenFor(model => model.ActorID, "Actor")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.HonorificID, "Honorific1")
         </div>
         <div>
             @Html.DropDownList("Honorific", String.Empty)
-            @Html.ValidationMessageFor(model => model.Honorific)
+            @Html.ValidationMessageFor(model => model.HonorificID)
         </div>
 
         <div>

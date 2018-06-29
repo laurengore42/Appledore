@@ -10,7 +10,7 @@
 }
 else
 {
-    var canonPage = Model.First().Episode1.Season1.Adaptation1.Name == "Canon";
+    var canonPage = Model.First().Episode.Season.Adaptation.Name == "Canon";
     var castTitle = canonPage ? "Characters" : "Cast";
 
     <table class="lineddetails">
@@ -19,14 +19,14 @@ else
         </tr>
         @foreach (var appearance in Model)
         {
-            var canonCharacter = Shared.IsCanon(appearance.Character1);
-            var charName = Shared.LongName(appearance.Character1);
-            var actorName = Shared.ShortName(appearance.Actor1);
+            var canonCharacter = Shared.IsCanon(appearance.Character);
+            var charName = Shared.LongName(appearance.Character);
+            var actorName = Shared.ShortName(appearance.Actor);
             var rename = Shared.GetRename(appearance);
             <tr>
                 @if (canonPage)
                 {
-                    <td colspan="2">@Html.ActionLink(charName, "Details", "Character", new { ID = appearance.Character }, null)</td>
+                    <td colspan="2">@Html.ActionLink(charName, "Details", "Character", new { ID = appearance.CharacterID }, null)</td>
                 }
                 else
                 {
@@ -36,7 +36,7 @@ else
                         }
                         else
                         {
-                        @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { appearance.Actor1.ID }, null)
+                        @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { appearance.Actor.ID }, null)
                         }</td>
                     <td class="castchar">
                         as
@@ -48,11 +48,11 @@ else
                             >
                             @if (null == rename)
                             {
-                                @Html.ActionLink(Shared.LongName(appearance.Character1), "Details", "Character", new { ID = appearance.Character }, null)
+                                @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Character", new { ID = appearance.CharacterID }, null)
                             }
                             else
                             {
-                                @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { ID = appearance.Character }, null)
+                                @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { ID = appearance.CharacterID }, null)
                             }
                     </span>
                     </td>

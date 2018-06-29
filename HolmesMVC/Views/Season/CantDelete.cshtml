@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>You can't delete '@Shared.DisplayName(Model.Adaptation1) Season @Model.AirOrder' because it still has Episodes:</p>
+<p>You can't delete '@Shared.DisplayName(Model.Adaptation) Season @Model.AirOrder' because it still has Episodes:</p>
 
 @{ var i = 1; }
 @foreach (var e in Model.Episodes.OrderBy(e => e.Airdate))
