@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = Model.DisplayName;
-    ViewBag.Episode = Model.Episodes.First();
+    ViewBag.EpisodeID = Model.Episodes.First();
 }
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)
@@ -56,10 +56,10 @@
             <text><br />
             IMDb: <a href = '@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
         }
-        @if (!string.IsNullOrWhiteSpace(ViewBag.Episode.Story))
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Episode.StoryID))
         {
             <text><br /><br />
-            Canon basis: @Html.ActionLink(Model.Episodes.First().Story1.Name, "Details", "Story", new { id = Model.Episodes.First().Story}, null)</text>
+            Canon basis: @Html.ActionLink(Model.Episodes.First().Story.Name, "Details", "Story", new { id = Model.Episodes.First().StoryID}, null)</text>
         }
     </p>
     <p>

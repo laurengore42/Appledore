@@ -4,13 +4,13 @@
 @model HolmesMVC.Models.ViewModels.MassAdd
 
 @{
-    ViewBag.Title = "MassAdd for " + Shared.DisplayName(Model.Adaptation1);
+    ViewBag.Title = "MassAdd for " + Shared.DisplayName(Model.Adaptation);
 }
         <h2>MassAdd</h2>
         for @ViewBag.Title
         <br/><br/>
         <div>
-            @Html.ActionLink("Back to Adaptation", "Details", "Adaptation", new { id = Model.Adaptation }, null )
+            @Html.ActionLink("Back to Adaptation", "Details", "Adaptation", new { id = Model.AdaptationID }, null )
         </div>
         <br/><br/>
 
@@ -24,10 +24,10 @@
             Episode ep1 = epList.First();
         }
 
-        @Html.Partial("_AppActor", new Appearance { Actor = Model.Actor, Actor1 = Model.Actor1, Episode = ep1.ID, Episode1 = ep1 })
+        @Html.Partial("_AppActor", new Appearance { ActorID = Model.ActorID, Actor = Model.Actor, EpisodeID = ep1.ID, Episode = ep1 })
         <div class="clear-fix"></div><br/>
         
-        @Html.Partial("_AppChar", new Appearance { Character = Model.Character, Character1 = Model.Character1, Episode = ep1.ID, Episode1 = ep1 })
+        @Html.Partial("_AppChar", new Appearance { CharacterID = Model.CharacterID, Character = Model.Character, EpisodeID = ep1.ID, Episode = ep1 })
         <div class="clear-fix"></div><br/>
         
         <div class="editor-label">
@@ -39,7 +39,7 @@
             <br/><br/>
             @foreach (Episode ep in ViewBag.Eps)
             {
-                var epName = ep.Title.IsNullOrWhiteSpace() ? ep.Story1.Name : ep.Title;
+                var epName = ep.Title.IsNullOrWhiteSpace() ? ep.Story.Name : ep.Title;
                 var epBoxId = "epBox" + ep.ID;
                 <text><li class="checklist"><input type="checkbox" name="episodes" id="@epBoxId" value="@ep.ID"/> <label for="@epBoxId">@epName</label></li></text>
             }
@@ -48,7 +48,7 @@
 
 
         <p>
-            <input type="submit" value="Create" /> <input type="hidden" name="adaptation" value="@Model.Adaptation"/>
+            <input type="submit" value="Create" /> <input type="hidden" name="adaptation" value="@Model.AdaptationID"/>
         </p>
     </fieldset>
 }

@@ -54,7 +54,7 @@
 
         public EpisodeView(Episode episode)
         {
-            var adapt = episode.Season1.Adaptation1;
+            var adapt = episode.Season.Adaptation;
             var adaptEps = adapt.Seasons.SelectMany(s => s.Episodes);
             var orderedList = (from e in adaptEps
                               orderby e.Airdate
@@ -83,27 +83,27 @@
             Airdate = episode.Airdate;
             AirdatePrecision = (DatePrecision)episode.AirdatePrecision;
             EpId = episode.ID;
-            Adaptation = episode.Season1.Adaptation;
+            Adaptation = episode.Season.AdaptationID;
             AdaptationName =
-                string.IsNullOrWhiteSpace(episode.Season1.Adaptation1.Name)
-                    ? Shared.DisplayName(episode.Season1.Adaptation1)
-                    : episode.Season1.Adaptation1.Name;
-            AdaptationTranslation = episode.Season1.Adaptation1.Translation;
-            Season = episode.Season;
-            SeasonAirOrder = episode.Season1.AirOrder;
-            SeasonName = episode.Season1.Name;
+                string.IsNullOrWhiteSpace(episode.Season.Adaptation.Name)
+                    ? Shared.DisplayName(episode.Season.Adaptation)
+                    : episode.Season.Adaptation.Name;
+            AdaptationTranslation = episode.Season.Adaptation.Translation;
+            Season = episode.SeasonID;
+            SeasonAirOrder = episode.Season.AirOrder;
+            SeasonName = episode.Season.Name;
             Title = episode.Title;
             Translation = episode.Translation;
             DisplayName = Shared.DisplayName(episode);
-            MediumName = episode.Season1.Adaptation1.Medium1.Name;
-            StoryCode = episode.Story;
-            Story = episode.Story1 != null ? episode.Story1.Name : string.Empty;
+            MediumName = episode.Season.Adaptation.Medium.Name;
+            StoryCode = episode.StoryID;
+            Story = episode.Story != null ? episode.Story.Name : string.Empty;
             SeasonCode = Shared.GetSeasonCode(episode);
 
             var lockApp = from a in episode.Appearances
-                          where a.Actor == 0
-                          && a.Character == 0
-                          && a.Episode == EpId
+                          where a.ActorID == 0
+                          && a.CharacterID == 0
+                          && a.EpisodeID == EpId
                           select a.ID;
 
             Locked = lockApp.Any();

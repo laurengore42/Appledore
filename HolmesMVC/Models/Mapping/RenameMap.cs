@@ -8,19 +8,19 @@ namespace HolmesMVC.Models.Mapping
         public RenameMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.Adaptation, t.Character, t.Actor });
+            this.HasKey(t => new { t.AdaptationID, t.CharacterID, t.ActorID });
 
             // Properties
             this.Property(t => t.ID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            this.Property(t => t.Adaptation)
+            this.Property(t => t.AdaptationID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.Character)
+            this.Property(t => t.CharacterID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.Actor)
+            this.Property(t => t.ActorID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Forename)
@@ -33,26 +33,26 @@ namespace HolmesMVC.Models.Mapping
             // Table & Column Mappings
             this.ToTable("Renames");
             this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Adaptation).HasColumnName("Adaptation");
-            this.Property(t => t.Character).HasColumnName("Character");
-            this.Property(t => t.Actor).HasColumnName("Actor");
-            this.Property(t => t.Honorific).HasColumnName("Honorific");
+            this.Property(t => t.AdaptationID).HasColumnName("Adaptation");
+            this.Property(t => t.CharacterID).HasColumnName("Character");
+            this.Property(t => t.ActorID).HasColumnName("Actor");
+            this.Property(t => t.HonorificID).HasColumnName("Honorific");
             this.Property(t => t.Forename).HasColumnName("Forename");
             this.Property(t => t.Surname).HasColumnName("Surname");
 
             // Relationships
-            this.HasRequired(t => t.Actor1)
+            this.HasRequired(t => t.Actor)
                 .WithMany(t => t.Renames)
-                .HasForeignKey(d => d.Actor);
-            this.HasRequired(t => t.Adaptation1)
+                .HasForeignKey(d => d.ActorID);
+            this.HasRequired(t => t.Adaptation)
                 .WithMany(t => t.Renames)
-                .HasForeignKey(d => d.Adaptation);
-            this.HasRequired(t => t.Character1)
+                .HasForeignKey(d => d.AdaptationID);
+            this.HasRequired(t => t.Character)
                 .WithMany(t => t.Renames)
-                .HasForeignKey(d => d.Character);
-            this.HasOptional(t => t.Honorific1)
+                .HasForeignKey(d => d.CharacterID);
+            this.HasOptional(t => t.Honorific)
                 .WithMany(t => t.Renames)
-                .HasForeignKey(d => d.Honorific);
+                .HasForeignKey(d => d.HonorificID);
 
         }
     }

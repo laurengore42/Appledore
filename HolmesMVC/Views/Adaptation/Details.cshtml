@@ -89,31 +89,31 @@
         var i = 0;
         foreach (var e in Model.Episodes)
         {
-            if (i > 0 && lastEpisode.Season1.AirOrder != e.Season1.AirOrder)
+            if (i > 0 && lastEpisode.Season.AirOrder != e.Season.AirOrder)
             {
-                var seasontext = "Season " + e.Season1.AirOrder;
-                if (!string.IsNullOrWhiteSpace(e.Season1.Name))
+                var seasontext = "Season " + e.Season.AirOrder;
+                if (!string.IsNullOrWhiteSpace(e.Season.Name))
                 {
-                    seasontext = e.Season1.Name;
+                    seasontext = e.Season.Name;
                 }
         <text><tr>
             <td colspan="2" class="adaptseason">
-                <h3>@seasontext @if (!string.IsNullOrEmpty(e.Season1.Translation))
-                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season1.Translation</i></span> }</h3>
+                <h3>@seasontext @if (!string.IsNullOrEmpty(e.Season.Translation))
+                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season.Translation</i></span> }</h3>
             </td>
         </tr></text>
             }
             if (i == 0 && !Model.SingleSeason)
             {
                 var seasontext = "Season 1";
-                if (!string.IsNullOrWhiteSpace(e.Season1.Name))
+                if (!string.IsNullOrWhiteSpace(e.Season.Name))
                 {
-                    seasontext = e.Season1.Name;
+                    seasontext = e.Season.Name;
                 }
         <text><tr>
             <td colspan="2" class="adaptseason">
-                <h3>@seasontext @if (!string.IsNullOrEmpty(e.Season1.Translation))
-                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season1.Translation</i></span> }</h3>
+                <h3>@seasontext @if (!string.IsNullOrEmpty(e.Season.Translation))
+                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season.Translation</i></span> }</h3>
             </td>
         </tr></text>
             }

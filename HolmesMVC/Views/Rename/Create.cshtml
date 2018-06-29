@@ -14,35 +14,35 @@
         <legend>Rename</legend>
 
         <div>
-            @Html.LabelFor(model => model.Adaptation, "Adaptation")
+            @Html.LabelFor(model => model.AdaptationID, "Adaptation")
         </div>
         <div>
             @Html.DropDownList("Adaptation", String.Empty)
-            @Html.ValidationMessageFor(model => model.Adaptation)
+            @Html.ValidationMessageFor(model => model.AdaptationID)
         </div>
 
         <div>
-            @Html.LabelFor(model => model.Character, "in Canon")
+            @Html.LabelFor(model => model.CharacterID, "in Canon")
         </div>
         <div>
             @Html.DropDownList("Character", String.Empty)
-            @Html.ValidationMessageFor(model => model.Character)
+            @Html.ValidationMessageFor(model => model.CharacterID)
         </div>
 
         <div>
-            @Html.LabelFor(model => model.Actor, "Actor")
+            @Html.LabelFor(model => model.ActorID, "Actor")
         </div>
         <div>
             @Html.DropDownList("Actor", String.Empty)
-            @Html.ValidationMessageFor(model => model.Actor)
+            @Html.ValidationMessageFor(model => model.ActorID)
         </div>
 
         <div>
-            @Html.LabelFor(model => model.Honorific, "Honorific1")
+            @Html.LabelFor(model => model.HonorificID, "Honorific1")
         </div>
         <div>
             @Html.DropDownList("Honorific", String.Empty)
-            @Html.ValidationMessageFor(model => model.Honorific)
+            @Html.ValidationMessageFor(model => model.HonorificID)
         </div>
 
         <div>

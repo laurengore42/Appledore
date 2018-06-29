@@ -22,19 +22,19 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Story, "Story1")
+            @Html.LabelFor(model => model.StoryID, "Story1")
         </div>
         <div class="editor-field">
             @Html.DropDownList("Story", String.Empty)
-            @Html.ValidationMessageFor(model => model.Story)
+            @Html.ValidationMessageFor(model => model.StoryID)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Episode, "Episode1")
+            @Html.LabelFor(model => model.EpisodeID, "Episode1")
         </div>
         <div class="editor-field">
             @Html.DropDownList("Episode", String.Empty)
-            @Html.ValidationMessageFor(model => model.Episode)
+            @Html.ValidationMessageFor(model => model.EpisodeID)
         </div>
 
         <p>

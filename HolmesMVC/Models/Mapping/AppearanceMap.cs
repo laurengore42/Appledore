@@ -14,21 +14,21 @@ namespace HolmesMVC.Models.Mapping
             // Table & Column Mappings
             this.ToTable("Appearances");
             this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Actor).HasColumnName("Actor");
-            this.Property(t => t.Character).HasColumnName("Character");
-            this.Property(t => t.Episode).HasColumnName("Episode");
+            this.Property(t => t.ActorID).HasColumnName("Actor");
+            this.Property(t => t.CharacterID).HasColumnName("Character");
+            this.Property(t => t.EpisodeID).HasColumnName("Episode");
             this.Property(t => t.Pic).HasColumnName("Pic");
 
             // Relationships
-            this.HasRequired(t => t.Actor1)
+            this.HasRequired(t => t.Actor)
                 .WithMany(t => t.Appearances)
-                .HasForeignKey(d => d.Actor);
-            this.HasRequired(t => t.Character1)
+                .HasForeignKey(d => d.ActorID);
+            this.HasRequired(t => t.Character)
                 .WithMany(t => t.Appearances)
-                .HasForeignKey(d => d.Character);
-            this.HasRequired(t => t.Episode1)
+                .HasForeignKey(d => d.CharacterID);
+            this.HasRequired(t => t.Episode)
                 .WithMany(t => t.Appearances)
-                .HasForeignKey(d => d.Episode);
+                .HasForeignKey(d => d.EpisodeID);
 
         }
     }

@@ -52,15 +52,15 @@ Choose a date system:<br />
             {
                 seasontext = "Season 1";
             }
-            else if (i > 0 && lastEpisode.Season1.AirOrder != e.Season1.AirOrder)
+            else if (i > 0 && lastEpisode.Season.AirOrder != e.Season.AirOrder)
             {
-                seasontext = "Season " + e.Season1.AirOrder;
+                seasontext = "Season " + e.Season.AirOrder;
             }
             if (seasontext != "")
             {
-                if (!string.IsNullOrWhiteSpace(e.Season1.Name))
+                if (!string.IsNullOrWhiteSpace(e.Season.Name))
                 {
-                    seasontext = e.Season1.Name;
+                    seasontext = e.Season.Name;
                 }
                 <tr>
                     <td colspan="3" class="adaptseason">
@@ -73,7 +73,7 @@ Choose a date system:<br />
                     @Html.Raw(i + 1)
                 </td>
                 <td>@Shared.VagueDate(e.Airdate, DatePrecision.Month, true, false)</td>
-                <td>@Html.ActionLink(e.Story1.Name, "Details", "Story", new { e.Story1.ID }, null)</td>
+                <td>@Html.ActionLink(e.Story.Name, "Details", "Story", new { e.Story.ID }, null)</td>
             </tr>
             lastEpisode = e;
             i++;
