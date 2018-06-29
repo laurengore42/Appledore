@@ -19,7 +19,7 @@ else // allow user to choose a character
         <div class="editor-field">
             <a onclick=" ToggleCharVisible() ">New character</a><br/>
             <ul class="charlist">
-                @foreach (var c in (List<SelectListItem>)ViewBag.CharacterID)
+                @foreach (var c in (List<SelectListItem>)ViewBag.Character)
                 {
                     <li><a class="listlink" tabindex="2" href="javascript:location.replace(addParam(location, 'character', @c.Value));">@c.Text</a></li>
                 }

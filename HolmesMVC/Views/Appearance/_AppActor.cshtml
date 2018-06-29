@@ -25,7 +25,7 @@ else // allow user to choose an actor
         <div class="editor-field">
             <a onclick="ToggleActorVisible()">New actor</a><br />
             <ul class="actorlist">
-                @foreach (var a in (List<SelectListItem>)ViewBag.ActorID)
+                @foreach (var a in (List<SelectListItem>)ViewBag.Actor)
                 {
                     <li><a class="listlink" tabindex="1" href="javascript:location.replace(addParam(location, 'actor', @a.Value));">@a.Text</a></li>
                 }
