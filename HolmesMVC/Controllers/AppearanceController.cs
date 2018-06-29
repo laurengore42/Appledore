@@ -146,7 +146,7 @@
             return RedirectToAction("Details", "Adaptation", new { id = returnTo });
         }
 
-        public ActionResult Create(int id = -1, int actor = -1, int character = -1)
+        public ActionResult Create(int id = -1, int actorid = -1, int characterid = -1)
         {
             if (id == -1)
             {
@@ -170,20 +170,20 @@
             {
                 appearance.ActorID = 0;
             }
-            else if (actor > 0)
+            else if (actorid > 0)
             {
-                appearance.ActorID = actor;
-                appearance.Actor = Db.Actors.Find(actor);
+                appearance.ActorID = actorid;
+                appearance.Actor = Db.Actors.Find(actorid);
             }
             else
             {
                 ViewBag.Actor = ActorList();
             }
 
-            if (character > 0)
+            if (characterid > 0)
             {
-                appearance.CharacterID = character;
-                appearance.Character = Db.Characters.Find(character);
+                appearance.CharacterID = characterid;
+                appearance.Character = Db.Characters.Find(characterid);
             }
             else
             {

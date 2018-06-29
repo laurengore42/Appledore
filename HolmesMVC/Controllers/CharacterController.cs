@@ -106,9 +106,9 @@
             {
                 return HttpNotFound();
             }
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", character.GenderID);
-            ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
-            ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);
+            ViewBag.GenderID = new SelectList(Db.Genders, "ID", "Name", character.GenderID);
+            ViewBag.HonorificID = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
+            ViewBag.SpeciesID = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);
             return View(character);
         }
 
