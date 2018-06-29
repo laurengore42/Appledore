@@ -79,16 +79,16 @@
 
             var massAdd = new MassAdd
                               {
-                                  Adaptation = adapt.ID,
-                                  Adaptation1 = adapt
+                                  AdaptationID = adapt.ID,
+                                  Adaptation = adapt
                               };
 
             ViewBag.Eps = eps;
 
             if (actor > 0)
             {
-                massAdd.Actor = actor;
-                massAdd.Actor1 = Db.Actors.Find(actor);
+                massAdd.ActorID = actor;
+                massAdd.Actor = Db.Actors.Find(actor);
             }
             else
             {
@@ -97,8 +97,8 @@
 
             if (character > 0)
             {
-                massAdd.Character = character;
-                massAdd.Character1 = Db.Characters.Find(character);
+                massAdd.CharacterID = character;
+                massAdd.Character = Db.Characters.Find(character);
             }
             else
             {
@@ -113,7 +113,7 @@
         public ActionResult MassAdd(MassAdd model)
         {
             var returnTo = model.Adaptation;
-            if (model.Actor < 1 || model.Character < 1 || model.Episodes.Count() < 1)
+            if (model.ActorID < 1 || model.CharacterID < 1 || model.Episodes.Count() < 1)
             {
                 return HttpNotFound();
             }
@@ -122,8 +122,8 @@
             {
                 var existApp = (from a in Db.Appearances
                                 where a.EpisodeID == epId
-                                && a.ActorID == model.Actor
-                                && a.CharacterID == model.Character
+                                && a.ActorID == model.ActorID
+                                && a.CharacterID == model.CharacterID
                                 select a).Any();
 
                 // Silently fail if trying to add duplicate appearance
@@ -135,9 +135,9 @@
                 var appearance = new Appearance
                                          {
                                              EpisodeID = epId,
-                                             ActorID = model.Actor,
-                                             CharacterID = model.Character
-                                         };
+                                             ActorID = model.ActorID,
+                                             CharacterID = model.CharacterID
+                };
                 Db.Appearances.Add(appearance);
             }
 

@@ -2,18 +2,18 @@
 {
     public class MassAdd
     {
-        public int Actor { get; set; }
+        public int ActorID { get; set; }
 
-        public int Character { get; set; }
+        public int CharacterID { get; set; }
 
-        public int Adaptation { get; set; }
+        public int AdaptationID { get; set; }
 
         public int[] Episodes { get; set; }
 
-        public virtual Actor Actor1 { get; set; }
+        public virtual Actor Actor { get; set; }
 
-        public virtual Character Character1 { get; set; }
+        public virtual Character Character { get; set; }
 
-        public virtual Adaptation Adaptation1 { get; set; }
+        public virtual Adaptation Adaptation { get; set; }
     }
 }
