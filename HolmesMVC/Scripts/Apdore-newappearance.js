@@ -64,7 +64,7 @@ function SaveNewActor() {
             surname: $("#actorsurname").val(),
         },
         success: function (data) {
-            location.replace(addParam(location, "actor", data));
+            location.replace(addParam(location, "actorid", data));
         },
         error: function (xhr, textStatus, errorThrown) {
             var sErrMsg = "";
@@ -103,7 +103,7 @@ function SaveNewChar() {
             surname: $("#charsurname").val(),
         },
         success: function (data) {
-            location.replace(addParam(location, "character", data));
+            location.replace(addParam(location, "characterid", data));
         },
         error: function (xhr, textStatus, errorThrown) {
             var sErrMsg = "";
