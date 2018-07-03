@@ -118,3 +118,18 @@ function SaveNewChar() {
         }
     });
 }
+
+$(document).ready(function () {
+    $('#actorsearch').hideseek({
+        nodata: 'No results found',
+        hidden_mode: true,
+        min_chars: 3,
+        highlight: true
+    });
+    $('#charsearch').hideseek({
+        nodata: 'No results found',
+        hidden_mode: true,
+        min_chars: 3,
+        highlight: true
+    });
+});
