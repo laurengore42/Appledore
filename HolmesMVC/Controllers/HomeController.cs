@@ -59,6 +59,8 @@
             // kill IMDb cruft
             imdbInput = imdbInput.Replace(" (credit only)", "");
             imdbInput = imdbInput.Replace(" (uncredited)", "");
+            imdbInput = imdbInput.Replace(" (voice)", "");
+            imdbInput = imdbInput.Replace(" (archive footage)", "");
             imdbInput = imdbInput.Replace("Rest of cast listed alphabetically:", "");
             Regex asPattern = new Regex(@" \(as .*\)");
             imdbInput = asPattern.Replace(imdbInput, "");
