@@ -126,7 +126,7 @@
         }
 
         [HttpGet]
-        public ViewResult DataEntry()
+        public ViewResult DataEntry(int? epId)
         {
             var dupeCharNames = (from c in Db.Characters
                                  where c.ID > 0
@@ -196,6 +196,11 @@
             if (dupeActNames.Any())
             {
                 ViewBag.dupeActNames = dupeActNames;
+            }
+
+            if (epId != null)
+            {
+                ViewBag.epId = epId;
             }
 
             return View();

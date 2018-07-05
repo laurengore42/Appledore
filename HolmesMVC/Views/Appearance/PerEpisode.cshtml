@@ -5,8 +5,8 @@
 @if (!Model.Any())
 {
     <text><ul>
-        <li>No actor appearances found for episode ID: @ViewBag.EpId.</li>
-    </ul></text>
+            <li>No actor appearances found for episode ID: @ViewBag.EpId.</li>
+        </ul></text>
 }
 else
 {
@@ -30,48 +30,47 @@ else
                 }
                 else
                 {
-                    <td>@if (actorName == "(mentioned)")
+                    <td>
+                        @if (actorName == "(mentioned)")
                         {
-                        <text>(mentioned)</text>
+                            <text>(mentioned)</text>
                         }
                         else
                         {
-                        @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { appearance.Actor.ID }, null)
-                        }</td>
-                    <td class="castchar">
-                        as
-                        <span
-                            @if (canonCharacter)
-                            {
-                                <text>class="strong"</text>
-                            }
-                            >
-                            @if (null == rename)
-                            {
-                                @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Character", new { ID = appearance.CharacterID }, null)
-                            }
-                            else
-                            {
-                                @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { ID = appearance.CharacterID }, null)
-                            }
+                            @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { appearance.Actor.ID }, null)
+                        }
+                </td>
+                <td class="castchar">
+                    as
+                    <span @if (canonCharacter) { <text> class="strong" </text>  }>
+                        @if (null == rename)
+                        {
+                            @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Character", new { ID = appearance.CharacterID }, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { ID = appearance.CharacterID }, null)
+                        }
                     </span>
-                    </td>
-                }
+                </td>
+            }
                 @if (Request.IsAuthenticated && ViewBag.Locked == false)
                 {
-                    <td class="linedbutton">@Html.ActionLink("Delete", "Delete", new { appearance.ID })
-                        @if (!canonPage)
+                    <td class="linedbutton">
+                        @Html.ActionLink("Delete", "Delete", new { appearance.ID })
+                    @if (!canonPage)
+                    {
+                        if (null == rename)
                         {
-                            if (null == rename)
-                            {
-                            <text>&nbsp;@Html.ActionLink("Rename", "Create", "Rename", new { appearance.ID }, null)</text>                          
-                            }
-                            else
-                            {
+                            <text>&nbsp;@Html.ActionLink("Rename", "Create", "Rename", new { appearance.ID }, null)</text>
+                        }
+                        else
+                        {
                             <text>&nbsp;@Html.ActionLink("Unrename", "Delete", "Rename", new { appearance.ID }, null)</text>
-                            }
-                        }</td>
-                }
+                        }
+                    }
+                </td>
+            }
             </tr>
         }
     </table>
@@ -80,7 +79,10 @@ else
 {
     <div class="addappearlink">
         @Html.ActionLink("Add appearance", "Create", "Appearance", new { ID = ViewBag.EpId }, null)
-    </div> 
+    </div>
+    <div class="addappearlink">
+        @Html.ActionLink("Fill from IMDb", "DataEntry", "Home", new { epId = ViewBag.EpId }, null)
+    </div>
 }
 
 <div>
@@ -89,18 +91,18 @@ else
         <br />
         if (ViewBag.Locked == true)
         {
-        @Html.ActionLink("Unlock", "Unlock", "Episode", new { id = ViewBag.EpId }, null)
+            @Html.ActionLink("Unlock", "Unlock", "Episode", new { id = ViewBag.EpId }, null)
         }
         else
         {
-        @Html.ActionLink("Lock", "Lock", "Episode", new { id = ViewBag.EpId }, null)
+            @Html.ActionLink("Lock", "Lock", "Episode", new { id = ViewBag.EpId }, null)
         }
     }
     else
     {
         if (ViewBag.Locked != true)
         {
-        <i>(cast list not finalised)</i>
+            <i>(cast list not finalised)</i>
         }
     }
 </div>

@@ -12,11 +12,11 @@ Pulling in IMDb info:
 <div>
     @using (Html.BeginForm())
     {
-        <input type="text" name="epId"/> <text> ep id <br/></text>
+        <input type="text" name="epId" @if (ViewBag.epId > 0) { <text> value="@ViewBag.epId" </text> } /> <text> ep id <br /></text>
         <textarea name="ImdbInput"></textarea>
-        <input type="submit" />
+        <input type="submit"/>
     }
-</div>
+    </div>
 
 <hr />
 @{
