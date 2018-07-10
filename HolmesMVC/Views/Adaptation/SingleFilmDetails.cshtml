@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = Model.DisplayName;
-    ViewBag.EpisodeID = Model.Episodes.First();
+    ViewBag.Episode = Model.Episodes.First();
 }
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)
