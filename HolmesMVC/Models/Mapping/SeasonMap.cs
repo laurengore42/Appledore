@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
@@ -8,19 +7,19 @@ namespace HolmesMVC.Models.Mapping
         public SeasonMap()
         {
             // Primary Key
-            this.HasKey(t => t.ID);
+            HasKey(t => t.ID);
 
             // Properties
             // Table & Column Mappings
-            this.ToTable("Seasons");
-            this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.Translation).HasColumnName("Translation");
-            this.Property(t => t.AdaptationID).HasColumnName("Adaptation");
-            this.Property(t => t.AirOrder).HasColumnName("AirOrder");
+            ToTable("Seasons");
+            Property(t => t.ID).HasColumnName("ID");
+            Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.Translation).HasColumnName("Translation");
+            Property(t => t.AdaptationID).HasColumnName("Adaptation");
+            Property(t => t.AirOrder).HasColumnName("AirOrder");
 
             // Relationships
-            this.HasRequired(t => t.Adaptation)
+            HasRequired(t => t.Adaptation)
                 .WithMany(t => t.Seasons)
                 .HasForeignKey(d => d.AdaptationID);
 

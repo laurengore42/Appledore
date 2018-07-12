@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
 {
@@ -8,20 +7,20 @@ namespace HolmesMVC.Models.Mapping
         public HolmesLinkAppearanceMap()
         {
             // Primary Key
-            this.HasKey(t => t.ID);
+            HasKey(t => t.ID);
 
             // Properties
             // Table & Column Mappings
-            this.ToTable("HolmesLinkAppearances");
-            this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.HolmesLinkActorID).HasColumnName("HolmesLinkActor");
-            this.Property(t => t.HolmesLinkID).HasColumnName("HolmesLink");
+            ToTable("HolmesLinkAppearances");
+            Property(t => t.ID).HasColumnName("ID");
+            Property(t => t.HolmesLinkActorID).HasColumnName("HolmesLinkActor");
+            Property(t => t.HolmesLinkID).HasColumnName("HolmesLink");
 
             // Relationships
-            this.HasRequired(t => t.HolmesLinkActor)
+            HasRequired(t => t.HolmesLinkActor)
                 .WithMany(t => t.HolmesLinkAppearances)
                 .HasForeignKey(d => d.HolmesLinkActorID);
-            this.HasRequired(t => t.HolmesLink)
+            HasRequired(t => t.HolmesLink)
                 .WithMany(t => t.HolmesLinkAppearances)
                 .HasForeignKey(d => d.HolmesLinkID);
 

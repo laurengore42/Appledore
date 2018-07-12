@@ -7,14 +7,14 @@ namespace HolmesMVC.Models.Mapping
         public UserProfileMap()
         {
             // Primary Key
-            this.HasKey(t => t.UserId);
+            HasKey(t => t.UserId);
 
             // Properties
             // Table & Column Mappings
-            this.ToTable("UserProfile");
-            this.Property(t => t.UserId).HasColumnName("UserId");
-            this.Property(t => t.UserName).HasColumnName("UserName");
-            this.Property(t => t.PreferredCanonOrder).HasColumnName("PreferredCanonOrder");
+            ToTable("UserProfile");
+            Property(t => t.UserId).HasColumnName("UserId");
+            Property(t => t.UserName).HasColumnName("UserName");
+            Property(t => t.PreferredCanonOrder).HasColumnName("PreferredCanonOrder");
         }
     }
 }

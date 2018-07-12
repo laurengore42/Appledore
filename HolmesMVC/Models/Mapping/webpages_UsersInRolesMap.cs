@@ -8,19 +8,19 @@ namespace HolmesMVC.Models.Mapping
         public webpages_UsersInRolesMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.UserId, t.RoleId });
+            HasKey(t => new { t.UserId, t.RoleId });
 
             // Properties
-            this.Property(t => t.UserId)
+            Property(t => t.UserId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.RoleId)
+            Property(t => t.RoleId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
-            this.ToTable("webpages_UsersInRoles");
-            this.Property(t => t.UserId).HasColumnName("UserId");
-            this.Property(t => t.RoleId).HasColumnName("RoleId");
+            ToTable("webpages_UsersInRoles");
+            Property(t => t.UserId).HasColumnName("UserId");
+            Property(t => t.RoleId).HasColumnName("RoleId");
         }
     }
 }

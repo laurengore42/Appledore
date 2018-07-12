@@ -8,39 +8,39 @@ namespace HolmesMVC.Models.Mapping
         public webpages_MembershipMap()
         {
             // Primary Key
-            this.HasKey(t => t.UserId);
+            HasKey(t => t.UserId);
 
             // Properties
-            this.Property(t => t.ConfirmationToken)
+            Property(t => t.ConfirmationToken)
                 .HasMaxLength(128);
 
-            this.Property(t => t.Password)
+            Property(t => t.Password)
                 .IsRequired()
                 .HasMaxLength(128);
 
-            this.Property(t => t.PasswordSalt)
+            Property(t => t.PasswordSalt)
                 .IsRequired()
                 .HasMaxLength(128);
 
-            this.Property(t => t.PasswordVerificationToken)
+            Property(t => t.PasswordVerificationToken)
                 .HasMaxLength(128);
 
-            this.Property(t => t.UserId)
+            Property(t => t.UserId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
-            this.ToTable("webpages_Membership");
-            this.Property(t => t.CreateDate).HasColumnName("CreateDate");
-            this.Property(t => t.ConfirmationToken).HasColumnName("ConfirmationToken");
-            this.Property(t => t.IsConfirmed).HasColumnName("IsConfirmed");
-            this.Property(t => t.LastPasswordFailureDate).HasColumnName("LastPasswordFailureDate");
-            this.Property(t => t.PasswordFailuresSinceLastSuccess).HasColumnName("PasswordFailuresSinceLastSuccess");
-            this.Property(t => t.Password).HasColumnName("Password");
-            this.Property(t => t.PasswordChangedDate).HasColumnName("PasswordChangedDate");
-            this.Property(t => t.PasswordSalt).HasColumnName("PasswordSalt");
-            this.Property(t => t.PasswordVerificationToken).HasColumnName("PasswordVerificationToken");
-            this.Property(t => t.PasswordVerificationTokenExpirationDate).HasColumnName("PasswordVerificationTokenExpirationDate");
-            this.Property(t => t.UserId).HasColumnName("UserId");
+            ToTable("webpages_Membership");
+            Property(t => t.CreateDate).HasColumnName("CreateDate");
+            Property(t => t.ConfirmationToken).HasColumnName("ConfirmationToken");
+            Property(t => t.IsConfirmed).HasColumnName("IsConfirmed");
+            Property(t => t.LastPasswordFailureDate).HasColumnName("LastPasswordFailureDate");
+            Property(t => t.PasswordFailuresSinceLastSuccess).HasColumnName("PasswordFailuresSinceLastSuccess");
+            Property(t => t.Password).HasColumnName("Password");
+            Property(t => t.PasswordChangedDate).HasColumnName("PasswordChangedDate");
+            Property(t => t.PasswordSalt).HasColumnName("PasswordSalt");
+            Property(t => t.PasswordVerificationToken).HasColumnName("PasswordVerificationToken");
+            Property(t => t.PasswordVerificationTokenExpirationDate).HasColumnName("PasswordVerificationTokenExpirationDate");
+            Property(t => t.UserId).HasColumnName("UserId");
         }
     }
 }

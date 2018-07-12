@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
+
 using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
@@ -8,64 +8,64 @@ namespace HolmesMVC.Models.Mapping
         public ActorMap()
         {
             // Primary Key
-            this.HasKey(t => t.ID);
+            HasKey(t => t.ID);
 
             // Properties
-            this.Property(t => t.Forename)
+            Property(t => t.Forename)
                 .HasMaxLength(50);
 
-            this.Property(t => t.Surname)
+            Property(t => t.Surname)
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.Pic)
+            Property(t => t.Pic)
                 .HasMaxLength(1000);
 
-            this.Property(t => t.PicCredit)
+            Property(t => t.PicCredit)
                 .HasMaxLength(1000);
 
-            this.Property(t => t.Middlenames)
+            Property(t => t.Middlenames)
                 .HasMaxLength(200);
 
-            this.Property(t => t.IMDb)
+            Property(t => t.IMDb)
                 .HasMaxLength(1000);
 
-            this.Property(t => t.Wikipedia)
+            Property(t => t.Wikipedia)
                 .HasMaxLength(1000);
 
-            this.Property(t => t.Birthplace)
+            Property(t => t.Birthplace)
                 .HasMaxLength(200);
 
             // Table & Column Mappings
-            this.ToTable("Actors");
-            this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Forename).HasColumnName("Forename");
-            this.Property(t => t.Surname).HasColumnName("Surname");
-            this.Property(t => t.Birthdate).HasColumnName("Birthdate");
-            this.Property(t => t.Deathdate).HasColumnName("Deathdate");
-            this.Property(t => t.Pic).HasColumnName("Pic");
-            this.Property(t => t.PicCredit).HasColumnName("PicCredit");
-            this.Property(t => t.Middlenames).HasColumnName("Middlenames");
-            this.Property(t => t.GenderID).HasColumnName("Gender");
-            this.Property(t => t.SpeciesID).HasColumnName("Species");
-            this.Property(t => t.IMDb).HasColumnName("IMDb");
-            this.Property(t => t.Wikipedia).HasColumnName("Wikipedia");
-            this.Property(t => t.Birthplace).HasColumnName("Birthplace");
-            this.Property(t => t.SyncedBirthplace).HasColumnName("SyncedBirthplace");
-            this.Property(t => t.Latitude).HasColumnName("Latitude");
-            this.Property(t => t.Longitude).HasColumnName("Longitude");
-            this.Property(t => t.BirthdatePrecision).HasColumnName("BirthdatePrecision");
-            this.Property(t => t.DeathdatePrecision).HasColumnName("DeathdatePrecision");
+            ToTable("Actors");
+            Property(t => t.ID).HasColumnName("ID");
+            Property(t => t.Forename).HasColumnName("Forename");
+            Property(t => t.Surname).HasColumnName("Surname");
+            Property(t => t.Birthdate).HasColumnName("Birthdate");
+            Property(t => t.Deathdate).HasColumnName("Deathdate");
+            Property(t => t.Pic).HasColumnName("Pic");
+            Property(t => t.PicCredit).HasColumnName("PicCredit");
+            Property(t => t.Middlenames).HasColumnName("Middlenames");
+            Property(t => t.GenderID).HasColumnName("Gender");
+            Property(t => t.SpeciesID).HasColumnName("Species");
+            Property(t => t.IMDb).HasColumnName("IMDb");
+            Property(t => t.Wikipedia).HasColumnName("Wikipedia");
+            Property(t => t.Birthplace).HasColumnName("Birthplace");
+            Property(t => t.SyncedBirthplace).HasColumnName("SyncedBirthplace");
+            Property(t => t.Latitude).HasColumnName("Latitude");
+            Property(t => t.Longitude).HasColumnName("Longitude");
+            Property(t => t.BirthdatePrecision).HasColumnName("BirthdatePrecision");
+            Property(t => t.DeathdatePrecision).HasColumnName("DeathdatePrecision");
 
             //Ignore fluff properties
-            this.Ignore(t => t.PicShow);
-            this.Ignore(t => t.PicCreditShow);
+            Ignore(t => t.PicShow);
+            Ignore(t => t.PicCreditShow);
 
             // Relationships
-            this.HasOptional(t => t.Gender)
+            HasOptional(t => t.Gender)
                 .WithMany(t => t.Actors)
                 .HasForeignKey(d => d.GenderID);
-            this.HasOptional(t => t.Species)
+            HasOptional(t => t.Species)
                 .WithMany(t => t.Actors)
                 .HasForeignKey(d => d.SpeciesID);
 

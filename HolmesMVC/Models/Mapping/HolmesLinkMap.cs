@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
 {
@@ -8,18 +7,18 @@ namespace HolmesMVC.Models.Mapping
         public HolmesLinkMap()
         {
             // Primary Key
-            this.HasKey(t => t.ID);
+            HasKey(t => t.ID);
 
             // Table & Column Mappings
-            this.ToTable("HolmesLinks");
-            this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Airdate).HasColumnName("Airdate");
-            this.Property(t => t.Title).HasColumnName("Title");
-            this.Property(t => t.EpisodeID).HasColumnName("Episode");
-            this.Property(t => t.AirdatePrecision).HasColumnName("AirdatePrecision");
+            ToTable("HolmesLinks");
+            Property(t => t.ID).HasColumnName("ID");
+            Property(t => t.Airdate).HasColumnName("Airdate");
+            Property(t => t.Title).HasColumnName("Title");
+            Property(t => t.EpisodeID).HasColumnName("Episode");
+            Property(t => t.AirdatePrecision).HasColumnName("AirdatePrecision");
 
             // Relationships
-            this.HasOptional(t => t.Episode)
+            HasOptional(t => t.Episode)
                 .WithMany(t => t.HolmesLinks)
                 .HasForeignKey(d => d.EpisodeID);
         }

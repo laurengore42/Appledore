@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
@@ -8,17 +7,17 @@ namespace HolmesMVC.Models.Mapping
         public webpages_RolesMap()
         {
             // Primary Key
-            this.HasKey(t => t.RoleId);
+            HasKey(t => t.RoleId);
 
             // Properties
-            this.Property(t => t.RoleName)
+            Property(t => t.RoleName)
                 .IsRequired()
                 .HasMaxLength(2561);
 
             // Table & Column Mappings
-            this.ToTable("webpages_Roles");
-            this.Property(t => t.RoleId).HasColumnName("RoleId");
-            this.Property(t => t.RoleName).HasColumnName("RoleName");
+            ToTable("webpages_Roles");
+            Property(t => t.RoleId).HasColumnName("RoleId");
+            Property(t => t.RoleName).HasColumnName("RoleName");
         }
     }
 }
