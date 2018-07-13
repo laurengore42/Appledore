@@ -47,6 +47,20 @@
             @Html.ValidationMessageFor(model => model.Wikipedia)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StoryID, "Story")
+        </div>
+        <div class="editor-field">
+            <select id="StoryID" name="StoryID"> <!-- This is done by hand as the automatic binding only displays 'Final Problem', not 'FINA' -->
+                <option value=""></option>
+                @foreach (var story in ViewBag.StoryID)
+                {
+                    <option selected="@story.Selected" value="@story.Value">@story.Value - @story.Text</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.StoryID)
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>
