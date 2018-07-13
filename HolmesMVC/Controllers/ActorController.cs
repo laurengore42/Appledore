@@ -124,8 +124,7 @@
             {
                 return HttpNotFound();
             }
-
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.GenderID);
+            
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
             return View(actor);
         }
@@ -144,7 +143,6 @@
 
                 return RedirectToRoute("Details", new { controller = "Actor", id = actor.ID });
             }
-            ViewBag.Gender = new SelectList(Db.Genders, "ID", "Name", actor.GenderID);
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
             return View(actor);
         }

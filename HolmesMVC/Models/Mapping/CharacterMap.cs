@@ -29,16 +29,12 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.ID).HasColumnName("ID");
             Property(t => t.Forename).HasColumnName("Forename");
             Property(t => t.Surname).HasColumnName("Surname");
-            Property(t => t.GenderID).HasColumnName("Gender");
             Property(t => t.SpeciesID).HasColumnName("Species");
             Property(t => t.HonorificID).HasColumnName("Honorific");
             Property(t => t.Wikipedia).HasColumnName("Wikipedia");
             Property(t => t.StoryID).HasColumnName("Story");
 
             // Relationships
-            HasOptional(t => t.Gender)
-                .WithMany(t => t.Characters)
-                .HasForeignKey(d => d.GenderID);
             HasOptional(t => t.Honorific)
                 .WithMany(t => t.Characters)
                 .HasForeignKey(d => d.HonorificID);

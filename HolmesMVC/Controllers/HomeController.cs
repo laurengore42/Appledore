@@ -341,7 +341,6 @@
                                "appearances",
                                "adaptations",
                                "episodes",
-                               "genders",
                                "renames",
                                "seasons",
                                "species",

@@ -46,7 +46,6 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.Pic).HasColumnName("Pic");
             Property(t => t.PicCredit).HasColumnName("PicCredit");
             Property(t => t.Middlenames).HasColumnName("Middlenames");
-            Property(t => t.GenderID).HasColumnName("Gender");
             Property(t => t.SpeciesID).HasColumnName("Species");
             Property(t => t.IMDb).HasColumnName("IMDb");
             Property(t => t.Wikipedia).HasColumnName("Wikipedia");
@@ -62,9 +61,6 @@ namespace HolmesMVC.Models.Mapping
             Ignore(t => t.PicCreditShow);
 
             // Relationships
-            HasOptional(t => t.Gender)
-                .WithMany(t => t.Actors)
-                .HasForeignKey(d => d.GenderID);
             HasOptional(t => t.Species)
                 .WithMany(t => t.Actors)
                 .HasForeignKey(d => d.SpeciesID);

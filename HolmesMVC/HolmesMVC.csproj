@@ -264,6 +264,10 @@
     <Compile Include="Migrations\201807121741092_link single story characters to story.Designer.cs">
       <DependentUpon>201807121741092_link single story characters to story.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807130936083_this whole thing smacks of gender.cs" />
+    <Compile Include="Migrations\201807130936083_this whole thing smacks of gender.Designer.cs">
+      <DependentUpon>201807130936083_this whole thing smacks of gender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
@@ -301,7 +305,6 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Date.cs" />
     <Compile Include="Models\Episode.cs" />
-    <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\HolmesDBEntities.cs" />
     <Compile Include="Models\Honorific.cs" />
     <Compile Include="Models\Mapping\ActorMap.cs" />
@@ -310,7 +313,6 @@
     <Compile Include="Models\Mapping\CharacterMap.cs" />
     <Compile Include="Models\Mapping\DateMap.cs" />
     <Compile Include="Models\Mapping\EpisodeMap.cs" />
-    <Compile Include="Models\Mapping\GenderMap.cs" />
     <Compile Include="Models\Mapping\HonorificMap.cs" />
     <Compile Include="Models\Mapping\MediumMap.cs" />
     <Compile Include="Models\Mapping\ReferenceMap.cs" />
@@ -1439,6 +1441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807121741092_link single story characters to story.resx">
       <DependentUpon>201807121741092_link single story characters to story.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807130936083_this whole thing smacks of gender.resx">
+      <DependentUpon>201807130936083_this whole thing smacks of gender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

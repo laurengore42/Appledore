@@ -22,7 +22,6 @@ namespace HolmesMVC.Models
         public DbSet<Character> Characters { get; set; }
         public DbSet<Date> Dates { get; set; }
         public DbSet<Episode> Episodes { get; set; }
-        public DbSet<Gender> Genders { get; set; }
         public DbSet<Honorific> Honorifics { get; set; }
         public DbSet<Medium> Media { get; set; }
         public DbSet<Reference> References { get; set; }
@@ -47,7 +46,6 @@ namespace HolmesMVC.Models
             modelBuilder.Configurations.Add(new CharacterMap());
             modelBuilder.Configurations.Add(new DateMap());
             modelBuilder.Configurations.Add(new EpisodeMap());
-            modelBuilder.Configurations.Add(new GenderMap());
             modelBuilder.Configurations.Add(new HonorificMap());
             modelBuilder.Configurations.Add(new MediumMap());
             modelBuilder.Configurations.Add(new ReferenceMap());
