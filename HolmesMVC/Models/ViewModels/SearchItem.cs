@@ -177,7 +177,8 @@
                                                                  ID = c.ID,
                                                                  Honorific = c.HonorificID == null ? string.Empty : c.Honorific.Name, 
                                                                  Forename = c.Forename,
-                                                                 Surname = c.Surname
+                                                                 Surname = c.Surname,
+                                                                 StoryID = c.StoryID
                                                              }).ToList();
 
             var renameQuery = from r in db.Renames 
@@ -315,6 +316,8 @@
         public string Forename { get; set; }
 
         public string Surname { get; set; }
+
+        public string StoryID { get; set; }
     }
 
     public class SearchRename

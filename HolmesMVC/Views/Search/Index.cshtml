@@ -51,7 +51,11 @@
                  {
                      displayName = c.Surname + ", " + Shared.BuildName( new [] { c.Honorific, c.Forename }, ' ');
                  }
-                 <li>@Html.ActionLink(displayName, "Details", "Character", new { id = c.ID }, null)</li>
+                 if (c.StoryID != null)
+                 {
+                     displayName += " <i>(" + c.StoryID + ")</i>";
+                 }
+                 <li>@Html.Raw(Html.ActionLink("XXX", "Details", "Character", new { id = c.ID }, null).ToHtmlString().Replace("XXX", displayName))</li>
              }
          </ul>
      }
