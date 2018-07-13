@@ -129,7 +129,7 @@
         public ViewResult DataEntry(int? epId)
         {
             var dupeCharNames = (from c in Db.Characters
-                                 where c.ID > 0
+                                 where c.ID > 0 && c.StoryID == null
                                  orderby c.ID
                                  group c by (c.HonorificID == null ? string.Empty : (c.Honorific.Name + " ")) + (c.Forename == null || c.Forename.Length < 1 ? string.Empty : c.Forename + " ") + c.Surname
                                      into grp
