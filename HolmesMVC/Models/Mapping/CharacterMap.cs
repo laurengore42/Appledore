@@ -20,6 +20,10 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.Wikipedia)
                 .HasMaxLength(1000);
 
+            Property(t => t.StoryID)
+                .IsFixedLength()
+                .HasMaxLength(4);
+
             // Table & Column Mappings
             ToTable("Characters");
             Property(t => t.ID).HasColumnName("ID");
@@ -29,6 +33,7 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.SpeciesID).HasColumnName("Species");
             Property(t => t.HonorificID).HasColumnName("Honorific");
             Property(t => t.Wikipedia).HasColumnName("Wikipedia");
+            Property(t => t.StoryID).HasColumnName("Story");
 
             // Relationships
             HasOptional(t => t.Gender)
@@ -40,6 +45,9 @@ namespace HolmesMVC.Models.Mapping
             HasOptional(t => t.Species)
                 .WithMany(t => t.Characters)
                 .HasForeignKey(d => d.SpeciesID);
+            HasOptional(t => t.Story)
+                .WithMany(t => t.Characters)
+                .HasForeignKey(d => d.StoryID);
 
         }
     }

@@ -256,6 +256,14 @@
     <Compile Include="Migrations\201609222324456_HolmesLink optionals have to be nullables.Designer.cs">
       <DependentUpon>201609222324456_HolmesLink optionals have to be nullables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807121736185_mark single story characters.cs" />
+    <Compile Include="Migrations\201807121736185_mark single story characters.Designer.cs">
+      <DependentUpon>201807121736185_mark single story characters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807121741092_link single story characters to story.cs" />
+    <Compile Include="Migrations\201807121741092_link single story characters to story.Designer.cs">
+      <DependentUpon>201807121741092_link single story characters to story.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
@@ -1425,6 +1433,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609222324456_HolmesLink optionals have to be nullables.resx">
       <DependentUpon>201609222324456_HolmesLink optionals have to be nullables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807121736185_mark single story characters.resx">
+      <DependentUpon>201807121736185_mark single story characters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807121741092_link single story characters to story.resx">
+      <DependentUpon>201807121741092_link single story characters to story.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

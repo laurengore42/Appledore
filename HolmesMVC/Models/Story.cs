@@ -11,6 +11,7 @@ namespace HolmesMVC.Models
         {
             this.Episodes = new List<Episode>();
             this.References = new List<Reference>();
+            this.Characters = new List<Character>();
         }
 
         public string ID { get; set; }
@@ -20,5 +21,6 @@ namespace HolmesMVC.Models
         public virtual Date Date { get; set; }
         public virtual ICollection<Episode> Episodes { get; set; }
         public virtual ICollection<Reference> References { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
     }
 }
