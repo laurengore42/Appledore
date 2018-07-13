@@ -63,7 +63,6 @@
                       select s).ToList();
 
             Actors = (from a in Actors
-                      orderby a.Surname
                       where NameListContainsQuery(
                            query,
                            new[] {
@@ -79,10 +78,13 @@
                                         ? ", " + a.Forename
                                         : string.Empty))
                                 })
-                       select a).ToList();
+                       select a)
+                       .ToList()
+                       .OrderBy(c => c.Surname)
+                       .ThenBy(c => c.Forename)
+                       .ToList();
 
             Characters = (from c in Characters
-                          orderby c.Surname
                        where NameListContainsQuery(
                             query,
                             new[] {
@@ -97,7 +99,12 @@
                                             ? c.Surname
                                             : c.Surname + ", " + c.Honorific + " " + c.Forename)
                                 })
-                       select c).ToList();
+                       select c)
+                       .ToList()
+                       .OrderBy(c => c.Surname)
+                       .ThenBy(c => c.Forename)
+                       .ThenBy(c => c.Honorific)
+                       .ToList();
 
             Renames = (from c in Renames
                        orderby c.Surname
