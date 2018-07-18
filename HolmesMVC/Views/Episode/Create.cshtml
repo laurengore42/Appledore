@@ -33,7 +33,7 @@
         <div class="editor-field">
             <select id="Story" name="Story"> <!-- This is done by hand as the automatic binding only displays 'Final Problem', not 'FINA' -->
                 <option value=""></option>
-                @foreach (var story in ViewBag.StoryID)
+                @foreach (var story in ViewBag.Story)
                 {
   <option value="@story.Value">@story.Value - @story.Text</option>
                 }
