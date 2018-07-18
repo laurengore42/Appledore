@@ -66,7 +66,7 @@
         }
 
         [HttpGet]
-        public ActionResult MassAdd(int id, int actor = -1, int character = -1)
+        public ActionResult MassAdd(int id, int actorid = -1, int characterid = -1)
         {
             var adapt = Db.Adaptations.Find(id);
 
@@ -85,20 +85,20 @@
 
             ViewBag.Eps = eps;
 
-            if (actor > 0)
+            if (actorid > 0)
             {
-                massAdd.ActorID = actor;
-                massAdd.Actor = Db.Actors.Find(actor);
+                massAdd.ActorID = actorid;
+                massAdd.Actor = Db.Actors.Find(actorid);
             }
             else
             {
                 ViewBag.Actor = ActorList();
             }
 
-            if (character > 0)
+            if (characterid > 0)
             {
-                massAdd.CharacterID = character;
-                massAdd.Character = Db.Characters.Find(character);
+                massAdd.CharacterID = characterid;
+                massAdd.Character = Db.Characters.Find(characterid);
             }
             else
             {
