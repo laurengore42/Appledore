@@ -1,10 +1,10 @@
 ﻿@model HolmesMVC.Models.ViewModels.EpisodeView
 
 <div class="editor-label">
-    <label for="Season">Season</label>
+    <label for="SeasonID">Season</label>
 </div>
 <div class="editor-field">
-    @Html.DropDownList("Season", ViewBag.SeasonList as SelectList, new { onchange="updateSeasonLinks();"}) @Html.ActionLink("New Season", "Create", "Season", new { ID = Model.Adaptation }, null) |
+    @Html.DropDownList("SeasonID", ViewBag.SeasonList as SelectList, new { onchange="updateSeasonLinks();"}) @Html.ActionLink("New Season", "Create", "Season", new { ID = Model.Adaptation }, null) |
 
     <span id="editLink">@Html.ActionLink("Edit Season","Edit","Season",new { ID = Model.Season}, null)</span>  |
     <span id="delLink">@Html.ActionLink("Delete Season","Delete","Season",new { ID = Model.Season}, null)</span>
