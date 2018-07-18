@@ -39,10 +39,10 @@
         </div>
 
         <div>
-            @Html.LabelFor(model => model.HonorificID, "Honorific1")
+            @Html.LabelFor(model => model.HonorificID, "Title")
         </div>
         <div>
-            @Html.DropDownList("Honorific", String.Empty)
+            @Html.DropDownList("HonorificID", String.Empty)
             @Html.ValidationMessageFor(model => model.HonorificID)
         </div>
 

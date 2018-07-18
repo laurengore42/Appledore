@@ -77,7 +77,7 @@
                                  CharacterID = character.ID,
                                  Character = character
                              };
-            ViewBag.Honorific = new SelectList(Db.Honorifics, "ID", "Name");
+            ViewBag.HonorificID = new SelectList(Db.Honorifics, "ID", "Name");
 
             return View("CreateFull", rename);
         }
