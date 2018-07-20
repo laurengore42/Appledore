@@ -44,7 +44,7 @@
 
         public ActionResult Create()
         {
-            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name");
+            ViewBag.MediumID = new SelectList(Db.Media, "ID", "Name");
             return View();
         }
 
