@@ -1094,6 +1094,7 @@
     <Content Include="Content\Standard.css" />
     <Content Include="Content\Menu.css" />
     <Content Include="Content\SearchPartial.css" />
+    <Content Include="google0df7ec4a1dcd4db8.html" />
     <Content Include="Scripts\Apdore-googlemaps.js" />
     <Content Include="Scripts\Apdore-StoryDetails.js" />
     <Content Include="Scripts\Apdore-multitimeline.js" />
