@@ -25,6 +25,15 @@
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Sitemap()
+        {
+            ViewBag.Actors = Db.Actors;
+            ViewBag.Adaptations = Db.Adaptations;
+            ViewBag.Characters = Db.Characters;
+            return View();
+        }
+
         public ActionResult Analytics()
         {
             var holmesId = Shared.GetHolmes();

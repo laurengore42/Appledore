@@ -1310,6 +1310,7 @@
     <Content Include="Views\HolmesLink\Create.cshtml" />
     <Content Include="Views\HolmesLink\Edit.cshtml" />
     <Content Include="Views\HolmesLink\Delete.cshtml" />
+    <Content Include="Views\Home\Sitemap.cshtml" />
     <None Include="Web.template.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
