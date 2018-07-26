@@ -4,6 +4,32 @@
 @{
     ViewBag.Title = Model.ShortName;
 }
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "Person",
+    @if (Model.PicShow != null)
+    {
+        <text>"image": "@Model.PicShow",</text>
+    }
+    "name": "@Model.ShortName"
+    @{
+        var isoDateFormat = "{0:s}";
+    }
+    @if (Model.Birthdate != null)
+    {
+        <text>"birthDate": "@string.Format(isoDateFormat, Model.Birthdate)",</text>
+    }
+    @if (Model.Birthplace != null)
+    {
+        <text>"birthPlace": "@Model.Birthplace",</text>
+    }
+    @if (Model.Deathdate != null)
+    {
+        <text>"deathDate": "@string.Format(isoDateFormat, Model.Deathdate)",</text>
+    }
+    }
+</script>
 <section id="details">
     <h2 class="detailscategory">Actor</h2>
 
