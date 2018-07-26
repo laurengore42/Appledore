@@ -6,27 +6,25 @@
 }
 <script type="application/ld+json">
     {
-    "@@context": "http://schema.org",
-    "@@type": "Person",
+    "@@context": "http://schema.org"
+    , "@@type": "Person"
     @if (Model.PicShow != null)
     {
-        <text>"image": "@Model.PicShow",</text>
+        <text>, "image": "@Model.PicShow"</text>
     }
-    "name": "@Model.ShortName",
-    @{
-        var isoDateFormat = "{0:s}";
-    }
+    , "name": "@Model.ShortName"
+    @{ var isoDateFormat = "{0:s}"; }
     @if (Model.Birthdate != null)
     {
-        <text>"birthDate": "@string.Format(isoDateFormat, Model.Birthdate)",</text>
+        <text>, "birthDate": "@string.Format(isoDateFormat, Model.Birthdate)"</text>
     }
     @if (Model.Birthplace != null)
     {
-        <text>"birthPlace": "@Model.Birthplace",</text>
+        <text>, "birthPlace": "@Model.Birthplace"</text>
     }
     @if (Model.Deathdate != null)
     {
-        <text>"deathDate": "@string.Format(isoDateFormat, Model.Deathdate)",</text>
+        <text>, "deathDate": "@string.Format(isoDateFormat, Model.Deathdate)"</text>
     }
     }
 </script>
