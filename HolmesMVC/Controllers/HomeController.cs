@@ -36,9 +36,9 @@
             );
             var root = new XElement(ns + "urlset");
             root.Add(
-                new XElement(ns + "url")
-            );
-            root.Add(
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("Index", "Home", null, "https")))
+                ),
                 new XElement(ns + "url",
                 new XElement(ns + "loc", new XText(Url.Action("Canon", "Home", null, "https")))
                 ),
@@ -61,7 +61,7 @@
                 new XElement(ns + "loc", new XText(Url.Action("Credits", "Home", null, "https")))
                 )
             );
-            foreach(var a in Db.Actors)
+            foreach(var a in Db.Actors.Where(a => a.ID > 0))
             {
                 root.Add(
                     new XElement(ns + "url",
@@ -69,7 +69,7 @@
                     )
                 );
             }
-            foreach (var c in Db.Characters)
+            foreach (var c in Db.Characters.Where(c => c.ID > 0))
             {
                 root.Add(
                     new XElement(ns + "url",
