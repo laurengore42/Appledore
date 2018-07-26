@@ -48,6 +48,11 @@
                 new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial|GetAccentDictionaryAsJson).*" }
             );
 
+            // Google verification route
+            routes.IgnoreRoute(
+                "google0df7ec4a1dcd4db8.html"
+            );
+
             // default route
             routes.MapRoute(
                 "Default",
