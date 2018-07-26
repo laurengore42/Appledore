@@ -5,14 +5,12 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
-    using System.Net;
     using System.Text.RegularExpressions;
     using System.Web.Configuration;
     using System.Web.Mvc;
-    using System.Xml.Serialization;
-
+    using System.Xml.Linq;
+    using HolmesMVC.ActionResults;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -23,6 +21,84 @@
         public ActionResult Credits()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult SitemapXml()
+        {
+            ViewBag.Actors = Db.Actors;
+            ViewBag.Adaptations = Db.Adaptations;
+            ViewBag.Characters = Db.Characters;
+
+            XNamespace ns = @"http://www.sitemaps.org/schemas/sitemap/0.9";
+            XDocument xmlDoc = new XDocument(
+                new XDeclaration("1.0", "utf-8", "true")
+            );
+            var root = new XElement(ns + "urlset");
+            root.Add(
+                new XElement(ns + "url")
+            );
+            root.Add(
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("Canon", "Home", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("Index", "Adaptation", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("HolmesNumToy", "Toys", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("PhotoCollageToy", "Toys", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("MapPinToy", "Toys", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("MultiTimelineToy", "Toys", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("Credits", "Home", null, "https")))
+                )
+            );
+            foreach(var a in Db.Actors)
+            {
+                root.Add(
+                    new XElement(ns + "url",
+                    new XElement(ns + "loc", new XText(Url.Action("Details", "Actor", new { a.ID }, "https")))
+                    )
+                );
+            }
+            foreach (var c in Db.Characters)
+            {
+                root.Add(
+                    new XElement(ns + "url",
+                    new XElement(ns + "loc", new XText(Url.Action("Details", "Character", new { c.ID }, "https")))
+                    )
+                );
+            }
+            foreach (var a in Db.Adaptations)
+            {
+                root.Add(
+                    new XElement(ns + "url",
+                    new XElement(ns + "loc", new XText(Url.Action("Details", "Adaptation", new { a.ID }, "https")))
+                    )
+                );
+                foreach (var s in a.Seasons)
+                {
+                    foreach (var e in s.Episodes)
+                    {
+                        root.Add(
+                            new XElement(ns + "url",
+                            new XElement(ns + "loc", new XText(Url.Action("Details", "Episode", new { e.ID }, "https")))
+                            )
+                        );
+                    }
+                }
+            }
+            xmlDoc.Add(root);
+
+            return new XmlActionResult(xmlDoc);
         }
 
         [AllowAnonymous]
