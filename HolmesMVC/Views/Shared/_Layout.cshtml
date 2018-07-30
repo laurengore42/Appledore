@@ -27,20 +27,8 @@
                 <p class="site-title">@Html.ActionLink("Appledore", "Index", "Home")</p>
             </div>
             <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
                 <section id="search">
-                    @if (ViewBag.Title == "Home" || !Request.IsAuthenticated)
-                    {
-                        var accentMapRawData = HolmesMVC.Shared.GetAccentDictionaryAsJson();
-                        var model = new { AccentMap = accentMapRawData };
-                        @Html.Partial("_SearchPartial", model)
-                    }
-                    else
-                    {
-                        <text>&nbsp;</text>
-                    }
+                    @Html.Partial("_SearchPartial")
                 </section>
             </div>
             <div class="clear-fix"></div>

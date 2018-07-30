@@ -40,13 +40,13 @@
                 new { id = @"\w+" }
             );
 
-            // Search route
-            routes.MapRoute(
-                "Search",
-                "Search/{id}",
-                new { controller = "Search", action = "Index" },
-                new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial|GetAccentDictionaryAsJson).*" }
-            );
+            //// Search route
+            //routes.MapRoute(
+            //    "Search",
+            //    "Search/{id}",
+            //    new { controller = "Search", action = "Index" },
+            //    new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial|GetAccentDictionaryAsJson).*" }
+            //);
 
             // Google verification route
             routes.IgnoreRoute(

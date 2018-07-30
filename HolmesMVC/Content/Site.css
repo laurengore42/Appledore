@@ -132,6 +132,7 @@ nav, section {
 
 .float-right {
     float: right;
+    width: 50%;
 }
 
 .clear-fix:after {

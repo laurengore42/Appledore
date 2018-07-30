@@ -27,3 +27,8 @@ ul.ui-autocomplete li.ui-menu-item a:hover {
 ul.ui-autocomplete li.ui-menu-item a:active {
     color: blue;
 }
+
+div.gsc-control-cse-en {
+    background-color: transparent;
+    border: none;
+}

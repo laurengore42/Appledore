@@ -1,90 +1,12 @@
-﻿
-
-<script>
-    $(document).ready(function () {
-        var loadedUp = false;
-
-        var throwAway = setTimeout(function () {
-            if (loadedUp == false) {
-                $("#overlay").show();
-            }
-        }, 500);
-        
-        var normalize = function (input, accentMap) {
-            var output = input;
-            if (accentMap != null) {
-                Object.keys(accentMap).forEach(function (e, i, a) {
-                    output = output.replace(e, accentMap[e]);
-                });
-            }
-            return output;
-        };
-
-        $.ajax({
-            url: "/Search/DeserialiseSearchStringForPartial",
-            datatype: "text",
-            async: true,
-            type: "GET",
-            success: function (data) {
-                var accentMap = JSON.parse('@Html.Raw(Model.AccentMap)');
-                var searchItems = data.split("¦");
-                $("#searchName").autocomplete({
-                    source: function (request, response) {
-                        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                        response($.grep(searchItems, function (value) {
-                            value = value.label || value.value || value;
-                            return matcher.test(value) || matcher.test(normalize(value, accentMap));
-                        }));
-                    }
-                });
-                $("#searchName").bind("autocompleteselect", function (event, ui) {
-                    //assign value back to the form element
-                    if (ui.item) {
-                        $(event.target).val(ui.item.value);
-                    }
-                    //submit the form
-                    $(event.target.form).submit();
-                });
-                loadedUp = true;
-
-                $("#overlay").hide();
-            },
-            error: function (x, t, m) {
-                document.write(x.responseText + "???" + t + ":" + m);
-            }
-        });
-    })
+﻿<script>
+    (function () {
+        var cx = '009280865212675381937:cwe_rh4ttlq';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+    })();
 </script>
-
-<form action="/Search/" method="post">
-    <div class="searchdiv">
-        <input class="searchbox" id="searchName" name="query" type="text" />&nbsp;<input class="searchbutton" id="searchButton" type="submit" value="Search" /></div>
-</form>
-
-<div id="overlay" style="display:none;">
-    <h1>Loading...</h1>
-</div>
-
-<style>
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        filter: alpha(opacity=90);
-        -moz-opacity: 0.5;
-        -khtml-opacity: 0.5;
-        opacity: 0.5;
-        z-index: 10000;
-    }
-
-    #overlay h1 {
-        position: fixed;
-        top: 5%;
-        left: 5%;
-        color: #fff;
-        font-size: 72pt;
-    }
-</style>
+<gcse:search></gcse:search>
