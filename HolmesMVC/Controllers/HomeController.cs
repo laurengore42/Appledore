@@ -40,7 +40,10 @@
                 new XElement(ns + "loc", new XText(Url.Action("Index", "Home", null, "https")))
                 ),
                 new XElement(ns + "url",
-                new XElement(ns + "loc", new XText(Url.Action("Canon", "Home", null, "https")))
+                new XElement(ns + "loc", new XText(Url.Action("Index", "Canon", null, "https")))
+                ),
+                new XElement(ns + "url",
+                new XElement(ns + "loc", new XText(Url.Action("Search", "Canon", null, "https")))
                 ),
                 new XElement(ns + "url",
                 new XElement(ns + "loc", new XText(Url.Action("Index", "Adaptation", null, "https")))
