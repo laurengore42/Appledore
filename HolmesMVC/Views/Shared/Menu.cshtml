@@ -1,36 +1,41 @@
 ﻿<nav>
     <ul id="menu" class="menulinks">
-        <li><a>Canon</a>
+        <li>
+            <a>Canon</a>
             <ul>
                 <li>@Html.ActionLink("Stories", "Index", "Canon")</li>
                 <li>@Html.ActionLink("Search", "Search", "Canon")</li>
             </ul>
         </li>
-        <li><a>Toys</a>
+        <li>@Html.ActionLink("Adaptations", "Index", "Adaptation")</li>
+        <li>
+            <a>Toys</a>
             <ul>
-                <li>@Html.ActionLink("Holmes Number","HolmesNumToy","Toys")</li>
-                <li>@Html.ActionLink("Photo Collage","PhotoCollageToy","Toys")</li>
-                <li>@Html.ActionLink("Birthplace Map","MapPinToy","Toys")</li>
-                <li>@Html.ActionLink("Timeline Viewer","MultiTimelineToy","Toys")</li>
+                <li>@Html.ActionLink("Holmes Number", "HolmesNumToy", "Toys")</li>
+                <li>@Html.ActionLink("Photo Collage", "PhotoCollageToy", "Toys")</li>
+                <li>@Html.ActionLink("Birthplace Map", "MapPinToy", "Toys")</li>
+                <li>@Html.ActionLink("Timeline Viewer", "MultiTimelineToy", "Toys")</li>
             </ul>
         </li>
         <li>@Html.ActionLink("Credits", "Credits", "Home")</li>
         @if (Request.IsAuthenticated) // only I get to see the TABLES OF POWER
-        {<li>¦¦¦</li>
-            <li><a>tables</a>
+        {
+            <li>¦¦¦</li>
+            <li>
+                <a>tables</a>
                 <ul>
                     @{
-            foreach (string table in ViewBag.TablesForData)
-            {
-                        <li>@Html.ActionLink(table, "Index", table)</li>
-            }
+                        foreach (string table in ViewBag.TablesForData)
+                        {
+                            <li>@Html.ActionLink(table, "Index", table)</li>
+                        }
                     }
                 </ul>
             </li>
-            <li>@Html.ActionLink("scraps","Scraps","Toys")</li> @* sandbox testing area *@
-            <li>@Html.ActionLink("unlocked","Unlocked","Home")</li> @* pages that need their data finalising *@
-            <li>@Html.ActionLink("dataentry","DataEntry","Home")</li> @* pulling from IMDb and killing dupes *@
-            <li>@Html.ActionLink("analytics","Analytics","Home")</li> @* scraps that have graduated *@
+            <li>@Html.ActionLink("scraps", "Scraps", "Toys")</li> @* sandbox testing area *@
+            <li>@Html.ActionLink("unlocked", "Unlocked", "Home")</li> @* pages that need their data finalising *@
+            <li>@Html.ActionLink("dataentry", "DataEntry", "Home")</li> @* pulling from IMDb and killing dupes *@
+            <li>@Html.ActionLink("analytics", "Analytics", "Home")</li> @* scraps that have graduated *@
         }
     </ul>
 </nav>

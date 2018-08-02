@@ -1,4 +1,4 @@
-﻿@model HolmesMVC.Models.ViewModels.SearchData
+﻿@model HolmesMVC.Models.ViewModels.AdaptListView
 
 @{
     ViewBag.Title = "Adaptations";
@@ -6,25 +6,11 @@
 
 <h2>@ViewBag.Title</h2>
 
-@if (!Model.Episodes.Any() && !Model.Adaptations.Any())
-{
-    <h3>No results found.</h3>
-}
-else
-{
-    var episodesFilm = (from e in Model.Episodes orderby e.Year where e.EpCount == 1 && e.Medium == "Film" select e).ToList();
-    var adaptsSingleFilm = (from a in Model.Adaptations orderby a.Year where a.EpCount == 1 && (a.Medium == "Film" || a.Medium == "Television") select a).ToList();
-    var adaptsSingleRadio = (from a in Model.Adaptations orderby a.Year where a.EpCount == 1 && a.Medium == "Radio" select a).ToList();
-    var adaptsTV = (from a in Model.Adaptations orderby a.Year where a.EpCount > 1 && a.Medium == "Television" select a).ToList();
-    var adaptsFilm = (from a in Model.Adaptations orderby a.Year where a.EpCount > 1 && a.Medium == "Film" select a).ToList();
-    var adaptsRadio  = (from a in Model.Adaptations orderby a.Year where a.EpCount > 1 && a.Medium == "Radio" select a).ToList();
-    var adaptsOther = (from a in Model.Adaptations orderby a.Year where a.Medium != "Television" && a.Medium != "Film" && a.Medium != "Radio" select a).ToList();
-    
-    if (adaptsFilm.Any())
+    @if (Model.AdaptsFilm.Any())
     {
         <h3>Film Series</h3>
         <ul>
-            @foreach (var a in adaptsFilm)
+            @foreach (var a in Model.AdaptsFilm)
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -43,11 +29,11 @@ else
         </ul>
     }
     
-    if (episodesFilm.Any() || adaptsSingleFilm.Any())
+    @if (Model.EpisodesFilm.Any() || Model.AdaptsSingleFilm.Any())
     {
-        var allFilms = (from e in episodesFilm
+        var allFilms = (from e in Model.EpisodesFilm
                        select new { ID = e.ID, Year = e.Year, Holmes = e.Holmes, Name = e.Name, Translation = e.Translation, Type = "Episode" }).ToList();
-        allFilms.AddRange(from e in adaptsSingleFilm
+        allFilms.AddRange(from e in Model.AdaptsSingleFilm
                        select new { ID = e.ID, Year = e.Year, Holmes = e.Holmes, Name = e.Name, Translation = e.Translation, Type = "Adaptation" });
         allFilms = allFilms.OrderBy(f => f.Year).ToList();
             
@@ -74,11 +60,11 @@ else
 </text>
     }
 
-    if (adaptsTV.Any())
+    @if (Model.AdaptsTV.Any())
     {
         <h3>TV Series</h3>
         <ul>
-            @foreach (var a in adaptsTV)
+            @foreach (var a in Model.AdaptsTV)
             {
             <li>
                 @if (a.Holmes.Length > 0)
@@ -97,11 +83,11 @@ else
         </ul>
     }
 
-    if (adaptsRadio.Any())
+    @if (Model.AdaptsRadio.Any())
     {
         <h3>Radio Series</h3>
         <ul>
-            @foreach (var a in adaptsRadio)
+            @foreach (var a in Model.AdaptsRadio)
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -120,11 +106,11 @@ else
         </ul>
     }
 
-    if (adaptsSingleRadio.Any())
+    @if (Model.AdaptsSingleRadio.Any())
     {
         <h3>Radio Plays</h3>
         <ul>
-            @foreach (var a in adaptsSingleRadio)
+            @foreach (var a in Model.AdaptsSingleRadio)
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -143,11 +129,11 @@ else
         </ul>
     }
 
-    if (adaptsOther.Any())
+    @if (Model.AdaptsOther.Any())
     {
         <h3>Other kinds of Series</h3>
         <ul>
-            @foreach (var a in adaptsOther)
+            @foreach (var a in Model.AdaptsOther)
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -165,4 +151,3 @@ else
             }
         </ul>
     }
-}

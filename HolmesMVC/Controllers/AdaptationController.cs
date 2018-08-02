@@ -1,16 +1,22 @@
 ﻿namespace HolmesMVC.Controllers
 {
     using System.Data;
-    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Xml.Serialization;
 
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
     public class AdaptationController : HolmesDbController
     {
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            AdaptListView model = new AdaptListView(Db);
+
+            return View(model);
+        }
+
         //
         // GET: /Adaptation/Details/5
 
