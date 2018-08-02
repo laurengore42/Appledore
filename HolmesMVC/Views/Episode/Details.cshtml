@@ -5,6 +5,44 @@
 @{
     ViewBag.Title = Model.DisplayName;
 }
+@if (Model.MediumName == "Television")
+{
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org"
+        , "@@type": "TVEpisode"
+        , "name": "@ViewBag.Title"
+        , "partOfTVSeries": "@Model.AdaptationName"
+        @if (Model.AirdatePrecision == DatePrecision.Full)
+        {
+            <text>, "datePublished": "@Model.Airdate.ToLongDateString()"</text>
+        }
+        @if (Model.SeasonCode.IndexOf('x') > -1)
+        {
+            <text>, "episodeNumber": @Int32.Parse(Model.SeasonCode.Split('x')[1])</text>
+            <text>, "partOfSeason": @Int32.Parse(Model.SeasonCode.Split('x')[0])</text>
+        }
+        else
+        {
+            <text>, "episodeNumber": @Int32.Parse(Model.SeasonCode)</text>
+        }
+        }
+    </script>
+}
+@if (Model.MediumName == "Film")
+{
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org"
+        , "@@type": "Movie"
+        , "name": "@ViewBag.Title"
+        @if (Model.AirdatePrecision == DatePrecision.Full)
+        {
+            <text>, "datePublished": "@Model.Airdate.ToLongDateString()"</text>
+        }
+        }
+    </script>
+}
 <section class="leftfloatdetails">
     <h2 class="detailscategory">Episode</h2>
     <h2 class="detailsheader">@ViewBag.Title

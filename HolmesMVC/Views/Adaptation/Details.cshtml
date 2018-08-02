@@ -5,6 +5,18 @@
 @{
     ViewBag.Title = Model.DisplayName;
 }
+@if (Model.MediumName == "Television")
+{
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org"
+        , "@@type": "TVSeries"
+        , "name": "@ViewBag.Title"
+        , "startDate": "@Model.DateOfFirstEpisode.ToLongDateString()"
+        , "numberOfEpisodes": @Model.Episodes.Count
+        }
+    </script>
+}
 
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)

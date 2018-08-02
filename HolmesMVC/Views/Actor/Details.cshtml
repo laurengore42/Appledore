@@ -13,18 +13,17 @@
         <text>, "image": "@Model.PicShow"</text>
     }
     , "name": "@Model.ShortName"
-    @{ var isoDateFormat = "{0:s}"; }
-    @if (Model.Birthdate != null)
+    @if (Model.Birthdate != null && Model.BirthdatePrecision == DatePrecision.Full)
     {
-        <text>, "birthDate": "@string.Format(isoDateFormat, Model.Birthdate)"</text>
+        <text>, "birthDate": "@(((DateTime)Model.Birthdate).ToLongDateString())"</text>
     }
     @if (Model.Birthplace != null)
     {
         <text>, "birthPlace": "@Model.Birthplace"</text>
     }
-    @if (Model.Deathdate != null)
+    @if (Model.Deathdate != null && Model.BirthdatePrecision == DatePrecision.Full)
     {
-        <text>, "deathDate": "@string.Format(isoDateFormat, Model.Deathdate)"</text>
+        <text>, "deathDate": "@(((DateTime)Model.Deathdate).ToLongDateString())"</text>
     }
     }
 </script>
