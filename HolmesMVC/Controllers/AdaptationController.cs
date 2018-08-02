@@ -11,14 +11,6 @@
 
     public class AdaptationController : HolmesDbController
     {
-        [AllowAnonymous]
-        public ActionResult Index()
-        {
-            var results = (SearchData)new XmlSerializer(typeof(SearchData)).Deserialize(new StringReader(HttpContext.Application["SearchDataFull"].ToString()));
-
-            return View(results);
-        }
-
         //
         // GET: /Adaptation/Details/5
 

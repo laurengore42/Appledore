@@ -46,9 +46,6 @@
                 new XElement(ns + "loc", new XText(Url.Action("Search", "Canon", null, "https")))
                 ),
                 new XElement(ns + "url",
-                new XElement(ns + "loc", new XText(Url.Action("Index", "Adaptation", null, "https")))
-                ),
-                new XElement(ns + "url",
                 new XElement(ns + "loc", new XText(Url.Action("HolmesNumToy", "Toys", null, "https")))
                 ),
                 new XElement(ns + "url",
