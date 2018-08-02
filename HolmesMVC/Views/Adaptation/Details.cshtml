@@ -7,15 +7,38 @@
 }
 @if (Model.MediumName == "Television")
 {
-    <script type="application/ld+json">
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org"
+    , "@@type": "TVSeries"
+    , "name": "@ViewBag.Title"
+    , "startDate": "@Model.DateOfFirstEpisode.ToLongDateString()"
+    , "numberOfEpisodes": @Model.Episodes.Count
+    @if (Model.HolmesActors.Any() || Model.WatsonActors.Any())
+    {
+        <text>, "actor": [</text>
+        if (Model.HolmesActors.Any())
         {
-        "@@context": "http://schema.org"
-        , "@@type": "TVSeries"
-        , "name": "@ViewBag.Title"
-        , "startDate": "@Model.DateOfFirstEpisode.ToLongDateString()"
-        , "numberOfEpisodes": @Model.Episodes.Count
+            <text>{</text>
+            <text>"@@type": "Person" </text>
+            <text>,"name": "@Shared.ShortName(Model.HolmesActors.First())"</text>
+            <text>}</text>
         }
-    </script>
+        if (Model.HolmesActors.Any() && Model.WatsonActors.Any())
+        {
+            <text>,</text>
+        }
+        if (Model.WatsonActors.Any())
+        {
+            <text>{</text>
+            <text>"@@type": "Person" </text>
+            <text>,"name": "@Shared.ShortName(Model.WatsonActors.First())"</text>
+            <text>}</text>
+        }
+        <text>]</text>
+    }
+    }
+</script>
 }
 
 <section class="rightfloatdetails">

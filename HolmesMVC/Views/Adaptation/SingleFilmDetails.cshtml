@@ -1,4 +1,5 @@
-﻿@using HolmesMVC.Models.ViewModels
+﻿@using HolmesMVC
+@using HolmesMVC.Models.ViewModels
 @model AdaptView
 
 @{
@@ -13,6 +14,29 @@
         , "@@type": "Movie"
         , "name": "@ViewBag.Title"
         , "datePublished": "@Model.DateOfFirstEpisode.ToLongDateString()"
+        @if (Model.HolmesActors.Any() || Model.WatsonActors.Any())
+        {
+            <text>, "actor": [</text>
+            if (Model.HolmesActors.Any())
+            {
+                <text>{</text>
+                <text>"@@type": "Person" </text>
+                <text>,"name": "@Shared.ShortName(Model.HolmesActors.First())"</text>
+                <text>}</text>
+            }
+            if (Model.HolmesActors.Any() && Model.WatsonActors.Any())
+            {
+                <text>,</text>
+            }
+            if (Model.WatsonActors.Any())
+            {
+                <text>{</text>
+                <text>"@@type": "Person" </text>
+                <text>,"name": "@Shared.ShortName(Model.WatsonActors.First())"</text>
+                <text>}</text>
+            }
+            <text>]</text>
+        }
         }
     </script>
 }
