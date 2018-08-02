@@ -9,35 +9,6 @@ namespace HolmesMVC.Models.ViewModels
 
         public AdaptListView(HolmesDBEntities Db)
         {
-            EpisodesFilm = (from e in Db.Episodes
-                            where e.Season.Adaptation.Medium.Name == "Film"
-                          && e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1
-                           select new AdaptListEpisode
-                           {
-                               ID = e.ID,
-            Name = ((e.Title == null || e.Title == string.Empty || e.Title.Length == 0)
-                        ? (e.StoryID == null || e.StoryID == string.Empty || e.StoryID.Length == 0)
-                            ? string.Empty
-                            : e.Story.Name
-                        : e.Title
-                    ).Replace("\"", string.Empty).Replace("\\" + "\"", string.Empty),
-            Translation = (e.Translation == null || e.Translation == string.Empty || e.Translation.Length == 0)
-                           ? string.Empty
-                           : e.Translation.Replace("\"", string.Empty),
-            Holmes = (from ap in e.Appearances
-                      where ap.CharacterID == HolmesId
-                      select ap).Any()
-                    ? (from ap in e.Appearances
-                       where ap.CharacterID == HolmesId
-                       group ap by ap.ActorID into grp
-                       orderby grp.Count() descending
-                       select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                    : string.Empty,
-            Year = e.Airdate.Year,
-            EpCount = e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count(),
-            Medium = e.Season.Adaptation.Medium.Name
-        }).ToList();
-
             AdaptsFilm = (from a in Db.Adaptations
                           where a.Medium.Name == "Film"
                          && a.Seasons.Any()
@@ -237,8 +208,6 @@ namespace HolmesMVC.Models.ViewModels
                            }).ToList();
         }
 
-        public List<AdaptListEpisode> EpisodesFilm { get; set; }
-
         public List<AdaptListAdapt> AdaptsSingleFilm { get; set; }
 
         public List<AdaptListAdapt> AdaptsFilm { get; set; }
@@ -250,24 +219,7 @@ namespace HolmesMVC.Models.ViewModels
         public List<AdaptListAdapt> AdaptsRadio { get; set; }
 
         public List<AdaptListAdapt> AdaptsOther { get; set; }
-    }
-
-    public class AdaptListEpisode
-    {
-        public int ID;
-
-        public string Name;
-
-        public string Translation;
-
-        public string Holmes;
-
-        public int Year;
-
-        public int EpCount;
-
-        public string Medium;
-    }
+    }    
 
     public class AdaptListAdapt
     {

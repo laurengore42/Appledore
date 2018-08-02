@@ -10,7 +10,7 @@
     {
         <h3>Film Series</h3>
         <ul>
-            @foreach (var a in Model.AdaptsFilm)
+            @foreach (var a in Model.AdaptsFilm.OrderBy(a => a.Year))
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -29,30 +29,24 @@
         </ul>
     }
     
-    @if (Model.EpisodesFilm.Any() || Model.AdaptsSingleFilm.Any())
-    {
-        var allFilms = (from e in Model.EpisodesFilm
-                       select new { ID = e.ID, Year = e.Year, Holmes = e.Holmes, Name = e.Name, Translation = e.Translation, Type = "Episode" }).ToList();
-        allFilms.AddRange(from e in Model.AdaptsSingleFilm
-                       select new { ID = e.ID, Year = e.Year, Holmes = e.Holmes, Name = e.Name, Translation = e.Translation, Type = "Adaptation" });
-        allFilms = allFilms.OrderBy(f => f.Year).ToList();
-            
+    @if (Model.AdaptsSingleFilm.Any())
+    {            
             <text>
          <h3>Films</h3>
          <ul>
-             @foreach (var e in allFilms)
+             @foreach (var a in Model.AdaptsSingleFilm.OrderBy(a => a.Year))
              {
                  <li>
-                 @if (e.Holmes.Length > 0)
+                 @if (a.Holmes.Length > 0)
                  {
-                     <text>@e.Year @e.Holmes: '@Html.ActionLink(e.Name, "Details", e.Type, new { id = e.ID }, null)'</text>
+                     <text>@a.Year @a.Holmes: '@Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)'</text>
                  }
                  else
                  {
-                     <text>@e.Year: '@Html.ActionLink(e.Name, "Details", e.Type, new { id = e.ID }, null)'</text>
+                     <text>@a.Year: '@Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)'</text>
                  }
-                 @if (!string.IsNullOrEmpty(e.Translation)) {
-                     <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
+                 @if (!string.IsNullOrEmpty(a.Translation)) {
+                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
                  }    
                  </li>
              }
@@ -64,7 +58,7 @@
     {
         <h3>TV Series</h3>
         <ul>
-            @foreach (var a in Model.AdaptsTV)
+            @foreach (var a in Model.AdaptsTV.OrderBy(a => a.Year))
             {
             <li>
                 @if (a.Holmes.Length > 0)
@@ -87,7 +81,7 @@
     {
         <h3>Radio Series</h3>
         <ul>
-            @foreach (var a in Model.AdaptsRadio)
+            @foreach (var a in Model.AdaptsRadio.OrderBy(a => a.Year))
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -106,11 +100,11 @@
         </ul>
     }
 
-    @if (Model.AdaptsSingleRadio.Any())
+    @if (Model.AdaptsSingleRadio.Any()
     {
         <h3>Radio Plays</h3>
         <ul>
-            @foreach (var a in Model.AdaptsSingleRadio)
+            @foreach (var a in Model.AdaptsSingleRadio.OrderBy(a => a.Year))
             {
                 <li>
                 @if (a.Holmes.Length > 0)
@@ -133,7 +127,7 @@
     {
         <h3>Other kinds of Series</h3>
         <ul>
-            @foreach (var a in Model.AdaptsOther)
+            @foreach (var a in Model.AdaptsOther.OrderBy(a => a.Year))
             {
                 <li>
                 @if (a.Holmes.Length > 0 && a.Holmes != "Nobody")
