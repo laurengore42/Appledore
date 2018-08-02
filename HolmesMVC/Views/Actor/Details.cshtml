@@ -21,7 +21,7 @@
     {
         <text>, "birthPlace": "@Model.Birthplace"</text>
     }
-    @if (Model.Deathdate != null && Model.BirthdatePrecision == DatePrecision.Full)
+    @if (Model.Deathdate != null && Model.DeathdatePrecision == DatePrecision.Full)
     {
         <text>, "deathDate": "@(((DateTime)Model.Deathdate).ToLongDateString())"</text>
     }
