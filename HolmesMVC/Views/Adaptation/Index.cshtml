@@ -136,7 +136,7 @@
             @foreach (var a in Model.AdaptsOther)
             {
                 <li>
-                @if (a.Holmes.Length > 0)
+                @if (a.Holmes.Length > 0 && a.Holmes != "Nobody")
                 {
                     <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes, @a.Medium)</text>
                 }
