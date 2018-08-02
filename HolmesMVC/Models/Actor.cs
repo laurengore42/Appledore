@@ -77,7 +77,7 @@ namespace HolmesMVC.Models
             {
                 if (Pic != null && Pic.IndexOf('.') > -1)
                 {
-                    return Pic;
+                    return Pic.Replace("http:","https:");
                 }
                 else if (Pic == null || Pic == "")
                 {
