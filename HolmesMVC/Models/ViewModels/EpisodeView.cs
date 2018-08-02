@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using HolmesMVC.Enums;
+    using System.Collections.Generic;
 
     public class EpisodeView
     {
@@ -47,6 +48,8 @@
         public string SeasonCode { get; set; }
 
         public bool Locked { get; set; }
+
+        public IEnumerable<string> ActorNames { get; set; }
 
         public EpisodeView()
         {
@@ -107,6 +110,10 @@
                           select a.ID;
 
             Locked = lockApp.Any();
+
+            ActorNames = from a in episode.Appearances
+                         where a.ActorID > 0
+                         select Shared.ShortName(a.Actor);
         }
 
         public string DisplayName { get; set; }
