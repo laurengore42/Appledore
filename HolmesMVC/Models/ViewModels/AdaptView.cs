@@ -29,6 +29,13 @@
 
             SingleFilm = Episodes.Count() == 1;
             SingleSeason = adapt.Seasons.Count() == 1;
+
+            if (SingleFilm)
+            {
+                ActorNames = from a in Episodes.First().Appearances
+                             where a.ActorID > 0
+                             select Shared.ShortName(a.Actor);
+            }
         }
 
         [Key]
@@ -49,6 +56,8 @@
         public bool SingleSeason { get; set; }
 
         public bool SingleFilm { get; set; }
+
+        public IEnumerable<string> ActorNames { get; set; }
 
         public DateTime DateOfFirstEpisode { get; set; }
 
