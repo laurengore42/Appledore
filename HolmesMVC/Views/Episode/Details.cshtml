@@ -46,6 +46,12 @@
         {
             <text>, "datePublished": "@Model.Airdate.ToLongDateString()"</text>
         }
+        @if (Model.ActorNames.Count() > 0)
+        {
+            <text>
+                , "actor": [{ "@@type": "Person", "name": "@Html.Raw(String.Join("\" }, { \"@type\": \"Person\", \"name\": \"", Model.ActorNames))"}]
+            </text>
+        }
         }
     </script>
 }
