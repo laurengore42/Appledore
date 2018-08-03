@@ -13,7 +13,9 @@
     {
         [AllowAnonymous]
         [HttpGet]
+#pragma warning disable CA1822 // Mark members as static
         public string StoryXml(string storyCode)
+#pragma warning restore CA1822 // Mark members as static
         {
             var uri = new Uri("https://appledore.azurewebsites.net/services/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
 
