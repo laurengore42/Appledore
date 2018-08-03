@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HolmesMVC.GoogleGeocode;
 
 namespace HolmesMVC.Models
 {
@@ -46,7 +47,7 @@ namespace HolmesMVC.Models
             {
                 Latitude = 0;
                 Longitude = 0;
-                GoogleGeocode.GeocodeResponse latlng = GoogleGeocode.Geocode(System.Configuration.ConfigurationManager.AppSettings["GoogleMapsAPIKey"], Birthplace);
+                GeocodeResponse latlng = Geocoder.Geocode(System.Configuration.ConfigurationManager.AppSettings["GoogleMapsAPIKey"], Birthplace);
                 if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out double tempLat) && Double.TryParse(latlng.Position.Lng, out double tempLng))
                 {
                     Latitude = tempLat;

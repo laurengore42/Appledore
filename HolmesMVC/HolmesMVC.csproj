@@ -207,14 +207,14 @@
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
-    <Compile Include="GoogleGeocode.AddressComponent.cs" />
-    <Compile Include="GoogleGeocode.Bounds.cs" />
-    <Compile Include="GoogleGeocode.cs" />
-    <Compile Include="GoogleGeocode.GeocodeResponse.cs" />
-    <Compile Include="GoogleGeocode.Geometry.cs" />
-    <Compile Include="GoogleGeocode.LatLng.cs" />
-    <Compile Include="GoogleGeocode.Response.cs" />
-    <Compile Include="GoogleGeocode.ResponseResults.cs" />
+    <Compile Include="GoogleGeocode\AddressComponent.cs" />
+    <Compile Include="GoogleGeocode\Bounds.cs" />
+    <Compile Include="GoogleGeocode\GoogleGeocode.cs" />
+    <Compile Include="GoogleGeocode\GeocodeResponse.cs" />
+    <Compile Include="GoogleGeocode\Geometry.cs" />
+    <Compile Include="GoogleGeocode\LatLng.cs" />
+    <Compile Include="GoogleGeocode\Response.cs" />
+    <Compile Include="GoogleGeocode\ResponseResults.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.Designer.cs">
       <DependentUpon>201503301626341_option to translate episodes and adaptations.cs</DependentUpon>

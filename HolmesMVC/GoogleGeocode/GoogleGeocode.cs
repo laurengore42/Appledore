@@ -4,11 +4,10 @@ using System.Web;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace HolmesMVC
+namespace HolmesMVC.GoogleGeocode
 {
-    public static partial class GoogleGeocode
+    public static class Geocoder
     {
-
         public static GeocodeResponse Geocode(string Key, string Location)
         {
 
