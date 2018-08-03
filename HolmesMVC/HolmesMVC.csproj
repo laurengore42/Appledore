@@ -1262,7 +1262,6 @@
     <Content Include="Scripts\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout\knockout-2.2.0.js" />
-    <Content Include="Scripts\modernizr\modernizr-2.6.2.js" />
     <Content Include="Scripts\Apdore-newappearance.js" />
     <Content Include="Services\StoryXmlRetriever.svc" />
     <Content Include="Views\Actor\Details.cshtml" />
