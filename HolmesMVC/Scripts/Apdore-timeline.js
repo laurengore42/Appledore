@@ -99,9 +99,6 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
         drawBox(startYear, startMonth, endYear, endMonth, ctx, blockWidth, heightRatio, color);
     }
 
-    // shut up, Resharper
-    var i;
-
     // little one-year markers
     ctx.fillStyle = "#888888";
     var newMarkerHeight = markerHeight * 0.3;
