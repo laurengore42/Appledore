@@ -1,5 +1,5 @@
 ﻿function roundByFives(value, up) {
-    if (value % 5 == 0) {
+    if (value % 5 === 0) {
         return value;
     }
     if (up) {
@@ -20,7 +20,7 @@ function drawBox(startYear, startMonth, endYear, endMonth, ctx, blockWidth, heig
 
     var startRoundedDown = roundByFives(startYear, false);
     // padding
-    if (startYear == startRoundedDown) {
+    if (startYear === startRoundedDown) {
         startRoundedDown -= 5;
     }
 
@@ -45,10 +45,10 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
     var endRoundedUp = roundByFives(endYear, true);
 
     // padding
-    if (endYear == endRoundedUp) {
+    if (endYear === endRoundedUp) {
         endRoundedUp += 5;
     }
-    if (startYear == startRoundedDown) {
+    if (startYear === startRoundedDown) {
         startRoundedDown -= 5;
     }
     var outerBlocks = (endRoundedUp - startRoundedDown) / 5;
@@ -91,7 +91,7 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
     ctx.strokeRect(0, 0, outerBlocks * blockWidth, blockWidth * heightRatio);
 
     var color = 'green';
-    if (spotty == true) {
+    if (spotty === true) {
         for (var j = 0; j < episodes.length; j += 2) {
             drawEpLine(startRoundedDown, episodes[j], episodes[j + 1], ctx, blockWidth, heightRatio, color);
         }
@@ -127,22 +127,19 @@ function drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, epi
 
 function redrawCanvases() {
     $('canvas.timelineCanvas').each(function () {
-        try {
-            var canvas = this;
-            var ctx = canvas.getContext('2d');
-            var startYear = canvas.attributes["data-startyear"].value;
-            var startMonth = canvas.attributes["data-startmonth"].value;
-            var endYear = canvas.attributes["data-endyear"].value;
-            var endMonth = canvas.attributes["data-endmonth"].value;
-            var spottyValues = JSON.parse(canvas.attributes["data-spottyvalues"].value);
+        var canvas = this;
+        var ctx = canvas.getContext('2d');
+        var startYear = canvas.attributes["data-startyear"].value;
+        var startMonth = canvas.attributes["data-startmonth"].value;
+        var endYear = canvas.attributes["data-endyear"].value;
+        var endMonth = canvas.attributes["data-endmonth"].value;
+        var spottyValues = JSON.parse(canvas.attributes["data-spottyvalues"].value);
 
-            var isSpotty = true;
-            if (canvas.attributes["data-isspotty"]) {
-                isSpotty = canvas.attributes["data-isspotty"].value == "true";
-            }
-            drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, isSpotty);
-        } catch (err) {
+        var isSpotty = true;
+        if (canvas.attributes["data-isspotty"]) {
+            isSpotty = canvas.attributes["data-isspotty"].value === "true";
         }
+        drawTimeline(startYear, startMonth, endYear, endMonth, canvas, ctx, spottyValues, isSpotty);
     });
 }
 

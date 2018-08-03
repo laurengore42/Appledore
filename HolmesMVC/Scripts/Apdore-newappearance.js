@@ -13,14 +13,14 @@ function addParam(currentLocation, paramName, paramValue) {
     var gotQuery = currUrl.indexOf("?");
     var newUrl;
     if (gotQuery > -1) {
-        if (paramName != "episode") {
+        if (paramName !== "episode") {
             currUrl = killParam(currUrl, paramName);
         }
         newUrl = currUrl + "&" + paramName + "=" + paramValue;
     } else {
         newUrl = currUrl + "?" + paramName + "=" + paramValue;
     }
-    return(newUrl);
+    return newUrl;
 }
 
 function killParam(currentLocation, paramName) {
@@ -34,24 +34,24 @@ function killParam(currentLocation, paramName) {
         i++;
     }
     // trailing punctuation
-    while (newUrl.substring(newUrl.length - 1, newUrl.length) == "?"
-        || newUrl.substring(newUrl.length - 1, newUrl.length) == "&") {
+    while (newUrl.substring(newUrl.length - 1, newUrl.length) === "?"
+        || newUrl.substring(newUrl.length - 1, newUrl.length) === "&") {
         newUrl = newUrl.substring(0, newUrl.length - 1);
     }
-    return (newUrl);
+    return newUrl;
 }
 
 function SaveNewActor() {
     $("#actorsave").disabled = true;
     $("#actorsave").hide();
-    if ($("#actorsurname") == "") {
+    if ($("#actorsurname") === "") {
         alert("Please enter a surname.");
         return;
     }
 
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajaxPrefilter(function (options, originalOptions) {
-        if (options.type.toUpperCase() == "POST") {
+        if (options.type.toUpperCase() === "POST") {
             options.data = $.param($.extend(originalOptions.data, { __RequestVerificationToken: token }));
         }
     });
@@ -61,7 +61,7 @@ function SaveNewActor() {
         type: 'POST',
         data: {
             forename: $("#actorforename").val(),
-            surname: $("#actorsurname").val(),
+            surname: $("#actorsurname").val()
         },
         success: function (data) {
             location.replace(addParam(location, "actorid", data));
@@ -83,14 +83,14 @@ function SaveNewActor() {
 function SaveNewChar() {
     $("#charsave").disabled = true;
     $("#charsave").hide();
-    if ($("#charsurname") == "") {
+    if ($("#charsurname") === "") {
         alert("Please enter a surname.");
         return;
     }
 
     var token = $('input[name="__RequestVerificationToken"]').val();
     $.ajaxPrefilter(function (options, originalOptions) {
-        if (options.type.toUpperCase() == "POST") {
+        if (options.type.toUpperCase() === "POST") {
             options.data = $.param($.extend(originalOptions.data, { __RequestVerificationToken: token }));
         }
     });
@@ -100,7 +100,7 @@ function SaveNewChar() {
         type: 'POST',
         data: {
             forename: $("#charforename").val(),
-            surname: $("#charsurname").val(),
+            surname: $("#charsurname").val()
         },
         success: function (data) {
             location.replace(addParam(location, "characterid", data));

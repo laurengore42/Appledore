@@ -45,7 +45,7 @@ function htmlTrim(wholeStory) {
     }
     tagless = tagless.trim();
 
-    while (tagless.indexOf('*¦') == 0) {
+    while (tagless.indexOf('*¦') === 0) {
         // Sometimes this has to be done twice. Don't ask me why
         // If you don't trim this off, you get an off-by-2 error when chunking
         tagless = tagless.substring(2, tagless.length);

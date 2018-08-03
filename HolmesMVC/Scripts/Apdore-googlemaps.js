@@ -21,7 +21,7 @@ function placePins() {
         var pin = new google.maps.Marker({
             position: new google.maps.LatLng(actorLat, actorLong),
             map: map
-        })
+        });
         pins.push(pin);
         var infoWindow = new google.maps.InfoWindow({
             content: link + ', ' + birthplace
@@ -61,7 +61,7 @@ function placePins() {
         while (map.getZoom() > 5) {
             map.setZoom(map.getZoom() - 1);
             var bounds = map.getBounds();
-            if (bounds != undefined) {
+            if (bounds !== undefined) {
                 if (bounds.contains(pins[0].getPosition())) {
                     break;
                 }
