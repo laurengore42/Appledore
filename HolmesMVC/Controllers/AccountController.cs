@@ -252,12 +252,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-#pragma warning disable IDE0018 // Inline variable declaration
-            string provider = null;
-            string providerUserId = null;
-#pragma warning restore IDE0018 // Inline variable declaration
-
-            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out string provider, out string providerUserId))
             {
                 return RedirectToAction("Manage");
             }

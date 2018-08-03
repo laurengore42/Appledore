@@ -48,11 +48,7 @@ namespace HolmesMVC.Models
                 Latitude = 0;
                 Longitude = 0;
                 GeocodeResponse latlng = Geocoder.Geocode(System.Configuration.ConfigurationManager.AppSettings["GoogleMapsAPIKey"], Birthplace);
-#pragma warning disable IDE0018 // Inline variable declaration
-                double tempLat = 0;
-                double tempLng = 0;
-#pragma warning restore IDE0018 // Inline variable declaration
-                if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out tempLat) && Double.TryParse(latlng.Position.Lng, out tempLng))
+                if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out double tempLat) && Double.TryParse(latlng.Position.Lng, out double tempLng))
                 {
                     Latitude = tempLat;
                     Longitude = tempLng;
