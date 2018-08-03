@@ -1,6 +1,5 @@
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using HolmesMVC.Models.Mapping;
+using System.Data.Entity;
 
 namespace HolmesMVC.Models
 {
@@ -33,10 +32,10 @@ namespace HolmesMVC.Models
         public DbSet<HolmesLinkAppearance> HolmesLinkAppearances { get; set; }
         public DbSet<HolmesLinkActor> HolmesLinkActors { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<webpages_Membership> webpages_Membership { get; set; }
-        public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
-        public DbSet<webpages_Roles> webpages_Roles { get; set; }
-        public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
+        public DbSet<Webpages_Membership> webpages_Membership { get; set; }
+        public DbSet<Webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public DbSet<Webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<Webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -57,10 +56,10 @@ namespace HolmesMVC.Models
             modelBuilder.Configurations.Add(new HolmesLinkAppearanceMap());
             modelBuilder.Configurations.Add(new HolmesLinkActorMap());
             modelBuilder.Configurations.Add(new UserProfileMap());
-            modelBuilder.Configurations.Add(new webpages_MembershipMap());
-            modelBuilder.Configurations.Add(new webpages_OAuthMembershipMap());
-            modelBuilder.Configurations.Add(new webpages_RolesMap());
-            modelBuilder.Configurations.Add(new webpages_UsersInRolesMap());
+            modelBuilder.Configurations.Add(new Webpages_MembershipMap());
+            modelBuilder.Configurations.Add(new Webpages_OAuthMembershipMap());
+            modelBuilder.Configurations.Add(new Webpages_RolesMap());
+            modelBuilder.Configurations.Add(new Webpages_UsersInRolesMap());
         }
     }
 }

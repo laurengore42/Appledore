@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace HolmesMVC.Models
@@ -7,8 +6,8 @@ namespace HolmesMVC.Models
     {
         public Adaptation()
         {
-            this.Renames = new List<Rename>();
-            this.Seasons = new List<Season>();
+            Renames = new List<Rename>();
+            Seasons = new List<Season>();
         }
 
         public int ID { get; set; }

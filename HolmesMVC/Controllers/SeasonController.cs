@@ -45,9 +45,11 @@
                 newSeasonAirOrder = existingSeasons.Max() + 1;
             }
 
-            var model = new Season();
-            model.AdaptationID = id;
-            model.AirOrder = newSeasonAirOrder;
+            var model = new Season
+            {
+                AdaptationID = id,
+                AirOrder = newSeasonAirOrder
+            };
 
             ViewBag.AdaptationName = Shared.DisplayName(adapt);
 

@@ -1,4 +1,3 @@
-using System;
 using HolmesMVC.Enums;
 using System.Collections.Generic;
 
@@ -9,9 +8,9 @@ namespace HolmesMVC.Models
     {
         public Story()
         {
-            this.Episodes = new List<Episode>();
-            this.References = new List<Reference>();
-            this.Characters = new List<Character>();
+            Episodes = new List<Episode>();
+            References = new List<Reference>();
+            Characters = new List<Character>();
         }
 
         public string ID { get; set; }

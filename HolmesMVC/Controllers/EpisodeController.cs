@@ -204,10 +204,12 @@
         public ActionResult Lock(int id)
         {
             var episode = Db.Episodes.Find(id);
-            var lockApp = new Appearance();
-            lockApp.Actor = Db.Actors.Find(0);
-            lockApp.Character = Db.Characters.Find(0);
-            lockApp.Episode = episode;
+            var lockApp = new Appearance
+            {
+                Actor = Db.Actors.Find(0),
+                Character = Db.Characters.Find(0),
+                Episode = episode
+            };
             Db.Appearances.Add(lockApp);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 

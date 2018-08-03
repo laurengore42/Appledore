@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace HolmesMVC.Models
 {
@@ -9,7 +6,7 @@ namespace HolmesMVC.Models
     {
         public HolmesLink()
         {
-            this.HolmesLinkAppearances = new List<HolmesLinkAppearance>();
+            HolmesLinkAppearances = new List<HolmesLinkAppearance>();
         }
 
         public int ID { get; set; }

@@ -34,9 +34,9 @@
 <div id="timelinecontainer">
 Choose a date system:<br />
 <input type="button" value="Baring-Gould" onclick="changeTheDates(@Baring);" /><br />
-    <canvas class="timelineCanvas" data-startyear="@Model.StartYear[Baring]" data-startmonth="@Model.StartMonth[Baring]" data-endyear="@Model.EndYear[Publish]" data-endmonth="@Model.EndMonth[Publish]" data-spottyvalues="@Model.EpisodeDateString[Baring]">Turn on &lt;canvas&gt;.</canvas><br />
+    <canvas class="timelineCanvas" data-startyear="@Model.StartYear.ElementAt(Baring)" data-startmonth="@Model.StartMonth.ElementAt(Baring)" data-endyear="@Model.EndYear.ElementAt(Publish)" data-endmonth="@Model.EndMonth.ElementAt(Publish)" data-spottyvalues="@Model.EpisodeDateString.ElementAt(Baring)">Turn on &lt;canvas&gt;.</canvas><br />
 <input type="button" value="Publication" onclick="changeTheDates(@Publish);" /><br />
-    <canvas class="timelineCanvas" data-startyear="@Model.StartYear[Baring]" data-startmonth="@Model.StartMonth[Baring]" data-endyear="@Model.EndYear[Publish]" data-endmonth="@Model.EndMonth[Baring]" data-spottyvalues="@Model.EpisodeDateString[Publish]">Turn on &lt;canvas&gt;.</canvas><br />
+    <canvas class="timelineCanvas" data-startyear="@Model.StartYear.ElementAt(Baring)" data-startmonth="@Model.StartMonth.ElementAt(Baring)" data-endyear="@Model.EndYear.ElementAt(Publish)" data-endmonth="@Model.EndMonth.ElementAt(Baring)" data-spottyvalues="@Model.EpisodeDateString.ElementAt(Publish)">Turn on &lt;canvas&gt;.</canvas><br />
 </div>
 
 <!-- Publication order -->
@@ -124,7 +124,7 @@ Choose a date system:<br />
         $(document).ready(function() {
             changeTheDates(@Model.UserCanonOrder);
             
-            $('#startYearSpan').text(@Model.StartYear[Publish]);
+            $('#startYearSpan').text(@Model.StartYear.ElementAt(Publish));
         });
 
         function changeTheDates(sysNum) {

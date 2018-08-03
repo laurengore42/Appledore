@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HolmesMVC.Models
 {
-    public partial class webpages_Membership
+    public partial class Webpages_Membership
     {
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ConfirmationToken { get; set; }

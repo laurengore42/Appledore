@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace HolmesMVC.Models
@@ -7,8 +6,8 @@ namespace HolmesMVC.Models
     {
         public Honorific()
         {
-            this.Characters = new List<Character>();
-            this.Renames = new List<Rename>();
+            Characters = new List<Character>();
+            Renames = new List<Rename>();
         }
 
         public int ID { get; set; }

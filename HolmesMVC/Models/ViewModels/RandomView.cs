@@ -58,9 +58,10 @@
                                    where ap.Select(a => a.CharacterID).Distinct().Count() > 1
                                    && ap.FirstOrDefault().ActorID > 0
                                    select ap.FirstOrDefault().Actor).OrderBy(a => a.Surname).ToList();
-            MultiActor = new MultiActor();
-            MultiActor.Actor =
-                multiCharActors[(new Random()).Next(multiCharActors.Count())];
+            MultiActor = new MultiActor
+            {
+                Actor = multiCharActors[(new Random()).Next(multiCharActors.Count())]
+            };
             MultiActor.Characters =
                                      (from ap in db.Appearances
                                       where ap.ActorID == MultiActor.Actor.ID

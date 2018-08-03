@@ -233,7 +233,7 @@
                                          Value =
                                              character.ID.ToString(CultureInfo.InvariantCulture),
                                          Text =
-                                             Shared.DisplayName(character) + (!String.IsNullOrEmpty(character.StoryID) ? " (" + character.StoryID + ")" : "")
+                                             Shared.DisplayName(character) + (!string.IsNullOrEmpty(character.StoryID) ? " (" + character.StoryID + ")" : "")
                                      }).OrderBy(a => a.Text).ToList();
             return characterlist;
         }

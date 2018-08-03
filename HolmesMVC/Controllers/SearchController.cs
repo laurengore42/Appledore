@@ -1,11 +1,10 @@
 ﻿namespace HolmesMVC.Controllers
 {
-    using System.IO;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
     using System.Xml.Serialization;
-
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -14,7 +13,7 @@
     public class SearchController : HolmesDbController
     {
         [AllowAnonymous]
-        public string GetSearchDataFull(HolmesDBEntities Db)
+        public static string GetSearchDataFull(HolmesDBEntities Db)
         {
             var sr = new StringWriter();
             var sd = new SearchData();

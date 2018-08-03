@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace HolmesMVC.Models
@@ -7,7 +6,7 @@ namespace HolmesMVC.Models
     {
         public Medium()
         {
-            this.Adaptations = new List<Adaptation>();
+            Adaptations = new List<Adaptation>();
         }
 
         public int ID { get; set; }

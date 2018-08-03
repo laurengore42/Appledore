@@ -2,9 +2,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
 {
-    public class webpages_RolesMap : EntityTypeConfiguration<webpages_Roles>
+    public class Webpages_RolesMap : EntityTypeConfiguration<Webpages_Roles>
     {
-        public webpages_RolesMap()
+        public Webpages_RolesMap()
         {
             // Primary Key
             HasKey(t => t.RoleId);

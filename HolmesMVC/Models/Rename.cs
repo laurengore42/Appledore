@@ -1,5 +1,3 @@
-using System;
-
 namespace HolmesMVC.Models
 {
     public partial class Rename
@@ -8,7 +6,7 @@ namespace HolmesMVC.Models
         public int AdaptationID { get; set; }
         public int CharacterID { get; set; }
         public int ActorID { get; set; }
-        public Nullable<int> HonorificID { get; set; }
+        public int? HonorificID { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
         public virtual Actor Actor { get; set; }

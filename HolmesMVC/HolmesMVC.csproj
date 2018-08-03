@@ -207,7 +207,14 @@
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="GoogleGeocode.AddressComponent.cs" />
+    <Compile Include="GoogleGeocode.Bounds.cs" />
     <Compile Include="GoogleGeocode.cs" />
+    <Compile Include="GoogleGeocode.GeocodeResponse.cs" />
+    <Compile Include="GoogleGeocode.Geometry.cs" />
+    <Compile Include="GoogleGeocode.LatLng.cs" />
+    <Compile Include="GoogleGeocode.Response.cs" />
+    <Compile Include="GoogleGeocode.ResponseResults.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.cs" />
     <Compile Include="Migrations\201503301626341_option to translate episodes and adaptations.Designer.cs">
       <DependentUpon>201503301626341_option to translate episodes and adaptations.cs</DependentUpon>
@@ -322,10 +329,10 @@
     <Compile Include="Models\Mapping\SpeciesMap.cs" />
     <Compile Include="Models\Mapping\StoryMap.cs" />
     <Compile Include="Models\Mapping\UserProfileMap.cs" />
-    <Compile Include="Models\Mapping\webpages_MembershipMap.cs" />
-    <Compile Include="Models\Mapping\webpages_OAuthMembershipMap.cs" />
-    <Compile Include="Models\Mapping\webpages_RolesMap.cs" />
-    <Compile Include="Models\Mapping\webpages_UsersInRolesMap.cs" />
+    <Compile Include="Models\Mapping\Webpages_MembershipMap.cs" />
+    <Compile Include="Models\Mapping\Webpages_OAuthMembershipMap.cs" />
+    <Compile Include="Models\Mapping\Webpages_RolesMap.cs" />
+    <Compile Include="Models\Mapping\Webpages_UsersInRolesMap.cs" />
     <Compile Include="Models\Medium.cs" />
     <Compile Include="Controllers\RenameController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -356,10 +363,10 @@
     <Compile Include="Models\ViewModels\RandomView.cs" />
     <Compile Include="Models\ViewModels\RenameView.cs" />
     <Compile Include="Models\ViewModels\StoryView.cs" />
-    <Compile Include="Models\webpages_Membership.cs" />
-    <Compile Include="Models\webpages_OAuthMembership.cs" />
-    <Compile Include="Models\webpages_Roles.cs" />
-    <Compile Include="Models\webpages_UsersInRoles.cs" />
+    <Compile Include="Models\Webpages_Membership.cs" />
+    <Compile Include="Models\Webpages_OAuthMembership.cs" />
+    <Compile Include="Models\Webpages_Roles.cs" />
+    <Compile Include="Models\Webpages_UsersInRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared.cs" />
     <Compile Include="Services\StoryXmlRetriever.svc.cs">

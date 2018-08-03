@@ -19,8 +19,8 @@
     {
         #region Fields
 
-        private int excerptBufferSize = 40;
-        private string highlightColor = "yellow";
+        private readonly int excerptBufferSize = 40;
+        private readonly string highlightColor = "yellow";
         private List<char> _mainTerminatorCharacters;
         private List<char> _additionalTerminatorCharacters;
 
@@ -28,15 +28,17 @@
         {
             if (_mainTerminatorCharacters == null)
             {
-                List<char> terminatorCharacters = new List<char>();
-                terminatorCharacters.Add('<');
-                terminatorCharacters.Add('>');
-                terminatorCharacters.Add('!');
-                terminatorCharacters.Add('.');
-                terminatorCharacters.Add('?');
-                terminatorCharacters.Add('"');
-                terminatorCharacters.Add('\'');
-                terminatorCharacters.Add('—');
+                List<char> terminatorCharacters = new List<char>
+                {
+                    '<',
+                    '>',
+                    '!',
+                    '.',
+                    '?',
+                    '"',
+                    '\'',
+                    '—'
+                };
                 _mainTerminatorCharacters = terminatorCharacters;
             }
             return _mainTerminatorCharacters;
@@ -46,11 +48,13 @@
         {
             if (_additionalTerminatorCharacters == null)
             {
-                List<char> terminatorCharacters = new List<char>();
-                terminatorCharacters.Add(',');
-                terminatorCharacters.Add(':');
-                terminatorCharacters.Add(';');
-                terminatorCharacters.Add('-');
+                List<char> terminatorCharacters = new List<char>
+                {
+                    ',',
+                    ':',
+                    ';',
+                    '-'
+                };
                 _additionalTerminatorCharacters = terminatorCharacters;
             }
             return _additionalTerminatorCharacters;
@@ -63,7 +67,7 @@
         private List<CanonSearchNode> GetRelevantNodes(HolmesDBEntities Db, XDocument xmlDoc, string query)
         {
             List<CanonSearchNode> nodes = new List<CanonSearchNode>();
-            if (String.IsNullOrEmpty(query) || xmlDoc == null)
+            if (string.IsNullOrEmpty(query) || xmlDoc == null)
             {
                 return nodes;
             }
@@ -82,7 +86,7 @@
             return nodes;
         }
 
-        private Dictionary<String, Story> GetNodeNames(HolmesDBEntities Db)
+        private static Dictionary<String, Story> GetNodeNames(HolmesDBEntities Db)
         {
             Dictionary<String, Story> nodeNames = new Dictionary<String, Story>();
 
@@ -105,7 +109,7 @@
         /// <returns>string</returns>
         private string HighlightKeyWords(string text, string keywords)
         {
-            if (text == String.Empty || keywords == String.Empty || highlightColor == String.Empty)
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(keywords) || string.IsNullOrEmpty(highlightColor))
                 return text;
             var words = keywords.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             return words.Select(word => word.Trim()).Aggregate(text,

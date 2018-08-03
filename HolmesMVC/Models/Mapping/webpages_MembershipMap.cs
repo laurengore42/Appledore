@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
 {
-    public class webpages_MembershipMap : EntityTypeConfiguration<webpages_Membership>
+    public class Webpages_MembershipMap : EntityTypeConfiguration<Webpages_Membership>
     {
-        public webpages_MembershipMap()
+        public Webpages_MembershipMap()
         {
             // Primary Key
             HasKey(t => t.UserId);

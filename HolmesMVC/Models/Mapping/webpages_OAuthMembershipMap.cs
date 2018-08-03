@@ -2,9 +2,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
 {
-    public class webpages_OAuthMembershipMap : EntityTypeConfiguration<webpages_OAuthMembership>
+    public class Webpages_OAuthMembershipMap : EntityTypeConfiguration<Webpages_OAuthMembership>
     {
-        public webpages_OAuthMembershipMap()
+        public Webpages_OAuthMembershipMap()
         {
             // Primary Key
             HasKey(t => new { t.Provider, t.ProviderUserId });

@@ -7,9 +7,9 @@
     using System.Web.Mvc;
     using System.Web.Security;
     using DotNetOpenAuth.AspNet;
+    using HolmesMVC.Models;
     using Microsoft.Web.WebPages.OAuth;
     using WebMatrix.WebData;
-    using HolmesMVC.Models;
 
     [Authorize]
     public class AccountController : HolmesDbController
@@ -252,10 +252,8 @@
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            string provider = null;
-            string providerUserId = null;
 
-            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out string provider, out string providerUserId))
             {
                 return RedirectToAction("Manage");
             }

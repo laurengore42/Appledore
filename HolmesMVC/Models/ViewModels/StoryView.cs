@@ -88,7 +88,7 @@
                 var storyXml = GetStoryXml();
                 if (storyXml != null)
                 {
-                    var storyWithoutTags = htmlTrim(storyXml);
+                    var storyWithoutTags = HtmlTrim(storyXml);
                     var storyChunk = storyWithoutTags.Substring(chunkStart, chunkLength);
                     var linebreaker = storyChunk;
                     while (linebreaker.Contains("*¦"))
@@ -118,7 +118,7 @@
             return null;
         }
 
-        private string htmlTrim(string storyWithTags)
+        private static string HtmlTrim(string storyWithTags)
         {
             var tagless = storyWithTags;
 

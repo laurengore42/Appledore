@@ -229,17 +229,17 @@
             }
 
             var titleForenames = (from c in Db.Characters
-								  join h in Db.Honorifics on 1 equals 1
-								  where c.ID > 0 && c.HonorificID == null && c.Forename != "" && c.Forename.StartsWith(h.Name + " ")
-								  orderby c.ID
-								  select c)
-								  .Union
-								 (from c in Db.Characters
-								  join h in Db.Honorifics on 1 equals 1
-								  where c.ID > 0 && c.HonorificID == null && c.Forename != "" && c.Forename == h.Name
-								  orderby c.ID
-								  select c)
-								  .ToList();
+                                  join h in Db.Honorifics on 1 equals 1
+                                  where c.ID > 0 && c.HonorificID == null && !string.IsNullOrEmpty(c.Forename) && c.Forename.StartsWith(h.Name + " ")
+                                  orderby c.ID
+                                  select c)
+                                  .Union
+                                 (from c in Db.Characters
+                                  join h in Db.Honorifics on 1 equals 1
+                                  where c.ID > 0 && c.HonorificID == null && !string.IsNullOrEmpty(c.Forename) && c.Forename == h.Name
+                                  orderby c.ID
+                                  select c)
+                                  .ToList();
             if (titleForenames.Any())
             {
                 ViewBag.titleForenames = titleForenames;
@@ -264,11 +264,11 @@
             {
                 var mainActor = dupe.First();
                 var mainActorIMDb = mainActor.IMDb;
-                if (mainActorIMDb != "") {
+                if (!string.IsNullOrEmpty(mainActorIMDb)) {
                     var valid = false;
                     foreach (var possible in dupe)
                     {
-                        if (possible.ID != mainActor.ID && (possible.IMDb == null || possible.IMDb == "" || possible.IMDb == mainActorIMDb))
+                        if (possible.ID != mainActor.ID && (string.IsNullOrEmpty(possible.IMDb) || possible.IMDb == mainActorIMDb))
                         {
                             valid = true;
                             break;

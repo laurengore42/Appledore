@@ -3,7 +3,7 @@
     using System.Diagnostics;
     using System.Web.Mvc;
 
-    public class StopwatchAttribute : ActionFilterAttribute
+    public sealed class StopwatchAttribute : ActionFilterAttribute
     {
         private Stopwatch _stopwatch;
 

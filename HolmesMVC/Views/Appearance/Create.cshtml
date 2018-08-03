@@ -17,7 +17,7 @@
         <br />
         <div class="editor-field">
             <label class="inlinelabel">Episode</label>: @Shared.DisplayName(Model.Episode.Season.Adaptation): @Shared.GetSeasonCode(Model.Episode)
-            @if (String.IsNullOrWhiteSpace(Model.Episode.Title))
+            @if (string.IsNullOrWhiteSpace(Model.Episode.Title))
             {
                 <text>'@Model.Episode.Story.Name'</text>
             }

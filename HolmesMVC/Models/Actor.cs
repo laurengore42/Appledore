@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace HolmesMVC.Models
 {
@@ -11,20 +7,20 @@ namespace HolmesMVC.Models
     {
         public Actor()
         {
-            this.HolmesLinkActors = new List<HolmesLinkActor>();
-            this.Appearances = new List<Appearance>();
-            this.Renames = new List<Rename>();
+            HolmesLinkActors = new List<HolmesLinkActor>();
+            Appearances = new List<Appearance>();
+            Renames = new List<Rename>();
         }
 
         public int ID { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
-        public Nullable<System.DateTime> Birthdate { get; set; }
-        public Nullable<System.DateTime> Deathdate { get; set; }
+        public DateTime? Birthdate { get; set; }
+        public DateTime? Deathdate { get; set; }
         public string Pic { get; set; }
         public string PicCredit { get; set; }
         public string Middlenames { get; set; }
-        public Nullable<int> SpeciesID { get; set; }
+        public int? SpeciesID { get; set; }
         public string IMDb { get; set; }
         public string IMDbName { get; set; }
         public string Wikipedia { get; set; }
@@ -51,15 +47,13 @@ namespace HolmesMVC.Models
                 Latitude = 0;
                 Longitude = 0;
                 GoogleGeocode.GeocodeResponse latlng = GoogleGeocode.Geocode(System.Configuration.ConfigurationManager.AppSettings["GoogleMapsAPIKey"], Birthplace);
-                double tempLat = 0;
-                double tempLng = 0;
-                if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out tempLat) && Double.TryParse(latlng.Position.Lng, out tempLng))
+                if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out double tempLat) && Double.TryParse(latlng.Position.Lng, out double tempLng))
                 {
                     Latitude = tempLat;
                     Longitude = tempLng;
                     SyncedBirthplace = Birthplace;
                 }
-                else 
+                else
                 {
                     return "Geocoding failed: " + latlng.ErrorMessage;
                 }
@@ -79,7 +73,7 @@ namespace HolmesMVC.Models
                 {
                     return Pic.Replace("http:","https:");
                 }
-                else if (Pic == null || Pic == "")
+                else if (string.IsNullOrEmpty(Pic))
                 {
                     return null;
                 }
@@ -93,7 +87,7 @@ namespace HolmesMVC.Models
         {
             get
             {
-                if (PicCredit != null && PicCredit != "")
+                if (!string.IsNullOrEmpty(PicCredit))
                 {
                     return "&copy; " + PicCredit;
                 }

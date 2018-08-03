@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace HolmesMVC.Models
@@ -7,8 +6,8 @@ namespace HolmesMVC.Models
     {
         public Species()
         {
-            this.Actors = new List<Actor>();
-            this.Characters = new List<Character>();
+            Actors = new List<Actor>();
+            Characters = new List<Character>();
         }
 
         public int ID { get; set; }

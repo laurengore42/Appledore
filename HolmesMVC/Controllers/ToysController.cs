@@ -3,14 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Data.SqlClient;
-    using System.Globalization;
-    using System.IO;
     using System.Linq;
-    using System.Net;
-    using System.Web.Configuration;
     using System.Web.Mvc;
-    using System.Xml.Serialization;
 
     using HolmesMVC.BaconXml;
     using HolmesMVC.Models;
@@ -20,7 +14,9 @@
     {
         [AllowAnonymous]
         [HttpPost]
+#pragma warning disable CA1822 // Mark members as static
         public string BrettNum(string targetImdbName)
+#pragma warning restore CA1822 // Mark members as static
         {
             // check spelling of target
             targetImdbName = targetImdbName.Trim();
@@ -224,7 +220,7 @@
                     }
                 }
 
-                if (holmesStr == string.Empty)
+                if (string.IsNullOrEmpty(holmesStr))
                 {
                     holmesStr = "I was unable to link this actor to ANY of the Sherlock Holmes actors known to Appledore. This is very rare - well done!";
                 }
@@ -281,8 +277,10 @@
             {
                 if (!holmesLinkActors.Where(hla => hla.ActorID == h.ID).Any())
                 {
-                    var newHLA = new HolmesLinkActor();
-                    newHLA.ActorID = h.ID;
+                    var newHLA = new HolmesLinkActor
+                    {
+                        ActorID = h.ID
+                    };
                     Db.HolmesLinkActors.Add(newHLA);
                     updated = true;
                 }
@@ -394,7 +392,7 @@
             var holmesList = (from app in Db.Appearances
                               where app.CharacterID == holmesId
                               && app.ActorID > 0
-                              && app.Actor.Pic != null && app.Actor.Pic != ""
+                              && !string.IsNullOrEmpty(app.Actor.Pic)
                               group app by app.ActorID into grp
                               orderby grp.FirstOrDefault().Episode.Airdate
                               select grp.FirstOrDefault().Actor).ToList();
@@ -410,7 +408,7 @@
             var holmesList = (from app in Db.Appearances
                               where app.CharacterID == holmesId
                               && app.ActorID > 0
-                              && app.Actor.Birthplace != null && app.Actor.Birthplace != ""
+                              && !string.IsNullOrEmpty(app.Actor.Birthplace)
                               group app by app.ActorID into grp
                               orderby grp.FirstOrDefault().Episode.Airdate
                               select grp.FirstOrDefault().Actor).ToList();

@@ -7,7 +7,7 @@
 
     public class CanonView
     {
-        public CanonView(Adaptation adapt,  UserProfile profile)
+        public CanonView(Adaptation adapt, UserProfile profile)
         {
             const int Publish = (int)CanonOrder.Published;
             const int Baring = (int)CanonOrder.Baring;
@@ -21,42 +21,49 @@
 
             const int NumberOfCanonOptions = 3;
 
-            EpisodeDateString = new string[NumberOfCanonOptions];
-            StartYear = new int[NumberOfCanonOptions];
-            StartMonth = new int[NumberOfCanonOptions];
-            EndYear = new int[NumberOfCanonOptions];
-            EndMonth = new int[NumberOfCanonOptions];
+            episodeDateString = new string[NumberOfCanonOptions];
+            startYear = new int[NumberOfCanonOptions];
+            startMonth = new int[NumberOfCanonOptions];
+            endYear = new int[NumberOfCanonOptions];
+            endMonth = new int[NumberOfCanonOptions];
 
-            StartYear[Publish] = Adaptation.DateOfFirstEpisode.Year;
-            StartMonth[Publish] = Adaptation.DateOfFirstEpisode.Month;
-            EndYear[Publish] = Adaptation.Episodes.OrderBy(a => a.Airdate).Last().Airdate.Year;
-            EndMonth[Publish] = Adaptation.Episodes.OrderBy(a => a.Airdate).Last().Airdate.Month;
+            startYear[Publish] = Adaptation.DateOfFirstEpisode.Year;
+            startMonth[Publish] = Adaptation.DateOfFirstEpisode.Month;
+            endYear[Publish] = Adaptation.Episodes.OrderBy(a => a.Airdate).Last().Airdate.Year;
+            endMonth[Publish] = Adaptation.Episodes.OrderBy(a => a.Airdate).Last().Airdate.Month;
 
-            StartYear[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).First().Date.BaringGouldStart.Year;
-            StartMonth[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).First().Date.BaringGouldStart.Month;
-            EndYear[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).Last().Date.BaringGouldStart.Year;
-            EndMonth[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).Last().Date.BaringGouldStart.Month;
+            startYear[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).First().Date.BaringGouldStart.Year;
+            startMonth[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).First().Date.BaringGouldStart.Month;
+            endYear[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).Last().Date.BaringGouldStart.Year;
+            endMonth[Baring] = Stories.OrderBy(a => a.Date.BaringGouldStart).Last().Date.BaringGouldStart.Month;
 
 
-            EpisodeDateString[Publish] = string.Empty;
+            episodeDateString[Publish] = string.Empty;
             foreach (var ep in Adaptation.Episodes.OrderBy(a => a.Airdate))
             {
-                EpisodeDateString[Publish] += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
+                episodeDateString[Publish] += ep.Airdate.Year + ", " + ep.Airdate.Month + ", ";
             }
 
-            EpisodeDateString[Publish] = EpisodeDateString[Publish].Substring(0, EpisodeDateString[Publish].Length - 2);
-            EpisodeDateString[Publish] = "[" + EpisodeDateString[Publish] + "]";
+            episodeDateString[Publish] = episodeDateString[Publish].Substring(0, episodeDateString[Publish].Length - 2);
+            episodeDateString[Publish] = "[" + episodeDateString[Publish] + "]";
 
 
-            EpisodeDateString[Baring] = string.Empty;
+            episodeDateString[Baring] = string.Empty;
             foreach (var ep in Stories.OrderBy(a => a.Date.BaringGouldStart))
             {
-                EpisodeDateString[Baring] += ep.Date.BaringGouldStart.Year + ", " + ep.Date.BaringGouldStart.Month + ", ";
+                episodeDateString[Baring] += ep.Date.BaringGouldStart.Year + ", " + ep.Date.BaringGouldStart.Month + ", ";
             }
 
-            EpisodeDateString[Baring] = EpisodeDateString[Baring].Substring(0, EpisodeDateString[Baring].Length - 2);
-            EpisodeDateString[Baring] = "[" + EpisodeDateString[Baring] + "]";
+            episodeDateString[Baring] = episodeDateString[Baring].Substring(0, episodeDateString[Baring].Length - 2);
+            episodeDateString[Baring] = "[" + episodeDateString[Baring] + "]";
         }
+
+
+        private readonly string[] episodeDateString;
+        private readonly int[] startYear;
+        private readonly int[] startMonth;
+        private readonly int[] endYear;
+        private readonly int[] endMonth;
 
         public int UserCanonOrder { get; set; }
 
@@ -64,14 +71,44 @@
 
         public List<Story> Stories { get; set; }
 
-        public string[] EpisodeDateString { get; set; }
+        public IReadOnlyCollection<string> EpisodeDateString
+        {
+            get
+            {
+                return episodeDateString;
+            }
+        }
 
-        public int[] StartYear { get; set; }
+        public IReadOnlyCollection<int> StartYear
+        {
+            get
+            {
+                return startYear;
+            }
+        }
 
-        public int[] StartMonth { get; set; }
+        public IReadOnlyCollection<int> StartMonth
+        {
+            get
+            {
+                return startMonth;
+            }
+        }
 
-        public int[] EndYear { get; set; }
+        public IReadOnlyCollection<int> EndYear
+        {
+            get
+            {
+                return endYear;
+            }
+        }
 
-        public int[] EndMonth { get; set; }
+        public IReadOnlyCollection<int> EndMonth
+        {
+            get
+            {
+                return endMonth;
+            }
+        }
     }
 }

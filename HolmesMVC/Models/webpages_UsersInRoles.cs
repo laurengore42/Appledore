@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-
 namespace HolmesMVC.Models
 {
-    public partial class webpages_UsersInRoles
+    public partial class Webpages_UsersInRoles
     {
         public int UserId { get; set; }
         public int RoleId { get; set; }

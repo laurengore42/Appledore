@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace HolmesMVC.Models
@@ -7,7 +6,7 @@ namespace HolmesMVC.Models
     {
         public Season()
         {
-            this.Episodes = new List<Episode>();
+            Episodes = new List<Episode>();
         }
 
         public int ID { get; set; }

@@ -1,5 +1,7 @@
 ﻿namespace HolmesMVC.BaconXml
 {
+#pragma warning disable CA1819 // Properties should not return arrays
+#pragma warning disable IDE1006 // Naming Styles
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -7,7 +9,7 @@
     using System.Xml;
     using System.Xml.Serialization;
 
-    [XmlTypeAttribute(IncludeInSchema = false)]
+    [XmlType(IncludeInSchema = false)]
     public enum ItemsChoiceType
     {
         actor,
@@ -227,28 +229,28 @@
         }
     }
     
-    [XmlTypeAttribute(AnonymousType = true)]
-    [XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public class link
     {
-        [XmlElementAttribute("actor", typeof(string))]
-        [XmlElementAttribute("movie", typeof(string))]
-        [XmlChoiceIdentifierAttribute("ItemsElementName")]
+        [XmlElement("actor", typeof(string))]
+        [XmlElement("movie", typeof(string))]
+        [XmlChoiceIdentifier("ItemsElementName")]
         public string[] Items { get; set; }
 
-        [XmlElementAttribute("ItemsElementName")]
-        [XmlIgnoreAttribute]
+        [XmlElement("ItemsElementName")]
+        [XmlIgnore]
         public ItemsChoiceType[] ItemsElementName { get; set; }
     }
     
-    [XmlTypeAttribute(AnonymousType = true)]
-    [XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public class spellcheck
     {
-        [XmlElementAttribute("match")]
+        [XmlElement("match")]
         public string[] match { get; set; }
 
-        [XmlAttributeAttribute]
+        [XmlAttribute]
         public string name { get; set; }
     }
 
@@ -287,4 +289,6 @@
         
         public string Actor2 { get; set; }
     }
+#pragma warning restore CA1819 // Properties should not return arrays
+#pragma warning restore IDE1006 // Naming Styles
 }
