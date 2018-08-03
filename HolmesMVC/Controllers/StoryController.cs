@@ -13,7 +13,7 @@
     {
         [AllowAnonymous]
         [HttpGet]
-        public static string StoryXml(string storyCode)
+        public string StoryXml(string storyCode)
         {
             var uri = new Uri("https://appledore.azurewebsites.net/services/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
 
