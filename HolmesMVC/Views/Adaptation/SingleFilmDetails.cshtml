@@ -72,7 +72,7 @@
         {
             var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
             <text><br />
-            IMDb: <a href = '@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
+            IMDb: <a target="_blank" href = '@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
         }
         @if (!string.IsNullOrWhiteSpace(ViewBag.Episode.StoryID))
         {
