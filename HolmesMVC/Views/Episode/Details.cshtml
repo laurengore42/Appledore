@@ -43,6 +43,10 @@
         "@@context": "http://schema.org"
         , "@@type": "Movie"
         , "name": "@ViewBag.Title"
+        @if (!String.IsNullOrEmpty(Model.Poster))
+        {
+            <text>, "image": "https://appledore.azurewebsites.net/EpisodePosters/</text>@Model.Poster<text>.jpg"</text>
+        }
         @if (Model.AirdatePrecision == DatePrecision.Full)
         {
             <text>, "datePublished": "@Model.Airdate.ToLongDateString()"</text>

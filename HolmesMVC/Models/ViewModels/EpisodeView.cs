@@ -38,6 +38,8 @@
 
         public string Translation { get; set; }
 
+        public string Poster { get; set; }
+
         public string StoryCode { get; set; }
 
         public string Story { get; set; }
@@ -96,6 +98,7 @@
             SeasonName = episode.Season.Name;
             Title = episode.Title;
             Translation = episode.Translation;
+            Poster = episode.Poster;
             DisplayName = Shared.DisplayName(episode);
             MediumName = episode.Season.Adaptation.Medium.Name;
             StoryCode = episode.StoryID;
