@@ -14,6 +14,10 @@
     "@@context": "http://schema.org"
     , "@@type": "Movie"
     , "name": "@ViewBag.Title"
+    @if (!String.IsNullOrEmpty(Model.Episodes.First().Poster))
+        {
+        <text>, "image": "https://appledore.azurewebsites.net/EpisodePosters/</text>@Model.Episodes.First().Poster<text>.jpg" </text>
+        }
     , "datePublished": "@Model.DateOfFirstEpisode.ToLongDateString()"
     @if (Model.ActorNames.Count() > 0)
     {
