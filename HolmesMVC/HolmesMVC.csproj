@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201807130936083_this whole thing smacks of gender.Designer.cs">
       <DependentUpon>201807130936083_this whole thing smacks of gender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808101611222_Film posters.cs" />
+    <Compile Include="Migrations\201808101611222_Film posters.Designer.cs">
+      <DependentUpon>201808101611222_Film posters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
@@ -1450,6 +1454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807130936083_this whole thing smacks of gender.resx">
       <DependentUpon>201807130936083_this whole thing smacks of gender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808101611222_Film posters.resx">
+      <DependentUpon>201808101611222_Film posters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,6 +19,7 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.ID).HasColumnName("ID");
             Property(t => t.SeasonID).HasColumnName("Season");
             Property(t => t.StoryID).HasColumnName("Story");
+            Property(t => t.Poster).HasColumnName("Poster");
             Property(t => t.Airdate).HasColumnName("Airdate");
             Property(t => t.Title).HasColumnName("Title");
             Property(t => t.Translation).HasColumnName("Translation");
