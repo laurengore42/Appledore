@@ -6,6 +6,7 @@
     ViewBag.Title = Model.DisplayName;
     ViewBag.Episode = Model.Episodes.First();
 }
+<link rel="canonical" href="https://appledore.azurewebsites.net/Adaptation/@Model.ID" />
 @if (Model.MediumName == "Film" || Model.MediumName == "Television")
 {
 <script type="application/ld+json">
