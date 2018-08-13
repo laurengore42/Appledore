@@ -9,7 +9,7 @@
     {
     "@@context": "http://schema.org"
     , "@@type": "Person"
-    @if (Model.PicShow != null)
+    @if (!String.IsNullOrEmpty(Model.PicShow))
     {
         <text>, "image": "@Model.PicShow"</text>
     }
@@ -31,11 +31,11 @@
 <section id="details">
     <h2 class="detailscategory">Actor</h2>
 
-    @if (Model.PicShow != null)
+    @if (!String.IsNullOrEmpty(Model.PicShow))
     {
         <figure class="actorpic">
             <img class="actorpic" src="@Model.PicShow" alt="@Model.ShortName" title="@Model.ShortName"/>
-        @if (Model.PicCreditShow != null)
+        @if (!String.IsNullOrEmpty(Model.PicCreditShow))
         {
                 <figcaption><i>@Html.Raw(Model.PicCreditShow)</i></figcaption>
         }

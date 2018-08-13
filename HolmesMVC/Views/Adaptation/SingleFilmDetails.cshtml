@@ -29,7 +29,7 @@
 </script>
 }
 <section class="rightfloatdetails">
-    @if (Model.HolmesActors.Any() && Model.HolmesActors.First().PicShow != null)
+    @if (Model.HolmesActors.Any() && !String.IsNullOrEmpty(Model.HolmesActors.First().PicShow))
     {
         <a href="@Url.Action("Details", "Actor", new { id = Model.HolmesActors.First().ID })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150"/></a>
     }
@@ -37,7 +37,7 @@
     {
         <i>(no Holmes picture)</i>
     }
-    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().PicShow != null)
+    @if (Model.WatsonActors.Any() && !String.IsNullOrEmpty(Model.WatsonActors.First().PicShow))
     {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150"/></a>}
     else
     {

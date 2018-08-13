@@ -50,7 +50,7 @@
             Pics = (from ap in character.Appearances
                     where ap.ActorID > 0
                     && ap.Episode.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
-                    && ap.Actor.PicShow != null
+                    && !String.IsNullOrEmpty(ap.Actor.PicShow)
                     group ap by new {ap.ActorID, ap.Actor.Forename, ap.Actor.Surname, ap.Actor.PicShow} into grp
                     select new CharPic
                                {
