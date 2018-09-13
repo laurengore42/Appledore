@@ -9,6 +9,9 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.LowercaseUrls = true;
+            routes.AppendTrailingSlash = false;
+
             // catchall for things like 'Actor/1'
             routes.MapRoute(
                 "Details",
