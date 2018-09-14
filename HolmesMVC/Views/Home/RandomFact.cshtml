@@ -3,7 +3,7 @@
 @model HolmesMVC.Models.ViewModels.RandomView
 
 <h3>A multi-actor:</h3>
-@Html.ActionLink(Shared.ShortName(Model.MultiActor.Actor),"Details","Actor", new { id = Model.MultiActor.Actor.ID }, null) played @Html.Raw(String.Join(" and ", Model.MultiActor.Characters.Select(c => Html.ActionLink(Shared.LongName(c), "Details", "Character", new { c.ID }, null))))
+@Html.ActionLink(Shared.ShortName(Model.MultiActor.Actor), "NewDetails", "Actor", new { irlName = Model.MultiActor.Actor.UrlName }, null) played @Html.Raw(String.Join(" and ", Model.MultiActor.Characters.Select(c => Html.ActionLink(Shared.LongName(c), "Details", "Character", new { c.ID }, null))))
 
 <h3>Today's birthdays:</h3>
 @if (!Model.BirthdayActors.Any())
