@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201809141358494_url names for actors.Designer.cs">
       <DependentUpon>201809141358494_url names for actors.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809141515372_url names for characters.cs" />
+    <Compile Include="Migrations\201809141515372_url names for characters.Designer.cs">
+      <DependentUpon>201809141515372_url names for characters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
@@ -1465,6 +1469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809141358494_url names for actors.resx">
       <DependentUpon>201809141358494_url names for actors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809141515372_url names for characters.resx">
+      <DependentUpon>201809141515372_url names for characters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -17,6 +17,7 @@ namespace HolmesMVC.Models
         public int? HonorificID { get; set; }
         public string StoryID { get; set; }
         public string Wikipedia { get; set; }
+        public string UrlName { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }
         public virtual Honorific Honorific { get; set; }
         public virtual Species Species { get; set; }

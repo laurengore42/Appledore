@@ -33,6 +33,7 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.HonorificID).HasColumnName("Honorific");
             Property(t => t.Wikipedia).HasColumnName("Wikipedia");
             Property(t => t.StoryID).HasColumnName("Story");
+            Property(t => t.UrlName).HasColumnName("UrlName");
 
             // Relationships
             HasOptional(t => t.Honorific)

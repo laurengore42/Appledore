@@ -6,7 +6,8 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -32,6 +33,14 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.UrlName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UrlName)
+            @Html.ValidationMessageFor(model => model.UrlName)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.HonorificID, "Title")
         </div>
         <div class="editor-field">
@@ -51,7 +60,8 @@
             @Html.LabelFor(model => model.StoryID, "Story")
         </div>
         <div class="editor-field">
-            <select id="StoryID" name="StoryID"> <!-- This is done by hand as the automatic binding only displays 'Final Problem', not 'FINA' -->
+            <select id="StoryID" name="StoryID">
+                <!-- This is done by hand as the automatic binding only displays 'Final Problem', not 'FINA' -->
                 <option value=""></option>
                 @foreach (var story in ViewBag.StoryID)
                 {
@@ -68,7 +78,7 @@
 }
 
 @section Scripts {
-    
+
 
     @Scripts.Render("~/Scripts/Apdore-editorscripts.js")
 }

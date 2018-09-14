@@ -10,7 +10,7 @@
     public class CharacterController : HolmesDbController
     {
         //
-        // GET: /Character/Details/5
+        // GET: /character/5
 
         [AllowAnonymous]
         public ActionResult Details(int id = 0)
@@ -30,7 +30,27 @@
         }
 
         //
-        // POST: /Character/Create
+        // GET: /character/sherlock_holmes
+
+        [AllowAnonymous]
+        public ActionResult NewDetails(string urlName = "")
+        {
+            if (urlName == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var character = Db.Characters.Where(a => a.UrlName == urlName).FirstOrDefault();
+            if (character == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new CharView(character));
+        }
+
+        //
+        // POST: /character/create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -96,7 +116,7 @@
         }
 
         //
-        // GET: /Character/Edit/5
+        // GET: /character/edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -112,7 +132,7 @@
         }
 
         //
-        // POST: /Character/Edit/5
+        // POST: /character/edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -132,7 +152,7 @@
         }
 
         //
-        // GET: /Character/Delete/5
+        // GET: /character/delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -149,7 +169,7 @@
         }
 
         //
-        // POST: /Character/Delete/5
+        // POST: /character/delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
