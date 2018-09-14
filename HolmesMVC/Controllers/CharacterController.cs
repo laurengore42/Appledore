@@ -46,7 +46,7 @@
                 return HttpNotFound();
             }
 
-            return View(new CharView(character));
+            return View("Details", new CharView(character));
         }
 
         //
