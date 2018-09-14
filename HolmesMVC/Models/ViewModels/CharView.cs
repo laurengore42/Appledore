@@ -51,10 +51,10 @@
                     where ap.ActorID > 0
                     && ap.Episode.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
                     && !String.IsNullOrEmpty(ap.Actor.PicShow)
-                    group ap by new {ap.ActorID, ap.Actor.Forename, ap.Actor.Surname, ap.Actor.PicShow} into grp
+                    group ap by new {ap.Actor.UrlName, ap.Actor.Forename, ap.Actor.Surname, ap.Actor.PicShow} into grp
                     select new CharPic
                                {
-                                   ActorID = grp.Key.ActorID,
+                                   UrlName = grp.Key.UrlName,
                                    Name = grp.Key.Forename + " " + grp.Key.Surname,
                                    PicShow = grp.Key.PicShow
                                })
@@ -83,7 +83,7 @@
 
     public class CharPic
     {
-        public int ActorID { get; set; }
+        public string UrlName { get; set; }
 
         public string Name { get; set; }
 

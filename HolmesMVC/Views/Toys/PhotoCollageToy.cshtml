@@ -12,7 +12,7 @@
         <div>
             @foreach (HolmesMVC.Models.Actor actor in Model)
     {
-    <a href="/actor/@actor.ID">
+    <a href="/actor/@actor.UrlName">
         <img style="height:200px;" src="@actor.PicShow" alt="@actor.Forename @actor.Surname"></a>
     }  
         </div>

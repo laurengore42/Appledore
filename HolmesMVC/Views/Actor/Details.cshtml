@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = Model.ShortName;
 }
-<link rel="canonical" href="https://appledore.azurewebsites.net/actor/@Model.ID" />
+<link rel="canonical" href="https://appledore.azurewebsites.net/actor/@Model.UrlName" />
 <script type="application/ld+json">
     {
     "@@context": "http://schema.org"
@@ -122,10 +122,10 @@
     <div>
         <ul>  
             @foreach (HolmesMVC.Models.Actor w in Model.WatsonActors) {
-                <li>Played Holmes to <a href="/Actor/@w.ID">@w.Surname</a>'s Watson</li>
+                <li>Played Holmes to <a href="/actor/@w.UrlName">@w.Surname</a>'s Watson</li>
             }                  
             @foreach (HolmesMVC.Models.Actor h in Model.HolmesActors) {
-                <li>Played Watson to <a href="/Actor/@h.ID">@h.Surname</a>'s Holmes</li>
+                <li>Played Watson to <a href="/actor/@h.UrlName">@h.Surname</a>'s Holmes</li>
             }  
         </ul>
     </div>                    

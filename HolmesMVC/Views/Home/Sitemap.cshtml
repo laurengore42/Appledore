@@ -61,7 +61,7 @@
 <ul>
     @foreach (var a in actors.Where(a => a.ID > 0))
     {
-        <li><a href="/Actor/@a.ID">@a.ID</a></li>
+        <li><a href="/actor/@a.UrlName">@a.UrlName</a></li>
     }
 </ul>
 

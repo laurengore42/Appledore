@@ -64,7 +64,7 @@
         $(document).ready(function() {
             var rnd = Math.floor(Math.random() * @Model.Pics.Count());
 
-            var picId = 0;
+            var picUrlName = "";
             var picName = "";
             var picUrl = "";
 
@@ -76,7 +76,7 @@
                 {
                     <text>
                     case @i:
-                        picId = @pic.ActorID;
+                        picUrlName = '@pic.UrlName';
                         picName = '@pic.Name';
                         picUrl = '@pic.PicShow';
                         break;
@@ -87,8 +87,8 @@
                 break;
             }
 
-            if (picId > 0) {
-                $('#actorPicSpan').html('<a href= "/Actor/' + picId + '"><img class="actorpic" src="' + picUrl + '" alt="@Shared.LongName(Model.Char)" title="@Shared.LongName(Model.Char)"/><br>'+picName+'</a>');
+            if (picUrlName !== "") {
+                $('#actorPicSpan').html('<a href= "/actor/' + picUrlName + '"><img class="actorpic" src="' + picUrl + '" alt="@Shared.LongName(Model.Char)" title="@Shared.LongName(Model.Char)"/><br>'+picName+'</a>');
             }
         });
 

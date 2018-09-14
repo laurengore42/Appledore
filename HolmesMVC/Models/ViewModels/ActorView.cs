@@ -15,6 +15,8 @@
 
         public string LongName { get; set; }
 
+        public string UrlName { get; set; }
+
         public string IMDbName { get; set; }
 
         public int? Age { get; set; }
@@ -54,6 +56,7 @@
             IMDb = actor.IMDb;
             IMDbName = actor.IMDbName;
             Wikipedia = actor.Wikipedia;
+            UrlName = actor.UrlName;
 
             ShortName = Shared.ShortName(actor);
             LongName = Shared.LongName(actor);
