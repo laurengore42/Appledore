@@ -92,7 +92,7 @@
 
                 if (results.Characters.Any())
                 {
-                    return RedirectToAction("Details", "Character", new { id = results.Characters.First().ID });
+                    return RedirectToAction("Details", "Character", new { urlName = results.Characters.First().UrlName });
                 }
 
                 if (results.Episodes.Any())

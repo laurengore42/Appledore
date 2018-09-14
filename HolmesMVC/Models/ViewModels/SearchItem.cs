@@ -178,7 +178,8 @@
                               Honorific = c.HonorificID == null ? string.Empty : c.Honorific.Name,
                               Forename = c.Forename,
                               Surname = c.Surname,
-                              StoryID = c.StoryID
+                              StoryID = c.StoryID,
+                              UrlName = c.UrlName
                           }).ToList();
 
             var renameQuery = from r in db.Renames
@@ -201,7 +202,7 @@
                                            : (r.Adaptation.Company + " " + (r.Adaptation.Medium.Name == "Television" ? "TV" : r.Adaptation.Medium.Name))
                                           ).Replace("\"", string.Empty),
 
-                                  Character = r.CharacterID,
+                                  Character = r.Character.UrlName,
                                   OldName =
                                                                        (r.Character.HonorificID == null ? string.Empty : r.Character.Honorific.Name + " ")
                                                                        + (string.IsNullOrEmpty(r.Character.Forename) ? string.Empty : r.Character.Forename + " ")
@@ -315,11 +316,13 @@
         public string Surname { get; set; }
 
         public string StoryID { get; set; }
+
+        public string UrlName { get; set; }
     }
 
     public class SearchRename
     {
-        public int Character { get; set; }
+        public string Character { get; set; }
 
         public string OldName { get; set; }
 

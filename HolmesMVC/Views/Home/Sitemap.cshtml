@@ -69,6 +69,6 @@
 <ul>
     @foreach (var c in characters.Where(c => c.ID > 0))
     {
-        <li><a href="/Character/@c.ID">@c.ID</a></li>
+        <li><a href="/character/@c.UrlName">@c.UrlName</a></li>
     }
 </ul>

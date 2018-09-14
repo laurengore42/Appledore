@@ -55,7 +55,7 @@
                  {
                      displayName += " <i>(" + c.StoryID + ")</i>";
                  }
-                 <li>@Html.Raw(Html.ActionLink("XXX", "Details", "Character", new { id = c.ID }, null).ToHtmlString().Replace("XXX", displayName))</li>
+                 <li>@Html.Raw(Html.ActionLink("XXX", "NewDetails", "Character", new { urlName = c.UrlName }, null).ToHtmlString().Replace("XXX", displayName))</li>
              }
          </ul>
      }
@@ -65,7 +65,7 @@
         @foreach (var r in Model.Renames)
         {
             var displayName = Shared.BuildName(new[] { r.Honorific, r.Forename, r.Surname }, ' ');
-            <li>@displayName, a name for @Html.ActionLink(r.OldName, "Details", "Character", new { id = r.Character}, null) in '@Html.ActionLink(r.AdaptName, "Details", "Adaptation", new { id = r.AdaptId}, null)'@if (r.AdaptTranslation != null && r.AdaptTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@r.AdaptTranslation</i></span>}</li>
+            <li>@displayName, a name for @Html.ActionLink(r.OldName, "NewDetails", "Character", new { urlName = r.Character }, null) in '@Html.ActionLink(r.AdaptName, "Details", "Adaptation", new { id = r.AdaptId}, null)'@if (r.AdaptTranslation != null && r.AdaptTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@r.AdaptTranslation</i></span>}</li>
         }
     </ul>
     }

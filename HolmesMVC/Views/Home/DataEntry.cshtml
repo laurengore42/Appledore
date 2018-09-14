@@ -31,7 +31,7 @@ Pulling in IMDb info:
         foreach (var c in titleForenames)
         {
     <li>
-        @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ", "&nbsp;")), "Details", "Character", new { id = c.ID }, null)
+        @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ", "&nbsp;")), "NewDetails", "Character", new { urlName = c.UrlName }, null)
     </li>
 
         }

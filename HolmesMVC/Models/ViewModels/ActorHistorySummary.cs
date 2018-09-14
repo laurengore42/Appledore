@@ -16,6 +16,7 @@
 
             var rename = Shared.GetRename(sampleApp);
             CharacterName = null == rename ? Shared.LongName(sampleApp.Character) : Shared.LongName(rename);
+            CharacterUrlName = sampleApp.Character.UrlName;
             MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
             AdaptName = sampleApp.Episode.Season.Adaptation.Name
                         ?? Shared.DisplayName(
@@ -30,6 +31,8 @@
         public int Count { get; set; }
 
         public string CharacterName { get; set; }
+
+        public string CharacterUrlName { get; set; }
 
         public string MediumName { get; set; }
 
