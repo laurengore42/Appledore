@@ -20,6 +20,13 @@
                 new { id = @"\d+" }
             );
 
+            // new human-readable URLs
+            routes.MapRoute(
+                "NewDetails",
+                "{controller}/{urlName}",
+                new { action = "NewDetails" }
+            );
+
             // XML route
             routes.MapRoute(
                 "StoryXml",

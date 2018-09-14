@@ -11,7 +11,7 @@
     public class ActorController : HolmesDbController
     {
         //
-        // GET: /Actor/Details/5
+        // GET: /actor/1
         
         [AllowAnonymous]
         public ActionResult Details(int id = 0)
@@ -27,13 +27,33 @@
                 return HttpNotFound();
             }
 
-            var actorView = new ActorView(actor);
-
-            return View(actorView);
+            return RedirectToActionPermanent("NewDetails", new { urlName = actor.UrlName });
         }
 
         //
-        // POST: /Actor/Create
+        // GET: /actor/jeremy_brett
+
+        [AllowAnonymous]
+        public ActionResult NewDetails(string urlName = "")
+        {
+            if (urlName == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var actor = Db.Actors.Where(a => a.UrlName == urlName).FirstOrDefault();
+            if (actor == null)
+            {
+                return HttpNotFound();
+            }
+
+            var actorView = new ActorView(actor);
+
+            return View("Details", actorView);
+        }
+
+        //
+        // POST: /actor/create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -115,7 +135,7 @@
         }
 
         //
-        // GET: /Actor/Edit/5
+        // GET: /actor/edit/1
 
         public ActionResult Edit(int id = 0)
         {
@@ -130,7 +150,7 @@
         }
 
         //
-        // POST: /Actor/Edit/5
+        // POST: /actor/edit/1
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -148,7 +168,7 @@
         }
 
         //
-        // GET: /Actor/Delete/5
+        // GET: /actor/delete/1
 
         public ActionResult Delete(int id = 0)
         {
@@ -165,7 +185,7 @@
         }
 
         //
-        // POST: /Actor/Delete/5
+        // POST: /actor/delete/1
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
