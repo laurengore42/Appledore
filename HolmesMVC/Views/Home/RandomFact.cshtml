@@ -15,7 +15,7 @@ else
     <table>
     @foreach (var a in Model.BirthdayActors)
      {
-        <tr><td>@Html.ActionLink(a.Name, "Details", "Actor", new { a.ID }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
+        <tr><td>@Html.ActionLink(a.Name, "NewDetails", "Actor", new { urlName = a.UrlName }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
      }
     </table>
 }

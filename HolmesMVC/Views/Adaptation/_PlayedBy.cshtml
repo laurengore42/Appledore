@@ -6,12 +6,12 @@ played by: @if (Model.Count() > 1)
                                    var links = "";
                                    foreach (var h in Model)
                                    {
-                                       links += Html.ActionLink(Shared.ShortName(h), "Details", "Actor", new { id = h.ID }, null) + ", ";
+                                       links += Html.ActionLink(Shared.ShortName(h), "NewDetails", "Actor", new { urlName = h.UrlName }, null) + ", ";
                                    }
                                    links = links.Substring(0, links.Length - 2);
         @Html.Raw(links)
                                }
                                else if (Model.Count() == 1)
                                {
-        @Html.ActionLink(Shared.ShortName(Model.First()), "Details", "Actor", new { id = Model.First().ID }, null)
+        @Html.ActionLink(Shared.ShortName(Model.First()), "NewDetails", "Actor", new { urlName = Model.First().UrlName }, null)
                                }

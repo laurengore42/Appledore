@@ -30,7 +30,7 @@
         @foreach (var a in Model.Actors)
         {
             var displayName = a.Surname + (string.IsNullOrWhiteSpace(a.Forename) ? string.Empty : ", " + a.Forename);
-            <li>@Html.ActionLink(displayName, "Details", "Actor", new { id = a.ID }, null)</li>
+            <li>@Html.ActionLink(displayName, "NewDetails", "Actor", new { urlName = a.UrlName }, null)</li>
         }
     </ul>
 }

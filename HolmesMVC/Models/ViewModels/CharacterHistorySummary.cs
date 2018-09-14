@@ -23,6 +23,7 @@
 
             var sampleApp = groupedApps.First();
             ActorName = Shared.ShortName(sampleApp.Actor);
+            ActorUrlName = sampleApp.Actor.UrlName;
             MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
             AdaptName = Shared.DisplayName(sampleApp.Episode.Season.Adaptation);
             AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
@@ -46,6 +47,8 @@
         }
 
         public int ActorId { get; set; }
+
+        public string ActorUrlName { get; set; }
 
         public int AdaptId { get; set; }
 

@@ -31,14 +31,14 @@
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && !String.IsNullOrEmpty(Model.HolmesActors.First().PicShow))
     {
-        <a href="@Url.Action("Details", "Actor", new { id = Model.HolmesActors.First().ID })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150"/></a>
+        <a href="@Url.Action("NewDetails", "Actor", new { urlName = Model.HolmesActors.First().UrlName })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150"/></a>
     }
     else
     {
         <i>(no Holmes picture)</i>
     }
     @if (Model.WatsonActors.Any() && !String.IsNullOrEmpty(Model.WatsonActors.First().PicShow))
-    {<a href="@Url.Action("Details", "Actor", new { id = Model.WatsonActors.First().ID })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150"/></a>}
+    {<a href="@Url.Action("NewDetails", "Actor", new { urlName = Model.WatsonActors.First().UrlName })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150"/></a>}
     else
     {
         <i>(no Watson picture)</i>
