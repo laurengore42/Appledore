@@ -31,6 +31,7 @@ namespace HolmesMVC.Models
         public double? Longitude { get; set; }
         public int BirthdatePrecision { get; set; }
         public int DeathdatePrecision { get; set; }
+        public string UrlName { get; set; }
         public virtual Species Species { get; set; }
         public virtual ICollection<HolmesLinkActor> HolmesLinkActors { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }

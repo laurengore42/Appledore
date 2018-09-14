@@ -55,6 +55,7 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.Longitude).HasColumnName("Longitude");
             Property(t => t.BirthdatePrecision).HasColumnName("BirthdatePrecision");
             Property(t => t.DeathdatePrecision).HasColumnName("DeathdatePrecision");
+            Property(t => t.UrlName).HasColumnName("UrlName");
 
             //Ignore fluff properties
             Ignore(t => t.PicShow);
