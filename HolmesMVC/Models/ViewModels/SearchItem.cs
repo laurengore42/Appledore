@@ -165,10 +165,10 @@
                       select new SearchActor
 
                       {
-                          ID = a.ID,
                           Forename = a.Forename,
                           Middlenames = a.Middlenames,
-                          Surname = a.Surname
+                          Surname = a.Surname,
+                          UrlName = a.UrlName
                       }).ToList();
 
             Characters = (from c in db.Characters
@@ -295,13 +295,13 @@
 
     public class SearchActor
     {
-        public int ID { get; set; }
-
         public string Forename { get; set; }
 
         public string Middlenames { get; set; }
 
         public string Surname { get; set; }
+
+        public string UrlName { get; set; }
     }
 
     public class SearchChar

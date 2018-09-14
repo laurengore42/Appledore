@@ -6,12 +6,12 @@
     {
         public BirthdayActor(Actor a)
         {
-            ID = a.ID;
+            UrlName = a.UrlName;
             Birthdate = (DateTime)a.Birthdate;
             Name = Shared.ShortName(a);
         }
 
-        public int ID { get; set; }
+        public string UrlName { get; set; }
 
         public DateTime Birthdate { get; set; }
 

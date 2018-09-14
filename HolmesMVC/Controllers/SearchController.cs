@@ -87,7 +87,7 @@
 
                 if (results.Actors.Any())
                 {
-                    return RedirectToAction("Details", "Actor", new { id = results.Actors.First().ID });
+                    return RedirectToAction("NewDetails", "Actor", new { urlName = results.Actors.First().UrlName });
                 }
 
                 if (results.Characters.Any())
