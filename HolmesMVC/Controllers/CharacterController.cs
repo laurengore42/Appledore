@@ -26,7 +26,7 @@
                 return HttpNotFound();
             }
 
-            return View(new CharView(character));
+            return RedirectToActionPermanent("NewDetails", character.UrlName);
         }
 
         //
