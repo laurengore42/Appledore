@@ -26,7 +26,7 @@
                 return HttpNotFound();
             }
 
-            return RedirectToActionPermanent("NewDetails", character.UrlName);
+            return RedirectToActionPermanent("NewDetails", new { urlName = character.UrlName });
         }
 
         //
