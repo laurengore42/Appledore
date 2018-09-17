@@ -43,24 +43,55 @@
                 new { id = @"\w+" }
             );
 
-            // Account controller is exempt from human-readable
+            // CRUD links
             routes.MapRoute(
-                "Account",
-                "account/{action}",
-                new { controller = "Account" }
+                "Create",
+                "{controller}/{action}",
+                new {},
+                new { action = @"create" }
+            );
+            routes.MapRoute(
+                "CreateShort",
+                "{controller}/{action}",
+                new { },
+                new { action = @"createshort" }
+            );
+            routes.MapRoute(
+                "Edit",
+                "{controller}/{action}",
+                new { },
+                new { action = @"edit" }
+            );
+            routes.MapRoute(
+                "Delete",
+                "{controller}/{action}",
+                new { },
+                new { action = @"delete" }
+            );
+            routes.MapRoute(
+                "DeleteConfirmed",
+                "{controller}/{action}",
+                new { },
+                new { action = @"deleteconfirmed" }
+            );
+            routes.MapRoute(
+                "Combine",
+                "{controller}/{action}",
+                new { },
+                new { action = @"combine" }
             );
 
-            // And this one
+            // actor human-readable URLs
             routes.MapRoute(
-                "Home",
-                "home/{action}",
-                new { controller = "Home" }
+                "ActorNewDetails",
+                "actor/{urlName}",
+                new { action = "NewDetails" }
             );
 
-            // new human-readable URLs
+            // character human-readable URLs
             routes.MapRoute(
-                "NewDetails",
-                "{controller}/{urlName}",
+                "CharNewDetails",
+                "character/{urlName}",
                 new { action = "NewDetails" }
             );
 
