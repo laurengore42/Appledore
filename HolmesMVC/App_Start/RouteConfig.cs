@@ -83,9 +83,9 @@
 
             // actor human-readable URLs
             routes.MapRoute(
-                "ActorNewDetails",
+                "ActorDetails",
                 "actor/{urlName}",
-                new { controller = "Actor", action = "NewDetails" }
+                new { controller = "Actor", action = "Details" }
             );
 
             // character human-readable URLs

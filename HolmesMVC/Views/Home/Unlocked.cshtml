@@ -16,7 +16,7 @@
     @if (null != unlockedHolmes)
     {
         <text>Why not go fill in this Holmes's details (@ViewBag.unlockedHolmesCount left):<br/>
-            @Html.ActionLink(Shared.ShortName(unlockedHolmes), "NewDetails", "Actor", new { urlName = unlockedHolmes.UrlName }, null)<br/></text>
+            @Html.ActionLink(Shared.ShortName(unlockedHolmes), "Details", "Actor", new { urlName = unlockedHolmes.UrlName }, null)<br/></text>
     }
     Why not go fill in this canon actor's details (@ViewBag.unlockedActorCount left):<br/>
     @Html.ActionLink(Shared.ShortName(unlockedActor),"Details","Actor",new { id = unlockedActor.ID},null)

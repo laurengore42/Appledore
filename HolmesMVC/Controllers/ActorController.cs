@@ -11,30 +11,10 @@
     public class ActorController : HolmesDbController
     {
         //
-        // GET: /actor/1
-        
-        [AllowAnonymous]
-        public ActionResult Details(int id = 0)
-        {
-            if (id == 0)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            var actor = Db.Actors.Find(id);
-            if (actor == null)
-            {
-                return HttpNotFound();
-            }
-
-            return RedirectToActionPermanent("NewDetails", new { urlName = actor.UrlName });
-        }
-
-        //
         // GET: /actor/jeremy_brett
 
         [AllowAnonymous]
-        public ActionResult NewDetails(string urlName = "")
+        public ActionResult Details(string urlName = "")
         {
             if (string.IsNullOrEmpty(urlName))
             {
@@ -121,7 +101,7 @@
 
             Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Actor", new { id = oneTrueActorId });
+            return RedirectToAction("Details", "Actor", new { urlName = oneTrueActor.UrlName });
         }
 
         // Actor history instances
@@ -167,7 +147,7 @@
                 Db.Entry(actor).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToRoute("Details", new { controller = "Actor", id = actor.ID });
+                return RedirectToRoute("Details", new { controller = "Actor", urlName = actor.UrlName });
             }
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
             return View(actor);

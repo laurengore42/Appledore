@@ -37,7 +37,7 @@ else
                         }
                         else
                         {
-                            @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "NewDetails", "Actor", new { urlName = appearance.Actor.UrlName }, null)
+                            @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { urlName = appearance.Actor.UrlName }, null)
                         }
                 </td>
                 <td class="castchar">
