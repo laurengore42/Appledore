@@ -20,9 +20,6 @@
                 new { id = @"\d+" }
             );
 
-            // new human-readable URLs
-            routes.MapRoute(
-                "NewDetails",
             // XML route
             routes.MapRoute(
                 "StoryXml",
