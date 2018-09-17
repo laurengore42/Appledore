@@ -85,14 +85,14 @@
             routes.MapRoute(
                 "ActorNewDetails",
                 "actor/{urlName}",
-                new { action = "NewDetails" }
+                new { controller = "Actor", action = "NewDetails" }
             );
 
             // character human-readable URLs
             routes.MapRoute(
                 "CharNewDetails",
                 "character/{urlName}",
-                new { action = "NewDetails" }
+                new { controller = "Character", action = "NewDetails" }
             );
 
             //// Search route
