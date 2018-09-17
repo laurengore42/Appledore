@@ -129,7 +129,7 @@
                 Db.Entry(character).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToRoute("Details", new { controller = "Character", urlName = character.UrlName });
+                return RedirectToAction("Details", "Character", new { urlName = character.UrlName });
             }
             ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);

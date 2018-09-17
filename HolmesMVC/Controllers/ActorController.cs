@@ -147,7 +147,7 @@
                 Db.Entry(actor).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToRoute("Details", new { controller = "Actor", urlName = actor.UrlName });
+                return RedirectToAction("Details", "Actor", new { urlName = actor.UrlName });
             }
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
             return View(actor);
