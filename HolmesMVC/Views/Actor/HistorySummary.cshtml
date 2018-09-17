@@ -1,4 +1,4 @@
 ﻿@using HolmesMVC
 @model HolmesMVC.Models.ViewModels.ActorHistorySummary
 
-Played @Html.ActionLink(Model.CharacterName, "Details", "Actor", new { urlName = Model.CharacterUrlName }, null) @Shared.Times(Model.Count) on @Model.MediumName in '@Html.ActionLink(Model.AdaptName, "Details", "Adaptation", new { id = Model.AdaptId }, null)'. @if (Model.AdaptTranslation != null && Model.AdaptTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@Model.AdaptTranslation</i></span> }
+Played @Html.ActionLink(Model.CharacterName, "Details", "Character", new { urlName = Model.CharacterUrlName }, null) @Shared.Times(Model.Count) on @Model.MediumName in '@Html.ActionLink(Model.AdaptName, "Details", "Adaptation", new { id = Model.AdaptId }, null)'. @if (Model.AdaptTranslation != null && Model.AdaptTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@Model.AdaptTranslation</i></span> }
