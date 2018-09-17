@@ -23,21 +23,17 @@
             // new human-readable URLs
             routes.MapRoute(
                 "NewDetails",
-                "{controller}/{urlName}",
-                new { action = "NewDetails" }
-            );
-
             // XML route
             routes.MapRoute(
                 "StoryXml",
-                "Story/StoryXml",
+                "story/storyxml",
                 new { controller = "Story", action = "StoryXml" }
             );
 
             // stories, and chunks
             routes.MapRoute(
                 "Stories",
-                "Story/{id}",
+                "story/{id}",
                 new { controller = "Story", action = "Details" },
                 new { id = @"\w+" }
             );
@@ -45,9 +41,30 @@
             // backwards compatibility, for old chunk links
             routes.MapRoute(
                 "Chunks",
-                "Chunk/{id}",
+                "chunk/{id}",
                 new { controller = "Story", action = "Details" },
                 new { id = @"\w+" }
+            );
+
+            // Account controller is exempt from human-readable
+            routes.MapRoute(
+                "Account",
+                "account/{action}",
+                new { controller = "Account" }
+            );
+
+            // And this one
+            routes.MapRoute(
+                "Home",
+                "home/{action}",
+                new { controller = "Home" }
+            );
+
+            // new human-readable URLs
+            routes.MapRoute(
+                "NewDetails",
+                "{controller}/{urlName}",
+                new { action = "NewDetails" }
             );
 
             //// Search route
