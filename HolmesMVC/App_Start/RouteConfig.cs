@@ -90,9 +90,9 @@
 
             // character human-readable URLs
             routes.MapRoute(
-                "CharNewDetails",
+                "CharDetails",
                 "character/{urlName}",
-                new { controller = "Character", action = "NewDetails" }
+                new { controller = "Character", action = "Details" }
             );
 
             //// Search route
