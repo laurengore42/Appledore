@@ -60,11 +60,17 @@
             {
                 return -1;
             }
+            var urlName = surname.Replace(" ", "_").Replace("'", "_");
+            if (!string.IsNullOrEmpty(forename))
+            {
+                urlName = forename.Replace(" ", "_").Replace("'", "_") + "_" + urlName;
+            }
             var character = new Character
                                 {
                                     Forename = forename,
-                                    Surname = surname
-                                };
+                                    Surname = surname,
+                                    UrlName = urlName
+            };
 
             Db.Characters.Add(character);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
