@@ -10,30 +10,10 @@
     public class CharacterController : HolmesDbController
     {
         //
-        // GET: /character/5
-
-        [AllowAnonymous]
-        public ActionResult Details(int id = 0)
-        {
-            if (id == 0)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            var character = Db.Characters.Find(id);
-            if (character == null)
-            {
-                return HttpNotFound();
-            }
-
-            return RedirectToActionPermanent("NewDetails", new { urlName = character.UrlName });
-        }
-
-        //
         // GET: /character/sherlock_holmes
 
         [AllowAnonymous]
-        public ActionResult NewDetails(string urlName = "")
+        public ActionResult Details(string urlName = "")
         {
             if (string.IsNullOrEmpty(urlName))
             {
@@ -118,7 +98,7 @@
 
             Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Character", new { id = oneTrueCharId });
+            return RedirectToAction("Details", "Character", new { urlName = oneTrueChar.UrlName });
         }
 
         //
@@ -149,7 +129,7 @@
                 Db.Entry(character).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToRoute("Details", new { controller = "Character", id = character.ID });
+                return RedirectToRoute("Details", new { controller = "Character", urlName = character.UrlName });
             }
             ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);

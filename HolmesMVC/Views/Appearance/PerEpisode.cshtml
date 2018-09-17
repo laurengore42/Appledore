@@ -26,7 +26,7 @@ else
             <tr>
                 @if (canonPage)
                 {
-                    <td colspan="2">@Html.ActionLink(charName, "NewDetails", "Character", new { urlName = appearance.Character.UrlName }, null)</td>
+                    <td colspan="2">@Html.ActionLink(charName, "Details", "Actor", new { urlName = appearance.Character.UrlName }, null)</td>
                 }
                 else
                 {
@@ -45,11 +45,11 @@ else
                     <span @if (canonCharacter) { <text> class="strong" </text>  }>
                         @if (null == rename)
                         {
-                            @Html.ActionLink(Shared.LongName(appearance.Character), "NewDetails", "Character", new { urlName = appearance.Character.UrlName }, null)
+                            @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Actor", new { urlName = appearance.Character.UrlName }, null)
                         }
                         else
                         {
-                            @Html.ActionLink(Shared.LongName(rename), "NewDetails", "Character", new { urlName = appearance.Character.UrlName }, null)
+                            @Html.ActionLink(Shared.LongName(rename), "Details", "Actor", new { urlName = appearance.Character.UrlName }, null)
                         }
                     </span>
                 </td>
