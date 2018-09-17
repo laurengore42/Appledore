@@ -35,7 +35,7 @@
         [AllowAnonymous]
         public ActionResult NewDetails(string urlName = "")
         {
-            if (urlName == "")
+            if (string.IsNullOrEmpty(urlName))
             {
                 return RedirectToAction("Index", "Home");
             }
