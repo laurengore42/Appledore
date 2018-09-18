@@ -52,7 +52,7 @@
                             {
                                 Forename = forename,
                                 Surname = surname,
-                                UrlName = urlName
+                                UrlName = urlName.ToLower()
             };
 
             Db.Actors.Add(actor);

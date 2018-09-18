@@ -49,7 +49,7 @@
                                 {
                                     Forename = forename,
                                     Surname = surname,
-                                    UrlName = urlName
+                                    UrlName = urlName.ToLower()
             };
 
             Db.Characters.Add(character);
