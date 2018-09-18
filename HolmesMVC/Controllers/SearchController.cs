@@ -87,12 +87,12 @@
 
                 if (results.Actors.Any())
                 {
-                    return RedirectToAction("Details", "Actor", new { urlName = results.Actors.First().UrlName });
+                    return RedirectToAction("Details", "Actor", new { results.Actors.First().UrlName });
                 }
 
                 if (results.Characters.Any())
                 {
-                    return RedirectToAction("Details", "Character", new { urlName = results.Characters.First().UrlName });
+                    return RedirectToAction("Details", "Character", new { results.Characters.First().UrlName });
                 }
 
                 if (results.Episodes.Any())

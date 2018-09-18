@@ -3,7 +3,7 @@
 @model HolmesMVC.Models.ViewModels.RandomView
 
 <h3>A multi-actor:</h3>
-@Html.ActionLink(Shared.ShortName(Model.MultiActor.Actor), "Details", "Actor", new { urlName = Model.MultiActor.Actor.UrlName }, null) played @Html.Raw(String.Join(" and ", Model.MultiActor.Characters.Select(c => Html.ActionLink(Shared.LongName(c), "Details", "Character", new { c.UrlName }, null))))
+@Html.ActionLink(Shared.ShortName(Model.MultiActor.Actor), "Details", "Actor", new { Model.MultiActor.Actor.UrlName }, null) played @Html.Raw(String.Join(" and ", Model.MultiActor.Characters.Select(c => Html.ActionLink(Shared.LongName(c), "Details", "Character", new { c.UrlName }, null))))
 
 <h3>Today's birthdays:</h3>
 @if (!Model.BirthdayActors.Any())
@@ -15,7 +15,7 @@ else
     <table>
     @foreach (var a in Model.BirthdayActors)
      {
-        <tr><td>@Html.ActionLink(a.Name, "Details", "Actor", new { urlName = a.UrlName }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
+        <tr><td>@Html.ActionLink(a.Name, "Details", "Actor", new { a.UrlName }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
      }
     </table>
 }

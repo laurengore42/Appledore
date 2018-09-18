@@ -98,7 +98,7 @@
 
             Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Character", new { urlName = oneTrueChar.UrlName });
+            return RedirectToAction("Details", "Character", new { oneTrueChar.UrlName });
         }
 
         //
@@ -129,7 +129,7 @@
                 Db.Entry(character).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToAction("Details", "Character", new { urlName = character.UrlName });
+                return RedirectToAction("Details", "Character", new { character.UrlName });
             }
             ViewBag.Honorific = new SelectList(Db.Honorifics.OrderBy(h => h.Name), "ID", "Name", character.HonorificID);
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", character.SpeciesID);

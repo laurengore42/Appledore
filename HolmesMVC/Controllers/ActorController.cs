@@ -101,7 +101,7 @@
 
             Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Actor", new { urlName = oneTrueActor.UrlName });
+            return RedirectToAction("Details", "Actor", new { oneTrueActor.UrlName });
         }
 
         // Actor history instances
@@ -147,7 +147,7 @@
                 Db.Entry(actor).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToAction("Details", "Actor", new { urlName = actor.UrlName });
+                return RedirectToAction("Details", "Actor", new { actor.UrlName });
             }
             ViewBag.Species = new SelectList(Db.Species, "ID", "Name", actor.SpeciesID);
             return View(actor);

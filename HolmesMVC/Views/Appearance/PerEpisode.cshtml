@@ -26,7 +26,7 @@ else
             <tr>
                 @if (canonPage)
                 {
-                    <td colspan="2">@Html.ActionLink(charName, "Details", "Character", new { urlName = appearance.Character.UrlName }, null)</td>
+                    <td colspan="2">@Html.ActionLink(charName, "Details", "Character", new { appearance.Character.UrlName }, null)</td>
                 }
                 else
                 {
@@ -37,7 +37,7 @@ else
                         }
                         else
                         {
-                            @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { urlName = appearance.Actor.UrlName }, null)
+                            @Html.ActionLink(actorName == null || actorName.Length == 0 ? "ACTOR WITH NO NAME???" : actorName, "Details", "Actor", new { appearance.Actor.UrlName }, null)
                         }
                 </td>
                 <td class="castchar">
@@ -45,11 +45,11 @@ else
                     <span @if (canonCharacter) { <text> class="strong" </text>  }>
                         @if (null == rename)
                         {
-                            @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Character", new { urlName = appearance.Character.UrlName }, null)
+                            @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Character", new { appearance.Character.UrlName }, null)
                         }
                         else
                         {
-                            @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { urlName = appearance.Character.UrlName }, null)
+                            @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { appearance.Character.UrlName }, null)
                         }
                     </span>
                 </td>
