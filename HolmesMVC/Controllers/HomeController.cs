@@ -68,7 +68,7 @@
             {
                 root.Add(
                     new XElement(ns + "url",
-                    new XElement(ns + "loc", new XText(Url.Action("Details", "Actor", new { a.ID }, "https")))
+                    new XElement(ns + "loc", new XText(Url.Action("Details", "Actor", new { a.UrlName }, "https")))
                     )
                 );
             }
@@ -76,7 +76,7 @@
             {
                 root.Add(
                     new XElement(ns + "url",
-                    new XElement(ns + "loc", new XText(Url.Action("Details", "Character", new { c.ID }, "https")))
+                    new XElement(ns + "loc", new XText(Url.Action("Details", "Character", new { c.UrlName }, "https")))
                     )
                 );
             }
