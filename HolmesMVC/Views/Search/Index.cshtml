@@ -65,7 +65,7 @@
         @foreach (var r in Model.Renames)
         {
             var displayName = Shared.BuildName(new[] { r.Honorific, r.Forename, r.Surname }, ' ');
-            <li>@displayName, a name for @Html.ActionLink(r.OldName, "Details", "Character", new { r.Character }, null) in '@Html.ActionLink(r.AdaptName, "Details", "Adaptation", new { id = r.AdaptId}, null)'@if (r.AdaptTranslation != null && r.AdaptTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@r.AdaptTranslation</i></span>}</li>
+            <li>@displayName, a name for @Html.ActionLink(r.OldName, "Details", "Character", new { r.Character }, null) in '@Html.ActionLink(r.AdaptName, "Details", "Adaptation", new { urlName = r.AdaptUrlName }, null)'@if (r.AdaptTranslation != null && r.AdaptTranslation != string.Empty) { <span style="font-weight: normal; font-size: small;"><i>@r.AdaptTranslation</i></span>}</li>
         }
     </ul>
     }
@@ -92,11 +92,11 @@
                 <li>
                 @if (a.Holmes.Length > 0)
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
                 }
                 else
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
@@ -146,11 +146,11 @@
             <li>
                 @if (a.Holmes.Length > 0)
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
                 }
                 else
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
@@ -192,11 +192,11 @@
                 <li>
                 @if (a.Holmes.Length > 0)
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
                 }
                 else
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
@@ -215,11 +215,11 @@
                 <li>
                 @if (a.Holmes.Length > 0)
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
                 }
                 else
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
@@ -261,11 +261,11 @@
                 <li>
                 @if (a.Holmes.Length > 0)
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Holmes, @a.Medium)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes, @a.Medium)</text>
                 }
                 else
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { id = a.ID }, null) (@a.Medium)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Medium)</text>
                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>

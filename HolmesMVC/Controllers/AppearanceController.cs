@@ -80,6 +80,7 @@
             var massAdd = new MassAdd
                               {
                                   AdaptationID = adapt.ID,
+                                  AdaptationUrlName = adapt.UrlName,
                                   Adaptation = adapt
                               };
 
@@ -112,7 +113,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult MassAdd(MassAdd model)
         {
-            var returnTo = model.Adaptation;
+            var urlName = model.Adaptation.UrlName;
             if (model.ActorID < 1 || model.CharacterID < 1 || model.Episodes.Count() < 1)
             {
                 return HttpNotFound();
@@ -143,7 +144,7 @@
 
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Adaptation", new { id = returnTo });
+            return RedirectToAction("Details", "Adaptation", new { urlName });
         }
 
         public ActionResult Create(int id = -1, int actorid = -1, int characterid = -1)

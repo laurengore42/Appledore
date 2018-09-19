@@ -12,28 +12,28 @@
         <a href="/">Home</a>
     </li>
     <li>
-        <a href="/Canon">Canon</a>
+        <a href="/canon">Canon</a>
     </li>
     <li>
-        <a href="/Canon/Search">Canon Search</a>
+        <a href="/canon/search">Canon Search</a>
     </li>
     <li>
-        <a href="/Adaptation">Adaptations</a>
+        <a href="/adaptation">Adaptations</a>
     </li>
     <li>
-        <a href="/Toys/HolmesNumToy">HolmesNumToy</a>
+        <a href="/toys/holmesnumtoy">HolmesNumToy</a>
     </li>
     <li>
-        <a href="/Toys/PhotoCollageToy">PhotoCollageToy</a>
+        <a href="/toys/photocollagetoy">PhotoCollageToy</a>
     </li>
     <li>
-        <a href="/Toys/MapPinToy">MapPinToy</a>
+        <a href="/toys/mappintoy">MapPinToy</a>
     </li>
     <li>
-        <a href="/Toys/MultiTimelineToy">MultiTimelineToy</a>
+        <a href="/toys/multitimelinetoy">MultiTimelineToy</a>
     </li>
     <li>
-        <a href="/Home/Credits">Credits</a>
+        <a href="/home/credits">Credits</a>
     </li>
 </ul>
 
@@ -41,7 +41,7 @@
 <ul>
     @foreach (var a in adaptations)
     {
-        <li><a href="/Adaptation/@a.ID">@a.ID</a></li>
+        <li><a href="/adaptation/@a.UrlName">@a.UrlName</a></li>
         <li>
             Episodes:
             <ul>
@@ -49,7 +49,7 @@
                 {
                     foreach (var e in s.Episodes)
                     {
-                        <li><a href="/Episode/@e.ID">@e.ID</a></li>
+                        <li><a href="/episode/@e.ID">@e.ID</a></li>
                     }
                 }
             </ul>

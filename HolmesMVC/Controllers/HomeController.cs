@@ -84,7 +84,7 @@
             {
                 root.Add(
                     new XElement(ns + "url",
-                    new XElement(ns + "loc", new XText(Url.Action("Details", "Adaptation", new { a.ID }, "https")))
+                    new XElement(ns + "loc", new XText(Url.Action("Details", "Adaptation", new { a.UrlName }, "https")))
                     )
                 );
                 foreach (var s in a.Seasons)

@@ -60,7 +60,9 @@ namespace HolmesMVC.Models.ViewModels
                               .SelectMany(s => s.Episodes)
                               .Count(),
 
-                              Medium = a.Medium.Name
+                              Medium = a.Medium.Name,
+
+                              UrlName = a.UrlName
                           }).ToList();
 
             AdaptsSingleFilm = (from a in Db.Adaptations
@@ -113,7 +115,9 @@ namespace HolmesMVC.Models.ViewModels
                                     .SelectMany(s => s.Episodes)
                                     .Count(),
 
-                                    Medium = a.Medium.Name
+                                    Medium = a.Medium.Name,
+
+                                    UrlName = a.UrlName
                                 }).ToList();
 
             AdaptsTV = (from a in Db.Adaptations
@@ -166,7 +170,9 @@ namespace HolmesMVC.Models.ViewModels
                             .SelectMany(s => s.Episodes)
                             .Count(),
 
-                            Medium = a.Medium.Name
+                            Medium = a.Medium.Name,
+
+                            UrlName = a.UrlName
                         }).ToList();
 
             AdaptsSingleRadio = (from a in Db.Adaptations
@@ -219,7 +225,9 @@ namespace HolmesMVC.Models.ViewModels
                                     .SelectMany(s => s.Episodes)
                                     .Count(),
 
-                                     Medium = a.Medium.Name
+                                     Medium = a.Medium.Name,
+
+                                     UrlName = a.UrlName
                                  }).ToList();
 
             AdaptsRadio = (from a in Db.Adaptations
@@ -272,7 +280,9 @@ namespace HolmesMVC.Models.ViewModels
                                  .SelectMany(s => s.Episodes)
                                  .Count(),
 
-                               Medium = a.Medium.Name
+                               Medium = a.Medium.Name,
+
+                               UrlName = a.UrlName
                            }).ToList();
 
             AdaptsOther = (from a in Db.Adaptations
@@ -325,7 +335,9 @@ namespace HolmesMVC.Models.ViewModels
                               .SelectMany(s => s.Episodes)
                               .Count(),
 
-                               Medium = a.Medium.Name
+                               Medium = a.Medium.Name,
+
+                               UrlName = a.UrlName
                            }).ToList();
         }
 
@@ -357,5 +369,7 @@ namespace HolmesMVC.Models.ViewModels
         public int EpCount;
 
         public string Medium;
+
+        public string UrlName;
     }
 }

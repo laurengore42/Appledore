@@ -27,6 +27,7 @@
             MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
             AdaptName = Shared.DisplayName(sampleApp.Episode.Season.Adaptation);
             AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
+            AdaptUrlName = sampleApp.Episode.Season.Adaptation.UrlName;
 
             var rename = (from r in sampleApp.Episode.Season.Adaptation.Renames
                               where r.ActorID == ActorId
@@ -69,5 +70,7 @@
         public int LastYear { get; set; }
 
         public string AdaptTranslation { get; set; }
+
+        public string AdaptUrlName { get; set; }
     }
 }

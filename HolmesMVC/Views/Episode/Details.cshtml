@@ -68,7 +68,7 @@
         <span style="font-weight: normal; font-size: small;"><i>@Model.Translation</i></span>
     }</h2>
     <ul class="actordetails">
-        <li>Adaptation: @Html.ActionLink(Model.AdaptationName,"Details","Adaptation", new { id = Model.Adaptation }, null)@if (Model.AdaptationTranslation != null && Model.AdaptationTranslation != string.Empty){ <span style="font-weight: normal; font-size: small;"><i>@Model.AdaptationTranslation</i></span>}</li>
+        <li>Adaptation: @Html.ActionLink(Model.AdaptationName,"Details", "Adaptation", new { urlName = Model.AdaptationUrlName }, null)@if (Model.AdaptationTranslation != null && Model.AdaptationTranslation != string.Empty){ <span style="font-weight: normal; font-size: small;"><i>@Model.AdaptationTranslation</i></span>}</li>
         <li>Episode: @Html.DisplayFor(model => model.SeasonCode)</li>
         @{
             var airdateFormat = "dd MMMM yyyy";

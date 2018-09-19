@@ -29,6 +29,7 @@
         public int Adaptation { get; set; }
         public string AdaptationName { get; set; }
         public string AdaptationTranslation { get; set; }
+        public string AdaptationUrlName { get; set; }
 
         public int Season { get; set; }
 
@@ -93,6 +94,7 @@
                     ? Shared.DisplayName(episode.Season.Adaptation)
                     : episode.Season.Adaptation.Name;
             AdaptationTranslation = episode.Season.Adaptation.Translation;
+            AdaptationUrlName = episode.Season.Adaptation.UrlName;
             Season = episode.SeasonID;
             SeasonAirOrder = episode.Season.AirOrder;
             SeasonName = episode.Season.Name;

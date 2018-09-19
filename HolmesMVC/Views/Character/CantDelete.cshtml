@@ -28,7 +28,7 @@
 	{
 		<text>
 			<p>
-				In '@Html.ActionLink(Shared.DisplayName(r.Adaptation), "Details", "Adaptation", new { id = r.AdaptationID }, null)', @Shared.ShortName(r.Actor) plays @Shared.DisplayName(r.Character) as "@Shared.LongName(new HolmesMVC.Models.Character {HonorificID = r.HonorificID, Honorific = r.Honorific, Forename = r.Forename, Surname = r.Surname })".
+				In '@Html.ActionLink(Shared.DisplayName(r.Adaptation), "Details", "Adaptation", new { urlName = r.Adaptation.UrlName }, null)', @Shared.ShortName(r.Actor) plays @Shared.DisplayName(r.Character) as "@Shared.LongName(new HolmesMVC.Models.Character {HonorificID = r.HonorificID, Honorific = r.Honorific, Forename = r.Forename, Surname = r.Surname })".
 		</text>
 	}
 }

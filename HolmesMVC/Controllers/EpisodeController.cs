@@ -59,7 +59,7 @@
             }
 
             ViewBag.chosenAdapt = chosenAdapt;
-            ViewBag.adaptId = chosenAdapt.ID;
+            ViewBag.adaptUrlName = chosenAdapt.UrlName;
 
             ViewBag.Story = new SelectList(Db.Stories, "ID", "Name");
             ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name");

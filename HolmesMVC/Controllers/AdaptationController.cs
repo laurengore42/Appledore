@@ -18,30 +18,10 @@
         }
 
         //
-        // GET: /adaptation/details/5
-
-        [AllowAnonymous]
-        public ActionResult Details(int id = 0)
-        {
-            Adaptation adaptation = Db.Adaptations.Find(id);
-            if (adaptation == null)
-            {
-                return HttpNotFound();
-            }
-            if (adaptation.Name == "Canon")
-            {
-                return RedirectToAction("Index", "Canon");
-            }
-            var viewmodel = new AdaptView(adaptation);
-
-            return viewmodel.SingleFilm ? View("SingleFilmDetails", viewmodel) : View(viewmodel);
-        }
-
-        //
         // GET: /adaptation/details/house_md
 
         [AllowAnonymous]
-        public ActionResult NewDetails(string urlName = "")
+        public ActionResult Details(string urlName = "")
         {
             if (string.IsNullOrEmpty(urlName))
             {
@@ -54,7 +34,7 @@
             Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
             var viewmodel = new AdaptView(adaptation);
 
-            return viewmodel.SingleFilm ? View("SingleFilmDetails", viewmodel) : View("Details", viewmodel);
+            return viewmodel.SingleFilm ? View("SingleFilmDetails", viewmodel) : View(viewmodel);
         }
 
         //

@@ -8,6 +8,8 @@
 
         public int AdaptationID { get; set; }
 
+        public string AdaptationUrlName { get; set; }
+
         public int[] Episodes { get; set; }
 
         public virtual Actor Actor { get; set; }

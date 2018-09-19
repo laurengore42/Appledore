@@ -102,7 +102,7 @@
 
                 if (results.Adaptations.Any())
                 {
-                    return RedirectToAction("Details", "Adaptation", new { id = results.Adaptations.First().ID });
+                    return RedirectToAction("Details", "Adaptation", new { results.Adaptations.First().UrlName });
                 }
             }
             

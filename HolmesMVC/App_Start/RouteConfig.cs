@@ -99,7 +99,7 @@
             routes.MapRoute(
                 "AdaptDetails",
                 "adaptation/{urlName}",
-                new { controller = "Adaptation", action = "NewDetails" }
+                new { controller = "Adaptation", action = "Details" }
             );
 
             //// Search route

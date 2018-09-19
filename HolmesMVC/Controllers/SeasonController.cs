@@ -112,7 +112,7 @@
             {
                 Db.Entry(season).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
-                return RedirectToAction("Details", "Adaptation", new { id = season.AdaptationID} );
+                return RedirectToAction("Details", "Adaptation", new { season.Adaptation.UrlName} );
             }
             ViewBag.Adaptation = GetAdaptList();
             return View(season);
@@ -145,7 +145,7 @@
             Season season = Db.Seasons.Find(id);
             Db.Seasons.Remove(season);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
-            return RedirectToAction("Details", "Adaptation", new { id = season.AdaptationID });
+            return RedirectToAction("Details", "Adaptation", new { season.Adaptation.UrlName });
         }
 
         private List<SelectListItem> GetAdaptList()

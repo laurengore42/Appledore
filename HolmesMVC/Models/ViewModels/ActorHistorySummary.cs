@@ -22,9 +22,12 @@
                         ?? Shared.DisplayName(
                             sampleApp.Episode.Season.Adaptation);
             AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
+            AdaptUrlName = sampleApp.Episode.Season.Adaptation.UrlName;
         }
 
         public int AdaptId { get; set; }
+
+        public string AdaptUrlName { get; set; }
 
         public int CharacterId { get; set; }
 

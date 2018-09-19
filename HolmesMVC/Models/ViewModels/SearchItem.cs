@@ -190,6 +190,7 @@
                                   Surname = r.Surname,
                                   AdaptId = r.AdaptationID,
                                   AdaptTranslation = r.Adaptation.Translation,
+                                  AdaptUrlName = r.Adaptation.UrlName,
                                   AdaptName = (
 
                                            // oh my god
@@ -332,6 +333,8 @@
 
         public string AdaptTranslation { get; set; }
 
+        public string AdaptUrlName { get; set; }
+
         public string Honorific { get; set; }
 
         public string Forename { get; set; }
@@ -354,6 +357,8 @@
         public string Medium { get; set; }
 
         public int EpCount { get; set; }
+
+        public string UrlName { get; internal set; }
     }
 
     public class SearchEp
