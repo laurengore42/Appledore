@@ -13,19 +13,13 @@
         <ul>
             @foreach (var a in Model.AdaptsFilm.OrderBy(a => a.Year))
             {
-                <li>
-                @if (a.Holmes.Length > 0)
+            <li>
+                <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
+                @if (!string.IsNullOrEmpty(a.Translation))
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
+                    <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
                 }
-                else
-                {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
-                }
-                 @if (!string.IsNullOrEmpty(a.Translation)) {
-                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
-                 }   
-                </li>
+            </li>
             }
         </ul>
     }
