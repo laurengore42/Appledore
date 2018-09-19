@@ -36,6 +36,9 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.Birthplace)
                 .HasMaxLength(200);
 
+            Property(t => t.UrlName)
+                .HasMaxLength(150);
+
             // Table & Column Mappings
             ToTable("Actors");
             Property(t => t.ID).HasColumnName("ID");

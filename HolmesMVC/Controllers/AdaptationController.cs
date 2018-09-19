@@ -18,7 +18,7 @@
         }
 
         //
-        // GET: /Adaptation/Details/5
+        // GET: /adaptation/details/5
 
         [AllowAnonymous]
         public ActionResult Details(int id = 0)
@@ -35,6 +35,26 @@
             var viewmodel = new AdaptView(adaptation);
 
             return viewmodel.SingleFilm ? View("SingleFilmDetails", viewmodel) : View(viewmodel);
+        }
+
+        //
+        // GET: /adaptation/details/house_md
+
+        [AllowAnonymous]
+        public ActionResult NewDetails(string urlName = "")
+        {
+            if (string.IsNullOrEmpty(urlName))
+            {
+                return HttpNotFound();
+            }
+            if (urlName == "canon")
+            {
+                return RedirectToAction("Index", "Canon");
+            }
+            Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
+            var viewmodel = new AdaptView(adaptation);
+
+            return viewmodel.SingleFilm ? View("SingleFilmDetails", viewmodel) : View("Details", viewmodel);
         }
 
         //

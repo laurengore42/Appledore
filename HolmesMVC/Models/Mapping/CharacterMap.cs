@@ -24,6 +24,9 @@ namespace HolmesMVC.Models.Mapping
                 .IsFixedLength()
                 .HasMaxLength(4);
 
+            Property(t => t.UrlName)
+                .HasMaxLength(150);
+
             // Table & Column Mappings
             ToTable("Characters");
             Property(t => t.ID).HasColumnName("ID");

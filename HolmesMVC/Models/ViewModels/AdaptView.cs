@@ -13,6 +13,7 @@
             DisplayName = Shared.DisplayName(adapt);
             Translation = adapt.Translation;
             MediumName = adapt.Medium.Name;
+            UrlName = adapt.UrlName;
             Company = adapt.Company;
 
             HolmesActors = Shared.PlayedBy("Holmes", adapt);
@@ -46,6 +47,8 @@
         public string Translation { get; set; }
 
         public string MediumName { get; set; }
+
+        public string UrlName { get; set; }
 
         public string Company { get; set; }
 

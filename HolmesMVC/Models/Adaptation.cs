@@ -15,6 +15,7 @@ namespace HolmesMVC.Models
         public string Translation { get; set; }
         public int MediumID { get; set; }
         public string Company { get; set; }
+        public string UrlName { get; set; }
         public virtual Medium Medium { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }
         public virtual ICollection<Season> Seasons { get; set; }

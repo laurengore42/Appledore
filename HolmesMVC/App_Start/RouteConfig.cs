@@ -95,6 +95,13 @@
                 new { controller = "Character", action = "Details" }
             );
 
+            // adaptation human-readable URLs
+            routes.MapRoute(
+                "AdaptDetails",
+                "adaptation/{urlName}",
+                new { controller = "Adaptation", action = "NewDetails" }
+            );
+
             //// Search route
             //routes.MapRoute(
             //    "Search",
