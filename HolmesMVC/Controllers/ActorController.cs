@@ -21,6 +21,16 @@
                 return RedirectToAction("Index", "Home");
             }
 
+            int id = 0;
+            if (int.TryParse(urlName, out id))
+            {
+                var actorById = Db.Actors.Find(id);
+                if (actorById != null)
+                {
+                    return RedirectToAction("Details", "Actor", new { actorById.UrlName });
+                }
+            }
+
             var actor = Db.Actors.Where(a => a.UrlName == urlName).FirstOrDefault();
             if (actor == null)
             {

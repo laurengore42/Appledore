@@ -20,6 +20,16 @@
                 return RedirectToAction("Index", "Home");
             }
 
+            int id = 0;
+            if (int.TryParse(urlName, out id))
+            {
+                var characterById = Db.Characters.Find(id);
+                if (characterById != null)
+                {
+                    return RedirectToAction("Details", "Character", new { characterById.UrlName });
+                }
+            }
+
             var character = Db.Characters.Where(a => a.UrlName == urlName).FirstOrDefault();
             if (character == null)
             {

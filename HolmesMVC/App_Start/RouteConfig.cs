@@ -11,8 +11,29 @@
 
             routes.LowercaseUrls = true;
             routes.AppendTrailingSlash = false;
+            
+            // actor human-readable URLs
+            routes.MapRoute(
+                "ActorDetails",
+                "actor/{urlName}",
+                new { controller = "Actor", action = "Details" }
+            );
 
-            // catchall for things like 'Actor/1'
+            // character human-readable URLs
+            routes.MapRoute(
+                "CharDetails",
+                "character/{urlName}",
+                new { controller = "Character", action = "Details" }
+            );
+
+            // adaptation human-readable URLs
+            routes.MapRoute(
+                "AdaptDetails",
+                "adaptation/{urlName}",
+                new { controller = "Adaptation", action = "Details" }
+            );
+
+            // catchall for things like 'Episode/1'
             routes.MapRoute(
                 "Details",
                 "{controller}/{id}",
@@ -79,27 +100,6 @@
                 "{controller}/{action}",
                 new { },
                 new { action = @"combine" }
-            );
-
-            // actor human-readable URLs
-            routes.MapRoute(
-                "ActorDetails",
-                "actor/{urlName}",
-                new { controller = "Actor", action = "Details" }
-            );
-
-            // character human-readable URLs
-            routes.MapRoute(
-                "CharDetails",
-                "character/{urlName}",
-                new { controller = "Character", action = "Details" }
-            );
-
-            // adaptation human-readable URLs
-            routes.MapRoute(
-                "AdaptDetails",
-                "adaptation/{urlName}",
-                new { controller = "Adaptation", action = "Details" }
             );
 
             //// Search route

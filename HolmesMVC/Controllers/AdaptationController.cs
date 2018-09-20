@@ -18,7 +18,7 @@
         }
 
         //
-        // GET: /adaptation/details/house_md
+        // GET: /adaptation/house_md
 
         [AllowAnonymous]
         public ActionResult Details(string urlName = "")
@@ -31,6 +31,17 @@
             {
                 return RedirectToAction("Index", "Canon");
             }
+
+            int id = 0;
+            if (int.TryParse(urlName, out id))
+            {
+                var adaptationById = Db.Adaptations.Find(id);
+                if (adaptationById != null)
+                {
+                    return RedirectToAction("Details", "Adaptation", new { adaptationById.UrlName });
+                }
+            }
+
             Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
             var viewmodel = new AdaptView(adaptation);
 
@@ -38,7 +49,7 @@
         }
 
         //
-        // GET: /Adaptation/Create
+        // GET: /adaptation/create
 
         public ActionResult Create()
         {
@@ -47,7 +58,7 @@
         }
 
         //
-        // POST: /Adaptation/Create
+        // POST: /adaptation/create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,7 +77,7 @@
         }
 
         //
-        // GET: /Adaptation/Edit/5
+        // GET: /adaptation/edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -80,7 +91,7 @@
         }
 
         //
-        // POST: /Adaptation/Edit/5
+        // POST: /adaptation/edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,7 +109,7 @@
         }
 
         //
-        // GET: /Adaptation/Delete/5
+        // GET: /adaptation/delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -115,7 +126,7 @@
         }
 
         //
-        // POST: /Adaptation/Delete/5
+        // POST: /adaptation/delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
