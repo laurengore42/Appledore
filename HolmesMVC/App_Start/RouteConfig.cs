@@ -11,7 +11,45 @@
 
             routes.LowercaseUrls = true;
             routes.AppendTrailingSlash = false;
-            
+
+            // CRUD links
+            routes.MapRoute(
+                "Create",
+                "{controller}/{action}",
+                new { },
+                new { action = @"create" }
+            );
+            routes.MapRoute(
+                "CreateShort",
+                "{controller}/{action}",
+                new { },
+                new { action = @"createshort" }
+            );
+            routes.MapRoute(
+                "Edit",
+                "{controller}/{action}",
+                new { },
+                new { action = @"edit" }
+            );
+            routes.MapRoute(
+                "Delete",
+                "{controller}/{action}",
+                new { },
+                new { action = @"delete" }
+            );
+            routes.MapRoute(
+                "DeleteConfirmed",
+                "{controller}/{action}",
+                new { },
+                new { action = @"deleteconfirmed" }
+            );
+            routes.MapRoute(
+                "Combine",
+                "{controller}/{action}",
+                new { },
+                new { action = @"combine" }
+            );
+
             // actor human-readable URLs
             routes.MapRoute(
                 "ActorDetails",
@@ -62,44 +100,6 @@
                 "chunk/{id}",
                 new { controller = "Story", action = "Details" },
                 new { id = @"\w+" }
-            );
-
-            // CRUD links
-            routes.MapRoute(
-                "Create",
-                "{controller}/{action}",
-                new {},
-                new { action = @"create" }
-            );
-            routes.MapRoute(
-                "CreateShort",
-                "{controller}/{action}",
-                new { },
-                new { action = @"createshort" }
-            );
-            routes.MapRoute(
-                "Edit",
-                "{controller}/{action}",
-                new { },
-                new { action = @"edit" }
-            );
-            routes.MapRoute(
-                "Delete",
-                "{controller}/{action}",
-                new { },
-                new { action = @"delete" }
-            );
-            routes.MapRoute(
-                "DeleteConfirmed",
-                "{controller}/{action}",
-                new { },
-                new { action = @"deleteconfirmed" }
-            );
-            routes.MapRoute(
-                "Combine",
-                "{controller}/{action}",
-                new { },
-                new { action = @"combine" }
             );
 
             //// Search route
