@@ -19,7 +19,7 @@
             @Html.ActionLink(Shared.ShortName(unlockedHolmes), "Details", "Actor", new { unlockedHolmes.UrlName }, null)<br/></text>
     }
     Why not go fill in this canon actor's details (@ViewBag.unlockedActorCount left):<br/>
-    @Html.ActionLink(Shared.ShortName(unlockedActor),"Details","Actor",new { id = unlockedActor.ID},null)
+    @Html.ActionLink(Shared.ShortName(unlockedActor), "Details", "Actor", new { unlockedActor.UrlName },null)
     <br/>
     @if (null != unlockedFilm)
     {

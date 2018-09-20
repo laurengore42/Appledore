@@ -21,7 +21,7 @@
                 {
                     alreadyMapped.Add(a.Birthplace);
                     <div class="actorPin" style="display:none;">                      
-                        <span class="actorLink">@Html.ActionLink(HolmesMVC.Shared.ShortName(a),"Details","Actor",new { a.ID }, null)</span>    
+                        <span class="actorLink">@Html.ActionLink(HolmesMVC.Shared.ShortName(a),"Details", "Actor", new { a.UrlName }, null)</span>    
                         <span class="actorBirthplace">@a.Birthplace</span>
                         <span class="actorLat">@a.Latitude</span>
                         <span class="actorLong">@a.Longitude</span>

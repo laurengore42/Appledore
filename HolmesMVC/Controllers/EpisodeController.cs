@@ -35,7 +35,7 @@
             // the single-film case
             if (episode.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1)
             {
-                return RedirectToAction("Details","Adaptation",new {ID = episode.Season.AdaptationID});
+                return RedirectToAction("Details", "Adaptation", new { episode.Season.Adaptation.UrlName });
             }
 
             return View(new EpisodeView(episode));
@@ -195,10 +195,10 @@
         public ActionResult DeleteConfirmed(int id)
         {
             var episode = Db.Episodes.Find(id);
-            var adaptId = episode.Season.AdaptationID;
+            var urlName = episode.Season.Adaptation.UrlName;
             Db.Episodes.Remove(episode);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
-            return RedirectToAction("Details","Adaptation", new {ID = adaptId});
+            return RedirectToAction("Details", "Adaptation", new { urlName });
         }
 
         public ActionResult Lock(int id)

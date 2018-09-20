@@ -58,7 +58,7 @@
                 Db.Adaptations.Add(adaptation);
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-                return RedirectToAction("Details","Adaptation", new {id = adaptation.ID});
+                return RedirectToAction("Details", "Adaptation", new { adaptation.UrlName });
             }
 
             ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);

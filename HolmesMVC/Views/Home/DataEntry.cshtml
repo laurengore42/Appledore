@@ -51,7 +51,7 @@ Pulling in IMDb info:
             var charIdsStr = string.Join(",", from c in charName select c.ID);
             <li>@Html.ActionLink("Combine", "Combine", "Character", new { charIdStr = charIdsStr }, null) Potential duplicates: @foreach (Character c in charName)
                                       {
-                                          <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ","&nbsp;")),"Details","Character", new { id = c.ID}, null) + </text>
+                                          <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ","&nbsp;")),"Details", "Character", new { c.UrlName }, null) + </text>
                                       }</li>
                     
         }
@@ -69,7 +69,7 @@ Pulling in IMDb info:
             foreach (var actName in dupeActNames)
             {
                 var actIdsStr = string.Join(",", from a in actName select a.ID);
-                    <li>@Html.ActionLink("Combine", "Combine", "Actor", new { actorIdStr = actIdsStr }, null) Potential duplicates: @foreach (Actor a in actName) { <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(a).Replace(" ","&nbsp;")),"Details","Actor", new { id = a.ID}, null) + </text> }</li>
+                    <li>@Html.ActionLink("Combine", "Combine", "Actor", new { actorIdStr = actIdsStr }, null) Potential duplicates: @foreach (Actor a in actName) { <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(a).Replace(" ","&nbsp;")),"Details", "Actor", new { a.UrlName }, null) + </text> }</li>
                 }
         }
         else
