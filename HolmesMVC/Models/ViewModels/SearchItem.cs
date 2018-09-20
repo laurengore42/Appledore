@@ -358,7 +358,7 @@
 
         public int EpCount { get; set; }
 
-        public string UrlName { get; internal set; }
+        public string UrlName { get; set; }
     }
 
     public class SearchEp
