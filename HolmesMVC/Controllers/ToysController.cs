@@ -242,7 +242,6 @@
         public ViewResult Scraps()
         {
             var holmesID = Shared.GetHolmes();
-            var watsonID = Shared.GetWatson();
             
             // How about an expansion of the HolmesNum to generate a network?
             // Inspired by talking to Ian Rennie about connections between Holmeses
@@ -292,36 +291,8 @@
 
             foreach (HolmesLinkActor act in holmesLinkActors)
             {
-                var myName = act.Name;
-                if (string.IsNullOrEmpty(myName) && act.Actor != null)
-                {
-                    myName = Shared.ShortName(act.Actor);
-                }
-
-                var playedHolmes = false;
-                var playedWatson = false;
-                int appledoreActorID = act.ActorID ?? 0;
-                if (appledoreActorID > 0)
-                {
-                    if (Db.Appearances.Where(app => app.ActorID == appledoreActorID).Where(app => app.CharacterID == holmesID).Any())
-                    {
-                        playedHolmes = true;
-                    }
-                    else if (Db.Appearances.Where(app => app.ActorID == appledoreActorID).Where(app => app.CharacterID == watsonID).Any())
-                    {
-                        playedWatson = true;
-                    }
-                }
-
-                var groupID = 3;
-                if (playedWatson)
-                {
-                    groupID = 2;
-                }
-                if (playedHolmes)
-                {
-                    groupID = 1;
-                }
+                var myName = Shared.ShortName(act.Actor);                
+                var groupID = 1;
 
                 if (!blockedNames.Contains(myName))
                 {
@@ -333,24 +304,16 @@
 
             foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor).Distinct())
             {
-                var myName = act.Name;
-                if (string.IsNullOrEmpty(myName) && act.Actor != null)
-                {
-                    myName = Shared.ShortName(act.Actor);
-                }
+                var myName = Shared.ShortName(act.Actor);
                 foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor).Distinct())
                 {
                     if (linkedActor.ID > act.ID)
                     {
-                        var theirName = linkedActor.Name;
-                        if (string.IsNullOrEmpty(theirName) && linkedActor.Actor != null)
-                        {
-                            theirName = Shared.ShortName(linkedActor.Actor);
-                        }
+                        var theirName = Shared.ShortName(linkedActor.Actor);
 
                         if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
                         {
-                            linkList.Add("{\"source\": \"" + act.ID + "\", \"target\": \"" + linkedActor.ID + "\", \"value\": 5}");
+                            linkList.Add("{\"source\": \"" + act.ID + "\", \"target\": \"" + linkedActor.ID + "\", \"value\": 1}");
                         }
                     }
                 }
