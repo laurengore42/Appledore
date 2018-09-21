@@ -23,7 +23,7 @@
             var allNames = proclink.ProcessedMovies.Select(a => a.Name).ToList();
             var concatNames = string.Join(" ", allNames).ToLower();
 
-            if (concatNames.Contains("award") || concatNames.Contains("oscars") || concatNames.Contains("emmys") || concatNames.Contains("night of 100 stars") || concatNames.Contains("live") || concatNames.Contains("stage") || concatNames.Contains("show business") || concatNames.Contains("anniversary") || concatNames.Contains("years of") || concatNames.Contains("greatest") || concatNames.Contains("tribute") || concatNames.Contains("stars") || concatNames.Contains("relief"))
+            if (concatNames.Contains("award") || concatNames.Contains("oscars") || concatNames.Contains("emmys") || concatNames.Contains("night of 100 stars") || concatNames.Contains("live") || concatNames.Contains("stage") || concatNames.Contains("show business") || concatNames.Contains("anniversary") || concatNames.Contains("years of") || concatNames.Contains("greatest") || concatNames.Contains("tribute") || concatNames.Contains("stars") || concatNames.Contains("relief") || concatNames.Contains("red nose day") || concatNames.Contains("royal gala") || concatNames.Contains("salute to") || concatNames.Contains("stand up to"))
             {
                 // throw it out, start again
                 return null;
