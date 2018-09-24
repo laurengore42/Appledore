@@ -1,6 +1,4 @@
-﻿@using HolmesMVC
-@using HolmesMVC.Models
-@using HolmesMVC.Models.ViewModels
+﻿@using HolmesMVC.Models.ViewModels
 @model ScrapsView
 
 @{
@@ -14,20 +12,22 @@
 
 <style>
 
-.links line {
-  stroke: #999;
-  stroke-opacity: 0.6;
-}
+    .links line {
+      stroke: #999;
+      stroke-opacity: 0.3;
+    }
 
-.nodes circle {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
+    g.gnode circle.node {
+      stroke: #fff;
+      fill: darkorange;
+      stroke-width: 1.5px;
+    }
 
-g.gnode {
-    font-size: 8px;
-    font-weight: 700;
-}
+    g.gnode text.nodelabel {
+        font-size: 10px;
+        font-weight: 700;
+        fill: forestgreen;
+    }
 
 </style>
 
@@ -46,8 +46,6 @@ g.gnode {
         var svg = d3.select("svg"),
             width = +svg.attr("width"),
             height = +svg.attr("height");
-
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(function () { return 150; }))
@@ -69,16 +67,16 @@ g.gnode {
                .append('g')
                .classed('gnode', true);
 
-            var node = gnodes.append("circle")
+            gnodes.append("circle")
                 .attr("class", "node")
-                .attr("r", 10)
-                .style("fill", function (d) { return color(d.group); })
+                .attr("r", 5)
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended));
 
-            var labels = gnodes.append("text")
+            gnodes.append("text")
+                .attr("class", "nodelabel")
                 .text(function (d) { return d.name; });
 
             simulation

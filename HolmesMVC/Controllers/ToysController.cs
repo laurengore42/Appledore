@@ -291,7 +291,7 @@
 
             foreach (HolmesLinkActor act in holmesLinkActors)
             {
-                var myName = Shared.ShortName(act.Actor);                
+                var myName = act.Actor.Surname; 
                 var groupID = 1;
 
                 if (!blockedNames.Contains(myName))
