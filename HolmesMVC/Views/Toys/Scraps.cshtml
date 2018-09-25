@@ -17,16 +17,15 @@
       stroke-opacity: 0.3;
     }
 
-    g.gnode circle.node {
-      stroke: #fff;
-      fill: darkorange;
-      stroke-width: 1.5px;
+    g.gnode rect.node {
+      opacity: 0;
     }
 
     g.gnode text.nodelabel {
         font-size: 10px;
         font-weight: 700;
         fill: forestgreen;
+        text-anchor: middle;
     }
 
 </style>
@@ -49,7 +48,7 @@
 
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function (d) { return d.id; }).distance(function () { return 150; }))
-            .force("charge", d3.forceManyBody())
+            .force("charge", d3.forceManyBody().strength(function () { return -150; }))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         var drawGraph = function (graph) {
@@ -67,9 +66,10 @@
                .append('g')
                .classed('gnode', true);
 
-            gnodes.append("circle")
+            gnodes.append("rect")
                 .attr("class", "node")
-                .attr("r", 5)
+                .attr("width", 1)
+                .attr("height", 1)
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
@@ -77,7 +77,11 @@
 
             gnodes.append("text")
                 .attr("class", "nodelabel")
-                .text(function (d) { return d.name; });
+                .text(function (d) { return d.name; })
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
 
             simulation
                 .nodes(graph.nodes)
