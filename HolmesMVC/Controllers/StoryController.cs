@@ -1,7 +1,7 @@
 ﻿namespace HolmesMVC.Controllers
 {
     using System;
-    using System.Data;
+    using System.Data.Entity;
     using System.Net;
     using System.Web.Mvc;
     using System.Xml;

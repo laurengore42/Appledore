@@ -44,14 +44,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -64,6 +65,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -291,6 +295,10 @@
     <Compile Include="Migrations\201809191531206_url names for adaptations, lengths for url names.cs" />
     <Compile Include="Migrations\201809191531206_url names for adaptations, lengths for url names.Designer.cs">
       <DependentUpon>201809191531206_url names for adaptations, lengths for url names.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809281611150_actor unique urlnames.cs" />
+    <Compile Include="Migrations\201809281611150_actor unique urlnames.Designer.cs">
+      <DependentUpon>201809281611150_actor unique urlnames.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
@@ -1332,7 +1340,9 @@
     <Content Include="Views\HolmesLink\Edit.cshtml" />
     <Content Include="Views\HolmesLink\Delete.cshtml" />
     <Content Include="Views\Home\Sitemap.cshtml" />
-    <None Include="Web.template.config" />
+    <None Include="Web.template.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -1479,6 +1489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809191531206_url names for adaptations, lengths for url names.resx">
       <DependentUpon>201809191531206_url names for adaptations, lengths for url names.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809281611150_actor unique urlnames.resx">
+      <DependentUpon>201809281611150_actor unique urlnames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
