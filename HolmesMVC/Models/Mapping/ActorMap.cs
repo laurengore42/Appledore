@@ -1,4 +1,6 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 
 namespace HolmesMVC.Models.Mapping
@@ -37,6 +39,8 @@ namespace HolmesMVC.Models.Mapping
                 .HasMaxLength(200);
 
             Property(t => t.UrlName)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute() { IsUnique = true }))
                 .HasMaxLength(150);
 
             // Table & Column Mappings
