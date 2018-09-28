@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201809281611150_actor unique urlnames.Designer.cs">
       <DependentUpon>201809281611150_actor unique urlnames.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809281616557_char unique urlnames.cs" />
+    <Compile Include="Migrations\201809281616557_char unique urlnames.Designer.cs">
+      <DependentUpon>201809281616557_char unique urlnames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\HolmesLinkActor.cs" />
     <Compile Include="Models\HolmesLink.cs" />
     <Compile Include="Models\HolmesLinkAppearance.cs" />
@@ -1492,6 +1496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809281611150_actor unique urlnames.resx">
       <DependentUpon>201809281611150_actor unique urlnames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809281616557_char unique urlnames.resx">
+      <DependentUpon>201809281616557_char unique urlnames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
