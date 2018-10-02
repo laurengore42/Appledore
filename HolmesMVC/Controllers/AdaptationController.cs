@@ -110,7 +110,7 @@
                 var adaptationById = Db.Adaptations.Find(id);
                 if (adaptationById != null)
                 {
-                    return RedirectToAction("Details", "Adaptation", new { adaptationById.UrlName });
+                    return RedirectToActionPermanent("Details", "Adaptation", new { adaptationById.UrlName });
                 }
             }
 
