@@ -40,6 +40,27 @@
         }
 
         //
+        // GET: /tv/granada
+
+        [AllowAnonymous]
+        public ActionResult TVDetails(string urlName = "")
+        {
+            Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
+            if (adaptation == null)
+            {
+                return RedirectToAction("Details", "Adaptation", new { urlName });
+            }
+
+            var viewmodel = new AdaptView(adaptation);
+
+            if (viewmodel.MediumName != "Television")
+            {
+                return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+            }
+            return View("Details", viewmodel);
+        }
+
+        //
         // GET: /adaptation/house_md
 
         [AllowAnonymous]

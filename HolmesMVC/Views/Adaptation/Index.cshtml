@@ -58,11 +58,11 @@
             <li>
                 @if (a.Holmes.Length > 0)
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "TVDetails", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
                 }
                 else
                 {
-                    <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
+                    <text>@a.Year @Html.ActionLink(a.Name, "TVDetails", "Adaptation", new { a.UrlName }, null)</text>
                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
