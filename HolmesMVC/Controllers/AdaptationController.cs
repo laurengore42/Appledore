@@ -61,7 +61,7 @@
         }
 
         //
-        // GET: /adaptation/house_md
+        // GET: /adaptation/wontner
 
         [AllowAnonymous]
         public ActionResult Details(string urlName = "")
