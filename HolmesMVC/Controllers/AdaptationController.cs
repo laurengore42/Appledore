@@ -19,6 +19,27 @@
         }
 
         //
+        // GET: /radio/granada
+
+        [AllowAnonymous]
+        public ActionResult RadioDetails(string urlName = "")
+        {
+            Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
+            if (adaptation == null)
+            {
+                return RedirectToAction("Details", "Adaptation", new { urlName });
+            }
+
+            var viewmodel = new AdaptView(adaptation);
+            
+            if (viewmodel.MediumName != "Radio")
+            {
+                return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+            }
+            return View("Details", viewmodel);
+        }
+
+        //
         // GET: /film/without_a_clue
 
         [AllowAnonymous]
@@ -35,6 +56,10 @@
             if (!viewmodel.SingleFilm)
             {
                 return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+            }
+            if (viewmodel.MediumName == "Radio")
+            {
+                return RedirectToAction("RadioDetails", "Adaptation", new { viewmodel.UrlName });
             }
             return View(viewmodel);
         }
@@ -95,7 +120,11 @@
                 return HttpNotFound();
             }
 
-            var viewmodel = new AdaptView(adaptation);            
+            var viewmodel = new AdaptView(adaptation);
+            if (viewmodel.MediumName == "Radio")
+            {
+                return RedirectToActionPermanent("RadioDetails", "Adaptation", new { viewmodel.UrlName });
+            }
             if (viewmodel.SingleFilm)
             {
                 return RedirectToActionPermanent("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });

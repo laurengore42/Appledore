@@ -6,83 +6,87 @@
     ViewBag.Title = Model.DisplayName;
     ViewBag.Episode = Model.Episodes.First();
 }
-<link rel="canonical" href="https://appledore.azurewebsites.net/film/@Model.UrlName" />
 @if (Model.MediumName == "Film" || Model.MediumName == "Television")
 {
-<script type="application/ld+json">
-    {
-    "@@context": "http://schema.org"
-    , "@@type": "Movie"
-    , "name": "@ViewBag.Title"
-    @if (!String.IsNullOrEmpty(Model.Episodes.First().Poster))
-    {
-        <text>, "image": "https://appledore.azurewebsites.net/Content/EpisodePosters/</text>@Model.Episodes.First().Poster<text>.jpg" </text>
-    }
-    , "datePublished": "@Model.DateOfFirstEpisode.ToLongDateString()"
-    @if (Model.ActorNames.Count() > 0)
-    {
-        <text>
-            , "actor": [{ "@@type": "Person", "name": "@Html.Raw(String.Join("\" }, { \"@type\": \"Person\", \"name\": \"", Model.ActorNames))"}]
-        </text>
-    }
-    }
-</script>
+    <link rel="canonical" href="https://appledore.azurewebsites.net/film/@Model.UrlName" />
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org"
+        , "@@type": "Movie"
+        , "name": "@ViewBag.Title"
+        @if (!String.IsNullOrEmpty(Model.Episodes.First().Poster))
+        {
+            <text>, "image": "https://appledore.azurewebsites.net/Content/EpisodePosters/</text>@Model.Episodes.First().Poster<text>.jpg" </text>
+        }
+        , "datePublished": "@Model.DateOfFirstEpisode.ToLongDateString()"
+        @if (Model.ActorNames.Count() > 0)
+        {
+            <text>
+                , "actor": [{ "@@type": "Person", "name": "@Html.Raw(String.Join("\" }, { \"@type\": \"Person\", \"name\": \"", Model.ActorNames))"}]
+            </text>
+        }
+        }
+    </script>
+}
+else if (Model.MediumName == "Radio")
+{
+    <link rel="canonical" href="https://appledore.azurewebsites.net/radio/@Model.UrlName" />
 }
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && !String.IsNullOrEmpty(Model.HolmesActors.First().PicShow))
     {
-        <a href="@Url.Action("Details", "Actor", new { Model.HolmesActors.First().UrlName })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150"/></a>
+        <a href="@Url.Action("Details", "Actor", new { Model.HolmesActors.First().UrlName })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150" /></a>
     }
     else
     {
         <i>(no Holmes picture)</i>
     }
     @if (Model.WatsonActors.Any() && !String.IsNullOrEmpty(Model.WatsonActors.First().PicShow))
-    {<a href="@Url.Action("Details", "Actor", new { Model.WatsonActors.First().UrlName })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150"/></a>}
+    {<a href="@Url.Action("Details", "Actor", new { Model.WatsonActors.First().UrlName })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150" /></a>}
     else
     {
         <i>(no Watson picture)</i>
-    }<br/><br/>
+    }<br /><br />
 </section>
 <section class="leftfloatdetails">
     <h2 class="detailscategory">Adaptation</h2>
     <h2 class="detailsheader">@ViewBag.Title</h2>
     <p>
-        This 
-    @switch (Model.MediumName)
-    {
-        case "Stage":
-        <text>Play was premiered</text>
-            break;
-        case "Radio":
-        <text>Radio Play was aired</text>
-            break;
-        case "Television":
-        <text>TV Film was aired</text>
-            break;
-        default:
-        <text>@Model.MediumName was released</text>
-            break;
-    }
-        on @ViewBag.Episode.Airdate.ToString("dd MMMM yyyy"), by  
-    @if (string.IsNullOrWhiteSpace(Model.Company))
-    {
-        <text>an unknown company.</text>
-    }
-    else
-    {
-        <text>@Model.Company.</text>
-    }
+        This
+        @switch (Model.MediumName)
+        {
+            case "Stage":
+                <text>Play was premiered</text>
+                break;
+            case "Radio":
+                <text>Radio Play was aired</text>
+                break;
+            case "Television":
+                <text>TV Film was aired</text>
+                break;
+            default:
+                <text>@Model.MediumName was released</text>
+                break;
+        }
+        on @ViewBag.Episode.Airdate.ToString("dd MMMM yyyy"), by
+        @if (string.IsNullOrWhiteSpace(Model.Company))
+        {
+            <text>an unknown company.</text>
+        }
+        else
+        {
+            <text>@Model.Company.</text>
+        }
         @if (Model.MediumName == "Television" || Model.MediumName == "Film")
         {
             var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
             <text><br />
-            IMDb: <a target="_blank" href = '@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
+                IMDb: <a target="_blank" href='@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
         }
         @if (!string.IsNullOrWhiteSpace(ViewBag.Episode.StoryID))
         {
             <text><br /><br />
-            Canon basis: @Html.ActionLink(Model.Episodes.First().Story.Name, "Details", "Story", new { id = Model.Episodes.First().StoryID}, null)</text>
+                Canon basis: @Html.ActionLink(Model.Episodes.First().Story.Name, "Details", "Story", new { id = Model.Episodes.First().StoryID }, null)</text>
         }
     </p>
     <p>
@@ -92,9 +96,11 @@
 
     @if (Request.IsAuthenticated)
     {
-        <p>@Html.ActionLink("Add episode", "Create", "Episode", new { Model.ID }, null) |
-        @Html.ActionLink("Edit episode", "Edit", "Episode", new { ViewBag.Episode.ID }, null)</p>
-    }
+        <p>
+            @Html.ActionLink("Add episode", "Create", "Episode", new { Model.ID }, null) |
+        @Html.ActionLink("Edit episode", "Edit", "Episode", new { ViewBag.Episode.ID }, null)
+    </p>
+}
     @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
 
     <section id="timelineSection">

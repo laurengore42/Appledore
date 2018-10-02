@@ -66,6 +66,11 @@
 
             // adaptation human-readable URLs
             routes.MapRoute(
+                "AdaptRadioDetails",
+                "radio/{urlName}",
+                new { controller = "Adaptation", action = "RadioDetails" }
+            );
+            routes.MapRoute(
                 "AdaptTVDetails",
                 "tv/{urlName}",
                 new { controller = "Adaptation", action = "TVDetails" }
