@@ -19,7 +19,7 @@
         }
 
         //
-        // GET: /radio/granada
+        // GET: /radio/merrison
 
         [AllowAnonymous]
         public ActionResult RadioDetails(string urlName = "")
