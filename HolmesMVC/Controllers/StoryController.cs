@@ -28,7 +28,7 @@
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Canon");
+            return RedirectToActionPermanent("Index", "Canon");
         }
         
         [AllowAnonymous]

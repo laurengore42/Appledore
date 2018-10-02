@@ -72,7 +72,7 @@
             }
             if (urlName == "canon")
             {
-                return RedirectToAction("Index", "Canon");
+                return RedirectToActionPermanent("Index", "Canon");
             }
 
             int id = 0;
