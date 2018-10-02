@@ -98,11 +98,11 @@
             var viewmodel = new AdaptView(adaptation);            
             if (viewmodel.SingleFilm)
             {
-                return RedirectToAction("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
+                return RedirectToActionPermanent("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
             }
             if (viewmodel.MediumName == "Television")
             {
-                return RedirectToAction("TVDetails", "Adaptation", new { viewmodel.UrlName });
+                return RedirectToActionPermanent("TVDetails", "Adaptation", new { viewmodel.UrlName });
             }
             return View(viewmodel);
         }
