@@ -19,6 +19,27 @@
         }
 
         //
+        // GET: /film/without_a_clue
+
+        [AllowAnonymous]
+        public ActionResult SingleFilmDetails(string urlName = "")
+        {
+            Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
+            if (adaptation == null)
+            {
+                return RedirectToAction("Details", "Adaptation", new { urlName });
+            }
+
+            var viewmodel = new AdaptView(adaptation);
+
+            if (!viewmodel.SingleFilm)
+            {
+                return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+            }
+            return View(viewmodel);
+        }
+
+        //
         // GET: /adaptation/house_md
 
         [AllowAnonymous]
@@ -44,9 +65,17 @@
             }
 
             Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
-            var viewmodel = new AdaptView(adaptation);
+            if (adaptation == null)
+            {
+                return HttpNotFound();
+            }
 
-            return viewmodel.SingleFilm ? View("SingleFilmDetails", viewmodel) : View(viewmodel);
+            var viewmodel = new AdaptView(adaptation);            
+            if (viewmodel.SingleFilm)
+            {
+                return RedirectToAction("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
+            }
+            return View(viewmodel);
         }
 
         //
