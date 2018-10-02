@@ -18,7 +18,7 @@
             EpName = Shared.DisplayName(ap.Episode);
             EpTranslation = ap.Episode.Translation;
             SeasonCode = Shared.GetSeasonCode(ap.Episode);
-            MediumName = ap.Episode.Season.Adaptation.Medium.Name;
+            Medium = ap.Episode.Season.Adaptation.Medium;
         }
 
         public DateTime Airdate { get; set; }
@@ -35,7 +35,7 @@
 
         public int EpId { get; set; }
 
-        public string MediumName { get; set; }
+        public int Medium { get; set; }
 
         public string EpTranslation { get; set; }
     }

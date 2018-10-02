@@ -208,7 +208,6 @@
     <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HonorificController.cs" />
-    <Compile Include="Controllers\MediumController.cs" />
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
@@ -355,7 +354,6 @@
     <Compile Include="Models\Mapping\DateMap.cs" />
     <Compile Include="Models\Mapping\EpisodeMap.cs" />
     <Compile Include="Models\Mapping\HonorificMap.cs" />
-    <Compile Include="Models\Mapping\MediumMap.cs" />
     <Compile Include="Models\Mapping\ReferenceMap.cs" />
     <Compile Include="Models\Mapping\RenameMap.cs" />
     <Compile Include="Models\Mapping\SeasonMap.cs" />
@@ -366,7 +364,6 @@
     <Compile Include="Models\Mapping\Webpages_OAuthMembershipMap.cs" />
     <Compile Include="Models\Mapping\Webpages_RolesMap.cs" />
     <Compile Include="Models\Mapping\Webpages_UsersInRolesMap.cs" />
-    <Compile Include="Models\Medium.cs" />
     <Compile Include="Controllers\RenameController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SeasonController.cs" />
@@ -1392,11 +1389,6 @@
     <Content Include="Views\Home\RandomFact.cshtml" />
     <Content Include="Views\Toys\Scraps.cshtml" />
     <Content Include="Views\Rename\CreateFull.cshtml" />
-    <Content Include="Views\Medium\Index.cshtml" />
-    <Content Include="Views\Medium\Details.cshtml" />
-    <Content Include="Views\Medium\Create.cshtml" />
-    <Content Include="Views\Medium\Edit.cshtml" />
-    <Content Include="Views\Medium\Delete.cshtml" />
     <Content Include="Views\Reference\Index.cshtml" />
     <Content Include="Views\Reference\Details.cshtml" />
     <Content Include="Views\Reference\Create.cshtml" />

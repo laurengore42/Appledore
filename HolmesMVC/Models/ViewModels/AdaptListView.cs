@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HolmesMVC.Enums;
 
 namespace HolmesMVC.Models.ViewModels
 {
@@ -11,7 +12,7 @@ namespace HolmesMVC.Models.ViewModels
         public AdaptListView(HolmesDBEntities Db)
         {
             AdaptsFilm = (from a in Db.Adaptations
-                          where a.Medium.Name == "Film"
+                          where a.Medium == (int)Medium.Film
                          && a.Seasons.Any()
                          && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
                           select new AdaptListAdapt
@@ -26,7 +27,7 @@ namespace HolmesMVC.Models.ViewModels
                                     ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                     ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                     : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                    : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                    : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                    ).Replace("\"", string.Empty),
 
                               Translation = string.IsNullOrEmpty(a.Translation)
@@ -60,13 +61,13 @@ namespace HolmesMVC.Models.ViewModels
                               .SelectMany(s => s.Episodes)
                               .Count(),
 
-                              Medium = a.Medium.Name,
+                              Medium = ((Medium)a.Medium).ToString(),
 
                               UrlName = a.UrlName
                           }).ToList();
 
             AdaptsSingleFilm = (from a in Db.Adaptations
-                                where a.Medium.Name == "Film"
+                                where a.Medium == (int)Medium.Film
                          && a.Seasons.Any()
                          && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
                                 select new AdaptListAdapt
@@ -81,7 +82,7 @@ namespace HolmesMVC.Models.ViewModels
                                           ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                           ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                           : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                          : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                          : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                          ).Replace("\"", string.Empty),
 
                                     Translation = string.IsNullOrEmpty(a.Translation)
@@ -115,13 +116,13 @@ namespace HolmesMVC.Models.ViewModels
                                     .SelectMany(s => s.Episodes)
                                     .Count(),
 
-                                    Medium = a.Medium.Name,
+                                    Medium = ((Medium)a.Medium).ToString(),
 
                                     UrlName = a.UrlName
                                 }).ToList();
 
             AdaptsTV = (from a in Db.Adaptations
-                        where a.Medium.Name == "Television"
+                        where a.Medium == (int)Medium.Television
                          && a.Seasons.Any()
                          && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
                         select new AdaptListAdapt
@@ -136,7 +137,7 @@ namespace HolmesMVC.Models.ViewModels
                                   ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                   ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                   : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                  : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                  : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                  ).Replace("\"", string.Empty),
 
                             Translation = string.IsNullOrEmpty(a.Translation)
@@ -170,13 +171,13 @@ namespace HolmesMVC.Models.ViewModels
                             .SelectMany(s => s.Episodes)
                             .Count(),
 
-                            Medium = a.Medium.Name,
+                            Medium = ((Medium)a.Medium).ToString(),
 
                             UrlName = a.UrlName
                         }).ToList();
 
             AdaptsSingleRadio = (from a in Db.Adaptations
-                                 where a.Medium.Name == "Radio"
+                                 where a.Medium == (int)Medium.Radio
                           && a.Seasons.Any()
                           && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
                                  select new AdaptListAdapt
@@ -191,7 +192,7 @@ namespace HolmesMVC.Models.ViewModels
                                           ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                           ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                           : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                          : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                          : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                          ).Replace("\"", string.Empty),
 
                                      Translation = string.IsNullOrEmpty(a.Translation)
@@ -225,13 +226,13 @@ namespace HolmesMVC.Models.ViewModels
                                     .SelectMany(s => s.Episodes)
                                     .Count(),
 
-                                     Medium = a.Medium.Name,
+                                     Medium = ((Medium)a.Medium).ToString(),
 
                                      UrlName = a.UrlName
                                  }).ToList();
 
             AdaptsRadio = (from a in Db.Adaptations
-                           where a.Medium.Name == "Radio"
+                           where a.Medium == (int)Medium.Radio
                        && a.Seasons.Any()
                        && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
                            select new AdaptListAdapt
@@ -246,7 +247,7 @@ namespace HolmesMVC.Models.ViewModels
                                        ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                        ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                        : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                       : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                       : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                       ).Replace("\"", string.Empty),
 
                                Translation = string.IsNullOrEmpty(a.Translation)
@@ -280,13 +281,13 @@ namespace HolmesMVC.Models.ViewModels
                                  .SelectMany(s => s.Episodes)
                                  .Count(),
 
-                               Medium = a.Medium.Name,
+                               Medium = ((Medium)a.Medium).ToString(),
 
                                UrlName = a.UrlName
                            }).ToList();
 
             AdaptsOther = (from a in Db.Adaptations
-                           where a.Medium.Name != "Television" && a.Medium.Name != "Radio" && a.Medium.Name != "Film" && a.Medium.Name != "Stage" // to_do_theatre
+                           where a.Medium != (int)Medium.Television && a.Medium != (int)Medium.Radio && a.Medium != (int)Medium.Film && a.Medium != (int)Medium.Stage // to_do_theatre
                           && a.Seasons.Any()
                           && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
                            select new AdaptListAdapt
@@ -301,7 +302,7 @@ namespace HolmesMVC.Models.ViewModels
                                     ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                     ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                     : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                    : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                    : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                    ).Replace("\"", string.Empty),
 
                                Translation = string.IsNullOrEmpty(a.Translation)
@@ -335,7 +336,7 @@ namespace HolmesMVC.Models.ViewModels
                               .SelectMany(s => s.Episodes)
                               .Count(),
 
-                               Medium = a.Medium.Name,
+                               Medium = ((Medium)a.Medium).ToString(),
 
                                UrlName = a.UrlName
                            }).ToList();

@@ -1,4 +1,4 @@
-﻿@using HolmesMVC
+﻿@using HolmesMVC.Enums
 @model HolmesMVC.Models.Adaptation
 
 @{
@@ -12,13 +12,14 @@
     <legend>Adaptation</legend>
 
     <div class="display-field">
-        @Html.DisplayFor(model => model.Name), @Html.DisplayFor(model => model.Medium.Name), @Html.DisplayFor(model => model.Company)
+        @Html.DisplayFor(model => model.Name), @Html.DisplayFor(model => ((Medium)model.Medium).ToString()), @Html.DisplayFor(model => model.Company)
     </div>
     <div>
-        also known as '@Shared.DisplayName(Model)'
+        also known as '@HolmesMVC.Shared.DisplayName(Model)'
     </div>
 </fieldset>
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Delete" />

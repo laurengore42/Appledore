@@ -6,7 +6,7 @@
     ViewBag.Title = Model.DisplayName;
 }
 <link rel="canonical" href="https://appledore.azurewebsites.net/episode/@Model.EpId" />
-@if (Model.MediumName == "Television")
+@if (Model.Medium == (int)Medium.Television)
 {
     <script type="application/ld+json">
         {
@@ -36,7 +36,7 @@
         }
     </script>
 }
-@if (Model.MediumName == "Film")
+@if (Model.Medium == (int)Medium.Film)
 {
     <script type="application/ld+json">
         {
@@ -85,7 +85,7 @@
         @if (!Model.Story.IsNullOrWhiteSpace())
         { <text><li>Canon basis: @Html.ActionLink(Model.Story, "Details", "Story", new { id = Model.StoryCode }, null)</li></text> }
         
-        @if (Model.MediumName == "Television" || Model.MediumName == "Film")
+        @if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
         {
             var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy"); 
     <text>        <li>IMDb: <a target="_blank" href = '@IMDbUrl'>@Model.DisplayName</a> <i>(link not verified)</i></li></text>}

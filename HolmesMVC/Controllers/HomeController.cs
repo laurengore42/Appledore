@@ -11,6 +11,7 @@
     using System.Web.Mvc;
     using System.Xml.Linq;
     using HolmesMVC.ActionResults;
+    using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -125,11 +126,11 @@
                     .Count();
 
             ViewBag.fadaCount =
-                Db.Episodes.Count(e => e.Season.Adaptation.Medium.Name == "Film");
+                Db.Episodes.Count(e => e.Season.Adaptation.Medium == (int)Medium.Film);
             ViewBag.tadaCount =
-                Db.Adaptations.Count(a => a.Medium.Name == "Television");
+                Db.Adaptations.Count(a => a.Medium == (int)Medium.Television);
             ViewBag.radaCount =
-                Db.Adaptations.Count(a => a.Medium.Name == "Radio");
+                Db.Adaptations.Count(a => a.Medium == (int)Medium.Radio);
 
             ViewBag.chaCount = Db.Characters.Count();
             ViewBag.canCount = Db.Stories.Count();
@@ -308,8 +309,8 @@
                                                     && ap2.Episode.Season.Adaptation.Name == "Canon"
                                                     select ap2.ID).Any()
                                                && !ap.Actor.Surname.Contains("the dog")
-                                               && (ap.Episode.Season.Adaptation.Medium.Name == "Television"
-                                                   || ap.Episode.Season.Adaptation.Medium.Name == "Film")
+                                               && (ap.Episode.Season.Adaptation.Medium == (int)Medium.Television
+                                                   || ap.Episode.Season.Adaptation.Medium == (int)Medium.Film)
                                            select ap).Any()
                                        select a).ToList();
 
@@ -325,7 +326,7 @@
                                            where
                                                ap.CharacterID == holmesId
                                                && ap.Episode.Season.Adaptation
-                                                      .Medium.Name != "Stage" // to_do_theatre
+                                                      .Medium != (int)Medium.Stage // to_do_theatre
                                            select ap).Any()
                                     select a).ToList();
 
@@ -338,7 +339,7 @@
 
             var unlockedFilms = (from e in Db.Episodes
                                  where 
-                                 e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
+                                 e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
                                  && e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1
                                  && !(from a in e.Appearances
                                       where a.ActorID == 0 && a.CharacterID == 0
@@ -354,7 +355,7 @@
             {
                 var unlockedEpisodes = (from e in Db.Episodes
                                        where
-                                           e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
+                                           e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
                                            && !(from a in e.Appearances
                                                 where a.ActorID == 0 && a.CharacterID == 0
                                                 select a.ID).Any()

@@ -32,7 +32,7 @@
                               ).ToList();
             var epList = (from e in db.Episodes
                           where 
-                          e.Season.Adaptation.Medium.Name != "Stage"
+                          e.Season.Adaptation.Medium != (int)Medium.Stage
                           && e.Season.Adaptation.Name != "Canon"
                           && e.Airdate.Month == thisMonth
                           && e.Airdate.Day == thisDay
@@ -50,7 +50,7 @@
 
             var canonApps = from ap in db.Appearances
                             where canonChars.Contains(ap.CharacterID)
-                            && ap.Episode.Season.Adaptation.Medium.Name != "Stage"
+                            && ap.Episode.Season.Adaptation.Medium != (int)Medium.Stage
                             group ap by ap.ActorID into grp
                             select grp;
             

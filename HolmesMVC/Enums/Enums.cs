@@ -1,5 +1,15 @@
 ﻿namespace HolmesMVC.Enums
 {
+    public enum Medium
+    {
+        Television = 1,
+        Radio = 2,
+        Literature = 3,
+        Film = 4,
+        Stage = 5,
+        Audiobook = 6
+    }
+
     public enum CanonOrder
     {
         Published = 0,

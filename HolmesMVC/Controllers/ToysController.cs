@@ -7,6 +7,7 @@
     using System.Web.Mvc;
 
     using HolmesMVC.BaconXml;
+    using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -339,8 +340,8 @@
             var adaptList = (from ad in Db.Adaptations
                              where ad.Seasons.Any()
                              && ad.Seasons.FirstOrDefault().Episodes.Any()
-                             && ad.Medium.Name != "Literature"
-                             && ad.Medium.Name != "Stage" //to_do_theatre
+                             && ad.Medium != (int)Medium.Literature
+                             && ad.Medium != (int)Medium.Stage //to_do_theatre
                              orderby ad.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Airdate
                              select ad).ToList();
 

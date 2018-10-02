@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+    using HolmesMVC.Enums;
 
     public enum SearchItemType
     {
@@ -200,7 +201,7 @@
                                            ? string.IsNullOrEmpty(r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                            ? r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                            : r.Adaptation.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                           : (r.Adaptation.Company + " " + (r.Adaptation.Medium.Name == "Television" ? "TV" : r.Adaptation.Medium.Name))
+                                           : (r.Adaptation.Company + " " + (r.Adaptation.Medium == (int)Medium.Television ? "TV" : ((Medium)r.Adaptation.Medium).ToString()))
                                           ).Replace("\"", string.Empty),
 
                                   Character = r.Character.UrlName,
@@ -214,14 +215,14 @@
 
             var episodeQuery = from e in db.Episodes
                                where (e.Season.Adaptation.Name == null || e.Season.Adaptation.Name != "Canon") // these are 'Stories'
-                                    && e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
+                                    && e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
                                     && e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() > 1 // exclude single-film, put those in 'Adapts'
                                select new SearchEp
                                {
                                    ID = e.ID,
                                    Year = e.Airdate.Year,
                                    EpCount = e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count(),
-                                   Medium = e.Season.Adaptation.Medium.Name,
+                                   Medium = e.Season.Adaptation.Medium,
                                    Holmes = (from ap in e.Appearances
                                              where ap.CharacterID == holmesId
                                              select ap).Any()
@@ -247,7 +248,7 @@
 
             var adaptQuery = from a in db.Adaptations
                              where (a.Name == null || a.Name != "Canon")
-                            && a.Medium.Name != "Stage" // to_do_theatre
+                            && a.Medium != (int)Medium.Stage // to_do_theatre
                             && a.Seasons.Any()
                             && a.Seasons.FirstOrDefault().Episodes.Any()
                              select new SearchAdapt
@@ -255,7 +256,7 @@
                                  ID = a.ID,
                                  Year = a.Seasons.OrderBy(s => s.AirOrder).FirstOrDefault().Episodes.OrderBy(e => e.Airdate).FirstOrDefault().Airdate.Year,
                                  EpCount = a.Seasons.SelectMany(s => s.Episodes).Count(),
-                                 Medium = a.Medium.Name,
+                                 Medium = a.Medium,
 
                                  Holmes = (from ap in a.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
                                            where ap.CharacterID == holmesId
@@ -280,7 +281,7 @@
                                  ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
                                      ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
                                      : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                 : (a.Company + " " + (a.Medium.Name == "Television" ? "TV" : a.Medium.Name))
+                                 : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
                                  ).Replace("\"", string.Empty)
                              };
             var stringit3 = adaptQuery.ToString();
@@ -354,7 +355,7 @@
 
         public string Holmes { get; set; }
 
-        public string Medium { get; set; }
+        public int Medium { get; set; }
 
         public int EpCount { get; set; }
 
@@ -373,7 +374,7 @@
 
         public string Holmes { get; set; }
 
-        public string Medium { get; set; }
+        public int Medium { get; set; }
 
         public int EpCount { get; set; }
     }

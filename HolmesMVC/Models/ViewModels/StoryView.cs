@@ -54,7 +54,7 @@
                         where
                             (null == e.Season.Adaptation.Name
                              || e.Season.Adaptation.Name != "Canon")
-                            && e.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
+                            && e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
                         select e).OrderBy(e => e.Airdate).ToList();
 
             GetChunk(chunkStart, chunkLength);

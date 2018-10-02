@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using HolmesMVC.Enums;
 
     public class CharView
     {
@@ -16,8 +17,8 @@
             // All appearances of character, grouped by actor and adaptation
             var dataGet = from ap in character.Appearances
                           where
-                              ap.Episode.Season.Adaptation.Medium.Name
-                              != "Stage"
+                              ap.Episode.Season.Adaptation.Medium
+                              != (int)Medium.Stage
                           // to_do_theatre
                           orderby ap.Episode.Airdate ascending
                           select ap;
@@ -49,7 +50,7 @@
             // Choose a pic from the actors available
             Pics = (from ap in character.Appearances
                     where ap.ActorID > 0
-                    && ap.Episode.Season.Adaptation.Medium.Name != "Stage" // to_do_theatre
+                    && ap.Episode.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
                     && !String.IsNullOrEmpty(ap.Actor.PicShow)
                     group ap by new {ap.Actor.UrlName, ap.Actor.Forename, ap.Actor.Surname, ap.Actor.PicShow} into grp
                     select new CharPic

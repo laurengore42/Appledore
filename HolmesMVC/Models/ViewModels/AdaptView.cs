@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using HolmesMVC.Enums;
 
     public class AdaptView
     {
@@ -12,7 +13,8 @@
             ID = adapt.ID;
             DisplayName = Shared.DisplayName(adapt);
             Translation = adapt.Translation;
-            MediumName = adapt.Medium.Name;
+            Medium = adapt.Medium;
+            MediumName = ((Medium)adapt.Medium).ToString();
             UrlName = adapt.UrlName;
             Company = adapt.Company;
 
@@ -45,6 +47,8 @@
         public string DisplayName { get; set; }
 
         public string Translation { get; set; }
+
+        public int Medium { get; set; }
 
         public string MediumName { get; set; }
 

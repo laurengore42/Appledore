@@ -220,8 +220,8 @@
                 return a.Seasons.First().Episodes.First().Title;
             }
 
-            var medium = a.Medium.Name;
-            if (medium == "Television")
+            var medium = ((Medium)a.Medium).ToString();
+            if (a.Medium == (int)Medium.Television)
             {
                 medium = "TV"; // special case
             }

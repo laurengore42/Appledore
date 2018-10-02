@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using HolmesMVC.Enums;
 
     public class ActorHistorySummary
     {
@@ -17,7 +18,7 @@
             var rename = Shared.GetRename(sampleApp);
             CharacterName = null == rename ? Shared.LongName(sampleApp.Character) : Shared.LongName(rename);
             CharacterUrlName = sampleApp.Character.UrlName;
-            MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
+            MediumName = ((Medium)sampleApp.Episode.Season.Adaptation.Medium).ToString();
             AdaptName = sampleApp.Episode.Season.Adaptation.Name
                         ?? Shared.DisplayName(
                             sampleApp.Episode.Season.Adaptation);

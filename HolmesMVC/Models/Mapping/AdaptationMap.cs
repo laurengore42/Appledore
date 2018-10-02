@@ -23,19 +23,17 @@ namespace HolmesMVC.Models.Mapping
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute() { IsUnique = true }))
                 .HasMaxLength(150);
 
+            Property(t => t.Medium)
+                .IsRequired();
+
             // Table & Column Mappings
             ToTable("Adaptations");
             Property(t => t.ID).HasColumnName("ID");
             Property(t => t.Name).HasColumnName("Name");
             Property(t => t.Translation).HasColumnName("Translation");
-            Property(t => t.MediumID).HasColumnName("Medium");
+            Property(t => t.Medium).HasColumnName("Medium");
             Property(t => t.Company).HasColumnName("Company");
             Property(t => t.UrlName).HasColumnName("UrlName");
-
-            // Relationships
-            HasRequired(t => t.Medium)
-                .WithMany(t => t.Adaptations)
-                .HasForeignKey(d => d.MediumID);
 
         }
     }

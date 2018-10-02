@@ -102,7 +102,8 @@
             Translation = episode.Translation;
             Poster = episode.Poster;
             DisplayName = Shared.DisplayName(episode);
-            MediumName = episode.Season.Adaptation.Medium.Name;
+            Medium = episode.Season.Adaptation.Medium;
+            MediumName = ((Medium)episode.Season.Adaptation.Medium).ToString();
             StoryCode = episode.StoryID;
             Story = episode.Story != null ? episode.Story.Name : string.Empty;
             SeasonCode = Shared.GetSeasonCode(episode);
@@ -121,6 +122,8 @@
         }
 
         public string DisplayName { get; set; }
+
+        public int Medium { get; set; }
 
         public string MediumName { get; set; }
     }

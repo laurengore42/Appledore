@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using HolmesMVC.Enums;
 
     public class CharacterHistorySummary
     {
@@ -24,7 +25,7 @@
             var sampleApp = groupedApps.First();
             ActorName = Shared.ShortName(sampleApp.Actor);
             ActorUrlName = sampleApp.Actor.UrlName;
-            MediumName = sampleApp.Episode.Season.Adaptation.Medium.Name;
+            MediumName = ((Medium)sampleApp.Episode.Season.Adaptation.Medium).ToString();
             AdaptName = Shared.DisplayName(sampleApp.Episode.Season.Adaptation);
             AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
             AdaptUrlName = sampleApp.Episode.Season.Adaptation.UrlName;

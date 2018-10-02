@@ -1,10 +1,11 @@
 ﻿namespace HolmesMVC.Controllers
 {
+    using System;
     using System.Data;
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
-
+    using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -31,8 +32,8 @@
             }
 
             var viewmodel = new AdaptView(adaptation);
-            
-            if (viewmodel.MediumName != "Radio")
+
+            if (viewmodel.Medium != (int)Medium.Radio)
             {
                 return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
             }
@@ -57,7 +58,7 @@
             {
                 return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
             }
-            if (viewmodel.MediumName == "Radio")
+            if (viewmodel.Medium == (int)Medium.Radio)
             {
                 return RedirectToAction("RadioDetails", "Adaptation", new { viewmodel.UrlName });
             }
@@ -82,7 +83,7 @@
             {
                 return RedirectToAction("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
             }
-            if (viewmodel.MediumName != "Television")
+            if (viewmodel.Medium != (int)Medium.Television)
             {
                 return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
             }
@@ -121,7 +122,7 @@
             }
 
             var viewmodel = new AdaptView(adaptation);
-            if (viewmodel.MediumName == "Radio")
+            if (viewmodel.Medium == (int)Medium.Radio)
             {
                 return RedirectToActionPermanent("RadioDetails", "Adaptation", new { viewmodel.UrlName });
             }
@@ -129,7 +130,7 @@
             {
                 return RedirectToActionPermanent("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
             }
-            if (viewmodel.MediumName == "Television")
+            if (viewmodel.Medium == (int)Medium.Television)
             {
                 return RedirectToActionPermanent("TVDetails", "Adaptation", new { viewmodel.UrlName });
             }
@@ -141,7 +142,14 @@
 
         public ActionResult Create()
         {
-            ViewBag.MediumID = new SelectList(Db.Media, "ID", "Name");
+            ViewBag.Medium = new SelectList(
+                Enum.GetNames(typeof(Medium))
+                    .Select(m => new
+                    {
+                        ID = (int)Enum.Parse(typeof(Medium), m),
+                        Name = m
+                    })
+                , "ID", "Name", string.Empty);
             return View();
         }
 
@@ -160,7 +168,14 @@
                 return RedirectToAction("Details", "Adaptation", new { adaptation.UrlName });
             }
 
-            ViewBag.Medium = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);
+            ViewBag.Medium = new SelectList(
+                Enum.GetNames(typeof(Medium))
+                    .Select(m => new
+                    {
+                        ID = (int)Enum.Parse(typeof(Medium), m),
+                        Name = m
+                    })
+                , "ID", "Name", adaptation.Medium);
             return View(adaptation);
         }
 
@@ -174,7 +189,14 @@
             {
                 return HttpNotFound();
             }
-            ViewBag.MediumID = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);
+            ViewBag.Medium = new SelectList(
+                Enum.GetNames(typeof(Medium))
+                    .Select(m => new
+                    {
+                        ID = (int)Enum.Parse(typeof(Medium), m),
+                        Name = m
+                    })
+                , "ID", "Name", adaptation.Medium);
             return View(adaptation);
         }
 
@@ -192,7 +214,14 @@
 
                 return RedirectToAction("Details", new { adaptation.ID });
             }
-            ViewBag.MediumID = new SelectList(Db.Media, "ID", "Name", adaptation.MediumID);
+            ViewBag.Medium = new SelectList(                
+                Enum.GetNames(typeof(Medium))
+                    .Select(m => new
+                    {
+                        ID = (int)Enum.Parse(typeof(Medium), m),
+                        Name = m
+                    })                
+                , "ID", "Name", adaptation.Medium);
             return View(adaptation);
         }
 

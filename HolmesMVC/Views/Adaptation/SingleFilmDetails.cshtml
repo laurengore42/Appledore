@@ -1,4 +1,5 @@
 ﻿@using HolmesMVC
+@using HolmesMVC.Enums
 @using HolmesMVC.Models.ViewModels
 @model AdaptView
 
@@ -6,7 +7,7 @@
     ViewBag.Title = Model.DisplayName;
     ViewBag.Episode = Model.Episodes.First();
 }
-@if (Model.MediumName == "Film" || Model.MediumName == "Television")
+@if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
 {
     <link rel="canonical" href="https://appledore.azurewebsites.net/film/@Model.UrlName" />
     <script type="application/ld+json">
@@ -28,7 +29,7 @@
         }
     </script>
 }
-else if (Model.MediumName == "Radio")
+else if (Model.Medium == (int)Medium.Radio)
 {
     <link rel="canonical" href="https://appledore.azurewebsites.net/radio/@Model.UrlName" />
 }
@@ -53,19 +54,19 @@ else if (Model.MediumName == "Radio")
     <h2 class="detailsheader">@ViewBag.Title</h2>
     <p>
         This
-        @switch (Model.MediumName)
+        @switch (Model.Medium)
         {
-            case "Stage":
+            case (int)Medium.Stage:
                 <text>Play was premiered</text>
                 break;
-            case "Radio":
+            case (int)Medium.Radio:
                 <text>Radio Play was aired</text>
                 break;
-            case "Television":
+            case (int)Medium.Television:
                 <text>TV Film was aired</text>
                 break;
             default:
-                <text>@Model.MediumName was released</text>
+                <text>Film was released</text>
                 break;
         }
         on @ViewBag.Episode.Airdate.ToString("dd MMMM yyyy"), by
@@ -77,7 +78,7 @@ else if (Model.MediumName == "Radio")
         {
             <text>@Model.Company.</text>
         }
-        @if (Model.MediumName == "Television" || Model.MediumName == "Film")
+        @if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
         {
             var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
             <text><br />
@@ -98,9 +99,9 @@ else if (Model.MediumName == "Radio")
     {
         <p>
             @Html.ActionLink("Add episode", "Create", "Episode", new { Model.ID }, null) |
-        @Html.ActionLink("Edit episode", "Edit", "Episode", new { ViewBag.Episode.ID }, null)
-    </p>
-}
+            @Html.ActionLink("Edit episode", "Edit", "Episode", new { ViewBag.Episode.ID }, null)
+        </p>
+    }
     @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
 
     <section id="timelineSection">
