@@ -5,55 +5,60 @@
 @{
     ViewBag.Title = Model.DisplayName;
 }
-<link rel="canonical" href="https://appledore.azurewebsites.net/adaptation/@Model.ID" />
 @if (Model.MediumName == "Television")
 {
-<script type="application/ld+json">
-    {
-    "@@context": "http://schema.org"
-    , "@@type": "TVSeries"
-    , "name": "@ViewBag.Title"
-    , "startDate": "@Model.DateOfFirstEpisode.ToLongDateString()"
-    , "numberOfEpisodes": @Model.Episodes.Count
-    @if (Model.HolmesActors.Any() || Model.WatsonActors.Any())
-    {
-        <text>, "actor": [</text>
-        if (Model.HolmesActors.Any())
+    <link rel="canonical" href="https://appledore.azurewebsites.net/tv/@Model.UrlName" />
+    <script type="application/ld+json">
         {
-            <text>{</text>
-            <text>"@@type": "Person" </text>
-            <text>,"name": "@Shared.ShortName(Model.HolmesActors.First())"</text>
-            <text>}</text>
-        }
-        if (Model.HolmesActors.Any() && Model.WatsonActors.Any())
+        "@@context": "http://schema.org"
+        , "@@type": "TVSeries"
+        , "name": "@ViewBag.Title"
+        , "startDate": "@Model.DateOfFirstEpisode.ToLongDateString()"
+        , "numberOfEpisodes": @Model.Episodes.Count
+        @if (Model.HolmesActors.Any() || Model.WatsonActors.Any())
         {
-            <text>,</text>
+            <text>, "actor": [</text>
+            if (Model.HolmesActors.Any())
+            {
+                <text>{</text>
+                <text>"@@type": "Person" </text>
+                <text>,"name": "@Shared.ShortName(Model.HolmesActors.First())"</text>
+                <text>}</text>
+            }
+            if (Model.HolmesActors.Any() && Model.WatsonActors.Any())
+            {
+                <text>,</text>
+            }
+            if (Model.WatsonActors.Any())
+            {
+                <text>{</text>
+                <text>"@@type": "Person" </text>
+                <text>,"name": "@Shared.ShortName(Model.WatsonActors.First())"</text>
+                <text>}</text>
+            }
+            <text>]</text>
         }
-        if (Model.WatsonActors.Any())
-        {
-            <text>{</text>
-            <text>"@@type": "Person" </text>
-            <text>,"name": "@Shared.ShortName(Model.WatsonActors.First())"</text>
-            <text>}</text>
         }
-        <text>]</text>
-    }
-    }
-</script>
+    </script>
+}
+else
+{
+    <link rel="canonical" href="https://appledore.azurewebsites.net/adaptation/@Model.UrlName" />
 }
 
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && !String.IsNullOrEmpty(Model.HolmesActors.First().PicShow))
     {
-        <a href="@Url.Action("Details", "Actor", new { Model.HolmesActors.First().UrlName })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150"/></a>
+        <a href="@Url.Action("Details", "Actor", new { Model.HolmesActors.First().UrlName })"><img style="border: none;" src="@Model.HolmesActors.First().PicShow" width="150" /></a>
     }
     else
     {
         <i>(no Holmes picture)</i>
     }
-    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().ID != Model.HolmesActors.First().ID) {
+    @if (Model.WatsonActors.Any() && Model.WatsonActors.First().ID != Model.HolmesActors.First().ID)
+    {
         if (!String.IsNullOrEmpty(Model.WatsonActors.First().PicShow))
-        {<a href="@Url.Action("Details", "Actor", new { Model.WatsonActors.First().UrlName })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150"/></a>}
+        {<a href="@Url.Action("Details", "Actor", new { Model.WatsonActors.First().UrlName })"><img style="border: none;" src="@Model.WatsonActors.First().PicShow" width="150" /></a>}
         else
         {
             <i>(no Watson picture)</i>
@@ -61,50 +66,52 @@
     }
 </section>
 <section class="leftfloatdetails">
-<h2 class="detailscategory">Adaptation</h2>
-<h2 class="detailsheader">@ViewBag.Title
-    @if (!string.IsNullOrEmpty(Model.Translation))
-    {
-        <span style="font-weight: normal; font-size: small;"><br /><i>@Model.Translation</i></span>
-    }
+    <h2 class="detailscategory">Adaptation</h2>
+    <h2 class="detailsheader">
+        @ViewBag.Title
+        @if (!string.IsNullOrEmpty(Model.Translation))
+        {
+            <span style="font-weight: normal; font-size: small;"><br /><i>@Model.Translation</i></span>
+        }
     </h2>
-<p>
-    This @Model.MediumName adaptation
-    @if (Model.Episodes.Any())
-    {
-        <text>began in @Model.DateOfFirstEpisode.Year, and </text>
-    }
-    was made by
-    @if (string.IsNullOrWhiteSpace(Model.Company))
-    {
-        <text>an unknown company.</text>
-    }
-    else
-    {
-        <text>@Model.Company.</text>
-    }
-@if (Model.DisplayName != "Canon" && (Model.MediumName == "Television" || Model.MediumName == "Film"))
-{
-    <text><br/>IMDb: <a target="_blank" href="@string.Format("https://www.imdb.com/find?q=" + Model.DisplayName + " " + Model.DateOfFirstEpisode.Year + "")">@Model.DisplayName</a> <i>(link not verified)</i></text>
-}
-</p>
-@if (Model.DisplayName != "Canon")
-{
     <p>
-        Sherlock Holmes @Html.Partial("_PlayedBy", Model.HolmesActors)<br />
-        Dr. Watson @Html.Partial("_PlayedBy", Model.WatsonActors)
+        This @Model.MediumName adaptation
+        @if (Model.Episodes.Any())
+        {
+            <text>began in @Model.DateOfFirstEpisode.Year, and </text>
+        }
+        was made by
+        @if (string.IsNullOrWhiteSpace(Model.Company))
+        {
+            <text>an unknown company.</text>
+        }
+        else
+        {
+            <text>@Model.Company.</text>
+        }
+        @if (Model.DisplayName != "Canon" && (Model.MediumName == "Television" || Model.MediumName == "Film"))
+        {
+            <text><br />IMDb: <a target="_blank" href="@string.Format("https://www.imdb.com/find?q=" + Model.DisplayName + " " + Model.DateOfFirstEpisode.Year + "")">@Model.DisplayName</a> <i>(link not verified)</i></text>
+        }
     </p>
-}
+    @if (Model.DisplayName != "Canon")
+    {
+        <p>
+            Sherlock Holmes @Html.Partial("_PlayedBy", Model.HolmesActors)<br />
+            Dr. Watson @Html.Partial("_PlayedBy", Model.WatsonActors)
+        </p>
+    }
 
-@if (Request.IsAuthenticated)
-{
-    <p>@Html.ActionLink("Add episode", "Create", "Episode", new { Model.ID }, null)
-        <br />
-        @Html.ActionLink("Mass-add appearances to episodes", "MassAdd", "Appearance", new { Model.ID }, null)
-    </p>
-}
-@Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
-    </section>
+    @if (Request.IsAuthenticated)
+    {
+        <p>
+            @Html.ActionLink("Add episode", "Create", "Episode", new { Model.ID }, null)
+            <br />
+            @Html.ActionLink("Mass-add appearances to episodes", "MassAdd", "Appearance", new { Model.ID }, null)
+        </p>
+    }
+    @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
+</section>
 @if (Model.Episodes.Any())
 {
     string spottyValues = "[";
@@ -132,12 +139,15 @@
                 {
                     seasontext = e.Season.Name;
                 }
-        <text><tr>
-            <td colspan="2" class="adaptseason">
-                <h3>@seasontext @if (!string.IsNullOrEmpty(e.Season.Translation))
-                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season.Translation</i></span> }</h3>
-            </td>
-        </tr></text>
+                <text>
+                    <tr>
+                        <td colspan="2" class="adaptseason">
+                            <h3>
+                                @seasontext @if (!string.IsNullOrEmpty(e.Season.Translation))
+                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season.Translation</i></span>}
+                            </h3>
+                        </td>
+                    </tr></text>
             }
             if (i == 0 && !Model.SingleSeason)
             {
@@ -146,32 +156,37 @@
                 {
                     seasontext = e.Season.Name;
                 }
-        <text><tr>
-            <td colspan="2" class="adaptseason">
-                <h3>@seasontext @if (!string.IsNullOrEmpty(e.Season.Translation))
-                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season.Translation</i></span> }</h3>
-            </td>
-        </tr></text>
+                <text>
+                    <tr>
+                        <td colspan="2" class="adaptseason">
+                            <h3>
+                                @seasontext @if (!string.IsNullOrEmpty(e.Season.Translation))
+                                {<span style="font-weight: normal; font-size: small;"><br /><i>@e.Season.Translation</i></span>}
+                            </h3>
+                        </td>
+                    </tr></text>
             }
-        <text>
-        <tr>
-            @{ string airdateFormat = "dd MMM yyyy"; }
-            @if (e.AirdatePrecision == (int)DatePrecision.Month)
-            {
-                airdateFormat = "MMMM yyyy";
-            }
-            else if (e.AirdatePrecision == (int)DatePrecision.Year)
-            {
-                airdateFormat = "yyyy";
-            }
-            <td>@e.Airdate.ToString(airdateFormat)</td>
-            @{var name = Shared.DisplayName(e);}
-            <td>@Html.ActionLink(name, "Details", "Episode", new { e.ID }, null) @if (!string.IsNullOrEmpty(e.Translation))
-                                                                                 { <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span> }</td>
-        </tr>
-        </text>
-                                                                                 lastEpisode = e;
-                                                                                 i++;
+            <text>
+                <tr>
+                    @{ string airdateFormat = "dd MMM yyyy"; }
+                    @if (e.AirdatePrecision == (int)DatePrecision.Month)
+                    {
+                        airdateFormat = "MMMM yyyy";
+                    }
+                    else if (e.AirdatePrecision == (int)DatePrecision.Year)
+                    {
+                        airdateFormat = "yyyy";
+                    }
+                    <td>@e.Airdate.ToString(airdateFormat)</td>
+                    @{var name = Shared.DisplayName(e);}
+                    <td>
+                        @Html.ActionLink(name, "Details", "Episode", new { e.ID }, null) @if (!string.IsNullOrEmpty(e.Translation))
+                        {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>}
+                    </td>
+                </tr>
+            </text>
+            lastEpisode = e;
+            i++;
         }
     }
 </table>
