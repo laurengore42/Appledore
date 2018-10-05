@@ -42,10 +42,10 @@
     <ul id="accordion">
         @foreach (var historysummary in Model.AllSummaries)
         {
-            <li class="bar">@historysummary.FirstYear ▷ @Html.Partial("HistorySummary", historysummary)
+            <li class="li-bar">@historysummary.FirstYear ▷ @Html.Partial("HistorySummary", historysummary)
             </li>
 
-            <li class="table">
+            <li class="li-table">
                 <table class="lineddetails">
                     @foreach (var h in historysummary.Histories)
                     {

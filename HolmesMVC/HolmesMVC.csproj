@@ -193,6 +193,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BaconXml.cs" />
+    <Content Include="Content\bulma.css" />
+    <Content Include="Content\bulma.min.css" />
     <Content Include="Content\EpisodePosters\placeholder.txt" />
     <Content Include="Content\ActorPhotos\placeholder.txt" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -405,7 +407,6 @@
     <Compile Include="Stopwatch.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Accordion.css" />
     <Content Include="Content\CanoPics\danc-1.png" />
     <Content Include="Content\CanoPics\danc-2.png" />
     <Content Include="Content\CanoPics\danc-3.png" />
@@ -1127,11 +1128,6 @@
     <Content Include="Content\Illustrations\yell-07.jpg" />
     <Content Include="Content\Illustrations\yell-11.gif" />
     <Content Include="Content\Illustrations\yell-12.gif" />
-    <Content Include="Content\Login.css" />
-    <Content Include="Content\Scraps.css" />
-    <Content Include="Content\Standard.css" />
-    <Content Include="Content\Menu.css" />
-    <Content Include="Content\SearchPartial.css" />
     <Content Include="google0df7ec4a1dcd4db8.html" />
     <Content Include="Scripts\Apdore-googlemaps.js" />
     <Content Include="Scripts\Apdore-StoryDetails.js" />

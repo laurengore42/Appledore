@@ -1,6 +1,6 @@
 ﻿$(document).ready(function() {
 
-    $("#accordion > li.bar").click(function() {
+    $("#accordion > li.li-bar").click(function() {
         var oldHtml = $(this).html();
         var newHtml = oldHtml.replace("▷", "|`|");
         newHtml = newHtml.replace("◢", "▷");
