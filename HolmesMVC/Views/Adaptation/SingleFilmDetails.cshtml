@@ -104,7 +104,7 @@ else if (Model.Medium == (int)Medium.Radio)
     }
     @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.ID })
 
-    <section id="timelineSection">
+    <section id="timelineSection" class="is-hidden-mobile">
         <div class="clear-fix"></div>
         <canvas class="timelineCanvas" data-startyear="@ViewBag.Episode.Airdate.Year" data-startmonth="@ViewBag.Episode.Airdate.Month" data-endyear="@ViewBag.Episode.Airdate.Year" data-endmonth="@ViewBag.Episode.Airdate.Month" data-spottyvalues="[@ViewBag.Episode.Airdate.Year, @ViewBag.Episode.Airdate.Month]" data-isspotty="false">Turn on &lt;canvas&gt;.</canvas>
     </section>
