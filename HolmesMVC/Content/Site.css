@@ -5,6 +5,14 @@
 @import url('Scraps.css');
 @import url('SearchPartial.css');
 
+
+@media screen and (max-width:768px) { /* thank you bulma.io */
+    .is-hidden-mobile {
+        display: none !important
+    }
+}
+
+
 html {
     background-color: #C9EFD2; /* header and space below footer */
     margin: 0;

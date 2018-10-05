@@ -126,7 +126,7 @@ else
     spottyValues = spottyValues.Substring(0, spottyValues.Length - 2);
     spottyValues += "]";
     <div class="clear-fix"></div>
-    <div id="timelinecontainer">
+    <div id="timelinecontainer" class="is-hidden-mobile">
         <canvas class="timelineCanvas" data-startyear="@Model.Episodes.First().Airdate.Year" data-startmonth="@Model.Episodes.First().Airdate.Month" data-endyear="@Model.Episodes.Last().Airdate.Year" data-endmonth="@Model.Episodes.Last().Airdate.Month" data-spottyvalues="@spottyValues">Turn on &lt;canvas&gt;.</canvas>
     </div>
 }

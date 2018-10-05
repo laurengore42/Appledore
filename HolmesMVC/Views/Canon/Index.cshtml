@@ -32,7 +32,7 @@
 }
 @Html.Action("DatabaseLinks", "Home", new { table = "Adaptation", id = Model.Adaptation.ID })
 
-<div id="timelinecontainer">
+<div id="timelinecontainer" class="is-hidden-mobile">
 Choose a date system:<br />
 <input type="button" value="Baring-Gould" onclick="changeTheDates(@Baring);" /><br />
     <canvas class="timelineCanvas" data-startyear="@Model.StartYear.ElementAt(Baring)" data-startmonth="@Model.StartMonth.ElementAt(Baring)" data-endyear="@Model.EndYear.ElementAt(Publish)" data-endmonth="@Model.EndMonth.ElementAt(Publish)" data-spottyvalues="@Model.EpisodeDateString.ElementAt(Baring)">Turn on &lt;canvas&gt;.</canvas><br />
