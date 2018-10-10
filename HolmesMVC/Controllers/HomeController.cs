@@ -119,7 +119,7 @@
                 {
                     root.Add(
                         new XElement(ns + "url",
-                        new XElement(ns + "loc", new XText(Url.Action("Search", "Canon", null, "https")))
+                        new XElement(ns + "loc", new XText(Url.Action("Index", "Canon", null, "https")))
                         )
                     );
                     foreach (var s in a.Seasons)
