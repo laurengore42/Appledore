@@ -222,7 +222,11 @@
                                    ID = e.ID,
                                    Year = e.Airdate.Year,
                                    EpCount = e.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count(),
+                                   AirOrder = e.AirOrder,
+                                   SeasonAirOrder = e.Season.AirOrder,
                                    Medium = e.Season.Adaptation.Medium,
+                                   MediumUrlName = e.Season.Adaptation.MediumUrlName,
+                                   AdaptationUrlName = e.Season.Adaptation.UrlName,
                                    Holmes = (from ap in e.Appearances
                                              where ap.CharacterID == holmesId
                                              select ap).Any()
@@ -375,6 +379,14 @@
         public string Holmes { get; set; }
 
         public int Medium { get; set; }
+
+        public string AdaptationUrlName { get; set; }
+
+        public string MediumUrlName { get; set; }
+
+        public int AirOrder { get; set; }
+
+        public int SeasonAirOrder { get; set; }
 
         public int EpCount { get; set; }
     }

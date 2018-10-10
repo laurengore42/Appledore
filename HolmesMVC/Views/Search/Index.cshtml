@@ -173,20 +173,20 @@
         <ul>
             @foreach (var e in episodesTV)
             {
-                <li>
-                    @if (e.Holmes.Length > 0)
-                    {
-                        <text>@e.Year @e.Holmes: '@Html.ActionLink(e.Name, "Details", "Episode", new { id = e.ID }, null)'</text>
-                    }
-                    else
-                    {
-                        <text>@e.Year: '@Html.ActionLink(e.Name, "Details", "Episode", new { id = e.ID }, null)'</text>
-                    }
-                    @if (!string.IsNullOrEmpty(e.Translation))
-                    {
-                        <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
-                    }
-                </li>
+            <li>
+                @if (e.Holmes.Length > 0)
+                {
+                    <text>@e.Year @e.Holmes: '@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.MediumUrlName, adaptName = e.AdaptationUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder })'</text>
+                }
+                else
+                {
+                    <text>@e.Year: '@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.MediumUrlName, adaptName = e.AdaptationUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder })'</text>
+                }
+                @if (!string.IsNullOrEmpty(e.Translation))
+                {
+                    <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
+                }
+            </li>
             }
         </ul>
     }
@@ -245,20 +245,20 @@
         <ul>
             @foreach (var e in episodesRadio)
             {
-                <li>
-                    @if (e.Holmes.Length > 0)
-                    {
-                        <text>@e.Year @e.Holmes: '@Html.ActionLink(e.Name, "Details", "Episode", new { id = e.ID }, null)'</text>
-                    }
-                    else
-                    {
-                        <text>@e.Year: '@Html.ActionLink(e.Name, "Details", "Episode", new { id = e.ID }, null)'</text>
-                    }
-                    @if (!string.IsNullOrEmpty(e.Translation))
-                    {
-                        <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
-                    }
-                </li>
+            <li>
+                @if (e.Holmes.Length > 0)
+                {
+                    <text>@e.Year @e.Holmes: '@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.MediumUrlName, adaptName = e.AdaptationUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder })'</text>
+                }
+                else
+                {
+                    <text>@e.Year: '@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.MediumUrlName, adaptName = e.AdaptationUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder })'</text>
+                }
+                @if (!string.IsNullOrEmpty(e.Translation))
+                {
+                    <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
+                }
+            </li>
             }
         </ul>
     }
@@ -293,20 +293,20 @@
         <ul>
             @foreach (var e in episodesOther)
             {
-                <li>
-                    @if (e.Holmes.Length > 0)
-                    {
-                        <text>@e.Year @e.Holmes: '@Html.ActionLink(e.Name, "Details", "Episode", new { id = e.ID }, null)' (@e.Medium)</text>
-                    }
-                    else
-                    {
-                        <text>@e.Year: '@Html.ActionLink(e.Name, "Details", "Episode", new { id = e.ID }, null)' (@e.Medium)</text>
-                    }
-                    @if (!string.IsNullOrEmpty(e.Translation))
-                    {
-                        <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
-                    }
-                </li>
+            <li>
+                @if (e.Holmes.Length > 0)
+                {
+                    <text>@e.Year @e.Holmes: '@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.MediumUrlName, adaptName = e.AdaptationUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder })' (@e.Medium)</text>
+                }
+                else
+                {
+                    <text>@e.Year: '@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.MediumUrlName, adaptName = e.AdaptationUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder })' (@e.Medium)</text>
+                }
+                @if (!string.IsNullOrEmpty(e.Translation))
+                {
+                    <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>
+                }
+            </li>
             }
         </ul>
     }

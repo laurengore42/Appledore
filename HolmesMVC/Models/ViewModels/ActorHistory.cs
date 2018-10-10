@@ -13,6 +13,10 @@
             var rename = Shared.GetRename(ap);
             CharacterName = null == rename ? Shared.LongName(ap.Character) : Shared.LongName(rename);
             EpId = ap.EpisodeID;
+            AdaptUrlName = ap.Episode.Season.Adaptation.UrlName;
+            AdaptMediumUrlName = ap.Episode.Season.Adaptation.MediumUrlName;
+            AirOrder = ap.Episode.AirOrder;
+            SeasonAirOrder = ap.Episode.Season.AirOrder;
             AdaptName = ap.Episode.Season.Adaptation.Name
                         ?? Shared.DisplayName(ap.Episode.Season.Adaptation);
             EpName = Shared.DisplayName(ap.Episode);
@@ -24,6 +28,14 @@
         public DateTime Airdate { get; set; }
 
         public DatePrecision AirdatePrecision { get; set; }
+
+        public string AdaptUrlName { get; set; }
+
+        public string AdaptMediumUrlName { get; set; }
+
+        public int AirOrder { get; set; }
+
+        public int SeasonAirOrder { get; set; }
 
         public string AdaptName { get; set; }
 

@@ -92,9 +92,9 @@
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to Episode", "Details", "Episode", new { ID = Model.EpId }, null)
-</div>
+    <div>
+        @Html.RouteLink("Back to Episode", "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.SeasonAirOrder, episodeNumber = Model.AirOrder })
+    </div>
 
 @section Scripts {
     

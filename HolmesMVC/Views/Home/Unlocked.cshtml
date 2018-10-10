@@ -15,20 +15,20 @@
     }
     @if (null != unlockedHolmes)
     {
-        <text>Why not go fill in this Holmes's details (@ViewBag.unlockedHolmesCount left):<br/>
-            @Html.ActionLink(Shared.ShortName(unlockedHolmes), "Details", "Actor", new { unlockedHolmes.UrlName }, null)<br/></text>
+        <text>Why not go fill in this Holmes's details (@ViewBag.unlockedHolmesCount left):<br />
+        @Html.ActionLink(Shared.ShortName(unlockedHolmes), "Details", "Actor", new { unlockedHolmes.UrlName }, null)<br /></text>
     }
-    Why not go fill in this canon actor's details (@ViewBag.unlockedActorCount left):<br/>
-    @Html.ActionLink(Shared.ShortName(unlockedActor), "Details", "Actor", new { unlockedActor.UrlName },null)
-    <br/>
+    Why not go fill in this canon actor's details (@ViewBag.unlockedActorCount left):<br />
+    @Html.ActionLink(Shared.ShortName(unlockedActor), "Details", "Actor", new { unlockedActor.UrlName }, null)
+    <br />
     @if (null != unlockedFilm)
     {
-        <text>Or this film's cast list (@ViewBag.unlockedFilmCount left):<br/>
-            @Html.ActionLink(Shared.DisplayName(unlockedFilm), "Details", "Episode", new { id = unlockedFilm.ID }, null)<br/></text>
+        <text>Or this film's cast list (@ViewBag.unlockedFilmCount left):<br />
+        @Html.RouteLink(Shared.DisplayName(unlockedFilm), "EpDetails", new { adaptWord = unlockedFilm.Season.Adaptation.MediumUrlName, adaptName = unlockedFilm.Season.Adaptation.UrlName, seasonNumber = unlockedFilm.Season.AirOrder, episodeNumber = unlockedFilm.AirOrder })<br /></text>
     }
     else
     {
-        <text>Or this episode's cast list (@ViewBag.unlockedEpisodeCount left):<br/>
-            @Html.ActionLink(Shared.DisplayName(unlockedEpisode), "Details", "Episode", new { id = unlockedEpisode.ID }, null)<br/></text>
+        <text>Or this episode's cast list (@ViewBag.unlockedEpisodeCount left):<br />
+        @Html.RouteLink(Shared.DisplayName(unlockedEpisode), "EpDetails", new { adaptWord = unlockedEpisode.Season.Adaptation.MediumUrlName, adaptName = unlockedEpisode.Season.Adaptation.UrlName, seasonNumber = unlockedEpisode.Season.AirOrder, episodeNumber = unlockedEpisode.AirOrder })<br /></text>
     }
 </div>

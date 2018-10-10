@@ -52,9 +52,9 @@
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to Episode", "Details", "Episode", new { Model.Episode.ID }, null)
-</div>
+    <div>
+        @Html.RouteLink("Back to Episode", "EpDetails", new { adaptWord = Model.Episode.Season.Adaptation.MediumUrlName, adaptName = Model.Episode.Season.Adaptation.UrlName, seasonNumber = Model.Episode.Season.AirOrder, episodeNumber = Model.Episode.AirOrder })
+    </div>
 
 @section Scripts {
     <script src="@Url.Content("~/Scripts/HideSeek/jquery.hideseek.min.js")" type="text/javascript"></script>

@@ -94,7 +94,7 @@
                     {
                         root.Add(
                             new XElement(ns + "url",
-                            new XElement(ns + "loc", new XText(Url.Action("Details", "Episode", new { e.ID }, "https")))
+                            new XElement(ns + "loc", new XText(Url.Action("EpDetails", "Episode", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
                             )
                         );
                     }
@@ -211,7 +211,8 @@
 
             Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Episode", new { id = epId });
+            var episode = Db.Episodes.Find(epId);
+            return RedirectToAction("EpDetails", "Episode", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
 
         [HttpGet]

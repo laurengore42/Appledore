@@ -121,19 +121,25 @@
                 return HttpNotFound();
             }
 
+            var actionName = "Details";
+            switch (adaptation.MediumUrlName)
+            {
+                case "radio":
+                    actionName = "RadioDetails";
+                    break;
+                case "film":
+                    actionName = "SingleFilmDetails";
+                    break;
+                case "tv":
+                    actionName = "TVDetails";
+                    break;
+            }
+            if (actionName != "Details")
+            {
+                return RedirectToActionPermanent(actionName, "Adaptation", new { urlName });
+            }
+            
             var viewmodel = new AdaptView(adaptation);
-            if (viewmodel.Medium == (int)Medium.Radio)
-            {
-                return RedirectToActionPermanent("RadioDetails", "Adaptation", new { viewmodel.UrlName });
-            }
-            if (viewmodel.SingleFilm)
-            {
-                return RedirectToActionPermanent("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
-            }
-            if (viewmodel.Medium == (int)Medium.Television)
-            {
-                return RedirectToActionPermanent("TVDetails", "Adaptation", new { viewmodel.UrlName });
-            }
             return View(viewmodel);
         }
 

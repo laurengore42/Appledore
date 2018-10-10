@@ -207,7 +207,7 @@
             Db.Appearances.Add(appearance);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Episode", new { ID = epId });
+            return RedirectToAction("EpDetails", "Episode", new { adaptWord = appearance.Episode.Season.Adaptation.MediumUrlName, adaptName = appearance.Episode.Season.Adaptation.UrlName, seasonNumber = appearance.Episode.Season.AirOrder, episodeNumber = appearance.Episode.AirOrder });
         }
 
         public List<SelectListItem> ActorList()
@@ -259,7 +259,7 @@
             Db.Appearances.Remove(appearance);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("Details", "Episode", new { ID = epId });
+            return RedirectToAction("EpDetails", "Episode", new { adaptWord = appearance.Episode.Season.Adaptation.MediumUrlName, adaptName = appearance.Episode.Season.Adaptation.UrlName, seasonNumber = appearance.Episode.Season.AirOrder, episodeNumber = appearance.Episode.AirOrder });
         }
     }
 }

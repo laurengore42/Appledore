@@ -28,7 +28,7 @@ else
     <table>
 @foreach (var e in Model.AnnivEpisodes)
 {
-        <tr><td>@Html.ActionLink(e.Name, "Details", "Episode", new { e.ID }, null) starring @e.Holmes </td><td> @((e.Airdate).ToString("d MMMM yyyy"))</td></tr>
+        <tr><td>@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.AdaptMediumUrlName, adaptName = e.AdaptUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder }) starring @e.Holmes </td><td> @((e.Airdate).ToString("d MMMM yyyy"))</td></tr>
 }
     </table>
 }

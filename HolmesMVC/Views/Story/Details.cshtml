@@ -35,12 +35,12 @@
     <p class="dblinks">
         @if (Model.Episode.EpPrev > 0 || Model.Episode.EpPrevName != null)
         {
-            <text>Previous: @Html.ActionLink(Model.Episode.EpPrevName, "Details", "Episode", new { ID = Model.Episode.EpPrev }, null)
+            <text>Previous: @Html.RouteLink(Model.Episode.EpPrevName, "EpDetails", new { adaptWord = Model.Episode.AdaptationMediumUrlName, adaptName = Model.Episode.AdaptationUrlName, seasonNumber = Model.Episode.EpPrevSeason, episodeNumber = Model.Episode.EpPrevAirOrder })
             <br />
             </text>}
         @if (Model.Episode.EpNext > 0 || Model.Episode.EpNextName != null)
         {
-            <text>Next: @Html.ActionLink(Model.Episode.EpNextName, "Details", "Episode", new { ID = Model.Episode.EpNext }, null)</text>}
+            <text>Next: @Html.RouteLink(Model.Episode.EpNextName, "EpDetails", new { adaptWord = Model.Episode.AdaptationMediumUrlName, adaptName = Model.Episode.AdaptationUrlName, seasonNumber = Model.Episode.EpNextSeason, episodeNumber = Model.Episode.EpNextAirOrder })</text>}
     </p>
     
     @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.Episode.EpId })
@@ -55,12 +55,13 @@
                 {
                     string epName = Shared.DisplayName(e);
                     epName = "'" + epName + "'";
-                    <li>
-                        @{
-                    var actorHolmes = Shared.PlayedBy(holmesId, e.Season.Adaptation).First();
-                        }
-                        @e.Airdate.ToString("yyyy"): @Html.ActionLink(epName, "Details", "Episode", new { id = e.ID }, null),@if (!string.IsNullOrEmpty(e.Translation)) { <span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(Shared.ShortName(actorHolmes),"Details", "Actor", new { actorHolmes.UrlName }, null)
-                    </li>
+                <li>
+                    @{
+                        var actorHolmes = Shared.PlayedBy(holmesId, e.Season.Adaptation).First();
+                    }
+                    @e.Airdate.ToString("yyyy"): @Html.RouteLink(epName, "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
+                    {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(Shared.ShortName(actorHolmes), "Details", "Actor", new { actorHolmes.UrlName }, null)
+                </li>
                 }
             </ul>
         </div>

@@ -93,12 +93,12 @@
     <p class="dblinks">
         @if (Model.EpPrev > 0 || Model.EpPrevName != null)
         {
-            <text>Previous: @Html.ActionLink(Model.EpPrevName, "Details", "Episode", new { ID = Model.EpPrev }, null) @if (Model.EpPrevTranslation != null && Model.EpPrevTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpPrevTranslation</i></span>}
+            <text>Previous: @Html.RouteLink(Model.EpPrevName, "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.EpPrevSeason, episodeNumber = Model.EpPrevAirOrder }) @if (Model.EpPrevTranslation != null && Model.EpPrevTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpPrevTranslation</i></span>}
             <br />
             </text>}
         @if (Model.EpNext > 0 || Model.EpNextName != null)
         {
-            <text>Next: @Html.ActionLink(Model.EpNextName, "Details", "Episode", new { ID = Model.EpNext }, null) @if (Model.EpNextTranslation != null && Model.EpNextTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpNextTranslation</i></span>}</text>}
+            <text>Next: @Html.RouteLink(Model.EpNextName, "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.EpNextSeason, episodeNumber = Model.EpNextAirOrder }) @if (Model.EpNextTranslation != null && Model.EpNextTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpNextTranslation</i></span>}</text>}
     </p>
 
     @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.EpId })

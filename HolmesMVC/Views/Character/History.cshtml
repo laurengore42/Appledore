@@ -1,3 +1,4 @@
 ﻿@model HolmesMVC.Models.ViewModels.CharacterHistory
 
-<tr><td>@Model.AirdateString:</td><td>'@Html.ActionLink(Model.EpName, "Details", "Episode", new { ID = Model.EpId }, null)' @if (Model.EpTranslation != null && Model.EpTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpTranslation</i></span>}</td></tr>
+<tr><td>@Model.AirdateString:</td><td>'@Html.RouteLink(Model.EpName, "EpDetails", new { adaptWord = Model.AdaptMediumUrlName, adaptName = Model.AdaptUrlName, seasonNumber = Model.SeasonAirOrder, episodeNumber = Model.AirOrder })' @if (Model.EpTranslation != null && Model.EpTranslation != string.Empty)
+{<span style="font-weight: normal; font-size: small;"><i>@Model.EpTranslation</i></span>}</td></tr>

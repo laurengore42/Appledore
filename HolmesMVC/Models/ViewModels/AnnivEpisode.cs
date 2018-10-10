@@ -10,6 +10,10 @@
             ID = e.ID;
             Airdate = e.Airdate;
             Name = Shared.DisplayName(e);
+            AdaptMediumUrlName = e.Season.Adaptation.MediumUrlName;
+            AdaptUrlName = e.Season.Adaptation.UrlName;
+            AirOrder = e.AirOrder;
+            SeasonAirOrder = e.Season.AirOrder;
             var HolmesActor = Shared.PlayedBy(holmesId, e.Season.Adaptation).FirstOrDefault();
             Holmes = HolmesActor == null ? "(nobody)" : HolmesActor.Surname;
         }
@@ -20,6 +24,14 @@
 
         public string Name { get; set; }
 
+        public string AdaptMediumUrlName { get; set; }
+
+        public string AdaptUrlName { get; set; }
+
+        public int AirOrder { get; set; }
+
         public string Holmes { get; set; }
+
+        public int SeasonAirOrder { get; set; }
     }
 }

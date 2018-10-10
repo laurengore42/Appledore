@@ -19,16 +19,21 @@
         public int EpId { get; set; }
 
         public int EpNext { get; set; }
+        public int EpNextAirOrder { get; set; }
+        public int EpNextSeason { get; set; }
         public string EpNextName { get; set; }
         public string EpNextTranslation { get; set; }
 
         public int EpPrev { get; set; }
+        public int EpPrevAirOrder { get; set; }
+        public int EpPrevSeason { get; set; }
         public string EpPrevName { get; set; }
         public string EpPrevTranslation { get; set; }
 
         public int Adaptation { get; set; }
         public string AdaptationName { get; set; }
         public string AdaptationTranslation { get; set; }
+        public string AdaptationMediumUrlName { get; set; }
         public string AdaptationUrlName { get; set; }
 
         public int Season { get; set; }
@@ -44,6 +49,8 @@
         public string StoryCode { get; set; }
 
         public string Story { get; set; }
+
+        public int AirOrder { get; set; }
 
         public int SeasonAirOrder { get; set; }
 
@@ -72,6 +79,8 @@
                 var episodePrev = (from e in adaptEps
                                    where e.ID == EpPrev
                                    select e).First();
+                EpPrevAirOrder = episodePrev.AirOrder;
+                EpPrevSeason = episodePrev.Season.AirOrder;
                 EpPrevName = Shared.DisplayName(episodePrev);
                 EpPrevTranslation = episodePrev.Translation;
             }
@@ -81,10 +90,12 @@
                 var episodeNext = (from e in adaptEps
                               where e.ID == EpNext
                               select e).First();
+                EpNextAirOrder = episodeNext.AirOrder;
+                EpNextSeason = episodeNext.Season.AirOrder;
                 EpNextName = Shared.DisplayName(episodeNext);
                 EpNextTranslation = episodeNext.Translation;
             }
-
+            
             Airdate = episode.Airdate;
             AirdatePrecision = (DatePrecision)episode.AirdatePrecision;
             EpId = episode.ID;
@@ -94,7 +105,9 @@
                     ? Shared.DisplayName(episode.Season.Adaptation)
                     : episode.Season.Adaptation.Name;
             AdaptationTranslation = episode.Season.Adaptation.Translation;
+            AdaptationMediumUrlName = episode.Season.Adaptation.MediumUrlName;
             AdaptationUrlName = episode.Season.Adaptation.UrlName;
+            AirOrder = episode.AirOrder;
             Season = episode.SeasonID;
             SeasonAirOrder = episode.Season.AirOrder;
             SeasonName = episode.Season.Name;
