@@ -17,7 +17,7 @@
                         ?? Shared.DisplayName(ap.Episode.Season.Adaptation);
             EpName = Shared.DisplayName(ap.Episode);
             EpTranslation = ap.Episode.Translation;
-            SeasonCode = Shared.GetSeasonCode(ap.Episode);
+            SeasonCode = ap.Episode.SeasonCode;
             Medium = ap.Episode.Season.Adaptation.Medium;
         }
 

@@ -106,7 +106,7 @@
             MediumName = ((Medium)episode.Season.Adaptation.Medium).ToString();
             StoryCode = episode.StoryID;
             Story = episode.Story != null ? episode.Story.Name : string.Empty;
-            SeasonCode = Shared.GetSeasonCode(episode);
+            SeasonCode = episode.SeasonCode;
 
             var lockApp = from a in episode.Appearances
                           where a.ActorID == 0

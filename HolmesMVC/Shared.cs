@@ -235,23 +235,6 @@
             return startYear > 0 ? (startYear + " " + company + " " + medium).Trim() : (company + " " + medium).Trim();
         }
 
-        public static string GetSeasonCode(Episode thisepisode)
-        {
-            var episodeNumber =
-                (from e in thisepisode.Season.Episodes
-                 where e.Airdate < thisepisode.Airdate
-                 select e).Count() + 1;
-
-            if (thisepisode.Season.Adaptation.Seasons.Count() == 1)
-            {
-                return episodeNumber.ToString(CultureInfo.InvariantCulture);
-            }
-
-            return (episodeNumber < 10)
-                       ? thisepisode.Season.AirOrder + "x0" + episodeNumber
-                       : thisepisode.Season.AirOrder + "x" + episodeNumber;
-        }
-
         public static string Times(int count)
         {
             switch (count)
