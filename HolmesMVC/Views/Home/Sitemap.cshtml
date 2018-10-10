@@ -44,17 +44,17 @@
         <li><a href="/adaptation/@a.UrlName">@a.UrlName</a></li>
         if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
         {
-        <li>
-            <ul>
-                @foreach (var s in a.Seasons)
-                {
-                    foreach (var e in s.Episodes)
+            <li>
+                <ul>
+                    @foreach (var s in a.Seasons)
                     {
-                        <li><a href="/@e.Season.Adaptation.MediumUrlName/@e.Season.Adaptation.UrlName/season/@e.Season.AirOrder/episode/@e.AirOrder">@e.SeasonCode</a></li>
+                        foreach (var e in s.Episodes)
+                        {
+                            <li><a href="/@e.Season.Adaptation.MediumUrlName/@e.Season.Adaptation.UrlName/season/@e.Season.AirOrder/episode/@e.AirOrder">@e.SeasonCode</a></li>
                         }
                     }
-            </ul>
-        </li>
+                </ul>
+            </li>
         }
     }
 </ul>
