@@ -14,7 +14,48 @@
     public class EpisodeController : HolmesDbController
     {
         //
-        // GET: /Episode/Details/5
+        // GET: /{adaptWord}/{adaptName}/season/{seasonNumber}/episode/{episodeNumber}
+
+        [AllowAnonymous]
+        public ActionResult LongformDetails(string adaptName = "", int seasonNumber = 0, int episodeNumber = 0)
+        {
+            Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == adaptName).FirstOrDefault();
+            if (adaptation == null)
+            {
+                return RedirectToAction("Details", "Adaptation", new { adaptName });
+            }
+
+            Season season = adaptation.Seasons.Where(s => s.AirOrder == seasonNumber).FirstOrDefault();
+            if (season == null)
+            {
+                return RedirectToAction("Details", "Adaptation", new { adaptName });
+            }
+
+            Episode episode = season.Episodes.Where(e => e.AirOrder == episodeNumber).FirstOrDefault();
+            if (episode == null)
+            {
+                return RedirectToAction("Details", "Adaptation", new { adaptName });
+            }
+
+            var canon = Shared.DisplayName(episode.Season.Adaptation) == "Canon";
+
+            // the Canon case
+            if (canon)
+            {
+                return RedirectToAction("Details", "Story", new { id = episode.StoryID });
+            }
+
+            // the single-film case
+            if (episode.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1)
+            {
+                return RedirectToAction("Details", "Adaptation", new { episode.Season.Adaptation.UrlName });
+            }
+
+            return View("Details", new EpisodeView(episode));
+        }
+
+        //
+        // GET: /episode/details/5
 
         [AllowAnonymous]
         public ActionResult Details(int id = 0)
@@ -25,25 +66,11 @@
                 return HttpNotFound();
             }
 
-            var canon = Shared.DisplayName(episode.Season.Adaptation) == "Canon";
-
-            // the Canon case
-            if (canon)
-            {
-                return RedirectToAction("Details","Story", new {id = episode.StoryID});
-            }
-
-            // the single-film case
-            if (episode.Season.Adaptation.Seasons.SelectMany(s => s.Episodes).Count() == 1)
-            {
-                return RedirectToAction("Details", "Adaptation", new { episode.Season.Adaptation.UrlName });
-            }
-
-            return View(new EpisodeView(episode));
+            return RedirectToActionPermanent("LongformDetails", new { adaptWord = "adaptation", adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
 
         //
-        // GET: /Episode/Create
+        // GET: /episode/create
 
         public ActionResult Create(int id = -1)
         {
@@ -69,7 +96,7 @@
         }
 
         //
-        // POST: /Episode/Create
+        // POST: /episode/create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -88,7 +115,7 @@
         }
 
         //
-        // GET: /Episode/Edit/5
+        // GET: /episode/edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -115,7 +142,7 @@
         }
 
         //
-        // POST: /Episode/Edit/5
+        // POST: /episode/edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -172,7 +199,7 @@
         }
 
         //
-        // GET: /Episode/Delete/5
+        // GET: /episode/delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -189,7 +216,7 @@
         }
 
         //
-        // POST: /Episode/Delete/5
+        // POST: /episode/delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

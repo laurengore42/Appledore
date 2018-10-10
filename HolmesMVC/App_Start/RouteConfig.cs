@@ -64,6 +64,13 @@
                 new { controller = "Character", action = "Details" }
             );
 
+            // episode human-readable URLs
+            routes.MapRoute(
+                "EpDetails",
+                "{adaptWord}/{adaptName}/season/{seasonNumber}/episode/{episodeNumber}",
+                new { controller = "Episode", action = "LongformDetails" }
+            );
+
             // adaptation human-readable URLs
             routes.MapRoute(
                 "AdaptRadioDetails",
