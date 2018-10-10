@@ -128,7 +128,7 @@
                         {
                             root.Add(
                                 new XElement(ns + "url",
-                                new XElement(ns + "loc", new XText(Url.Action("Details", "Story", new { e.StoryID }, "https")))
+                                new XElement(ns + "loc", new XText(Url.Action("Details", "Story", new { id = e.StoryID }, "https")))
                                 )
                             );
                         }
