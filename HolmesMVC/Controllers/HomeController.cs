@@ -83,9 +83,22 @@
             }
             foreach (var a in Db.Adaptations)
             {
+                var actionName = "Details";
+                switch(a.MediumUrlName)
+                {
+                    case "radio":
+                        actionName = "RadioDetails";
+                        break;
+                    case "film":
+                        actionName = "SingleFilmDetails";
+                        break;
+                    case "tv":
+                        actionName = "TVDetails";
+                        break;
+                }
                 root.Add(
                     new XElement(ns + "url",
-                    new XElement(ns + "loc", new XText(Url.Action("Details", "Adaptation", new { a.UrlName }, "https")))
+                    new XElement(ns + "loc", new XText(Url.Action(actionName, "Adaptation", new { a.UrlName }, "https")))
                     )
                 );
                 foreach (var s in a.Seasons)
