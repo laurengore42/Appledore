@@ -23,9 +23,18 @@ namespace HolmesMVC.Models
         public int AirdatePrecision { get; set; }
         public string SeasonCode
         {
-            get => Season.Adaptation.Seasons.Count() == 1 ? Rank.ToString(CultureInfo.InvariantCulture) : Rank < 10 ? Season.AirOrder + "x0" + Rank : Season.AirOrder + "x" + Rank;
+            get
+            {
+                return Season.Adaptation.Seasons.Count() == 1 ? Rank.ToString(CultureInfo.InvariantCulture) : Rank < 10 ? Season.AirOrder + "x0" + Rank : Season.AirOrder + "x" + Rank;
+            }
         }
-        public int Rank { get => Season.Episodes.OrderBy(e => e.Airdate).ThenBy(e => e.Title).Select((episode, index) => new { episode.ID, Rank = index + 1 }).Where(e => e.ID == ID).FirstOrDefault().Rank; }
+        public int Rank
+        {
+            get
+            {
+                return Season.Episodes.OrderBy(e => e.Airdate).ThenBy(e => e.Title).Select((episode, index) => new { episode.ID, Rank = index + 1 }).Where(e => e.ID == ID).FirstOrDefault().Rank;
+            }
+        }
         public virtual ICollection<Appearance> Appearances { get; set; }
         public virtual Season Season { get; set; }
         public virtual Story Story { get; set; }
