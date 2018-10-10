@@ -41,9 +41,6 @@
                 new XElement(ns + "loc", new XText(Url.Action("Index", "Home", null, "https")))
                 ),
                 new XElement(ns + "url",
-                new XElement(ns + "loc", new XText(Url.Action("Index", "Canon", null, "https")))
-                ),
-                new XElement(ns + "url",
                 new XElement(ns + "loc", new XText(Url.Action("Search", "Canon", null, "https")))
                 ),
                 new XElement(ns + "url",
@@ -83,33 +80,55 @@
             }
             foreach (var a in Db.Adaptations)
             {
-                var actionName = "Details";
-                switch(a.MediumUrlName)
+                if (a.UrlName != "canon")
                 {
-                    case "radio":
-                        actionName = "RadioDetails";
-                        break;
-                    case "film":
-                        actionName = "SingleFilmDetails";
-                        break;
-                    case "tv":
-                        actionName = "TVDetails";
-                        break;
+                    var actionName = "Details";
+                    switch (a.MediumUrlName)
+                    {
+                        case "radio":
+                            actionName = "RadioDetails";
+                            break;
+                        case "film":
+                            actionName = "SingleFilmDetails";
+                            break;
+                        case "tv":
+                            actionName = "TVDetails";
+                            break;
+                    }
+                    root.Add(
+                        new XElement(ns + "url",
+                        new XElement(ns + "loc", new XText(Url.Action(actionName, "Adaptation", new { a.UrlName }, "https")))
+                        )
+                    );
+                    if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
+                    {
+                        foreach (var s in a.Seasons)
+                        {
+                            foreach (var e in s.Episodes)
+                            {
+                                root.Add(
+                                    new XElement(ns + "url",
+                                    new XElement(ns + "loc", new XText(Url.RouteUrl("EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
+                                    )
+                                );
+                            }
+                        }
+                    }
                 }
-                root.Add(
-                    new XElement(ns + "url",
-                    new XElement(ns + "loc", new XText(Url.Action(actionName, "Adaptation", new { a.UrlName }, "https")))
-                    )
-                );
-                if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
+                else
                 {
+                    root.Add(
+                        new XElement(ns + "url",
+                        new XElement(ns + "loc", new XText(Url.Action("Search", "Canon", null, "https")))
+                        )
+                    );
                     foreach (var s in a.Seasons)
                     {
                         foreach (var e in s.Episodes)
                         {
                             root.Add(
                                 new XElement(ns + "url",
-                                new XElement(ns + "loc", new XText(Url.RouteUrl("EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
+                                new XElement(ns + "loc", new XText(Url.Action("Details", "Story", new { e.StoryID }, "https")))
                                 )
                             );
                         }

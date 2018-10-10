@@ -12,9 +12,6 @@
         <a href="/">Home</a>
     </li>
     <li>
-        <a href="/canon">Canon</a>
-    </li>
-    <li>
         <a href="/canon/search">Canon Search</a>
     </li>
     <li>
@@ -41,16 +38,34 @@
 <ul>
     @foreach (var a in adaptations)
     {
-        <li><a href="/@a.MediumUrlName/@a.UrlName">@a.UrlName</a></li>
-        if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
+        if (a.UrlName != "canon")
         {
+            <li><a href="/@a.MediumUrlName/@a.UrlName">@a.UrlName</a></li>
+            if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
+            {
+                <li>
+                    <ul>
+                        @foreach (var s in a.Seasons)
+                        {
+                            foreach (var e in s.Episodes)
+                            {
+                                <li><a href="/@e.Season.Adaptation.MediumUrlName/@e.Season.Adaptation.UrlName/season/@e.Season.AirOrder/episode/@e.AirOrder">@e.SeasonCode</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        }
+        else
+        {
+            <li><a href="/canon">Canon</a></li>
             <li>
                 <ul>
                     @foreach (var s in a.Seasons)
                     {
                         foreach (var e in s.Episodes)
                         {
-                            <li><a href="/@e.Season.Adaptation.MediumUrlName/@e.Season.Adaptation.UrlName/season/@e.Season.AirOrder/episode/@e.AirOrder">@e.SeasonCode</a></li>
+                            <li><a href="/story/@e.StoryID">@e.Story.Name</a></li>
                         }
                     }
                 </ul>
