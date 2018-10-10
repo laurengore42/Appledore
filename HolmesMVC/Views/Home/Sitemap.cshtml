@@ -49,7 +49,7 @@
                         {
                             foreach (var e in s.Episodes)
                             {
-                                <li><a href="/@e.Season.Adaptation.MediumUrlName/@e.Season.Adaptation.UrlName/season/@e.Season.AirOrder/episode/@e.AirOrder">@HolmesMVC.Shared.DisplayName(e)</a></li>
+                                <li><a href="/@e.Season.Adaptation.MediumUrlName/@e.Season.Adaptation.UrlName/season/@e.Season.AirOrder/episode/@e.AirOrder">@HolmesMVC.Shared.DisplayName(e.Season.Adaptation) - @HolmesMVC.Shared.DisplayName(e)</a></li>
                             }
                         }
                     </ul>
