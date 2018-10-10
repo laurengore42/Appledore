@@ -101,15 +101,18 @@
                     new XElement(ns + "loc", new XText(Url.Action(actionName, "Adaptation", new { a.UrlName }, "https")))
                     )
                 );
-                foreach (var s in a.Seasons)
+                if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
                 {
-                    foreach (var e in s.Episodes)
+                    foreach (var s in a.Seasons)
                     {
-                        root.Add(
-                            new XElement(ns + "url",
-                            new XElement(ns + "loc", new XText(Url.Action("EpDetails", "Episode", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
-                            )
-                        );
+                        foreach (var e in s.Episodes)
+                        {
+                            root.Add(
+                                new XElement(ns + "url",
+                                new XElement(ns + "loc", new XText(Url.Action("EpDetails", "Episode", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
+                                )
+                            );
+                        }
                     }
                 }
             }
