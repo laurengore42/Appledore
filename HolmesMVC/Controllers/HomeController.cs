@@ -109,7 +109,7 @@
                         {
                             root.Add(
                                 new XElement(ns + "url",
-                                new XElement(ns + "loc", new XText(Url.Action("EpDetails", "Episode", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
+                                new XElement(ns + "loc", new XText(Url.RouteUrl("EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }, "https")))
                                 )
                             );
                         }
