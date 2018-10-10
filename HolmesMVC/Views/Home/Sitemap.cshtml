@@ -41,7 +41,7 @@
 <ul>
     @foreach (var a in adaptations)
     {
-        <li><a href="/adaptation/@a.UrlName">@a.UrlName</a></li>
+        <li><a href="/@a.MediumUrlName/@a.UrlName">@a.UrlName</a></li>
         if (a.Seasons.SelectMany(s => s.Episodes).Count() > 1)
         {
             <li>
