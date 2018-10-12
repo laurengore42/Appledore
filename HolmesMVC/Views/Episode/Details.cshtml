@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = Model.DisplayName;
 }
-<link rel="canonical" href="https://appledore.azurewebsites.net/episode/@Model.EpId" />
+<link rel="canonical" href="https://appledore.azurewebsites.net/@Model.AdaptationMediumUrlName/@Model.AdaptationUrlName/season/@Model.SeasonAirOrder/episode/@Model.AirOrder" />
 @if (Model.Medium == (int)Medium.Television)
 {
     <script type="application/ld+json">
