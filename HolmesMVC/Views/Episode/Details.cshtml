@@ -20,12 +20,12 @@
         }
         @if (Model.SeasonCode.IndexOf('x') > -1)
         {
-            <text>, "episodeNumber": @Int32.Parse(Model.SeasonCode.Split('x')[1])</text>
-            <text>, "partOfSeason": @Int32.Parse(Model.SeasonCode.Split('x')[0])</text>
+            <text>, "episodeNumber": @Model.SeasonAirOrder</text>
+            <text>, "partOfSeason": @Model.AirOrder</text>
         }
         else
         {
-            <text>, "episodeNumber": @Int32.Parse(Model.SeasonCode)</text>
+            <text>, "episodeNumber": @Model.AirOrder</text>
         }
         @if (Model.ActorNames.Count() > 0)
         {
