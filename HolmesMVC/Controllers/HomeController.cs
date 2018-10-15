@@ -528,7 +528,8 @@
             var actor = new Actor
             {
                 Forename = forename,
-                Surname = surname
+                Surname = surname,
+                UrlName = forename.ToLower() + "_" + surname.ToLower()
             };
 
             Db.Actors.Add(actor);
@@ -542,7 +543,8 @@
             var character = new Character
             {
                 Forename = forename,
-                Surname = surname
+                Surname = surname,
+                UrlName = forename.ToLower() + "_" + surname.ToLower()
             };
 
             Db.Characters.Add(character);
