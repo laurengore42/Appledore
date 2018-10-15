@@ -532,7 +532,15 @@
                 UrlName = forename.ToLower() + "_" + surname.ToLower()
             };
 
-            Db.Actors.Add(actor);
+            try
+            {
+                Db.Actors.Add(actor);
+            }
+            catch
+            {
+                actor.UrlName = actor.UrlName + (new DateTime()).ToString("s", CultureInfo.InvariantCulture);
+                Db.Actors.Add(actor);
+            }
             Db.SaveChanges();
 
             return actor.ID;
@@ -547,7 +555,15 @@
                 UrlName = forename.ToLower() + "_" + surname.ToLower()
             };
 
-            Db.Characters.Add(character);
+            try
+            {
+                Db.Characters.Add(character);
+            }
+            catch
+            {
+                character.UrlName = character.UrlName + (new DateTime()).ToString("s", CultureInfo.InvariantCulture);
+                Db.Characters.Add(character);
+            }
             Db.SaveChanges();
 
             return character.ID;
