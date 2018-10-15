@@ -539,7 +539,7 @@
             }
             catch
             {
-                actor.UrlName = actor.UrlName + (new DateTime()).ToString("s", CultureInfo.InvariantCulture);
+                actor.UrlName = actor.UrlName + DateTime.Now.ToString("s", CultureInfo.InvariantCulture);
                 Db.Actors.Add(actor);
                 Db.SaveChanges();
             }
@@ -563,7 +563,7 @@
             }
             catch
             {
-                character.UrlName = character.UrlName + (new DateTime()).ToString("s", CultureInfo.InvariantCulture);
+                character.UrlName = character.UrlName + DateTime.Now.ToString("s", CultureInfo.InvariantCulture);
                 Db.Characters.Add(character);
                 Db.SaveChanges();
             }
