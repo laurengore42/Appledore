@@ -98,7 +98,7 @@
                 if (results.Episodes.Any())
                 {
                     var episode = results.Episodes.First();
-                    return RedirectToAction("EpDetails", "Episode", new { adaptWord = episode.MediumUrlName, adaptName = episode.AdaptationUrlName, seasonNumber = episode.SeasonAirOrder, episodeNumber = episode.AirOrder });
+                    return RedirectToRoute("EpDetails", new { adaptWord = episode.MediumUrlName, adaptName = episode.AdaptationUrlName, seasonNumber = episode.SeasonAirOrder, episodeNumber = episode.AirOrder });
                 }
 
                 if (results.Adaptations.Any())

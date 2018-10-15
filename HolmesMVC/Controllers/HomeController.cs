@@ -247,7 +247,7 @@
             Shared.SomethingChanged(HttpContext.Application);
 
             var episode = Db.Episodes.Find(epId);
-            return RedirectToAction("EpDetails", "Episode", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+            return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
 
         [HttpGet]
@@ -529,19 +529,20 @@
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = forename.ToLower() + "_" + surname.ToLower()
+                UrlName = (forename.ToLower() + "_" + surname.ToLower()).Replace(" ", "_").Replace(".", "")
             };
 
             try
             {
                 Db.Actors.Add(actor);
+                Db.SaveChanges();
             }
             catch
             {
                 actor.UrlName = actor.UrlName + (new DateTime()).ToString("s", CultureInfo.InvariantCulture);
                 Db.Actors.Add(actor);
+                Db.SaveChanges();
             }
-            Db.SaveChanges();
 
             return actor.ID;
         }
@@ -552,19 +553,20 @@
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = forename.ToLower() + "_" + surname.ToLower()
+                UrlName = (forename.ToLower() + "_" + surname.ToLower()).Replace(" ", "_").Replace(".", "")
             };
 
             try
             {
                 Db.Characters.Add(character);
+                Db.SaveChanges();
             }
             catch
             {
                 character.UrlName = character.UrlName + (new DateTime()).ToString("s", CultureInfo.InvariantCulture);
                 Db.Characters.Add(character);
+                Db.SaveChanges();
             }
-            Db.SaveChanges();
 
             return character.ID;
         }

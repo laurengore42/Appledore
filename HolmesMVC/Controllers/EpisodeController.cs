@@ -153,7 +153,7 @@
                 var id = episode.ID;
                 Db.Entry(episode).State = EntityState.Modified;
                 Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
-                return RedirectToAction("EpDetails", "Episode", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+                return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
             }
             ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.SeasonID);
             ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.StoryID);
@@ -241,7 +241,7 @@
             Db.Appearances.Add(lockApp);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("EpDetails", "Episode", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+            return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
 
         public ActionResult Unlock(int id)
@@ -254,7 +254,7 @@
             Db.Appearances.Remove(lockApp);
             Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
 
-            return RedirectToAction("EpDetails", "Episode", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+            return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
     }
 }
