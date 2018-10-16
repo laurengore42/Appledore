@@ -88,7 +88,7 @@
 
                     var dbApp = dbActor.Appearances.OrderBy(a => a.Episode.Airdate).First();
                     var dbAdapt = dbApp.Episode.Season.Adaptation;
-                    var dbRename = Shared.GetRename(dbApp);
+                    var dbRename = dbApp.GetRename();
                     var charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
 
                     if (isAHolmes)
@@ -97,7 +97,7 @@
                                     where ap.CharacterID == holmesId
                                  select ap).First();
                         dbAdapt = dbApp.Episode.Season.Adaptation;
-                        dbRename = Shared.GetRename(dbApp);
+                        dbRename = dbApp.GetRename();
                         charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
 
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
@@ -112,7 +112,7 @@
                                  where ap.CharacterID == watsonId
                                  select ap).First();
                         dbAdapt = dbApp.Episode.Season.Adaptation;
-                        dbRename = Shared.GetRename(dbApp);
+                        dbRename = dbApp.GetRename();
                         charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
                         stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + Shared.ShortName(new AdaptView(dbAdapt).HolmesActors.First()) + "</a> as Sherlock Holmes.";

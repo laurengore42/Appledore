@@ -22,7 +22,7 @@ else
             var canonCharacter = Shared.IsCanon(appearance.Character);
             var charName = Shared.LongName(appearance.Character);
             var actorName = Shared.ShortName(appearance.Actor);
-            var rename = Shared.GetRename(appearance);
+            var rename = appearance.GetRename();
             <tr>
                 @if (canonPage)
                 {

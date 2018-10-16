@@ -26,31 +26,6 @@
             app["SearchDataShort"] = null;
         }
 
-        public static Rename GetRename(Appearance app)
-        {
-            return (from r in app.Episode.Season.Adaptation.Renames
-                    where
-                        r.ActorID == app.ActorID
-                        && r.CharacterID == app.CharacterID
-                    select r).FirstOrDefault();
-        }
-
-        public static string SortSurname(Appearance app)
-        {
-            var rename = GetRename(app);
-            return (rename == null)
-                ? app.Character.Surname
-                : rename.Surname;
-        }
-
-        public static string SortForename(Appearance app)
-        {
-            var rename = GetRename(app);
-            return (rename == null)
-                ? app.Character.Forename
-                : rename.Forename;
-        }
-
         public static string VagueDate(DateTime? nullableDate, DatePrecision precision, bool longMonth, bool longDay)
         {
             if (null == nullableDate)
