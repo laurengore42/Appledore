@@ -27,7 +27,7 @@
 
                 var chars = (from c in Db.Characters select c).ToList();
                 var charsList = (from c in chars
-                                 where Shared.IsCanon(c)
+                                 where c.IsCanon
                                  select new SelectListItem
                                  {
                                      Value = c.ID.ToString(CultureInfo.InvariantCulture),

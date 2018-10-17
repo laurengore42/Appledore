@@ -82,13 +82,6 @@
             }
         }
 
-        public static bool IsCanon(Character c)
-        {
-            return (from a in c.Appearances
-                    where a.Episode.Season.Adaptation.Name == "Canon"
-                    select a).Any();
-        }
-
         // returns 'Jeremy Brett'
         public static string ShortName(Actor actor)
         {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HolmesMVC.Models
 {
@@ -23,5 +24,14 @@ namespace HolmesMVC.Models
         public virtual Species Species { get; set; }
         public virtual ICollection<Rename> Renames { get; set; }
         public virtual Story Story { get; set; }
+
+        public bool IsCanon
+        {
+            get {
+                return (from a in Appearances
+                        where a.Episode.Season.Adaptation.Name == "Canon"
+                        select a).Any();
+            }
+        }
     }
 }
