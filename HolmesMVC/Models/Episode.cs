@@ -29,7 +29,10 @@ namespace HolmesMVC.Models
         public virtual ICollection<Reference> References { get; set; }
         public virtual ICollection<HolmesLink> HolmesLinks { get; set; }
 
-
+        /// <summary>
+        /// If episode has a Title, returns title.
+        /// If not, and episode is based on a Story, returns story name.
+        /// </summary>
         public string DisplayName
         {
             get

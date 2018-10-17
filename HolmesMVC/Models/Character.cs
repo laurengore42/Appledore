@@ -34,7 +34,10 @@ namespace HolmesMVC.Models
             }
         }
 
-        // returns 'Professor Moriarty' || 'James Moriarty'
+        /// <summary>
+        /// returns 'Professor Moriarty'
+        /// if character has no honorific, this is the same as LongName
+        /// </summary>
         public string ShortName
         {
             get
@@ -50,7 +53,10 @@ namespace HolmesMVC.Models
             }
         }
 
-        // returns 'Professor James Moriarty'
+        /// <summary>
+        /// returns 'Professor James Moriarty'
+        /// if character has no honorific, this is the same as ShortName
+        /// </summary>
         public string LongName
         {
             get
@@ -63,7 +69,9 @@ namespace HolmesMVC.Models
             }
         }
 
-        // returns 'Moriarty, Professor James'
+        /// <summary>
+        /// returns 'Moriarty, Professor James'
+        /// </summary>
         public string DisplayName
         {
             get

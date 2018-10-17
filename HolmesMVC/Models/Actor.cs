@@ -53,7 +53,7 @@ namespace HolmesMVC.Models
                 double tempLat = 0;
                 double tempLng = 0;
 #pragma warning restore IDE0018 // Inline variable declaration
-                if (latlng.ErrorCode == 0 && Double.TryParse(latlng.Position.Lat, out tempLat) && Double.TryParse(latlng.Position.Lng, out tempLng))
+                if (latlng.ErrorCode == 0 && double.TryParse(latlng.Position.Lat, out tempLat) && double.TryParse(latlng.Position.Lng, out tempLng))
                 {
                     Latitude = tempLat;
                     Longitude = tempLng;
@@ -107,7 +107,7 @@ namespace HolmesMVC.Models
                 }
             }
         }
-
+        
         public int? AgeInYears
         {
             get
@@ -131,7 +131,10 @@ namespace HolmesMVC.Models
         }
 
 
-        // returns 'Jeremy Brett'
+        /// <summary>
+        /// returns 'Edward Hardwicke'
+        /// if actor has no middle name, this is the same as LongName
+        /// </summary>
         public string ShortName
         {
             get
@@ -142,7 +145,10 @@ namespace HolmesMVC.Models
             }
         }
 
-        // returns 'Edward Cedric Hardwicke'
+        /// <summary>
+        /// returns 'Edward Cedric Hardwicke'
+        /// if actor has no middle name, this is the same as ShortName
+        /// </summary>
         public string LongName
         {
             get
@@ -155,7 +161,9 @@ namespace HolmesMVC.Models
             }
         }
 
-        // returns 'Brett, Jeremy'
+        /// <summary>
+        /// returns 'Hardwicke, Edward Cedric'
+        /// </summary>
         public string DisplayName
         {
             get

@@ -32,8 +32,9 @@ namespace HolmesMVC.Models
             }
         }
 
-
-        // returns '1984 Granada TV'
+        /// <summary>
+        /// returns '1984 Granada TV'
+        /// </summary>
         public string DisplayName
         {
             get

@@ -15,7 +15,10 @@ namespace HolmesMVC.Models
         public virtual Honorific Honorific { get; set; }
 
 
-        // returns 'Professor James Moriarty'
+        /// <summary>
+        /// returns 'Professor James Moriarty'
+        /// if character has no honorific, this is the same as ShortName
+        /// </summary>
         public string LongName
         {
             get
