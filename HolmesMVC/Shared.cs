@@ -22,8 +22,6 @@
         public static void SomethingChanged(HttpApplicationStateBase app)
         {
             app["LastDbUpdate"] = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
-            app["SearchDataFull"] = null;
-            app["SearchDataShort"] = null;
         }
 
         public static string VagueDate(DateTime? nullableDate, DatePrecision precision, bool longMonth, bool longDay)

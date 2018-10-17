@@ -409,7 +409,6 @@
         public ViewResult Index()
         {
             ViewBag.lastdbupdate = HttpContext.Application["LastDbUpdate"];
-            ViewBag.lastgotsearchdata = HttpContext.Application["LastGotSearchData"];
             return View();
         }
 

@@ -116,22 +116,6 @@
                 new { id = @"\w+" }
             );
 
-            // backwards compatibility, for old chunk links
-            routes.MapRoute(
-                "Chunks",
-                "chunk/{id}",
-                new { controller = "Story", action = "Details" },
-                new { id = @"\w+" }
-            );
-
-            //// Search route
-            //routes.MapRoute(
-            //    "Search",
-            //    "Search/{id}",
-            //    new { controller = "Search", action = "Index" },
-            //    new { id = "(?!OuterSearch|DeserialiseSearchStringForPartial|GetAccentDictionaryAsJson).*" }
-            //);
-
             // Google verification route
             routes.IgnoreRoute(
                 "google0df7ec4a1dcd4db8.html"
