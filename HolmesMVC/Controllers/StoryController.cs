@@ -4,11 +4,13 @@
     using System.Data.Entity;
     using System.Net;
     using System.Web.Mvc;
+    using System.Web.UI;
     using System.Xml;
 
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
+    [OutputCache(Duration = 86400, Location = OutputCacheLocation.Server, VaryByCustom = "LastDbUpdate")]
     public class StoryController : HolmesDbController
     {
         [AllowAnonymous]

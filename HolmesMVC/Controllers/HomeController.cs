@@ -9,13 +9,14 @@
     using System.Text.RegularExpressions;
     using System.Web.Configuration;
     using System.Web.Mvc;
+    using System.Web.UI;
     using System.Xml.Linq;
     using HolmesMVC.ActionResults;
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
-    [OutputCache(Duration = 1, VaryByCustom = "LastDbUpdate")]
+    [OutputCache(Duration = 86400, Location = OutputCacheLocation.Server, VaryByCustom = "LastDbUpdate")]
     public class HomeController : HolmesDbController
     {
         [AllowAnonymous]

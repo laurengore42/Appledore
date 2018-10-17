@@ -28,13 +28,7 @@
             {
                 case "LastDbUpdate":
                     // Every call to Db.SaveChanges() is followed by an update of this value
-                    return Application["LastDbUpdate"] == null
-                               ? User.Identity.Name == null
-                                    ? string.Empty
-                                    : User.Identity.Name
-                               : User.Identity.Name == null
-                                    ? Application["LastDbUpdate"].ToString()
-                                    : User.Identity.Name + Application["LastDbUpdate"].ToString();
+                    return User.Identity.Name ?? string.Empty + (Application["LastDbUpdate"] ?? string.Empty).ToString();
             }
 
             return base.GetVaryByCustomString(context, custom);

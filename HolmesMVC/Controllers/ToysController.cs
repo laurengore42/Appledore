@@ -5,12 +5,13 @@
     using System.Data;
     using System.Linq;
     using System.Web.Mvc;
-
+    using System.Web.UI;
     using HolmesMVC.BaconXml;
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
+    [OutputCache(Duration = 86400, Location = OutputCacheLocation.Server, VaryByCustom = "LastDbUpdate")]
     public class ToysController : HolmesDbController
     {
         [AllowAnonymous]

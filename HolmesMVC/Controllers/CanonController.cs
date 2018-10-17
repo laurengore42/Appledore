@@ -2,10 +2,11 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-
+    using System.Web.UI;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
+    [OutputCache(Duration = 86400, Location = OutputCacheLocation.Server, VaryByCustom = "LastDbUpdate")]
     public class CanonController : HolmesDbController
     {
         //

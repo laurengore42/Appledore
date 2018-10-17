@@ -11,19 +11,6 @@
     public class SeasonController : HolmesDbController
     {
         //
-        // GET: /Season/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            Season season = Db.Seasons.Find(id);
-            if (season == null)
-            {
-                return HttpNotFound();
-            }
-            return View(season);
-        }
-
-        //
         // GET: /Season/Create
 
         public ActionResult Create(int id = -1)
