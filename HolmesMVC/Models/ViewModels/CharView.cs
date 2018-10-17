@@ -11,8 +11,8 @@
         {
             Char = character;
 
-            ShortName = Shared.ShortName(character);
-            LongName = Shared.LongName(character);
+            ShortName = character.ShortName;
+            LongName = character.LongName;
 
             // All appearances of character, grouped by actor and adaptation
             var dataGet = from ap in character.Appearances

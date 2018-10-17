@@ -36,13 +36,13 @@
                               select r).FirstOrDefault();
             if (null != rename)
             {
-                Rename = Shared.LongName(new Character
+                Rename = new Character
                     {
                         Forename = rename.Forename,
                         HonorificID = rename.HonorificID,
                         Honorific = rename.Honorific,
                         Surname = rename.Surname
-                    });
+                    }.LongName;
             }
 
             Histories = (from ap in groupedApps select new CharacterHistory(ap)).ToList();

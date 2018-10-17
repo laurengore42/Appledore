@@ -31,7 +31,7 @@
                                  select new SelectListItem
                                  {
                                      Value = c.ID.ToString(CultureInfo.InvariantCulture),
-                                     Text = Shared.DisplayName(c) + " [" + c.ID + "]"
+                                     Text = c.DisplayName + " [" + c.ID + "]"
                                  }).OrderBy(a => a.Text).ToList();
                 ViewBag.Character = charsList;
 

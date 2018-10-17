@@ -77,55 +77,19 @@
             }
         }
 
-        // returns 'Professor Moriarty' || 'James Moriarty'
-        public static string ShortName(Character character)
-        {
-            var forename = character.Forename;
-            if (string.IsNullOrWhiteSpace(forename) && character.HonorificID != null)
-            {
-                forename = character.Honorific.Name;
-            }
-
-            var surname = character.Surname;
-            return BuildName(new[] { forename, surname }, ' ');
-        }
-
-        // returns 'Professor James Moriarty'
-        public static string LongName(Character character)
-        {
-            var honorific = character.Honorific != null ? character.Honorific.Name : string.Empty;
-            var forename = character.Forename ?? string.Empty;
-            var surname = character.Surname ?? string.Empty;
-
-            return BuildName(new[] { honorific, forename, surname }, ' ');
-        }
-
         // returns 'Professor James Moriarty'
         public static string LongName(Rename rename)
         {
             return (rename == null)
                 ? null
-                : LongName(new Character
+                : new Character
                 {
                     HonorificID = rename.HonorificID,
                     Honorific =
                         rename.Honorific,
                     Forename = rename.Forename,
                     Surname = rename.Surname
-                });
-        }
-
-        // returns 'Moriarty, Professor James'
-        public static string DisplayName(Character c)
-        {
-            return !c.Forename.IsNullOrWhiteSpace()
-                       ? c.HonorificID != null
-                             ? c.Surname + ", " + c.Honorific.Name + " "
-                               + c.Forename
-                             : c.Surname + ", " + c.Forename
-                       : c.HonorificID != null
-                             ? c.Surname + ", " + c.Honorific.Name
-                             : c.Surname;
+                }.LongName;
         }
 
         public static string Times(int count)

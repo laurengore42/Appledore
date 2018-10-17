@@ -88,7 +88,7 @@
             }
 
             if (picUrlName !== "") {
-                $('#actorPicSpan').html('<a href= "/actor/' + picUrlName + '"><img class="actorpic" src="' + picUrl + '" alt="@Shared.LongName(Model.Char)" title="@Shared.LongName(Model.Char)"/><br>'+picName+'</a>');
+                $('#actorPicSpan').html('<a href= "/actor/' + picUrlName + '"><img class="actorpic" src="' + picUrl + '" alt="@Model.Char.LongName" title="@Model.Char.LongName"/><br>'+picName+'</a>');
             }
         });
 

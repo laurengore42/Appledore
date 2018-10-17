@@ -5,7 +5,7 @@
 {
     <div class="editor-field">
         <div class="editor-label">
-            @Html.LabelFor(model => model.CharacterID, "Character", new { @class = "inlinelabel" }): @Shared.DisplayName(Model.Character)<br />
+            @Html.LabelFor(model => model.CharacterID, "Character", new { @class = "inlinelabel" }): @Model.Character.DisplayName<br />
             <a onclick="location.replace(killParam(location, 'characterid'))">Use different character</a>
         </div>
     </div>

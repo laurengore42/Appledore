@@ -33,5 +33,50 @@ namespace HolmesMVC.Models
                         select a).Any();
             }
         }
+
+        // returns 'Professor Moriarty' || 'James Moriarty'
+        public string ShortName
+        {
+            get
+            {
+                var forename = Forename;
+                if (string.IsNullOrWhiteSpace(forename) && HonorificID != null)
+                {
+                    forename = Honorific.Name;
+                }
+
+                var surname = Surname;
+                return Shared.BuildName(new[] { forename, surname }, ' ');
+            }
+        }
+
+        // returns 'Professor James Moriarty'
+        public string LongName
+        {
+            get
+            {
+                var honorific = Honorific != null ? Honorific.Name : string.Empty;
+                var forename = Forename ?? string.Empty;
+                var surname = Surname ?? string.Empty;
+
+                return Shared.BuildName(new[] { honorific, forename, surname }, ' ');
+            }
+        }
+
+        // returns 'Moriarty, Professor James'
+        public string DisplayName
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(Forename)
+                           ? HonorificID != null
+                                 ? Surname + ", " + Honorific.Name + " "
+                                   + Forename
+                                 : Surname + ", " + Forename
+                           : HonorificID != null
+                                 ? Surname + ", " + Honorific.Name
+                                 : Surname;
+            }
+        }
     }
 }

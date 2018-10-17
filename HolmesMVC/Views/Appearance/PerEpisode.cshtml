@@ -19,7 +19,7 @@ else
         </tr>
         @foreach (var appearance in Model)
         {
-            var charName = Shared.LongName(appearance.Character);
+            var charName = appearance.Character.LongName;
             var actorName = appearance.Actor.ShortName;
             var rename = appearance.GetRename();
             <tr>
@@ -44,7 +44,7 @@ else
                     <span @if (appearance.Character.IsCanon) { <text> class="strong" </text>  }>
                         @if (null == rename)
                         {
-                            @Html.ActionLink(Shared.LongName(appearance.Character), "Details", "Character", new { appearance.Character.UrlName }, null)
+                            @Html.ActionLink(appearance.Character.LongName, "Details", "Character", new { appearance.Character.UrlName }, null)
                         }
                         else
                         {

@@ -20,7 +20,7 @@
             Adaptation
         </div>
         <div class="editor-field">
-            @Shared.DisplayName(ViewBag.chosenAdapt)
+            @ViewBag.chosenAdapt.DisplayName
         </div>
         
         @Html.Action("SeasonBox", new { ID = ViewBag.adaptId, currentSeason = -1 })

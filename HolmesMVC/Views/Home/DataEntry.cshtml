@@ -31,7 +31,7 @@ Pulling in IMDb info:
         foreach (var c in titleForenames)
         {
     <li>
-        @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ", "&nbsp;")), "Details", "Character", new { c.UrlName }, null)
+        @Html.ActionLink(WebUtility.HtmlDecode(c.LongName.Replace(" ", "&nbsp;")), "Details", "Character", new { c.UrlName }, null)
     </li>
 
         }
@@ -51,7 +51,7 @@ Pulling in IMDb info:
             var charIdsStr = string.Join(",", from c in charName select c.ID);
             <li>@Html.ActionLink("Combine", "Combine", "Character", new { charIdStr = charIdsStr }, null) Potential duplicates: @foreach (Character c in charName)
                                       {
-                                          <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(c).Replace(" ","&nbsp;")),"Details", "Character", new { c.UrlName }, null) + </text>
+                                          <text> @Html.ActionLink(WebUtility.HtmlDecode(c.LongName.Replace(" ","&nbsp;")),"Details", "Character", new { c.UrlName }, null) + </text>
                                       }</li>
                     
         }

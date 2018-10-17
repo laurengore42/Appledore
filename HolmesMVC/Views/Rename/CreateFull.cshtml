@@ -26,7 +26,7 @@
             @Html.LabelFor(model => model.CharacterID, "in Canon")
         </div>
         <div>
-            @Shared.LongName(Model.Character)
+            @Model.Character.LongName
             @Html.HiddenFor(model => model.CharacterID, "Character")
         </div>
 

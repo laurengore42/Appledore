@@ -13,6 +13,6 @@
 {
 <text>
 <p>
-    @a.Actor.ShortName as @Shared.ShortName(a.Character): @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
+    @a.Actor.ShortName as @a.Character.ShortName: @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
 </text>
 }

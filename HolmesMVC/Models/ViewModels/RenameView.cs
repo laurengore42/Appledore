@@ -30,7 +30,7 @@
             ActorId = r.ActorID;
             ActorName = r.Actor.ShortName;
             CharId = r.CharacterID;
-            CharName = Shared.LongName(r.Character);
+            CharName = r.Character.LongName;
             Honorific = r.HonorificID == null ? null : r.Honorific.Name;
             Forename = r.Forename;
             Surname = r.Surname;
