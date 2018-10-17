@@ -3,16 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
     using System.Web;
-    using System.Xml.Serialization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
-    using HolmesMVC.Models.ViewModels;
 
     using Microsoft.Ajax.Utilities;
 
