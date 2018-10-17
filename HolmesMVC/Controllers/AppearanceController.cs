@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
+    using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -35,18 +36,17 @@
             ViewBag.EpId = epId;
 
             // sort characters
-            var holmesId = Shared.GetHolmes();
-            var watsonId = Shared.GetWatson();
 
             var hApps =
-                (from a in relevantApps where a.CharacterID == holmesId select a)
+                (from a in relevantApps where a.CharacterID == (int)CanonCharacter.Holmes select a)
                     .ToList();
             var wApps =
-                (from a in relevantApps where a.CharacterID == watsonId select a)
+                (from a in relevantApps where a.CharacterID == (int)CanonCharacter.Watson select a)
                     .ToList();
             var canonApps = (from a in relevantApps
                          where
-                             a.CharacterID != holmesId && a.CharacterID != watsonId
+                             a.CharacterID != (int)CanonCharacter.Holmes
+                             && a.CharacterID != (int)CanonCharacter.Watson
                              && a.Character.IsCanon
                          select a).ToList();
             var uncanonApps = (from a in relevantApps

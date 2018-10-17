@@ -2,10 +2,11 @@
 {
     using System;
     using System.Linq;
+    using HolmesMVC.Enums;
 
     public class AnnivEpisode
     {
-        public AnnivEpisode(Episode e, int holmesId)
+        public AnnivEpisode(Episode e)
         {
             ID = e.ID;
             Airdate = e.Airdate;
@@ -14,7 +15,7 @@
             AdaptUrlName = e.Season.Adaptation.UrlName;
             AirOrder = e.AirOrder;
             SeasonAirOrder = e.Season.AirOrder;
-            var HolmesActor = Shared.PlayedBy(holmesId, e.Season.Adaptation).FirstOrDefault();
+            var HolmesActor = e.Season.Adaptation.PlayedBy(CanonCharacter.Holmes).FirstOrDefault();
             Holmes = HolmesActor == null ? "(nobody)" : HolmesActor.Surname;
         }
 

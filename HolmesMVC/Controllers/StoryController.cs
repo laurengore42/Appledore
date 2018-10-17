@@ -5,7 +5,7 @@
     using System.Net;
     using System.Web.Mvc;
     using System.Xml;
-
+    using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -47,8 +47,7 @@
             {
                 return View("Chunk", model);
             }
-
-            ViewBag.HolmesId = Shared.GetHolmes();
+            
             return View("Details", model);
         }
 

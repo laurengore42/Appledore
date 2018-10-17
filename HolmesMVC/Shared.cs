@@ -7,9 +7,6 @@
     using System.Web;
 
     using HolmesMVC.Enums;
-    using HolmesMVC.Models;
-
-    using Microsoft.Ajax.Utilities;
 
     public static class Shared
     {
@@ -88,60 +85,6 @@
                 default:
                     return count + " times";
             }
-        }
-
-        public static int GetHolmes()
-        {
-            return 1;
-        }
-
-        public static int GetWatson()
-        {
-            return 2;
-        }
-
-        public static List<Actor> PlayedBy(int charId, Adaptation adapt)
-        {
-            return (from a in adapt.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
-                    where a.CharacterID == charId
-                    group a by a.Actor into grp
-                    orderby grp.Count() descending
-                    select grp.Key).ToList();
-        }
-
-        public static List<Actor> PlayedBy(string name, Adaptation adapt)
-        {
-            var allCharacters = adapt.Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances).Select(a => a.Character).ToList();
-
-            if (!allCharacters.Any())
-            {
-                return new List<Actor>();
-            }
-
-            int charId;
-            switch (name)
-            {
-                case "Holmes":
-                    charId = GetHolmes();
-                    if (charId < 0)
-                    {
-                        return new List<Actor>();
-                    }
-
-                    break;
-                case "Watson":
-                    charId = GetWatson();
-                    if (charId < 0)
-                    {
-                        return new List<Actor>();
-                    }
-
-                    break;
-                default:
-                    throw new Exception("PlayedBy was called without a valid character name.");
-            }
-
-            return PlayedBy(charId, adapt);
         }
 
         public static string BuildName(IEnumerable<string> names, char divider)

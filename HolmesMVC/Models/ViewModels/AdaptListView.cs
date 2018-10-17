@@ -7,8 +7,6 @@ namespace HolmesMVC.Models.ViewModels
 {
     public class AdaptListView
     {
-        const int HolmesId = 1;
-
         public AdaptListView(HolmesDBEntities Db)
         {
             AdaptsFilm = (from a in Db.Adaptations
@@ -37,12 +35,12 @@ namespace HolmesMVC.Models.ViewModels
                               Holmes = (from ap in a.Seasons
                                         .SelectMany(s => s.Episodes)
                                         .SelectMany(e => e.Appearances)
-                                        where ap.CharacterID == HolmesId
+                                        where ap.CharacterID == (int)CanonCharacter.Holmes
                                         select ap).Any()
                                     ? (from ap in a.Seasons
                                        .SelectMany(s => s.Episodes)
                                        .SelectMany(e => e.Appearances)
-                                       where ap.CharacterID == HolmesId
+                                       where ap.CharacterID == (int)CanonCharacter.Holmes
                                        group ap by ap.ActorID into grp
                                        orderby grp.Count() descending
                                        select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
@@ -92,12 +90,12 @@ namespace HolmesMVC.Models.ViewModels
                                     Holmes = (from ap in a.Seasons
                                               .SelectMany(s => s.Episodes)
                                               .SelectMany(e => e.Appearances)
-                                              where ap.CharacterID == HolmesId
+                                              where ap.CharacterID == (int)CanonCharacter.Holmes
                                               select ap).Any()
                                           ? (from ap in a.Seasons
                                              .SelectMany(s => s.Episodes)
                                              .SelectMany(e => e.Appearances)
-                                             where ap.CharacterID == HolmesId
+                                             where ap.CharacterID == (int)CanonCharacter.Holmes
                                              group ap by ap.ActorID into grp
                                              orderby grp.Count() descending
                                              select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
@@ -147,12 +145,12 @@ namespace HolmesMVC.Models.ViewModels
                             Holmes = (from ap in a.Seasons
                                       .SelectMany(s => s.Episodes)
                                       .SelectMany(e => e.Appearances)
-                                      where ap.CharacterID == HolmesId
+                                      where ap.CharacterID == (int)CanonCharacter.Holmes
                                       select ap).Any()
                                   ? (from ap in a.Seasons
                                      .SelectMany(s => s.Episodes)
                                      .SelectMany(e => e.Appearances)
-                                     where ap.CharacterID == HolmesId
+                                     where ap.CharacterID == (int)CanonCharacter.Holmes
                                      group ap by ap.ActorID into grp
                                      orderby grp.Count() descending
                                      select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
@@ -202,12 +200,12 @@ namespace HolmesMVC.Models.ViewModels
                                      Holmes = (from ap in a.Seasons
                                                .SelectMany(s => s.Episodes)
                                                .SelectMany(e => e.Appearances)
-                                               where ap.CharacterID == HolmesId
+                                               where ap.CharacterID == (int)CanonCharacter.Holmes
                                                select ap).Any()
                                           ? (from ap in a.Seasons
                                              .SelectMany(s => s.Episodes)
                                              .SelectMany(e => e.Appearances)
-                                             where ap.CharacterID == HolmesId
+                                             where ap.CharacterID == (int)CanonCharacter.Holmes
                                              group ap by ap.ActorID into grp
                                              orderby grp.Count() descending
                                              select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
@@ -257,12 +255,12 @@ namespace HolmesMVC.Models.ViewModels
                                Holmes = (from ap in a.Seasons
                                          .SelectMany(s => s.Episodes)
                                          .SelectMany(e => e.Appearances)
-                                         where ap.CharacterID == HolmesId
+                                         where ap.CharacterID == (int)CanonCharacter.Holmes
                                          select ap).Any()
                                        ? (from ap in a.Seasons
                                           .SelectMany(s => s.Episodes)
                                           .SelectMany(e => e.Appearances)
-                                          where ap.CharacterID == HolmesId
+                                          where ap.CharacterID == (int)CanonCharacter.Holmes
                                           group ap by ap.ActorID into grp
                                           orderby grp.Count() descending
                                           select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
@@ -312,12 +310,12 @@ namespace HolmesMVC.Models.ViewModels
                                Holmes = (from ap in a.Seasons
                                          .SelectMany(s => s.Episodes)
                                          .SelectMany(e => e.Appearances)
-                                         where ap.CharacterID == HolmesId
+                                         where ap.CharacterID == (int)CanonCharacter.Holmes
                                          select ap).Any()
                                     ? (from ap in a.Seasons
                                        .SelectMany(s => s.Episodes)
                                        .SelectMany(e => e.Appearances)
-                                       where ap.CharacterID == HolmesId
+                                       where ap.CharacterID == (int)CanonCharacter.Holmes
                                        group ap by ap.ActorID into grp
                                        orderby grp.Count() descending
                                        select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()

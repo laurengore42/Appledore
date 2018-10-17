@@ -52,9 +52,6 @@
         [HttpPost]
         public string HolmesNum(string targetImdbName)
         {
-            var holmesId = Shared.GetHolmes();
-            var watsonId = Shared.GetWatson();
-
             var stringOut = string.Empty;
 
             try
@@ -80,10 +77,10 @@
                     // they're in Appledore!
                     // are they a Holmes or a Watson?
                     var isAHolmes = (from ap in dbActor.Appearances
-                                     where ap.CharacterID == holmesId
+                                     where ap.CharacterID == (int)CanonCharacter.Holmes
                                      select ap).Any();
                     var isAWatson = (from ap in dbActor.Appearances
-                                     where ap.CharacterID == watsonId
+                                     where ap.CharacterID == (int)CanonCharacter.Watson
                                      select ap).Any();
 
                     var dbApp = dbActor.Appearances.OrderBy(a => a.Episode.Airdate).First();
@@ -94,7 +91,7 @@
                     if (isAHolmes)
                     {
                         dbApp = (from ap in dbActor.Appearances
-                                    where ap.CharacterID == holmesId
+                                    where ap.CharacterID == (int)CanonCharacter.Holmes
                                  select ap).First();
                         dbAdapt = dbApp.Episode.Season.Adaptation;
                         dbRename = dbApp.GetRename();
@@ -109,7 +106,7 @@
                     if (isAWatson)
                     {
                         dbApp = (from ap in dbActor.Appearances
-                                 where ap.CharacterID == watsonId
+                                 where ap.CharacterID == (int)CanonCharacter.Watson
                                  select ap).First();
                         dbAdapt = dbApp.Episode.Season.Adaptation;
                         dbRename = dbApp.GetRename();
@@ -158,7 +155,7 @@
                 // get holmes list
                 var holmeses = (from a in Db.Appearances
                                 where
-                                    a.CharacterID == holmesId
+                                    a.CharacterID == (int)CanonCharacter.Holmes
                                     && a.Actor.IMDbName != null
                                 select new ToyHolmes { ID = a.ActorID, Name = a.Actor.IMDbName }).Distinct().ToList();
 
@@ -242,7 +239,7 @@
 
         public ViewResult Scraps()
         {
-            var holmesID = Shared.GetHolmes();
+            var holmesID = (int)CanonCharacter.Holmes;
             
             // How about an expansion of the HolmesNum to generate a network?
             // Inspired by talking to Ian Rennie about connections between Holmeses
@@ -351,10 +348,8 @@
         [AllowAnonymous]
         public ActionResult PhotoCollageToy()
         {
-            var holmesId = Shared.GetHolmes();
-
             var holmesList = (from app in Db.Appearances
-                              where app.CharacterID == holmesId
+                              where app.CharacterID == (int)CanonCharacter.Holmes
                               && app.ActorID > 0
                               && !string.IsNullOrEmpty(app.Actor.Pic)
                               group app by app.ActorID into grp
@@ -367,10 +362,8 @@
         [AllowAnonymous]
         public ActionResult MapPinToy()
         {
-            var holmesId = Shared.GetHolmes();
-
             var holmesList = (from app in Db.Appearances
-                              where app.CharacterID == holmesId
+                              where app.CharacterID == (int)CanonCharacter.Holmes
                               && app.ActorID > 0
                               && !string.IsNullOrEmpty(app.Actor.Birthplace)
                               group app by app.ActorID into grp

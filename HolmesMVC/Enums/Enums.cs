@@ -1,5 +1,11 @@
 ﻿namespace HolmesMVC.Enums
 {
+    public enum CanonCharacter
+    {
+        Holmes = 1,
+        Watson = 2
+    }
+
     public enum Medium
     {
         Television = 1,

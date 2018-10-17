@@ -151,12 +151,9 @@
 
         public ActionResult Analytics()
         {
-            var holmesId = Shared.GetHolmes();
-            var watsonId = Shared.GetWatson();
-
             ViewBag.actCount = Db.Actors.Count();
             ViewBag.holCount =
-                Db.Appearances.Where(a => a.CharacterID == holmesId)
+                Db.Appearances.Where(a => a.CharacterID == (int)CanonCharacter.Holmes)
                     .GroupBy(a => a.ActorID)
                     .Count();
 
@@ -352,14 +349,11 @@
             var rand = (new Random()).Next(unlockedCanonActors.Count() - 1);
             ViewBag.unlockedActor = unlockedCanonActors[rand];
             ViewBag.unlockedActorCount = unlockedCanonActors.Count();
-
-            var holmesId = Shared.GetHolmes();
-            var watsonId = Shared.GetWatson();
-
+            
             var unlockedHolmeses = (from a in unlockedCanonActors
                                     where (from ap in a.Appearances
                                            where
-                                               ap.CharacterID == holmesId
+                                               ap.CharacterID == (int)CanonCharacter.Holmes
                                                && ap.Episode.Season.Adaptation
                                                       .Medium != (int)Medium.Stage // to_do_theatre
                                            select ap).Any()

@@ -17,9 +17,6 @@
             var thisMonth = rightNow.Month;
             var thisDay = rightNow.Day;
 
-            var holmesId = Shared.GetHolmes();
-            var watsonId = Shared.GetWatson();
-
             var actorList = (from a in db.Actors
                              where null != a.Birthdate
                              && a.Birthdate.Value.Month == thisMonth
@@ -40,7 +37,7 @@
                           orderby e.Airdate
                           select e).ToList();
             AnnivEpisodes = (from e in epList
-                             select new AnnivEpisode(e, holmesId)
+                             select new AnnivEpisode(e)
                              ).ToList();
 
             var canonChars = from ap in db.Appearances

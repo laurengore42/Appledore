@@ -1,5 +1,5 @@
-﻿@using HolmesMVC
-@using HolmesMVC.Models
+﻿@using HolmesMVC.Models
+@using HolmesMVC.Enums
 @model HolmesMVC.Models.ViewModels.StoryView
 @{
     ViewBag.Title = Model.Episode.Story;
@@ -12,23 +12,27 @@
     <h2 class="detailscategory">Story</h2>
     <h2 class="detailsheader">@ViewBag.Title</h2>
     <ul class="actordetails">
-        <li>Abbreviated: @Model.ID</li><br/>
+        <li>Abbreviated: @Model.ID</li>
+        <br />
         @if (Model.BaringGouldEndString.Length > 0)
         {
-            <text><li>Baring-Gould's dates: @Model.BaringGouldStartString to @Model.BaringGouldEndString</li></text>
+            <text>
+                <li>Baring-Gould's dates: @Model.BaringGouldStartString to @Model.BaringGouldEndString</li></text>
         }
         else
         {
-            <text><li>Baring-Gould's date: @Model.BaringGouldStartString</li></text>
+            <text>
+                <li>Baring-Gould's date: @Model.BaringGouldStartString</li></text>
         }
-        <br/>
-        <li>Published: @Model.Episode.Airdate.ToString("MMMM yyyy")
-        @if (Model.ID != "STUD" && Model.ID != "SIGN" && Model.ID != "HOUN" && Model.ID != "VALL")
-        {
-            <text> and in '@Model.Episode.SeasonName'</text>
-        }
+        <br />
+        <li>
+            Published: @Model.Episode.Airdate.ToString("MMMM yyyy")
+            @if (Model.ID != "STUD" && Model.ID != "SIGN" && Model.ID != "HOUN" && Model.ID != "VALL")
+            {
+                <text> and in '@Model.Episode.SeasonName'</text>
+            }
         </li>
-        <br/>
+        <br />
         <li>Crime: @Model.VillainType.ToString()</li>
         <li>Outcome: @Model.OutcomeType.ToString()</li>
     </ul>
@@ -42,24 +46,23 @@
         {
             <text>Next: @Html.RouteLink(Model.Episode.EpNextName, "EpDetails", new { adaptWord = Model.Episode.AdaptationMediumUrlName, adaptName = Model.Episode.AdaptationUrlName, seasonNumber = Model.Episode.EpNextSeason, episodeNumber = Model.Episode.EpNextAirOrder })</text>}
     </p>
-    
+
     @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.Episode.EpId })
     @Html.Action("DatabaseLinks", "Home", new { table = "Story", id = Model.ID })
-    
+
     <article>
         <div class="adapteds">
             <h3>Adaptations</h3>
             <ul>
-                @{ var holmesId = (int)ViewBag.HolmesId; }
                 @foreach (Episode e in Model.Adapteds)
                 {
-                <li>
-                    @{
-                        var actorHolmes = Shared.PlayedBy(holmesId, e.Season.Adaptation).First();
-                    }
-                    @e.Airdate.ToString("yyyy"): @Html.RouteLink("'" + e.DisplayName + "'", "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
-                    {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(actorHolmes.ShortName, "Details", "Actor", new { actorHolmes.UrlName }, null)
-                </li>
+                    <li>
+                        @{
+                            var actorHolmes = e.Season.Adaptation.PlayedBy(CanonCharacter.Holmes).First();
+                        }
+                        @e.Airdate.ToString("yyyy"): @Html.RouteLink("'" + e.DisplayName + "'", "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
+                        {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(actorHolmes.ShortName, "Details", "Actor", new { actorHolmes.UrlName }, null)
+                    </li>
                 }
             </ul>
         </div>

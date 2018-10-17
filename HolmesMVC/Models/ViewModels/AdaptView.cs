@@ -18,8 +18,8 @@
             UrlName = adapt.UrlName;
             Company = adapt.Company;
 
-            HolmesActors = Shared.PlayedBy("Holmes", adapt);
-            WatsonActors = Shared.PlayedBy("Watson", adapt);
+            HolmesActors = adapt.PlayedBy(CanonCharacter.Holmes);
+            WatsonActors = adapt.PlayedBy(CanonCharacter.Watson);
 
             Episodes = (from e in adapt.Seasons.SelectMany(s => s.Episodes)
                         orderby e.Airdate, e.ID

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HolmesMVC.Enums;
@@ -62,6 +63,15 @@ namespace HolmesMVC.Models
 
                 return startYear > 0 ? (startYear + " " + company + " " + medium).Trim() : (company + " " + medium).Trim();
             }
+        }
+
+        public List<Actor> PlayedBy(CanonCharacter character)
+        {
+            return (from a in Seasons.SelectMany(s => s.Episodes).SelectMany(e => e.Appearances)
+                    where a.CharacterID == (int)character
+                    group a by a.Actor into grp
+                    orderby grp.Count() descending
+                    select grp.Key).ToList();
         }
     }
 }
