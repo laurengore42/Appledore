@@ -130,5 +130,40 @@ namespace HolmesMVC.Models
             }
         }
 
+
+        // returns 'Jeremy Brett'
+        public string ShortName
+        {
+            get
+            {
+                var forename = Forename;
+                var surname = Surname;
+                return Shared.BuildName(new[] { forename, surname }, ' ');
+            }
+        }
+
+        // returns 'Edward Cedric Hardwicke'
+        public string LongName
+        {
+            get
+            {
+                var forename = Forename ?? string.Empty;
+            var middlenames = Middlenames ?? string.Empty;
+            var surname = Surname ?? string.Empty;
+
+            return Shared.BuildName(new[] { forename, middlenames, surname }, ' ');
+            }
+        }
+
+        // returns 'Brett, Jeremy'
+        public string DisplayName
+        {
+            get
+            {
+                return Surname + (!string.IsNullOrWhiteSpace(Forename)
+                ? ", " + Forename
+                : string.Empty);
+            }
+        }
     }
 }
