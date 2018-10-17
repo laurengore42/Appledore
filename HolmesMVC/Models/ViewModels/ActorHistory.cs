@@ -11,7 +11,7 @@
             Airdate = ap.Episode.Airdate;
             AirdatePrecision = (DatePrecision)ap.Episode.AirdatePrecision;
             var rename = ap.GetRename();
-            CharacterName = null == rename ? ap.Character.LongName : Shared.LongName(rename);
+            CharacterName = null == rename ? ap.Character.LongName : rename.LongName;
             EpId = ap.EpisodeID;
             AdaptUrlName = ap.Episode.Season.Adaptation.UrlName;
             AdaptMediumUrlName = ap.Episode.Season.Adaptation.MediumUrlName;

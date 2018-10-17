@@ -89,7 +89,7 @@
                     var dbApp = dbActor.Appearances.OrderBy(a => a.Episode.Airdate).First();
                     var dbAdapt = dbApp.Episode.Season.Adaptation;
                     var dbRename = dbApp.GetRename();
-                    var charName = null == dbRename ? dbApp.Character.LongName : Shared.LongName(dbRename);
+                    var charName = null == dbRename ? dbApp.Character.LongName : dbRename.LongName;
 
                     if (isAHolmes)
                     {
@@ -98,7 +98,7 @@
                                  select ap).First();
                         dbAdapt = dbApp.Episode.Season.Adaptation;
                         dbRename = dbApp.GetRename();
-                        charName = null == dbRename ? dbApp.Character.LongName : Shared.LongName(dbRename);
+                        charName = null == dbRename ? dbApp.Character.LongName : dbRename.LongName;
 
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
                         stringOut += actorName + " played " + charName + " in '" + dbAdapt.DisplayName + "'.";
@@ -113,7 +113,7 @@
                                  select ap).First();
                         dbAdapt = dbApp.Episode.Season.Adaptation;
                         dbRename = dbApp.GetRename();
-                        charName = null == dbRename ? dbApp.Character.LongName : Shared.LongName(dbRename);
+                        charName = null == dbRename ? dbApp.Character.LongName : dbRename.LongName;
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
                         stringOut += actorName + " played " + charName + " in '" + dbAdapt.DisplayName + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
                         stringOut += "<br><br>" + actorName + "'s Holmes number is 1.";

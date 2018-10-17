@@ -77,21 +77,6 @@
             }
         }
 
-        // returns 'Professor James Moriarty'
-        public static string LongName(Rename rename)
-        {
-            return (rename == null)
-                ? null
-                : new Character
-                {
-                    HonorificID = rename.HonorificID,
-                    Honorific =
-                        rename.Honorific,
-                    Forename = rename.Forename,
-                    Surname = rename.Surname
-                }.LongName;
-        }
-
         public static string Times(int count)
         {
             switch (count)

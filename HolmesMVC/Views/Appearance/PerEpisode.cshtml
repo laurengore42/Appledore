@@ -48,7 +48,7 @@ else
                         }
                         else
                         {
-                            @Html.ActionLink(Shared.LongName(rename), "Details", "Character", new { appearance.Character.UrlName }, null)
+                            @Html.ActionLink(rename.LongName, "Details", "Character", new { appearance.Character.UrlName }, null)
                         }
                     </span>
                 </td>

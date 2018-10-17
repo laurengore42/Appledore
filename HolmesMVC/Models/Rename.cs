@@ -13,5 +13,21 @@ namespace HolmesMVC.Models
         public virtual Adaptation Adaptation { get; set; }
         public virtual Character Character { get; set; }
         public virtual Honorific Honorific { get; set; }
+
+
+        // returns 'Professor James Moriarty'
+        public string LongName
+        {
+            get
+            {
+                return new Character
+                    {
+                        HonorificID = HonorificID,
+                        Honorific = Honorific,
+                        Forename = Forename,
+                        Surname = Surname
+                    }.LongName;
+            }
+        }
     }
 }
