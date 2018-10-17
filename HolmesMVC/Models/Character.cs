@@ -29,7 +29,7 @@ namespace HolmesMVC.Models
         {
             get {
                 return (from a in Appearances
-                        where a.Episode.Season.Adaptation.Name == "Canon"
+                        where a.Episode.Season.Adaptation.IsCanon
                         select a).Any();
             }
         }

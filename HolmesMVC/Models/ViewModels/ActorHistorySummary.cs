@@ -19,9 +19,7 @@
             CharacterName = null == rename ? Shared.LongName(sampleApp.Character) : Shared.LongName(rename);
             CharacterUrlName = sampleApp.Character.UrlName;
             MediumName = ((Medium)sampleApp.Episode.Season.Adaptation.Medium).ToString();
-            AdaptName = sampleApp.Episode.Season.Adaptation.Name
-                        ?? Shared.DisplayName(
-                            sampleApp.Episode.Season.Adaptation);
+            AdaptName = sampleApp.Episode.Season.Adaptation.DisplayName;
             AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
             AdaptUrlName = sampleApp.Episode.Season.Adaptation.UrlName;
         }

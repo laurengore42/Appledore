@@ -13,7 +13,7 @@
             AdaptMediumUrlName = ap.Episode.Season.Adaptation.MediumUrlName;
             AirOrder = ap.Episode.AirOrder;
             SeasonAirOrder = ap.Episode.Season.AirOrder;
-            AdaptName = Shared.DisplayName(ap.Episode.Season.Adaptation);
+            AdaptName = ap.Episode.Season.Adaptation.DisplayName;
             SeasonCode = ap.Episode.SeasonCode;
 
             var airdatePrecision = (DatePrecision)ap.Episode.AirdatePrecision;

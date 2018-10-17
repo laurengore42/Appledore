@@ -20,7 +20,7 @@
             var rawEp = (from e in story.Episodes
                          where
                              null != e.Season.Adaptation.Name
-                             && e.Season.Adaptation.Name == "Canon"
+                             && e.Season.Adaptation.IsCanon
                          select e).FirstOrDefault();
 
             Episode = new EpisodeView(rawEp);

@@ -301,7 +301,7 @@
                 var sortedNodes = new List<CanonSearchNode>();
 
                 var sortedStories = (from e in Db.Episodes
-                                     where e.Season.Adaptation.Name == "Canon"
+                                     where e.Season.Adaptation.IsCanon
                                      select e.StoryID).ToList();
 
                 foreach (var s in sortedStories)

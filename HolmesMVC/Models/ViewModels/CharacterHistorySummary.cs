@@ -26,7 +26,7 @@
             ActorName = sampleApp.Actor.ShortName;
             ActorUrlName = sampleApp.Actor.UrlName;
             MediumName = ((Medium)sampleApp.Episode.Season.Adaptation.Medium).ToString();
-            AdaptName = Shared.DisplayName(sampleApp.Episode.Season.Adaptation);
+            AdaptName = sampleApp.Episode.Season.Adaptation.DisplayName;
             AdaptTranslation = sampleApp.Episode.Season.Adaptation.Translation;
             AdaptUrlName = sampleApp.Episode.Season.Adaptation.UrlName;
 

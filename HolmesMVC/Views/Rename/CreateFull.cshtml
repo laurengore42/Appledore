@@ -18,7 +18,7 @@
             @Html.LabelFor(model => model.AdaptationID, "Adaptation")
         </div>
         <div>
-            @Shared.DisplayName(Model.Adaptation)
+            @Model.Adaptation.DisplayName
             @Html.HiddenFor(model => model.AdaptationID, "Adaptation")
         </div>
 

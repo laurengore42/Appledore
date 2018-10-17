@@ -39,7 +39,7 @@
                 AirOrder = newSeasonAirOrder
             };
 
-            ViewBag.AdaptationName = Shared.DisplayName(adapt);
+            ViewBag.AdaptationName = adapt.DisplayName;
 
             return View(model);
         }
@@ -78,7 +78,7 @@
             var listAdapts = (from a in adapts
                               select new SelectListItem
                               {
-                                  Text = a.Name ?? Shared.DisplayName(a),
+                                  Text = a.Name ?? a.DisplayName,
                                   Value = a.ID.ToString(
                                      CultureInfo.InvariantCulture
                                   )
@@ -143,7 +143,7 @@
                               select new SelectListItem
                               {
                                   Value = a.ID.ToString(CultureInfo.InvariantCulture),
-                                  Text = Shared.DisplayName(a)
+                                  Text = a.DisplayName
                               }).ToList();
             return adaptsList;
         } 

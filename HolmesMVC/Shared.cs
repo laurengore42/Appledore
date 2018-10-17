@@ -146,35 +146,6 @@
             return "Error in Episode DisplayName!";
         }
 
-        // returns '1984 Granada TV'
-        public static string DisplayName(Adaptation a)
-        {
-            if (!string.IsNullOrWhiteSpace(a.Name))
-            {
-                return a.Name;
-            }
-
-            if (a.Seasons.Count() == 1
-                && a.Seasons.First().Episodes.Count() == 1)
-            {
-                return a.Seasons.First().Episodes.First().Title;
-            }
-
-            var medium = ((Medium)a.Medium).ToString();
-            if (a.Medium == (int)Medium.Television)
-            {
-                medium = "TV"; // special case
-            }
-
-            var company = string.IsNullOrWhiteSpace(a.Company) ? string.Empty : a.Company;
-
-            var startYear = (from e in a.Seasons.SelectMany(s => s.Episodes)
-                             orderby e.Airdate
-                             select e.Airdate.Year).FirstOrDefault();
-
-            return startYear > 0 ? (startYear + " " + company + " " + medium).Trim() : (company + " " + medium).Trim();
-        }
-
         public static string Times(int count)
         {
             switch (count)

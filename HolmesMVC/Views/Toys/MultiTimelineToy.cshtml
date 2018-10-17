@@ -19,7 +19,7 @@
                     <option value="0"></option>
                     @foreach (HolmesMVC.Models.Adaptation ad in Model)
                     {
-                        var name = HolmesMVC.Shared.DisplayName(ad);
+                        var name = ad.DisplayName;
                         if (ad.Translation != null)
                         {
                             name = name + " (" + ad.Translation + ")";
@@ -55,7 +55,7 @@
                     string divID = "timelinediv" + ad.ID.ToString();
                     string canvasID = "timeline" + ad.ID.ToString();
                 <div id="@divID" class="timelineDiv" style="display:none;">
-                    <h3>@HolmesMVC.Shared.DisplayName(ad)</h3>
+                    <h3>@ad.DisplayName</h3>
                     <canvas id="@canvasID" data-firstepisode="@startYear" data-lastepisode="@endYear" data-startyear="@startYear" data-startmonth="1" data-endyear="@endYear" data-endmonth="12" data-spottyvalues="@spottyValues" class="timelineCanvas" style="display:none;">Turn on &lt;canvas&gt;.</canvas>
                 </div>
                 }

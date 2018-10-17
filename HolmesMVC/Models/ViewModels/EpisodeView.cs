@@ -100,10 +100,7 @@
             AirdatePrecision = (DatePrecision)episode.AirdatePrecision;
             EpId = episode.ID;
             Adaptation = episode.Season.AdaptationID;
-            AdaptationName =
-                string.IsNullOrWhiteSpace(episode.Season.Adaptation.Name)
-                    ? Shared.DisplayName(episode.Season.Adaptation)
-                    : episode.Season.Adaptation.Name;
+            AdaptationName = episode.Season.Adaptation.DisplayName;
             AdaptationTranslation = episode.Season.Adaptation.Translation;
             AdaptationMediumUrlName = episode.Season.Adaptation.MediumUrlName;
             AdaptationUrlName = episode.Season.Adaptation.UrlName;

@@ -21,7 +21,7 @@
                                   select new SelectListItem
                                   {
                                       Value = a.ID.ToString(CultureInfo.InvariantCulture),
-                                      Text = Shared.DisplayName(a)
+                                      Text = a.DisplayName
                                   }).OrderBy(a => a.Text).ToList();
                 ViewBag.Adaptation = adaptsList;
 

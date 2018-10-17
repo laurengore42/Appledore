@@ -26,7 +26,7 @@
         {
             ID = r.ID;
             AdaptId = r.AdaptationID;
-            AdaptName = Shared.DisplayName(r.Adaptation);
+            AdaptName = r.Adaptation.DisplayName;
             ActorId = r.ActorID;
             ActorName = r.Actor.ShortName;
             CharId = r.CharacterID;

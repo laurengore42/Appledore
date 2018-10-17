@@ -101,7 +101,7 @@
                         charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
 
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
-                        stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "'.";
+                        stringOut += actorName + " played " + charName + " in '" + dbAdapt.DisplayName + "'.";
                         stringOut += "<br><br>" + actorName + "'s Holmes number is 0.";
                         return stringOut;
                     }
@@ -115,14 +115,14 @@
                         dbRename = dbApp.GetRename();
                         charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
-                        stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
+                        stringOut += actorName + " played " + charName + " in '" + dbAdapt.DisplayName + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
                         stringOut += "<br><br>" + actorName + "'s Holmes number is 1.";
                         return stringOut;
                     }
 
                     // Or if they're just some randomer.
                     stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
-                    stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
+                    stringOut += actorName + " played " + charName + " in '" + dbAdapt.DisplayName + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
                     stringOut += "<br><br>" + actorName + "'s Holmes number is 1.";
                     return stringOut;
                 }

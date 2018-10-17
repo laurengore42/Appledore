@@ -1,7 +1,7 @@
 ﻿@using HolmesMVC
 @model HolmesMVC.Models.Appearance
 
-@if (Shared.DisplayName(Model.Episode.Season.Adaptation) == "Canon")
+@if (Model.Episode.Season.Adaptation.IsCanon)
 {
     <div class="editor-field">
         @Html.HiddenFor(model => model.ActorID)

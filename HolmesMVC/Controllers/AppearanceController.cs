@@ -167,7 +167,7 @@
             };
 
             var adapt = episode.Season.Adaptation;
-            if (Shared.DisplayName(adapt) == "Canon")
+            if (adapt.IsCanon)
             {
                 appearance.ActorID = 0;
             }

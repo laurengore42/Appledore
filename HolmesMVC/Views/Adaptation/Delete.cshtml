@@ -15,7 +15,7 @@
         @Html.DisplayFor(model => model.Name), @Html.DisplayFor(model => ((Medium)model.Medium).ToString()), @Html.DisplayFor(model => model.Company)
     </div>
     <div>
-        also known as '@HolmesMVC.Shared.DisplayName(Model)'
+        also known as '@Model.DisplayName'
     </div>
 </fieldset>
 @using (Html.BeginForm())

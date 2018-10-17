@@ -33,7 +33,7 @@
             var epList = (from e in db.Episodes
                           where 
                           e.Season.Adaptation.Medium != (int)Medium.Stage
-                          && e.Season.Adaptation.Name != "Canon"
+                          && !e.Season.Adaptation.IsCanon
                           && e.Airdate.Month == thisMonth
                           && e.Airdate.Day == thisDay
                           && e.AirdatePrecision == FullPrecision
@@ -44,7 +44,7 @@
                              ).ToList();
 
             var canonChars = from ap in db.Appearances
-                             where ap.Episode.Season.Adaptation.Name == "Canon"
+                             where ap.Episode.Season.Adaptation.IsCanon
                              && ap.CharacterID > 0
                              select ap.CharacterID;
 

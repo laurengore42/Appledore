@@ -11,7 +11,7 @@
         public AdaptView(Adaptation adapt)
         {
             ID = adapt.ID;
-            DisplayName = Shared.DisplayName(adapt);
+            DisplayName = adapt.DisplayName;
             Translation = adapt.Translation;
             Medium = adapt.Medium;
             MediumName = ((Medium)adapt.Medium).ToString();

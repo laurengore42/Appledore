@@ -9,7 +9,7 @@
 
 <h3>Are you sure you want to delete this appearance?</h3>
 
-<p>@Model.Actor.ShortName as @Shared.LongName(Model.Character) in '@Model.Episode.Title', @Shared.DisplayName(Model.Episode.Season.Adaptation)</p>
+<p>@Model.Actor.ShortName as @Shared.LongName(Model.Character) in '@Model.Episode.Title', @Model.Episode.Season.Adaptation.DisplayName</p>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using HolmesMVC.Enums;
 
 namespace HolmesMVC.Models
 {
@@ -21,5 +22,46 @@ namespace HolmesMVC.Models
 
         public virtual ICollection<Rename> Renames { get; set; }
         public virtual ICollection<Season> Seasons { get; set; }
+
+        public bool IsCanon
+        {
+            get
+            {
+                return Name == "Canon";
+            }
+        }
+
+
+        // returns '1984 Granada TV'
+        public string DisplayName
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Name))
+                {
+                    return Name;
+                }
+
+                if (Seasons.Count() == 1
+                    && Seasons.First().Episodes.Count() == 1)
+                {
+                    return Seasons.First().Episodes.First().Title;
+                }
+
+                var medium = ((Medium)Medium).ToString();
+                if (Medium == (int)Enums.Medium.Television)
+                {
+                    medium = "TV"; // special case
+                }
+
+                var company = string.IsNullOrWhiteSpace(Company) ? string.Empty : Company;
+
+                var startYear = (from e in Seasons.SelectMany(s => s.Episodes)
+                                 orderby e.Airdate
+                                 select e.Airdate.Year).FirstOrDefault();
+
+                return startYear > 0 ? (startYear + " " + company + " " + medium).Trim() : (company + " " + medium).Trim();
+            }
+        }
     }
 }

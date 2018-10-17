@@ -4,7 +4,7 @@
 @model HolmesMVC.Models.ViewModels.MassAdd
 
 @{
-    ViewBag.Title = "MassAdd for " + Shared.DisplayName(Model.Adaptation);
+    ViewBag.Title = "MassAdd for " + Model.Adaptation.DisplayName;
 }
         <h2>MassAdd</h2>
         for @ViewBag.Title

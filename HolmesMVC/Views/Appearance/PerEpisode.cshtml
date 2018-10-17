@@ -10,7 +10,7 @@
 }
 else
 {
-    var canonPage = Model.First().Episode.Season.Adaptation.Name == "Canon";
+    var canonPage = Model.First().Episode.Season.Adaptation.IsCanon;
     var castTitle = canonPage ? "Characters" : "Cast";
 
     <table class="lineddetails">

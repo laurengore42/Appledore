@@ -36,11 +36,9 @@
             {
                 return RedirectToAction("Details", "Adaptation", new { adaptName });
             }
-
-            var canon = Shared.DisplayName(episode.Season.Adaptation) == "Canon";
-
+            
             // the Canon case
-            if (canon)
+            if (episode.Season.Adaptation.IsCanon)
             {
                 return RedirectToAction("Details", "Story", new { id = episode.StoryID });
             }
@@ -129,7 +127,7 @@
             var listAdapts = (from a in adapts
                       select new SelectListItem
                                  {
-                                     Text = a.Name ?? Shared.DisplayName(a),
+                                     Text = a.DisplayName,
                                      Value = a.ID.ToString(
                                         CultureInfo.InvariantCulture
                                      )
@@ -193,7 +191,7 @@
             ViewBag.SeasonList = new SelectList(listSeasons, "Value", "Text");
             model.Season = currentSeason;
             model.Adaptation = relevantAdapt.ID;
-            ViewBag.adaptName = Shared.DisplayName(relevantAdapt);
+            ViewBag.adaptName = relevantAdapt.DisplayName;
 
             return PartialView(model);
         }
