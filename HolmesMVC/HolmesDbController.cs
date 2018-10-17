@@ -3,7 +3,7 @@
     using System.Web.Mvc;
     using HolmesMVC.Models;
 
-    [OutputCache(Duration = 86400, VaryByCustom = "LastDbUpdate")]
+    [OutputCache(Duration = 1, VaryByCustom = "LastDbUpdate")]
     public class HolmesDbController : Controller
     {
         protected readonly HolmesDBEntities Db = new HolmesDBEntities();
