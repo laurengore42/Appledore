@@ -81,7 +81,7 @@
                                    select e).First();
                 EpPrevAirOrder = episodePrev.AirOrder;
                 EpPrevSeason = episodePrev.Season.AirOrder;
-                EpPrevName = Shared.DisplayName(episodePrev);
+                EpPrevName = episodePrev.DisplayName;
                 EpPrevTranslation = episodePrev.Translation;
             }
             if (epLocation < orderedList.Count-1)
@@ -92,7 +92,7 @@
                               select e).First();
                 EpNextAirOrder = episodeNext.AirOrder;
                 EpNextSeason = episodeNext.Season.AirOrder;
-                EpNextName = Shared.DisplayName(episodeNext);
+                EpNextName = episodeNext.DisplayName;
                 EpNextTranslation = episodeNext.Translation;
             }
             
@@ -111,7 +111,7 @@
             Title = episode.Title;
             Translation = episode.Translation;
             Poster = episode.Poster;
-            DisplayName = Shared.DisplayName(episode);
+            DisplayName = episode.DisplayName;
             Medium = episode.Season.Adaptation.Medium;
             MediumName = ((Medium)episode.Season.Adaptation.Medium).ToString();
             StoryCode = episode.StoryID;

@@ -19,7 +19,7 @@
             SeasonAirOrder = ap.Episode.Season.AirOrder;
             AdaptName = ap.Episode.Season.Adaptation.Name
                         ?? ap.Episode.Season.Adaptation.DisplayName;
-            EpName = Shared.DisplayName(ap.Episode);
+            EpName = ap.Episode.DisplayName;
             EpTranslation = ap.Episode.Translation;
             SeasonCode = ap.Episode.SeasonCode;
             Medium = ap.Episode.Season.Adaptation.Medium;

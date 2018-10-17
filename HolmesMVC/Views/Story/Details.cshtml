@@ -53,13 +53,11 @@
                 @{ var holmesId = (int)ViewBag.HolmesId; }
                 @foreach (Episode e in Model.Adapteds)
                 {
-                    string epName = Shared.DisplayName(e);
-                    epName = "'" + epName + "'";
                 <li>
                     @{
                         var actorHolmes = Shared.PlayedBy(holmesId, e.Season.Adaptation).First();
                     }
-                    @e.Airdate.ToString("yyyy"): @Html.RouteLink(epName, "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
+                    @e.Airdate.ToString("yyyy"): @Html.RouteLink("'" + e.DisplayName + "'", "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
                     {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(actorHolmes.ShortName, "Details", "Actor", new { actorHolmes.UrlName }, null)
                 </li>
                 }

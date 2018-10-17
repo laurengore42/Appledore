@@ -12,9 +12,8 @@
 @{ var i = 1; }
 @foreach (var e in Model.Episodes.OrderBy(e => e.Airdate))
 {
-    var epname = Shared.DisplayName(e);
 <text>
-<p>Episode @i: '@epname' @Html.ActionLink("Delete","Delete","Episode",new { id = e.ID},null)</p>
+<p>Episode @i: '@e.DisplayName' @Html.ActionLink("Delete","Delete","Episode",new { id = e.ID},null)</p>
 </text>
     i++;
 }

@@ -182,9 +182,8 @@ else
                         airdateFormat = "yyyy";
                     }
                     <td>@e.Airdate.ToString(airdateFormat)</td>
-                    @{var name = Shared.DisplayName(e);}
                     <td>
-                        @Html.RouteLink(name, "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }) @if (!string.IsNullOrEmpty(e.Translation))
+                        @Html.RouteLink(e.DisplayName, "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }) @if (!string.IsNullOrEmpty(e.Translation))
                         {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>}
                     </td>
                 </tr>

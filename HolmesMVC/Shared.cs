@@ -128,19 +128,6 @@
                              : c.Surname;
         }
 
-        public static string DisplayName(Episode e)
-        {
-            if (!e.Title.IsNullOrWhiteSpace())
-            {
-                return e.Title;
-            }
-            if (!e.StoryID.IsNullOrWhiteSpace())
-            {
-                return e.Story.Name;
-            }
-            return "Error in Episode DisplayName!";
-        }
-
         public static string Times(int count)
         {
             switch (count)

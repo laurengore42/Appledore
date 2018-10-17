@@ -7,7 +7,7 @@
         public CharacterHistory(Appearance ap)
         {
             EpId = ap.EpisodeID;
-            EpName = Shared.DisplayName(ap.Episode);
+            EpName = ap.Episode.DisplayName;
             EpTranslation = ap.Episode.Translation;
             AdaptUrlName = ap.Episode.Season.Adaptation.UrlName;
             AdaptMediumUrlName = ap.Episode.Season.Adaptation.MediumUrlName;

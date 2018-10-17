@@ -12,6 +12,6 @@
 @foreach (var a in Model.Appearances)
 {
 <text>
-<p>in '@Shared.DisplayName(a.Episode)' as @Shared.ShortName(a.Character): @Html.ActionLink("Delete","Delete","Appearance", new {id = a.ID},null)
+<p>in '@a.Episode.DisplayName' as @Shared.ShortName(a.Character): @Html.ActionLink("Delete","Delete","Appearance", new {id = a.ID},null)
 </text>
 }

@@ -15,7 +15,7 @@
 	{
 		<text>
 			<p>
-				In '@Shared.DisplayName(a.Episode)' played by @a.Actor.ShortName: @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
+				In '@a.Episode.DisplayName' played by @a.Actor.ShortName: @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
 		</text>
 	}
 }

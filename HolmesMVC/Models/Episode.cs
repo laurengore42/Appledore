@@ -28,5 +28,22 @@ namespace HolmesMVC.Models
         public virtual Story Story { get; set; }
         public virtual ICollection<Reference> References { get; set; }
         public virtual ICollection<HolmesLink> HolmesLinks { get; set; }
+
+
+        public string DisplayName
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Title))
+                {
+                    return Title;
+                }
+                if (!string.IsNullOrWhiteSpace(StoryID))
+                {
+                    return Story.Name;
+                }
+                return "Error in Episode DisplayName!";
+            }
+        }
     }
 }

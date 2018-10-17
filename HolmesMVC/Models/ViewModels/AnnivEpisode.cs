@@ -9,7 +9,7 @@
         {
             ID = e.ID;
             Airdate = e.Airdate;
-            Name = Shared.DisplayName(e);
+            Name = e.DisplayName;
             AdaptMediumUrlName = e.Season.Adaptation.MediumUrlName;
             AdaptUrlName = e.Season.Adaptation.UrlName;
             AirOrder = e.AirOrder;

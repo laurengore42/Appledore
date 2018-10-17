@@ -24,11 +24,11 @@
     @if (null != unlockedFilm)
     {
         <text>Or this film's cast list (@ViewBag.unlockedFilmCount left):<br />
-        @Html.RouteLink(Shared.DisplayName(unlockedFilm), "EpDetails", new { adaptWord = unlockedFilm.Season.Adaptation.MediumUrlName, adaptName = unlockedFilm.Season.Adaptation.UrlName, seasonNumber = unlockedFilm.Season.AirOrder, episodeNumber = unlockedFilm.AirOrder })<br /></text>
+        @Html.RouteLink(unlockedFilm.DisplayName, "EpDetails", new { adaptWord = unlockedFilm.Season.Adaptation.MediumUrlName, adaptName = unlockedFilm.Season.Adaptation.UrlName, seasonNumber = unlockedFilm.Season.AirOrder, episodeNumber = unlockedFilm.AirOrder })<br /></text>
     }
     else
     {
         <text>Or this episode's cast list (@ViewBag.unlockedEpisodeCount left):<br />
-        @Html.RouteLink(Shared.DisplayName(unlockedEpisode), "EpDetails", new { adaptWord = unlockedEpisode.Season.Adaptation.MediumUrlName, adaptName = unlockedEpisode.Season.Adaptation.UrlName, seasonNumber = unlockedEpisode.Season.AirOrder, episodeNumber = unlockedEpisode.AirOrder })<br /></text>
+        @Html.RouteLink(unlockedEpisode.DisplayName, "EpDetails", new { adaptWord = unlockedEpisode.Season.Adaptation.MediumUrlName, adaptName = unlockedEpisode.Season.Adaptation.UrlName, seasonNumber = unlockedEpisode.Season.AirOrder, episodeNumber = unlockedEpisode.AirOrder })<br /></text>
     }
 </div>
