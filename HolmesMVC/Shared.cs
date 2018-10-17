@@ -259,37 +259,5 @@
 
             return outName.TrimEnd();
         }
-
-        public static Dictionary<char, char> GetAccentDictionary()
-        {
-            return new Dictionary<char, char>() { 
-                                                     { 'á', 'a' }
-                                                    ,{ 'à', 'a' }
-                                                    ,{ 'é', 'e' }
-                                                    ,{ 'è', 'e' }
-                                                    ,{ 'ö', 'o' }
-                                                    ,{ 'ô', 'o' }
-                                                    ,{ 'ō', 'o' }
-                                                    ,{ 'ø', 'o' }
-                                                };
-        }
-
-        public static string GetAccentDictionaryAsJson()
-        {
-            var ad = GetAccentDictionary();
-            string json = JsonConvert.SerializeObject(ad, new KeyValuePairConverter());
-            return json;
-        }
-
-        public static string NormaliseString(string input)
-        {
-            var accentDictionary = GetAccentDictionary();
-            var output = input;
-            foreach (char n in accentDictionary.Keys)
-            {
-                output = output.Replace(n, accentDictionary[n]);
-            }
-            return output;
-        }
     }
 }
