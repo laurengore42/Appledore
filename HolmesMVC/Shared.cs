@@ -87,22 +87,7 @@
             }
         }
 
-        public static string BuildName(IEnumerable<string> names, char divider)
-        {
-            var outName = string.Empty;
-            var namesList = names.ToList();
-
-            for (var i = 0; i < namesList.Count(); i++)
-            {
-                if (string.IsNullOrWhiteSpace(namesList[i]))
-                {
-                    continue;
-                }
-
-                outName += namesList[i] + divider;
-            }
-
-            return outName.TrimEnd();
-        }
+        public static string BuildName(IEnumerable<string> names, string divider) =>
+            string.Join(divider, names.Where(s => !string.IsNullOrEmpty(s)));
     }
 }

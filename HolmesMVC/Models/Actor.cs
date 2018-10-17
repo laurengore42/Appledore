@@ -138,7 +138,7 @@ namespace HolmesMVC.Models
             {
                 var forename = Forename;
                 var surname = Surname;
-                return Shared.BuildName(new[] { forename, surname }, ' ');
+                return Shared.BuildName(new[] { forename, surname }, " ");
             }
         }
 
@@ -151,7 +151,7 @@ namespace HolmesMVC.Models
             var middlenames = Middlenames ?? string.Empty;
             var surname = Surname ?? string.Empty;
 
-            return Shared.BuildName(new[] { forename, middlenames, surname }, ' ');
+            return Shared.BuildName(new[] { forename, middlenames, surname }, " ");
             }
         }
 
