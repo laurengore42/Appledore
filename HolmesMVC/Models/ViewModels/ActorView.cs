@@ -59,8 +59,8 @@
             UrlName = actor.UrlName;
             Age = actor.AgeInYears;
 
-            ShortName = Shared.ShortName(actor);
-            LongName = Shared.LongName(actor);
+            ShortName = actor.ShortName;
+            LongName = actor.LongName;
 
             // Get actor's appearances
             Histories = (from ap in actor.Appearances

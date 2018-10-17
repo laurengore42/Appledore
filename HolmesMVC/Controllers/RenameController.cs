@@ -40,7 +40,7 @@
                                   select new SelectListItem
                                   {
                                       Value = a.ID.ToString(CultureInfo.InvariantCulture),
-                                      Text = Shared.DisplayName(a) + " [" + a.ID + "]"
+                                      Text = a.DisplayName + " [" + a.ID + "]"
                                   }).OrderBy(a => a.Text).ToList();
                 ViewBag.Actor = actorsList;
 

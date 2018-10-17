@@ -15,7 +15,7 @@
 	{
 		<text>
 			<p>
-				In '@Shared.DisplayName(a.Episode)' played by @Shared.ShortName(a.Actor): @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
+				In '@Shared.DisplayName(a.Episode)' played by @a.Actor.ShortName: @Html.ActionLink("Delete", "Delete", "Appearance", new { id = a.ID }, null)
 		</text>
 	}
 }
@@ -28,7 +28,7 @@
 	{
 		<text>
 			<p>
-				In '@Html.ActionLink(Shared.DisplayName(r.Adaptation), "Details", "Adaptation", new { urlName = r.Adaptation.UrlName }, null)', @Shared.ShortName(r.Actor) plays @Shared.DisplayName(r.Character) as "@Shared.LongName(new HolmesMVC.Models.Character {HonorificID = r.HonorificID, Honorific = r.Honorific, Forename = r.Forename, Surname = r.Surname })".
+				In '@Html.ActionLink(Shared.DisplayName(r.Adaptation), "Details", "Adaptation", new { urlName = r.Adaptation.UrlName }, null)', @r.Actor.ShortName plays @Shared.DisplayName(r.Character) as "@Shared.LongName(new HolmesMVC.Models.Character {HonorificID = r.HonorificID, Honorific = r.Honorific, Forename = r.Forename, Surname = r.Surname })".
 		</text>
 	}
 }

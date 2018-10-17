@@ -34,7 +34,7 @@
             @Html.LabelFor(model => model.ActorID, "Actor")
         </div>
         <div>
-            @Shared.ShortName(Model.Actor)
+            @Model.Actor.ShortName
             @Html.HiddenFor(model => model.ActorID, "Actor")
         </div>
 

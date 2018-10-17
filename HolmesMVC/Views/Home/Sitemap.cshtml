@@ -78,7 +78,7 @@
 <ul>
     @foreach (var a in actors.Where(a => a.ID > 0))
     {
-        <li><a href="/actor/@a.UrlName">@HolmesMVC.Shared.ShortName(a)</a></li>
+        <li><a href="/actor/@a.UrlName">@a.ShortName</a></li>
     }
 </ul>
 

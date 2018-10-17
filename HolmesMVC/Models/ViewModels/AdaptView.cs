@@ -37,7 +37,7 @@
             {
                 ActorNames = from a in Episodes.First().Appearances
                              where a.ActorID > 0
-                             select Shared.ShortName(a.Actor);
+                             select a.Actor.ShortName;
             }
         }
 

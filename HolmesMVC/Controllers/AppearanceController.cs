@@ -219,7 +219,7 @@
                                  new SelectListItem
                                  {
                                      Value = actor.ID.ToString(CultureInfo.InvariantCulture),
-                                     Text = Shared.DisplayName(actor)
+                                     Text = actor.DisplayName
                                  }).OrderBy(a => a.Text).ToList();
             return actorlist;
         }

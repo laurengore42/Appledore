@@ -28,7 +28,7 @@
             AdaptId = r.AdaptationID;
             AdaptName = Shared.DisplayName(r.Adaptation);
             ActorId = r.ActorID;
-            ActorName = Shared.ShortName(r.Actor);
+            ActorName = r.Actor.ShortName;
             CharId = r.CharacterID;
             CharName = Shared.LongName(r.Character);
             Honorific = r.HonorificID == null ? null : r.Honorific.Name;

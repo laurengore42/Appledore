@@ -22,7 +22,7 @@
             {
                 <text>{</text>
                 <text>"@@type": "Person" </text>
-                <text>,"name": "@Shared.ShortName(Model.HolmesActors.First())"</text>
+                <text>,"name": "@(Model.HolmesActors.First().ShortName)"</text>
                 <text>}</text>
             }
             if (Model.HolmesActors.Any() && Model.WatsonActors.Any())
@@ -33,7 +33,7 @@
             {
                 <text>{</text>
                 <text>"@@type": "Person" </text>
-                <text>,"name": "@Shared.ShortName(Model.WatsonActors.First())"</text>
+                <text>,"name": "@(Model.WatsonActors.First().ShortName)"</text>
                 <text>}</text>
             }
             <text>]</text>

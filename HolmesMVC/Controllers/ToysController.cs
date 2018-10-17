@@ -75,7 +75,7 @@
                               select a).FirstOrDefault();
                 if (null != dbActor)
                 {
-                    var actorName = Shared.ShortName(dbActor);
+                    var actorName = dbActor.ShortName;
 
                     // they're in Appledore!
                     // are they a Holmes or a Watson?
@@ -115,14 +115,14 @@
                         dbRename = dbApp.GetRename();
                         charName = null == dbRename ? Shared.LongName(dbApp.Character) : Shared.LongName(dbRename);
                         stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
-                        stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + Shared.ShortName(new AdaptView(dbAdapt).HolmesActors.First()) + "</a> as Sherlock Holmes.";
+                        stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
                         stringOut += "<br><br>" + actorName + "'s Holmes number is 1.";
                         return stringOut;
                     }
 
                     // Or if they're just some randomer.
                     stringOut = "Appledore has a page on <a href='/Actor/" + dbActor.ID + "'>" + actorName + "</a>!<br><br>";
-                    stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + Shared.ShortName(new AdaptView(dbAdapt).HolmesActors.First()) + "</a> as Sherlock Holmes.";
+                    stringOut += actorName + " played " + charName + " in '" + Shared.DisplayName(dbAdapt) + "', which starred <a href='/Actor/" + new AdaptView(dbAdapt).HolmesActors.First().ID + "'>" + (new AdaptView(dbAdapt).HolmesActors.First()).ShortName + "</a> as Sherlock Holmes.";
                     stringOut += "<br><br>" + actorName + "'s Holmes number is 1.";
                     return stringOut;
                 }
@@ -305,12 +305,12 @@
 
             foreach (HolmesLinkActor act in Db.HolmesLinks.SelectMany(l => l.HolmesLinkAppearances).Select(app => app.HolmesLinkActor).Distinct())
             {
-                var myName = Shared.ShortName(act.Actor);
+                var myName = act.Actor.ShortName;
                 foreach (HolmesLinkActor linkedActor in act.HolmesLinkAppearances.Select(app => app.HolmesLink).SelectMany(link => link.HolmesLinkAppearances).Select(app => app.HolmesLinkActor).Distinct())
                 {
                     if (linkedActor.ID > act.ID)
                     {
-                        var theirName = Shared.ShortName(linkedActor.Actor);
+                        var theirName = linkedActor.Actor.ShortName;
 
                         if (!blockedNames.Contains(myName) && !blockedNames.Contains(theirName))
                         {

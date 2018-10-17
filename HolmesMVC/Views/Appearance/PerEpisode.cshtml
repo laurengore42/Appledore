@@ -20,7 +20,7 @@ else
         @foreach (var appearance in Model)
         {
             var charName = Shared.LongName(appearance.Character);
-            var actorName = Shared.ShortName(appearance.Actor);
+            var actorName = appearance.Actor.ShortName;
             var rename = appearance.GetRename();
             <tr>
                 @if (canonPage)

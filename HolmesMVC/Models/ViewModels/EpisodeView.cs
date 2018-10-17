@@ -131,7 +131,7 @@
 
             ActorNames = from a in episode.Appearances
                          where a.ActorID > 0
-                         select Shared.ShortName(a.Actor);
+                         select a.Actor.ShortName;
         }
 
         public string DisplayName { get; set; }

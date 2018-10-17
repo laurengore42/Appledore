@@ -69,7 +69,7 @@ Pulling in IMDb info:
             foreach (var actName in dupeActNames)
             {
                 var actIdsStr = string.Join(",", from a in actName select a.ID);
-                    <li>@Html.ActionLink("Combine", "Combine", "Actor", new { actorIdStr = actIdsStr }, null) Potential duplicates: @foreach (Actor a in actName) { <text> @Html.ActionLink(WebUtility.HtmlDecode(Shared.LongName(a).Replace(" ","&nbsp;")),"Details", "Actor", new { a.UrlName }, null) + </text> }</li>
+                    <li>@Html.ActionLink("Combine", "Combine", "Actor", new { actorIdStr = actIdsStr }, null) Potential duplicates: @foreach (Actor a in actName) { <text> @Html.ActionLink(WebUtility.HtmlDecode(a.LongName.Replace(" ","&nbsp;")),"Details", "Actor", new { a.UrlName }, null) + </text> }</li>
                 }
         }
         else

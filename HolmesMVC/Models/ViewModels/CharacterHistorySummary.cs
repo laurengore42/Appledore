@@ -23,7 +23,7 @@
                     .Episode.Airdate.Year;
 
             var sampleApp = groupedApps.First();
-            ActorName = Shared.ShortName(sampleApp.Actor);
+            ActorName = sampleApp.Actor.ShortName;
             ActorUrlName = sampleApp.Actor.UrlName;
             MediumName = ((Medium)sampleApp.Episode.Season.Adaptation.Medium).ToString();
             AdaptName = Shared.DisplayName(sampleApp.Episode.Season.Adaptation);

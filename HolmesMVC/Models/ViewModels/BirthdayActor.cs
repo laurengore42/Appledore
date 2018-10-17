@@ -8,7 +8,7 @@
         {
             UrlName = a.UrlName;
             Birthdate = (DateTime)a.Birthdate;
-            Name = Shared.ShortName(a);
+            Name = a.ShortName;
         }
 
         public string UrlName { get; set; }

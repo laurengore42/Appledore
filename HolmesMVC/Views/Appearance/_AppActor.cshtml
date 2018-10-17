@@ -11,7 +11,7 @@ else if (Model.ActorID > 0) // there's already an actor in the URL
 {
     <div class="editor-field">
         <div class="editor-label">
-            @Html.LabelFor(model => model.ActorID, "Actor", new { @class = "inlinelabel" }): @Shared.DisplayName(Model.Actor)<br />
+            @Html.LabelFor(model => model.ActorID, "Actor", new { @class = "inlinelabel" }): @(Model.Actor.DisplayName)<br />
             <a onclick="location.replace(killParam(location, 'actorid'))">Use different actor</a>
         </div>
     </div>

@@ -82,32 +82,6 @@
             }
         }
 
-        // returns 'Jeremy Brett'
-        public static string ShortName(Actor actor)
-        {
-            var forename = actor.Forename;
-            var surname = actor.Surname;
-            return BuildName(new[] { forename, surname }, ' ');
-        }
-
-        // returns 'Edward Cedric Hardwicke'
-        public static string LongName(Actor actor)
-        {
-            var forename = actor.Forename ?? string.Empty;
-            var middlenames = actor.Middlenames ?? string.Empty;
-            var surname = actor.Surname ?? string.Empty;
-
-            return BuildName(new[] { forename, middlenames, surname }, ' ');
-        }
-
-        // returns 'Brett, Jeremy'
-        public static string DisplayName(Actor a)
-        {
-            return a.Surname + (!a.Forename.IsNullOrWhiteSpace()
-                ? ", " + a.Forename
-                : string.Empty);
-        }
-
         // returns 'Professor Moriarty' || 'James Moriarty'
         public static string ShortName(Character character)
         {

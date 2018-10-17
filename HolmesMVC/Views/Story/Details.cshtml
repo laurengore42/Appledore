@@ -60,7 +60,7 @@
                         var actorHolmes = Shared.PlayedBy(holmesId, e.Season.Adaptation).First();
                     }
                     @e.Airdate.ToString("yyyy"): @Html.RouteLink(epName, "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
-                    {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(Shared.ShortName(actorHolmes), "Details", "Actor", new { actorHolmes.UrlName }, null)
+                    {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(actorHolmes.ShortName, "Details", "Actor", new { actorHolmes.UrlName }, null)
                 </li>
                 }
             </ul>
