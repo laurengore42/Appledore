@@ -329,7 +329,6 @@
     <Compile Include="Migrations\201503161512450_actor imdbname in database.Designer.cs">
       <DependentUpon>201503161512450_actor imdbname in database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\SearchItem.cs" />
     <Compile Include="ActionResults\XmlActionResult.cs" />
     <Compile Include="Services\IStoryXmlRetriever.cs" />
     <Compile Include="Migrations\201502181457490_initialmigration.cs" />
@@ -367,7 +366,6 @@
     <Compile Include="Models\Mapping\Webpages_RolesMap.cs" />
     <Compile Include="Models\Mapping\Webpages_UsersInRolesMap.cs" />
     <Compile Include="Controllers\RenameController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SeasonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1381,7 +1379,6 @@
     <Content Include="Views\Honorific\Index.cshtml" />
     <Content Include="Views\Honorific\Create.cshtml" />
     <Content Include="Views\Honorific\Delete.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\RandomFact.cshtml" />
     <Content Include="Views\Toys\Scraps.cshtml" />
     <Content Include="Views\Rename\CreateFull.cshtml" />
