@@ -107,5 +107,28 @@ namespace HolmesMVC.Models
                 }
             }
         }
+
+        public int? AgeInYears
+        {
+            get
+            {
+                var birth = Birthdate;
+                if (birth == null)
+                {
+                    return null;
+                }
+
+                var bday = (DateTime)birth;
+                var dday = Deathdate ?? DateTime.Now;
+                var age = dday.Year - bday.Year;
+                if (dday.DayOfYear < bday.DayOfYear)
+                {
+                    age--;
+                }
+
+                return age;
+            }
+        }
+
     }
 }

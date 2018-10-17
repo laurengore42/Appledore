@@ -268,25 +268,6 @@
             return PlayedBy(charId, adapt);
         }
 
-        public static int? AgeInYears(Actor actor)
-        {
-            var birth = actor.Birthdate;
-            if (birth == null)
-            {
-                return null;
-            }
-
-            var bday = (DateTime)birth;
-            var dday = actor.Deathdate ?? DateTime.Now;
-            var age = dday.Year - bday.Year;
-            if (dday.DayOfYear < bday.DayOfYear)
-            {
-                age--;
-            }
-
-            return age;
-        }
-
         public static string BuildName(IEnumerable<string> names, char divider)
         {
             var outName = string.Empty;

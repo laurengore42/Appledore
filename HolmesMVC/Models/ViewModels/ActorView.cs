@@ -57,10 +57,10 @@
             IMDbName = actor.IMDbName;
             Wikipedia = actor.Wikipedia;
             UrlName = actor.UrlName;
+            Age = actor.AgeInYears;
 
             ShortName = Shared.ShortName(actor);
             LongName = Shared.LongName(actor);
-            Age = Shared.AgeInYears(actor);
 
             // Get actor's appearances
             Histories = (from ap in actor.Appearances
