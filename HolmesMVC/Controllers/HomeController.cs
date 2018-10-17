@@ -408,7 +408,6 @@
         [AllowAnonymous]
         public ViewResult Index()
         {
-            ViewBag.lastdbupdate = HttpContext.Application["LastDbUpdate"];
             return View();
         }
 
