@@ -2,7 +2,7 @@
 @using HolmesMVC.Models
 @model HolmesMVC.Models.ViewModels.RandomView
 
-<h3>A multi-actor:</h3>
+<h3>An actor with more than one role:</h3>
 @Html.ActionLink(Model.MultiActor.Actor.ShortName, "Details", "Actor", new { Model.MultiActor.Actor.UrlName }, null) played @Html.Raw(String.Join(" and ", Model.MultiActor.Characters.Select(c => Html.ActionLink(c.LongName, "Details", "Character", new { c.UrlName }, null))))
 
 <h3>Today's birthdays:</h3>

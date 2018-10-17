@@ -10,8 +10,6 @@
     {
         public RandomView(HolmesDBEntities db)
         {
-            const int FullPrecision = (int)DatePrecision.Full;
-
             var rightNow = DateTime.Now;
 
             var thisMonth = rightNow.Month;
@@ -21,7 +19,7 @@
                              where null != a.Birthdate
                              && a.Birthdate.Value.Month == thisMonth
                              && a.Birthdate.Value.Day == thisDay
-                             && a.BirthdatePrecision == FullPrecision
+                             && a.BirthdatePrecision == (int)DatePrecision.Full
                              orderby a.Birthdate
                              select a).ToList();
             BirthdayActors = (from a in actorList
@@ -30,18 +28,18 @@
             var epList = (from e in db.Episodes
                           where 
                           e.Season.Adaptation.Medium != (int)Medium.Stage
-                          && !e.Season.Adaptation.IsCanon
+                          && e.Season.Adaptation.Name != "Canon" // IsCanon not valid in LINQ to Entities
                           && e.Airdate.Month == thisMonth
                           && e.Airdate.Day == thisDay
-                          && e.AirdatePrecision == FullPrecision
+                          && e.AirdatePrecision == (int)DatePrecision.Full
                           orderby e.Airdate
                           select e).ToList();
             AnnivEpisodes = (from e in epList
-                             select new AnnivEpisode(e)
+                             select new AnnivEpisode(e) // AnnivEpisode constructor not valid in LINQ to Entities
                              ).ToList();
 
             var canonChars = from ap in db.Appearances
-                             where ap.Episode.Season.Adaptation.IsCanon
+                             where ap.Episode.Season.Adaptation.Name == "Canon" // IsCanon not valid in LINQ to Entities
                              && ap.CharacterID > 0
                              select ap.CharacterID;
 
