@@ -73,6 +73,15 @@
             }
         }
 
+        public static string TrimCharactersForValidUrlName(string name) =>
+            name
+            .Replace(".", "")
+            .Replace(":", "")
+            .Replace("/", "")
+            .Replace("  ", " ")
+            .Replace(" ", "_")
+            .ToLower();
+
         public static string BuildName(IEnumerable<string> names, string divider) =>
             string.Join(divider, names.Where(s => !string.IsNullOrEmpty(s)));
     }

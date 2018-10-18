@@ -52,16 +52,16 @@
             {
                 return -1;
             }
-            var urlName = surname.Replace(" ", "_").Replace("'", "_");
+            var urlName = Shared.TrimCharactersForValidUrlName(surname);
             if (!string.IsNullOrEmpty(forename))
             {
-                urlName = forename.Replace(" ", "_").Replace("'", "_") + "_" + urlName;
+                urlName = Shared.TrimCharactersForValidUrlName(forename) + "_"+ urlName;
             }
             var character = new Character
                                 {
                                     Forename = forename,
                                     Surname = surname,
-                                    UrlName = urlName.ToLower()
+                                    UrlName = urlName
             };
 
             Db.Characters.Add(character);

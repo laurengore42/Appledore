@@ -210,8 +210,10 @@
             // statistically characters and actors are usually New,
             // so create them
             // we already have a mechanism for fixing dupes here
-            foreach (var pair in imdbPairs)
+            for (int i = 0; i < imdbPairs.Count; i++)
             {
+                var pair = imdbPairs[i];
+
                 var actor = pair.Split('¦')[0];
                 var character = pair.Split('¦')[1];
 
@@ -219,13 +221,13 @@
                 var actorSurname = actorNames.Last();
                 actorNames.RemoveAt(actorNames.Count() - 1);
                 var actorForename = string.Join(" ", actorNames);
-                var actorId = ActorCreateShort(actorForename, actorSurname);
+                var actorId = ActorCreateShort(actorForename, actorSurname, i);
 
                 List<string> charNames = character.Split(' ').ToList();
                 var charSurname = charNames.Last();
                 charNames.RemoveAt(charNames.Count() - 1);
                 var charForename = string.Join(" ", charNames);
-                var charId = CharCreateShort(charForename, charSurname);
+                var charId = CharCreateShort(charForename, charSurname, i);
 
                 // Right, we now have the actor and character IDs.
                 // Create an appearance!
@@ -512,13 +514,13 @@
             return this.PartialView();
         }
 
-        private int ActorCreateShort(string forename, string surname)
+        private int ActorCreateShort(string forename, string surname, int i)
         {
             var actor = new Actor
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = (forename.ToLower() + "_" + surname.ToLower()).Replace(" ", "_").Replace(".", "")
+                UrlName = Shared.TrimCharactersForValidUrlName(forename) + "_" + Shared.TrimCharactersForValidUrlName(surname)
             };
 
             try
@@ -528,7 +530,7 @@
             }
             catch
             {
-                actor.UrlName = actor.UrlName + DateTime.Now.ToString("s", CultureInfo.InvariantCulture);
+                actor.UrlName = string.Concat(actor.UrlName, "_", Shared.TrimCharactersForValidUrlName(DateTime.Now.ToString("s", CultureInfo.InvariantCulture)), "_", i);
                 Db.Actors.Add(actor);
                 Db.SaveChanges();
             }
@@ -536,13 +538,13 @@
             return actor.ID;
         }
 
-        private int CharCreateShort(string forename, string surname)
+        private int CharCreateShort(string forename, string surname, int i)
         {
             var character = new Character
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = (forename.ToLower() + "_" + surname.ToLower()).Replace(" ", "_").Replace(".", "")
+                UrlName = Shared.TrimCharactersForValidUrlName(forename) + "_" + Shared.TrimCharactersForValidUrlName(surname)
             };
 
             try
@@ -552,7 +554,7 @@
             }
             catch
             {
-                character.UrlName = character.UrlName + DateTime.Now.ToString("s", CultureInfo.InvariantCulture);
+                character.UrlName = string.Concat(character.UrlName, "_", Shared.TrimCharactersForValidUrlName(DateTime.Now.ToString("s", CultureInfo.InvariantCulture)), "_", i);
                 Db.Characters.Add(character);
                 Db.SaveChanges();
             }
