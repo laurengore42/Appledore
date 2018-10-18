@@ -73,7 +73,7 @@
             }
         }
 
-        public static string TrimCharactersForValidUrlName(string name) =>
+        private static string TrimCharactersForValidUrlName(string name) =>
             name
             .Replace(".", "")
             .Replace(":", "")
@@ -81,6 +81,12 @@
             .Replace("  ", " ")
             .Replace(" ", "_")
             .ToLower();
+
+        public static string BuildUrlName(string forename, string surname)
+        {
+            int throwaway;
+            return string.Concat(!string.IsNullOrEmpty(forename) || int.TryParse(surname, out throwaway) ? TrimCharactersForValidUrlName(forename) + "_" : string.Empty, TrimCharactersForValidUrlName(surname));
+        }
 
         public static string BuildName(IEnumerable<string> names, string divider) =>
             string.Join(divider, names.Where(s => !string.IsNullOrEmpty(s)));

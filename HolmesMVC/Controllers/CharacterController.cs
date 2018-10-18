@@ -52,16 +52,11 @@
             {
                 return -1;
             }
-            var urlName = Shared.TrimCharactersForValidUrlName(surname);
-            if (!string.IsNullOrEmpty(forename))
-            {
-                urlName = Shared.TrimCharactersForValidUrlName(forename) + "_"+ urlName;
-            }
             var character = new Character
                                 {
                                     Forename = forename,
                                     Surname = surname,
-                                    UrlName = urlName
+                UrlName = Shared.BuildUrlName(forename, surname)
             };
 
             Db.Characters.Add(character);

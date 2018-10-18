@@ -521,7 +521,7 @@
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = string.Concat(!string.IsNullOrEmpty(forename) || int.TryParse(surname, out throwaway) ? Shared.TrimCharactersForValidUrlName(forename) + "_" : string.Empty, Shared.TrimCharactersForValidUrlName(surname))
+                UrlName = Shared.BuildUrlName(forename, surname)
             };
 
             try
@@ -531,7 +531,7 @@
             }
             catch
             {
-                actor.UrlName = string.Concat(actor.UrlName, "_", Shared.TrimCharactersForValidUrlName(DateTime.Now.ToString("s", CultureInfo.InvariantCulture)), "_", i);
+                actor.UrlName = string.Concat(actor.UrlName, "_", DateTime.Now.ToString("o", CultureInfo.InvariantCulture).Replace(":",""), "_", i);
                 Db.Actors.Add(actor);
                 Db.SaveChanges();
             }
@@ -546,7 +546,7 @@
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = string.Concat(!string.IsNullOrEmpty(forename) || int.TryParse(surname, out throwaway) ? Shared.TrimCharactersForValidUrlName(forename) + "_" : string.Empty, Shared.TrimCharactersForValidUrlName(surname))
+                UrlName = Shared.BuildUrlName(forename, surname)
             };
 
             try
@@ -556,7 +556,7 @@
             }
             catch
             {
-                character.UrlName = string.Concat(character.UrlName, "_", Shared.TrimCharactersForValidUrlName(DateTime.Now.ToString("s", CultureInfo.InvariantCulture)), "_", i);
+                character.UrlName = string.Concat(character.UrlName, "_", DateTime.Now.ToString("o", CultureInfo.InvariantCulture).Replace(":", ""), "_", i);
                 Db.Characters.Add(character);
                 Db.SaveChanges();
             }
