@@ -516,11 +516,12 @@
 
         private int ActorCreateShort(string forename, string surname, int i)
         {
+            int throwaway = 0;
             var actor = new Actor
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = Shared.TrimCharactersForValidUrlName(forename) + "_" + Shared.TrimCharactersForValidUrlName(surname)
+                UrlName = string.Concat(!string.IsNullOrEmpty(forename) || int.TryParse(surname, out throwaway) ? Shared.TrimCharactersForValidUrlName(forename) + "_" : string.Empty, Shared.TrimCharactersForValidUrlName(surname))
             };
 
             try
@@ -540,11 +541,12 @@
 
         private int CharCreateShort(string forename, string surname, int i)
         {
+            int throwaway = 0;
             var character = new Character
             {
                 Forename = forename,
                 Surname = surname,
-                UrlName = Shared.TrimCharactersForValidUrlName(forename) + "_" + Shared.TrimCharactersForValidUrlName(surname)
+                UrlName = string.Concat(!string.IsNullOrEmpty(forename) || int.TryParse(surname, out throwaway) ? Shared.TrimCharactersForValidUrlName(forename) + "_" : string.Empty, Shared.TrimCharactersForValidUrlName(surname))
             };
 
             try
