@@ -78,7 +78,8 @@
             .Replace(".", "")
             .Replace(":", "")
             .Replace("/", "")
-            .Replace("  ", " ")
+			.Replace("+", "")
+			.Replace("  ", " ")
             .Replace(" ", "_")
             .ToLower();
 
