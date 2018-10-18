@@ -516,7 +516,6 @@
 
         private int ActorCreateShort(string forename, string surname, int i)
         {
-            int throwaway = 0;
             var actor = new Actor
             {
                 Forename = forename,
@@ -541,7 +540,6 @@
 
         private int CharCreateShort(string forename, string surname, int i)
         {
-            int throwaway = 0;
             var character = new Character
             {
                 Forename = forename,
