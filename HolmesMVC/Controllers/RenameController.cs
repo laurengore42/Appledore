@@ -93,7 +93,7 @@
             {
                 var adapt = rename.AdaptationID;
                 Db.Renames.Add(rename);
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToAction(
                     "Details",
                     "Adaptation",
@@ -165,7 +165,7 @@
 
             var adaptid = adapt.ID;
             Db.Renames.Remove(rename);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
             return RedirectToAction(
                 "Details",
                 "Adaptation",

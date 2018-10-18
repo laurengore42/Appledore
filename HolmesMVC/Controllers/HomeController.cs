@@ -241,8 +241,6 @@
                 Db.SaveChanges();
             }
 
-            Shared.SomethingChanged(HttpContext.Application);
-
             var episode = Db.Episodes.Find(epId);
             return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }

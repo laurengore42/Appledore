@@ -48,7 +48,6 @@ namespace HolmesMVC.Controllers
             {
                 Db.HolmesLinks.Add(holmeslink);
                 Db.SaveChanges();
-                Shared.SomethingChanged(HttpContext.Application);
                 return RedirectToAction("Index");
             }
 

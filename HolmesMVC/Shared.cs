@@ -10,12 +10,6 @@
 
     public static class Shared
     {
-
-        public static void SomethingChanged(HttpApplicationStateBase app)
-        {
-            app["LastDbUpdate"] = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
-        }
-
         public static string VagueDate(DateTime? nullableDate, DatePrecision precision, bool longMonth, bool longDay)
         {
             if (null == nullableDate)

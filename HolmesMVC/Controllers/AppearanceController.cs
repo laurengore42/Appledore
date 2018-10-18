@@ -142,11 +142,12 @@
                 Db.Appearances.Add(appearance);
             }
 
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToAction("Details", "Adaptation", new { urlName });
         }
 
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Create(int id = -1, int actorid = -1, int characterid = -1)
         {
             if (id == -1)
@@ -205,7 +206,7 @@
 
             var epId = appearance.EpisodeID;
             Db.Appearances.Add(appearance);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToRoute("EpDetails", new { adaptWord = appearance.Episode.Season.Adaptation.MediumUrlName, adaptName = appearance.Episode.Season.Adaptation.UrlName, seasonNumber = appearance.Episode.Season.AirOrder, episodeNumber = appearance.Episode.AirOrder });
         }
@@ -239,6 +240,7 @@
             return characterlist;
         }
 
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Delete(int id = 0)
         {
             var appearance = Db.Appearances.Find(id);
@@ -257,7 +259,7 @@
             var appearance = Db.Appearances.Find(id);
             var epId = appearance.EpisodeID;
             Db.Appearances.Remove(appearance);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToRoute("EpDetails", new { adaptWord = appearance.Episode.Season.Adaptation.MediumUrlName, adaptName = appearance.Episode.Season.Adaptation.UrlName, seasonNumber = appearance.Episode.Season.AirOrder, episodeNumber = appearance.Episode.AirOrder });
         }

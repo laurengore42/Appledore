@@ -1,5 +1,8 @@
 using HolmesMVC.Models.Mapping;
+using System;
 using System.Data.Entity;
+using System.Globalization;
+using System.Web;
 
 namespace HolmesMVC.Models
 {
@@ -58,6 +61,12 @@ namespace HolmesMVC.Models
             modelBuilder.Configurations.Add(new Webpages_OAuthMembershipMap());
             modelBuilder.Configurations.Add(new Webpages_RolesMap());
             modelBuilder.Configurations.Add(new Webpages_UsersInRolesMap());
+        }
+
+        public override int SaveChanges()
+        {
+            HttpContext.Current.Application["LastDbUpdate"] = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
+            return base.SaveChanges();
         }
     }
 }

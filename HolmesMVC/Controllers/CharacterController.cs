@@ -65,7 +65,7 @@
             };
 
             Db.Characters.Add(character);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return character.ID;
         }
@@ -108,14 +108,12 @@
 
             Db.SaveChanges();
 
-            Shared.SomethingChanged(HttpContext.Application);
-
             return RedirectToAction("Details", "Character", new { oneTrueChar.UrlName });
         }
 
         //
         // GET: /character/edit/5
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Edit(int id = 0)
         {
             Character character = Db.Characters.Find(id);
@@ -139,7 +137,7 @@
             if (ModelState.IsValid)
             {
                 Db.Entry(character).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
 
                 return RedirectToAction("Details", "Character", new { character.UrlName });
             }
@@ -151,7 +149,7 @@
 
         //
         // GET: /character/delete/5
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Delete(int id = 0)
         {
             Character character = Db.Characters.Find(id);
@@ -175,7 +173,7 @@
         {
             Character character = Db.Characters.Find(id);
             Db.Characters.Remove(character);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }

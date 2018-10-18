@@ -50,7 +50,7 @@
             if (ModelState.IsValid)
             {
                 Db.References.Add(reference);
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -84,7 +84,7 @@
             if (ModelState.IsValid)
             {
                 Db.Entry(reference).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.Episode = new SelectList(Db.Episodes, "ID", "Story", reference.EpisodeID);
@@ -114,7 +114,7 @@
         {
             Reference reference = Db.References.Find(id);
             Db.References.Remove(reference);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

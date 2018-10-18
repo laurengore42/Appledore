@@ -273,7 +273,7 @@
                     {
                         // Insert name into the profile table
                         db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-                        Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                        Db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
