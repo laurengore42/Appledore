@@ -1,5 +1,7 @@
 ﻿namespace HolmesMVC
 {
+    using System;
+    using System.Globalization;
     using System.Web;
     using System.Web.Http;
     using System.Web.Mvc;
@@ -20,6 +22,8 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            Application["LastDbUpdate"] = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
         }
 
         public override string GetVaryByCustomString(HttpContext context, string custom)
@@ -28,7 +32,7 @@
             {
                 case "LastDbUpdate":
                     // Every call to Db.SaveChanges() is followed by an update of this value
-                    return User.Identity.Name ?? string.Empty + (Application["LastDbUpdate"] ?? string.Empty).ToString();
+                    return string.Concat(User.Identity.Name ?? string.Empty, Application["LastDbUpdate"] ?? string.Empty);
             }
 
             return base.GetVaryByCustomString(context, custom);

@@ -55,7 +55,7 @@
             {
                 var id = season.AdaptationID;
                 Db.Seasons.Add(season);
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToAction("Create", "Episode", new { ID = id });
             }
 
@@ -99,7 +99,7 @@
             if (ModelState.IsValid)
             {
                 Db.Entry(season).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToAction("Details", "Adaptation", new { season.Adaptation.UrlName} );
             }
             ViewBag.Adaptation = GetAdaptList();
@@ -132,7 +132,7 @@
         {
             Season season = Db.Seasons.Find(id);
             Db.Seasons.Remove(season);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
             return RedirectToAction("Details", "Adaptation", new { season.Adaptation.UrlName });
         }
 

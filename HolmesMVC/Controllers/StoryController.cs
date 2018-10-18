@@ -54,7 +54,7 @@
 
         //
         // GET: /Story/Edit/stud
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Edit(string id = "")
         {
             var story = Db.Stories.Find(id);
@@ -76,7 +76,7 @@
             if (ModelState.IsValid)
             {
                 Db.Entry(story).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
 
                 return RedirectToRoute("Stories", new { controller = "Story", id = story.ID });
             }

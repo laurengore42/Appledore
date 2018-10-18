@@ -170,7 +170,7 @@
             if (ModelState.IsValid)
             {
                 Db.Adaptations.Add(adaptation);
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
 
                 return RedirectToAction("Details", "Adaptation", new { adaptation.UrlName });
             }
@@ -188,7 +188,7 @@
 
         //
         // GET: /adaptation/edit/5
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Edit(int id = 0)
         {
             Adaptation adaptation = Db.Adaptations.Find(id);
@@ -217,7 +217,7 @@
             if (ModelState.IsValid)
             {
                 Db.Entry(adaptation).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
 
                 return RedirectToAction("Details", new { adaptation.ID });
             }
@@ -234,7 +234,7 @@
 
         //
         // GET: /adaptation/delete/5
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Delete(int id = 0)
         {
             Adaptation adaptation = Db.Adaptations.Find(id);
@@ -258,7 +258,7 @@
         {
             Adaptation adaptation = Db.Adaptations.Find(id);
             Db.Adaptations.Remove(adaptation);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToAction("Index","Home");
         }

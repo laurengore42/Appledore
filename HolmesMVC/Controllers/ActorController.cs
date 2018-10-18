@@ -67,7 +67,7 @@
             };
 
             Db.Actors.Add(actor);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return actor.ID;
         }
@@ -110,8 +110,6 @@
 
             Db.SaveChanges();
 
-            Shared.SomethingChanged(HttpContext.Application);
-
             return RedirectToAction("Details", "Actor", new { oneTrueActor.UrlName });
         }
 
@@ -133,7 +131,7 @@
 
         //
         // GET: /actor/edit/1
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Edit(int id = 0)
         {
             Actor actor = Db.Actors.Find(id);
@@ -156,7 +154,7 @@
             if (ModelState.IsValid)
             {
                 Db.Entry(actor).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
 
                 return RedirectToAction("Details", "Actor", new { actor.UrlName });
             }
@@ -166,7 +164,7 @@
 
         //
         // GET: /actor/delete/1
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Delete(int id = 0)
         {
             Actor actor = Db.Actors.Find(id);
@@ -190,7 +188,7 @@
         {
             Actor actor = Db.Actors.Find(id);
             Db.Actors.Remove(actor);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }

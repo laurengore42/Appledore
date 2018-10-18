@@ -103,7 +103,7 @@
             if (ModelState.IsValid)
             {
                 Db.Episodes.Add(episode);
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToRoute("Details", new { controller = "Episode", id = episode.ID });
             }
 
@@ -114,7 +114,7 @@
 
         //
         // GET: /episode/edit/5
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Edit(int id = 0)
         {
             var episode = Db.Episodes.Find(id);
@@ -150,7 +150,7 @@
             {
                 var id = episode.ID;
                 Db.Entry(episode).State = EntityState.Modified;
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
             }
             ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.SeasonID);
@@ -198,7 +198,7 @@
 
         //
         // GET: /episode/delete/5
-
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Delete(int id = 0)
         {
             var episode = Db.Episodes.Find(id);
@@ -223,7 +223,7 @@
             var episode = Db.Episodes.Find(id);
             var urlName = episode.Season.Adaptation.UrlName;
             Db.Episodes.Remove(episode);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
             return RedirectToAction("Details", "Adaptation", new { urlName });
         }
 
@@ -237,7 +237,7 @@
                 Episode = episode
             };
             Db.Appearances.Add(lockApp);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
@@ -250,7 +250,7 @@
                           && a.CharacterID == 0
                           select a).First();
             Db.Appearances.Remove(lockApp);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
 
             return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }

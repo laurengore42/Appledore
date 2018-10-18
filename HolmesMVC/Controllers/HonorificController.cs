@@ -32,7 +32,7 @@
             if (ModelState.IsValid)
             {
                 Db.Honorifics.Add(honorific);
-                Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,7 +61,7 @@
         {
             Honorific honorific = Db.Honorifics.Find(id);
             Db.Honorifics.Remove(honorific);
-            Db.SaveChanges(); Shared.SomethingChanged(HttpContext.Application);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
