@@ -8,7 +8,7 @@
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
-    [OutputCache(Duration = 1, VaryByCustom = "LastDbUpdate")]
+    [OutputCache(Duration = 2628000, VaryByCustom = "LastDbUpdate")]
     public class CharacterController : HolmesDbController
     {
         //
