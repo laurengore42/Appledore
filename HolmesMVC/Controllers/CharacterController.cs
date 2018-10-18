@@ -22,7 +22,7 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            int id = 0;
+            int id = 0; // you can't inline this, MSbuild chokes
             if (int.TryParse(urlName, out id))
             {
                 var characterById = Db.Characters.Find(id);
