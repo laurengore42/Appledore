@@ -23,7 +23,7 @@
             @ViewBag.chosenAdapt.DisplayName
         </div>
         
-        @Html.Action("SeasonBox", new { ID = ViewBag.adaptId, currentSeason = -1 })
+        @Html.Action("SeasonBox", new { ID = ViewBag.chosenAdapt.ID, currentSeason = -1 })
         <span id ="SeasonOut">
         </span>
 
