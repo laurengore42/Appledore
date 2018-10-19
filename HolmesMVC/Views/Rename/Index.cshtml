@@ -32,10 +32,10 @@
             @item.AdaptName
         </td>
         <td>
-            @item.ActorName.Replace(" ", "\u00A0")
+            @item.ActorName.Replace(" ", "\u00A0") (@item.ActorId)
         </td>
         <td>
-            @item.CharName.Replace(" ", "\u00A0")
+            @item.CharName.Replace(" ", "\u00A0") (@item.CharId)
         </td>
         <td>
             @{
@@ -45,7 +45,7 @@
                 fullname = fullname.TrimStart();
                 fullname = fullname.Replace(" ", "\u00A0");
             }
-            @fullname
+            @fullname (@item.ID)
         </td>
         <td>&nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID  })
         </td>

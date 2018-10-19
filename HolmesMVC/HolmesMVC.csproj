@@ -1339,6 +1339,7 @@
     <Content Include="Views\HolmesLink\Edit.cshtml" />
     <Content Include="Views\HolmesLink\Delete.cshtml" />
     <Content Include="Views\Home\Sitemap.cshtml" />
+    <Content Include="Views\Rename\Index.cshtml" />
     <None Include="Web.template.config">
       <SubType>Designer</SubType>
     </None>

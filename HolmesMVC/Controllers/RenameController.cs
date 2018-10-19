@@ -10,6 +10,15 @@
     public class RenameController : HolmesDbController
     {
         //
+        // GET: /Rename/        
+        public ActionResult Index()
+        {
+            var renames = (from r in Db.Renames select r).ToList();
+            return View((from r in renames select new RenameView(r)).ToList());
+        }
+
+
+        //
         // GET: /Rename/Create
 
         public ActionResult Create(int id = -1)
