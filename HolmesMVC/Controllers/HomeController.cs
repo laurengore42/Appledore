@@ -526,17 +526,13 @@
                 UrlName = Shared.BuildUrlName(forename, surname)
             };
 
-            try
-            {
-                Db.Actors.Add(actor);
-                Db.SaveChanges();
-            }
-            catch
+            if (Db.Actors.Where(c => c.UrlName == actor.UrlName).Any())
             {
                 actor.UrlName = AppendDate(actor.UrlName, i);
-                Db.Actors.Add(actor);
-                Db.SaveChanges();
             }
+
+            Db.Actors.Add(actor);
+            Db.SaveChanges();
 
             return actor.ID;
         }
@@ -550,17 +546,13 @@
                 UrlName = Shared.BuildUrlName(forename, surname)
             };
 
-            try
-            {
-                Db.Characters.Add(character);
-                Db.SaveChanges();
-            }
-            catch
+            if (Db.Characters.Where(c => c.UrlName == character.UrlName).Any())
             {
                 character.UrlName = AppendDate(character.UrlName, i);
-                Db.Characters.Add(character);
-                Db.SaveChanges();
             }
+
+            Db.Characters.Add(character);
+            Db.SaveChanges();
 
             return character.ID;
         }
