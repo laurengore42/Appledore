@@ -168,7 +168,7 @@
             ViewBag.canCount = Db.Stories.Count();
 
             ViewBag.canChaCount = (from a in Db.Appearances
-                                   where a.Episode.Season.Adaptation.IsCanon
+                                   where a.Episode.Season.Adaptation.Name == "Canon"
                                    select a.CharacterID).Distinct().Count();
             
             return View();
