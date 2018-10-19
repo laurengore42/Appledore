@@ -457,7 +457,6 @@
                                "appearances",
                                "adaptations",
                                "episodes",
-                               "renames",
                                "seasons",
                                "species",
                                "stories",
