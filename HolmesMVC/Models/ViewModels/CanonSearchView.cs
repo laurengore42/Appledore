@@ -283,9 +283,7 @@
                     {
                         xmlDoc = XDocument.Load(storyUrl);
 
-                        string reverseQuery = query;
-                        reverseQuery = new string(reverseQuery.Reverse().ToArray());
-                        if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
+                        if (query[0] == '"' && query[query.Length-1] == '"')
                         {
                             query = query.Replace("\"", string.Empty);
                             Query = "\"" + query + "\"";
