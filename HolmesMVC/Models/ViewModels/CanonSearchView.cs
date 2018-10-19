@@ -72,7 +72,7 @@
                 return nodes;
             }
 
-            Dictionary<String, Story> nodeNames = GetNodeNames(Db);
+            Dictionary<string, Story> nodeNames = GetNodeNames(Db);
             query = query.ToLower();
             nodes = (from item in xmlDoc.Descendants("p")
                      where item.Value.ToLower().Contains(query)
@@ -86,9 +86,9 @@
             return nodes;
         }
 
-        private static Dictionary<String, Story> GetNodeNames(HolmesDBEntities Db)
+        private static Dictionary<string, Story> GetNodeNames(HolmesDBEntities Db)
         {
-            Dictionary<String, Story> nodeNames = new Dictionary<String, Story>();
+            Dictionary<string, Story> nodeNames = new Dictionary<string, Story>();
 
             foreach (var s in Db.Stories)
             {
@@ -216,7 +216,7 @@
 
                 // Trim the raw edges of the cuts to nearest word-ending
 
-                String[] textArray = text.Split('|');
+                string[] textArray = text.Split('|');
 
                 textArray[0] = TrimEndToWord(textArray[0], true);
                 for (var i = 0; i < textArray.Length - 1; i++)
@@ -270,29 +270,35 @@
 
             if (query != null)
             {
+                var storiesLocation = "~/Services/Stories/";
+                var storiesExtension = ".xml";
+
                 var xmlDoc = new XDocument();
 
-                var storyUrl = HostingEnvironment.MapPath("~/Services/Stories/ALL.xml");
-
-                if (storyUrl != null)
+                foreach (var s in Db.Stories)
                 {
-                    xmlDoc = XDocument.Load(storyUrl);
+                    var storyUrl = HostingEnvironment.MapPath(storiesLocation + s.ID.ToUpper() + storiesExtension);
 
-                    string reverseQuery = query;
-                    reverseQuery = new string(reverseQuery.Reverse().ToArray());
-                    if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
+                    if (storyUrl != null)
                     {
-                        query = query.Replace("\"", String.Empty);
-                        Query = "\"" + query + "\"";
-                        Nodes.AddRange(GetRelevantNodes(Db, xmlDoc, query));
-                    }
-                    else
-                    {
-                        var splitQuery = query.Split(' ');
-                        Query = String.Join(", ", splitQuery);
-                        foreach (var keyword in splitQuery)
+                        xmlDoc = XDocument.Load(storyUrl);
+
+                        string reverseQuery = query;
+                        reverseQuery = new string(reverseQuery.Reverse().ToArray());
+                        if (query.IndexOf('"') == 0 && reverseQuery.IndexOf('"') == 0)
                         {
-                            Nodes.AddRange(GetRelevantNodes(Db, xmlDoc, keyword));
+                            query = query.Replace("\"", string.Empty);
+                            Query = "\"" + query + "\"";
+                            Nodes.AddRange(GetRelevantNodes(Db, xmlDoc, query));
+                        }
+                        else
+                        {
+                            var splitQuery = query.Split(' ');
+                            Query = string.Join(", ", splitQuery);
+                            foreach (var keyword in splitQuery)
+                            {
+                                Nodes.AddRange(GetRelevantNodes(Db, xmlDoc, keyword));
+                            }
                         }
                     }
                 }
@@ -301,7 +307,7 @@
                 var sortedNodes = new List<CanonSearchNode>();
 
                 var sortedStories = (from e in Db.Episodes
-                                     where e.Season.Adaptation.IsCanon
+                                     where e.Season.Adaptation.Name == "Canon"
                                      select e.StoryID).ToList();
 
                 foreach (var s in sortedStories)
@@ -317,7 +323,7 @@
 
                     if (Query.IndexOf('"') > -1)
                     {
-                        highlightedSnippet = HighlightKeyWords(node.Snippet, Query.Replace("\"", String.Empty));
+                        highlightedSnippet = HighlightKeyWords(node.Snippet, Query.Replace("\"", string.Empty));
                     }
                     else
                     {
