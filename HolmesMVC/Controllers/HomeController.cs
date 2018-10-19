@@ -530,7 +530,7 @@
             }
             catch
             {
-                actor.UrlName = string.Concat(actor.UrlName, "_", DateTime.Now.ToString("o", CultureInfo.InvariantCulture).Replace(":",""), "_", i);
+                actor.UrlName = string.Concat(actor.UrlName, "_", DateTime.Now.ToString("s", CultureInfo.InvariantCulture).Replace(":",""), "_", i);
                 Db.Actors.Add(actor);
                 Db.SaveChanges();
             }
@@ -554,7 +554,7 @@
             }
             catch
             {
-                character.UrlName = string.Concat(character.UrlName, "_", DateTime.Now.ToString("o", CultureInfo.InvariantCulture).Replace(":", ""), "_", i);
+                character.UrlName = string.Concat(character.UrlName, "_", DateTime.Now.ToString("s", CultureInfo.InvariantCulture).Replace(":", ""), "_", i);
                 Db.Characters.Add(character);
                 Db.SaveChanges();
             }
