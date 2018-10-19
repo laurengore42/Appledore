@@ -514,6 +514,9 @@
             return this.PartialView();
         }
 
+        private static string AppendDate(string urlname, int i) =>
+             string.Concat(urlname, "_", DateTime.Now.ToString("o", CultureInfo.InvariantCulture), "_", i);
+
         private int ActorCreateShort(string forename, string surname, int i)
         {
             var actor = new Actor
@@ -530,7 +533,7 @@
             }
             catch
             {
-                actor.UrlName = string.Concat(actor.UrlName, "_", DateTime.Now.ToString("s", CultureInfo.InvariantCulture).Replace(":",""), "_", i);
+                actor.UrlName = AppendDate(actor.UrlName, i);
                 Db.Actors.Add(actor);
                 Db.SaveChanges();
             }
@@ -554,7 +557,7 @@
             }
             catch
             {
-                character.UrlName = string.Concat(character.UrlName, "_", DateTime.Now.ToString("s", CultureInfo.InvariantCulture).Replace(":", ""), "_", i);
+                character.UrlName = AppendDate(character.UrlName, i);
                 Db.Characters.Add(character);
                 Db.SaveChanges();
             }
