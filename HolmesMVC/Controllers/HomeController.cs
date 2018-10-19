@@ -465,7 +465,7 @@
                                "date",
 
                                // this leaves:
-                               // Honorific, Medium, Reference, HolmesLink, HolmesLinkAppearance
+                               // Honorific, Medium, Rename, Reference, HolmesLink, HolmesLinkAppearance
 
                                // also don't link to the membership tables
                                // which shouldn't be in this database, but, Azure
