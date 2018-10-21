@@ -1,6 +1,6 @@
 ﻿@using HolmesMVC
 @using HolmesMVC.Enums
-@model HolmesMVC.Models.ViewModels.EpisodeView
+@model HolmesMVC.Models.Episode
 
 @{
     ViewBag.Title = "Create Episode";
@@ -46,16 +46,20 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Airdate, "Date")
-            <select name="AirdatePrecision">
-                <option value="@((int)DatePrecision.Full)" @if (Model.AirdatePrecision == DatePrecision.Full)
-                                  {<text>selected</text>}>Full precision</option>
-                <option value="@((int)DatePrecision.Month)" @if (Model.AirdatePrecision == DatePrecision.Month)
-                                  {<text>selected</text>}>Accurate to month</option>
-                <option value="@((int)DatePrecision.Season)" @if (Model.AirdatePrecision == DatePrecision.Season)
-                                  {<text>selected</text>}>Accurate to season</option>
-                <option value="@((int)DatePrecision.Year)" @if (Model.AirdatePrecision == DatePrecision.Year)
-                                  {<text>selected</text>}>Accurate to year</option>
-            </select>
+			<select name="AirdatePrecision">
+				<option value="@((int)DatePrecision.Full)" @if (Model.AirdatePrecision == (int)DatePrecision.Full) { <text> selected</text>}>
+					Full precision
+				</option>
+				<option value="@((int)DatePrecision.Month)" @if (Model.AirdatePrecision == (int)DatePrecision.Month) { <text> selected</text>}>
+					Accurate to month
+				</option>
+				<option value="@((int)DatePrecision.Season)" @if (Model.AirdatePrecision == (int)DatePrecision.Season) { <text> selected</text>}>
+					Accurate to season
+				</option>
+				<option value="@((int)DatePrecision.Year)" @if (Model.AirdatePrecision == (int)DatePrecision.Year) { <text> selected</text>}>
+					Accurate to year
+				</option>
+			</select>
             @Html.ValidationMessageFor(model => model.Airdate)
         </div>
 

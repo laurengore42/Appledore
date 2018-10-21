@@ -1,5 +1,5 @@
 ﻿@using HolmesMVC.Enums
-@model HolmesMVC.Models.ViewModels.EpisodeView
+@model HolmesMVC.Models.Episode
 
 @{
     ViewBag.Title = "Edit Episode";
@@ -15,18 +15,18 @@
     <fieldset>
         <legend>Episode</legend>
 
-        @Html.HiddenFor(model => model.EpId)
+        @Html.HiddenFor(model => model.ID)
         
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Adaptation, "Adaptation")
+            @Html.LabelFor(model => model.Season.AdaptationID, "Adaptation")
         </div>
         <div class="editor-field">
             @Html.DropDownList("Adaptation", null, new { id = "AdaptBox", data_url = Url.Action("SeasonBox", "Episode") })
-            @Html.ValidationMessageFor(model => model.Adaptation)
+            @Html.ValidationMessageFor(model => model.Season.AdaptationID)
         </div>
         
-            @Html.Action("SeasonBox", new { ID = Model.Adaptation, currentSeason = Model.Season })
+            @Html.Action("SeasonBox", new { ID = Model.Season.AdaptationID, currentSeason = Model.SeasonID })
         <span id ="SeasonOut">
         </span>
 
@@ -50,13 +50,13 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Airdate, "Date")
             <select name="AirdatePrecision">
-                <option value="@((int)DatePrecision.Full)" @if (Model.AirdatePrecision == DatePrecision.Full)
+                <option value="@((int)DatePrecision.Full)" @if (Model.AirdatePrecision == (int)DatePrecision.Full)
                                   {<text>selected</text>}>Full precision</option>
-                <option value="@((int)DatePrecision.Month)" @if (Model.AirdatePrecision == DatePrecision.Month)
+                <option value="@((int)DatePrecision.Month)" @if (Model.AirdatePrecision == (int)DatePrecision.Month)
                                   {<text>selected</text>}>Accurate to month</option>
-                <option value="@((int)DatePrecision.Season)" @if (Model.AirdatePrecision == DatePrecision.Season)
+                <option value="@((int)DatePrecision.Season)" @if (Model.AirdatePrecision == (int)DatePrecision.Season)
                                   {<text>selected</text>}>Accurate to season</option>
-                <option value="@((int)DatePrecision.Year)" @if (Model.AirdatePrecision == DatePrecision.Year)
+                <option value="@((int)DatePrecision.Year)" @if (Model.AirdatePrecision == (int)DatePrecision.Year)
                                   {<text>selected</text>}>Accurate to year</option>
             </select>
             @Html.ValidationMessageFor(model => model.Airdate)
@@ -93,7 +93,7 @@
 }
 
     <div>
-        @Html.RouteLink("Back to Episode", "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.SeasonAirOrder, episodeNumber = Model.AirOrder })
+        @Html.RouteLink("Back to Episode", "EpDetails", new { adaptWord = Model.Season.Adaptation.MediumUrlName, adaptName = Model.Season.Adaptation.UrlName, seasonNumber = Model.Season.AirOrder, episodeNumber = Model.AirOrder })
     </div>
 
 @section Scripts {

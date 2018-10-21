@@ -1,15 +1,15 @@
-﻿@model HolmesMVC.Models.ViewModels.EpisodeView
+﻿@model HolmesMVC.Models.Episode
 
 <div class="editor-label">
     <label for="SeasonID">Season</label>
 </div>
 <div class="editor-field">
-    @Html.DropDownList("SeasonID", ViewBag.SeasonList as SelectList, new { onchange="updateSeasonLinks();"}) @Html.ActionLink("New Season", "Create", "Season", new { ID = Model.Adaptation }, null) |
+	@Html.DropDownList("SeasonID", ViewBag.SeasonList as SelectList, new { onchange = "updateSeasonLinks();" }) @Html.ActionLink("New Season", "Create", "Season", new { ID = ViewBag.adapt }, null) |
 
-    <span id="editLink">@Html.ActionLink("Edit Season","Edit","Season",new { ID = Model.Season}, null)</span>  |
-    <span id="delLink">@Html.ActionLink("Delete Season","Delete","Season",new { ID = Model.Season}, null)</span>
-    <input hidden type="text" id="oldSeason" value="@Model.Season" />
-    <span class="field-validation-valid" data-valmsg-for="Season" data-valmsg-replace="true"></span>
+	<span id="editLink">@Html.ActionLink("Edit Season", "Edit", "Season", new { ID = Model.SeasonID }, null)</span>  |
+	<span id="delLink">@Html.ActionLink("Delete Season", "Delete", "Season", new { ID = Model.SeasonID }, null)</span>
+	<input hidden type="text" id="oldSeason" value="@Model.SeasonID" />
+	<span class="field-validation-valid" data-valmsg-for="Season" data-valmsg-replace="true"></span>
 </div>
 
 <script>

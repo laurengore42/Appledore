@@ -90,7 +90,7 @@
             ViewBag.Story = new SelectList(Db.Stories, "ID", "Name");
             ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name");
 
-            return View(new EpisodeView());
+            return View(new Episode());
         }
 
         //
@@ -109,7 +109,7 @@
 
             ViewBag.Season = new SelectList(Db.Seasons, "ID", "Name", episode.SeasonID);
             ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.StoryID);
-            return View(new EpisodeView(episode));
+            return View(episode);
         }
 
         //
@@ -136,7 +136,7 @@
             ViewBag.Adaptation = new SelectList(listAdapts, "Value", "Text", episode.Season.AdaptationID);
             
             ViewBag.Story = new SelectList(Db.Stories, "ID", "Name", episode.StoryID);
-            return View(new EpisodeView(episode));
+            return View(episode);
         }
 
         //
@@ -185,12 +185,12 @@
                      select s.ID).FirstOrDefault();
             }
 
-            var model = new EpisodeView();
+            var model = new Episode();
 
             listSeasons = listSeasons.OrderBy(item => item.Text).ToList();
             ViewBag.SeasonList = new SelectList(listSeasons, "Value", "Text");
-            model.Season = currentSeason;
-            model.Adaptation = relevantAdapt.ID;
+            model.SeasonID = currentSeason;
+			ViewBag.adapt = relevantAdapt.ID;
             ViewBag.adaptName = relevantAdapt.DisplayName;
 
             return PartialView(model);
