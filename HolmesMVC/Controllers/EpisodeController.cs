@@ -63,8 +63,8 @@
             {
                 return HttpNotFound();
             }
-            
-            return RedirectToRoute("Details", new { controller = "Episode", id });
+
+            return RedirectToActionPermanent("LongformDetails", new { adaptWord = "adaptation", adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
         }
 
         //
