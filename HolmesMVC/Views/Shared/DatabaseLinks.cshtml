@@ -3,15 +3,17 @@
     // don't let anonymous users edit the database
     <text>
 <p class="dblinks">
-    @Html.ActionLink("Edit "+(string)ViewBag.Table, "Edit", (string)ViewBag.Table, new { ViewBag.ID }, null) |
-        @Html.ActionLink("Delete "+(string)ViewBag.Table, "Delete", (string)ViewBag.Table, new { ViewBag.ID }, null)
+    @Html.RouteLink("Edit " + (string)ViewBag.Table, "Edit", new { controller = (string)ViewBag.Table, action = "edit", id = ViewBag.ID }) |
+        @Html.RouteLink("Delete " + (string)ViewBag.Table, "Delete", new { controller = (string)ViewBag.Table, action = "delete", id = ViewBag.ID })
 
     @if (ViewBag.Table != "Episode")
     {
-        <text>| @Html.ActionLink("New " + (string)ViewBag.Table, "Create", (string)ViewBag.Table)</text>
-    } else {
-        <text>| @Html.ActionLink("New " + (string)ViewBag.Table, "Create", (string)ViewBag.Table, new { id = ViewBag.adaptId }, null)</text>
+        <text>| @Html.RouteLink("New " + (string)ViewBag.Table, "Create", new { controller = (string)ViewBag.Table, action = "create" })</text>
     }
-    </p>
+    else
+    {
+        <text>| @Html.RouteLink("New " + (string)ViewBag.Table, "CreateEpisode", new { id = ViewBag.adaptId })</text>
+    }
+</p>
     </text>
 }

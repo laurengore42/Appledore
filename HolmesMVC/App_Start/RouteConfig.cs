@@ -26,14 +26,22 @@
                 new { action = @"createshort" }
             );
             routes.MapRoute(
+                "CreateEpisode",
+                "episode/create/{id}"
+            );
+            routes.MapRoute(
+                "CreateSeason",
+                "season/create/{id}"
+            );
+            routes.MapRoute(
                 "Edit",
-                "{controller}/{action}",
+                "{controller}/{action}/{id}",
                 new { },
                 new { action = @"edit" }
             );
             routes.MapRoute(
                 "Delete",
-                "{controller}/{action}",
+                "{controller}/{action}/{id}",
                 new { },
                 new { action = @"delete" }
             );

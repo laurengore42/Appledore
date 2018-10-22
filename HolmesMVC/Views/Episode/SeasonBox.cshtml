@@ -4,19 +4,19 @@
     <label for="SeasonID">Season</label>
 </div>
 <div class="editor-field">
-	@Html.DropDownList("SeasonID", ViewBag.SeasonList as SelectList, new { onchange = "updateSeasonLinks();" }) @Html.ActionLink("New Season", "Create", "Season", new { ID = ViewBag.adapt }, null) |
+    @Html.DropDownList("SeasonID", ViewBag.SeasonList as SelectList, new { onchange = "updateSeasonLinks();" }) @Html.RouteLink("New Season", "CreateSeason", new { id = ViewBag.adapt }) |
 
-	<span id="editLink">@Html.ActionLink("Edit Season", "Edit", "Season", new { ID = Model.SeasonID }, null)</span>  |
-	<span id="delLink">@Html.ActionLink("Delete Season", "Delete", "Season", new { ID = Model.SeasonID }, null)</span>
-	<input hidden type="text" id="oldSeason" value="@Model.SeasonID" />
-	<span class="field-validation-valid" data-valmsg-for="Season" data-valmsg-replace="true"></span>
+    <span id="editLink">@Html.RouteLink("Edit Season", "Edit", new { controller = "season", action = "edit", id = Model.SeasonID })</span>  |
+    <span id="delLink">@Html.RouteLink("Delete Season", "Delete", new { controller = "season", action = "delete", id = Model.SeasonID })</span>
+    <input hidden type="text" id="oldSeason" value="@Model.SeasonID" />
+    <span class="field-validation-valid" data-valmsg-for="Season" data-valmsg-replace="true"></span>
 </div>
 
 <script>
     function updateSeasonLinks()
     {
         // get the Season value from the dropdown list
-        var newSeason = $('#Season').val();
+        var newSeason = $('#SeasonID').val();
 
         // update the Edit and Delete links
         var editLink = $('#editLink');
