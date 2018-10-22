@@ -190,7 +190,7 @@
             listSeasons = listSeasons.OrderBy(item => item.Text).ToList();
             ViewBag.SeasonList = new SelectList(listSeasons, "Value", "Text");
             model.SeasonID = currentSeason;
-			ViewBag.adapt = relevantAdapt.ID;
+            ViewBag.adapt = relevantAdapt.ID;
             ViewBag.adaptName = relevantAdapt.DisplayName;
 
             return PartialView(model);
