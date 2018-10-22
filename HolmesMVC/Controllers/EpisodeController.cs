@@ -63,8 +63,8 @@
             {
                 return HttpNotFound();
             }
-
-            return RedirectToActionPermanent("LongformDetails", new { adaptWord = "adaptation", adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+            
+            return RedirectToRoute("Details", new { controller = "Episode", id });
         }
 
         //
@@ -221,10 +221,10 @@
         public ActionResult DeleteConfirmed(int id)
         {
             var episode = Db.Episodes.Find(id);
-            var urlName = episode.Season.Adaptation.UrlName;
+            var adaptId = episode.Season.Adaptation.ID;
             Db.Episodes.Remove(episode);
             Db.SaveChanges();
-            return RedirectToAction("Details", "Adaptation", new { urlName });
+            return RedirectToRoute("Details", new { controller = "Adaptation", id = adaptId });
         }
 
         public ActionResult Lock(int id)
@@ -238,8 +238,8 @@
             };
             Db.Appearances.Add(lockApp);
             Db.SaveChanges();
-
-            return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+            
+            return RedirectToRoute("Details", new { controller = "Episode", id });
         }
 
         public ActionResult Unlock(int id)
@@ -251,8 +251,8 @@
                           select a).First();
             Db.Appearances.Remove(lockApp);
             Db.SaveChanges();
-
-            return RedirectToRoute("EpDetails", new { adaptWord = episode.Season.Adaptation.MediumUrlName, adaptName = episode.Season.Adaptation.UrlName, seasonNumber = episode.Season.AirOrder, episodeNumber = episode.AirOrder });
+            
+            return RedirectToRoute("Details", new { controller = "Episode", id });
         }
     }
 }
