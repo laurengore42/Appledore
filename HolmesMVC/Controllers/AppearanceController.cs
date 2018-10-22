@@ -142,10 +142,8 @@
             }
 
             Db.SaveChanges();
-
-            var relevantAdapt = Db.Adaptations.Find(model.AdaptationID);
-            var urlName = relevantAdapt.UrlName;
-            return RedirectToAction("Details", "Adaptation", new { urlName });
+            
+            return RedirectToRoute("Details", new { controller = "Adaptation", id = model.AdaptationID });
         }
 
         [OutputCache(NoStore = true, Duration = 0)]
@@ -204,13 +202,11 @@
             {
                 return View(appearance);
             }
-
-            var epId = appearance.EpisodeID;
-            var relevantEp = Db.Episodes.Find(epId);
+            
             Db.Appearances.Add(appearance);
             Db.SaveChanges();
 
-            return RedirectToRoute("EpDetails", new { adaptWord = relevantEp.Season.Adaptation.MediumUrlName, adaptName = relevantEp.Season.Adaptation.UrlName, seasonNumber = relevantEp.Season.AirOrder, episodeNumber = relevantEp.AirOrder });
+            return RedirectToRoute("Details", new { controller = "Episode", id = appearance.EpisodeID });
         }
 
         public List<SelectListItem> ActorList()
@@ -259,11 +255,10 @@
         public ActionResult DeleteConfirmed(int id)
         {
             var appearance = Db.Appearances.Find(id);
-            var epId = appearance.EpisodeID;
             Db.Appearances.Remove(appearance);
             Db.SaveChanges();
-
-            return RedirectToRoute("EpDetails", new { adaptWord = appearance.Episode.Season.Adaptation.MediumUrlName, adaptName = appearance.Episode.Season.Adaptation.UrlName, seasonNumber = appearance.Episode.Season.AirOrder, episodeNumber = appearance.Episode.AirOrder });
+            
+            return RedirectToRoute("Details", new { controller = "Episode", id = appearance.EpisodeID });
         }
     }
 }
