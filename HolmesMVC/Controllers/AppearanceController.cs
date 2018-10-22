@@ -206,10 +206,11 @@
             }
 
             var epId = appearance.EpisodeID;
+            var relevantEp = Db.Episodes.Find(epId);
             Db.Appearances.Add(appearance);
             Db.SaveChanges();
 
-            return RedirectToRoute("EpDetails", new { adaptWord = appearance.Episode.Season.Adaptation.MediumUrlName, adaptName = appearance.Episode.Season.Adaptation.UrlName, seasonNumber = appearance.Episode.Season.AirOrder, episodeNumber = appearance.Episode.AirOrder });
+            return RedirectToRoute("EpDetails", new { adaptWord = relevantEp.Season.Adaptation.MediumUrlName, adaptName = relevantEp.Season.Adaptation.UrlName, seasonNumber = relevantEp.Season.AirOrder, episodeNumber = relevantEp.AirOrder });
         }
 
         public List<SelectListItem> ActorList()
