@@ -113,7 +113,8 @@
         [ValidateAntiForgeryToken]
         public ActionResult MassAdd(MassAdd model)
         {
-            var urlName = model.Adaptation.UrlName;
+            var relevantAdapt = Db.Adaptations.Find(model.AdaptationID);
+            var urlName = relevantAdapt.UrlName;
             if (model.ActorID < 1 || model.CharacterID < 1 || model.Episodes.Count() < 1)
             {
                 return HttpNotFound();
