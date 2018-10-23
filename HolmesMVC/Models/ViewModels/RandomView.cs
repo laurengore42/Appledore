@@ -38,29 +38,29 @@
                              select new AnnivEpisode(e) // AnnivEpisode constructor not valid in LINQ to Entities
                              ).ToList();
 
-            var canonChars = from ap in db.Appearances
-                             where ap.Episode.Season.Adaptation.Name == "Canon" // IsCanon not valid in LINQ to Entities
-                             && ap.CharacterID > 0
-                             select ap.CharacterID;
+            //var canonChars = from ap in db.Appearances
+            //                 where ap.Episode.Season.Adaptation.Name == "Canon" // IsCanon not valid in LINQ to Entities
+            //                 && ap.CharacterID > 0
+            //                 select ap.CharacterID;
 
-            var canonApps = from ap in db.Appearances
-                            where canonChars.Contains(ap.CharacterID)
-                            && ap.Episode.Season.Adaptation.Medium != (int)Medium.Stage
-                            group ap by ap.ActorID into grp
-                            select grp;
+            //var canonApps = from ap in db.Appearances
+            //                where canonChars.Contains(ap.CharacterID)
+            //                && ap.Episode.Season.Adaptation.Medium != (int)Medium.Stage
+            //                group ap by ap.ActorID into grp
+            //                select grp;
             
-            var multiCharActors = (from ap in canonApps
-                                   where ap.Select(a => a.CharacterID).Distinct().Count() > 1
-                                   && ap.FirstOrDefault().ActorID > 0
-                                   select ap.FirstOrDefault().Actor).OrderBy(a => a.Surname).ToList();
-            MultiActor = new MultiActor
-            {
-                Actor = multiCharActors[(new Random()).Next(multiCharActors.Count())]
-            };
-            MultiActor.Characters =
-                                     (from ap in db.Appearances
-                                      where ap.ActorID == MultiActor.Actor.ID
-                                      select ap.Character).Distinct().ToList();
+            //var multiCharActors = (from ap in canonApps
+            //                       where ap.Select(a => a.CharacterID).Distinct().Count() > 1
+            //                       && ap.FirstOrDefault().ActorID > 0
+            //                       select ap.FirstOrDefault().Actor).OrderBy(a => a.Surname).ToList();
+            //MultiActor = new MultiActor
+            //{
+            //    Actor = multiCharActors[(new Random()).Next(multiCharActors.Count())]
+            //};
+            //MultiActor.Characters =
+            //                         (from ap in db.Appearances
+            //                          where ap.ActorID == MultiActor.Actor.ID
+            //                          select ap.Character).Distinct().ToList();
         }
 
         public MultiActor MultiActor { get; set; }
