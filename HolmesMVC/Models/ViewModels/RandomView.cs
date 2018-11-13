@@ -57,10 +57,10 @@
             //{
             //    Actor = multiCharActors[(new Random()).Next(multiCharActors.Count())]
             //};
-            //MultiActor.Characters =
-            //                         (from ap in db.Appearances
-            //                          where ap.ActorID == MultiActor.Actor.ID
-            //                          select ap.Character).Distinct().ToList();
+            //MultiActor.Characters = (from ap in db.Appearances
+            //                         where ap.ActorID == MultiActor.Actor.ID
+            //                         && canonChars.Contains(ap.CharacterID)
+            //                         select ap.Character).Distinct().ToList();
         }
 
         public MultiActor MultiActor { get; set; }
