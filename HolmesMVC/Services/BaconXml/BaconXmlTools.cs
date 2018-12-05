@@ -1,20 +1,12 @@
-﻿namespace HolmesMVC.BaconXml
+﻿namespace HolmesMVC.Services.BaconXml
 {
 #pragma warning disable CA1819 // Properties should not return arrays
 #pragma warning disable IDE1006 // Naming Styles
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Xml;
     using System.Xml.Serialization;
-
-    [XmlType(IncludeInSchema = false)]
-    public enum ItemsChoiceType
-    {
-        actor,
-        movie
-    }
 
     public static class BaconXmlTools
     {
@@ -227,67 +219,6 @@
                 return "Unknown error when deserialising XML: " + e.Message + "¦¦¦" + e.StackTrace;
             }
         }
-    }
-    
-    [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    public class link
-    {
-        [XmlElement("actor", typeof(string))]
-        [XmlElement("movie", typeof(string))]
-        [XmlChoiceIdentifier("ItemsElementName")]
-        public string[] Items { get; set; }
-
-        [XmlElement("ItemsElementName")]
-        [XmlIgnore]
-        public ItemsChoiceType[] ItemsElementName { get; set; }
-    }
-    
-    [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    public class spellcheck
-    {
-        [XmlElement("match")]
-        public string[] match { get; set; }
-
-        [XmlAttribute]
-        public string name { get; set; }
-    }
-
-    public class ProcessedLink
-    {
-        public ProcessedLink(link link)
-        {
-            ProcessedMovies = new List<ProcessedMovie>();
-            for (int i = 1; i < link.Items.Length; i += 2)
-            {
-                if (string.IsNullOrWhiteSpace(link.Items[i - 1])
-                    || string.IsNullOrWhiteSpace(link.Items[i])
-                    || string.IsNullOrWhiteSpace(link.Items[i + 1]))
-                {
-                    continue;
-                }
-
-                var procM = new ProcessedMovie
-                                    {
-                                        Name = link.Items[i],
-                                        Actor1 = link.Items[i - 1],
-                                        Actor2 = link.Items[i + 1]
-                                    };
-                    ProcessedMovies.Add(procM);
-            }
-        }
-
-        public List<ProcessedMovie> ProcessedMovies { get; set; }
-    }
-
-    public class ProcessedMovie
-    {
-        public string Name { get; set; }
-
-        public string Actor1 { get; set; }
-        
-        public string Actor2 { get; set; }
     }
 #pragma warning restore CA1819 // Properties should not return arrays
 #pragma warning restore IDE1006 // Naming Styles

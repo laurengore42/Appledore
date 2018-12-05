@@ -1,4 +1,4 @@
-﻿namespace HolmesMVC.Services
+﻿namespace HolmesMVC.Services.StoryService
 {
     using System.Web.Hosting;
     using System.Xml;
@@ -9,7 +9,7 @@
         {
             var xmlDoc = new XmlDocument();
             
-            var storyUrl = HostingEnvironment.MapPath("~/Services/Stories/" + storyCode + ".xml");
+            var storyUrl = HostingEnvironment.MapPath("~/Services/StoryService/Stories/" + storyCode + ".xml");
 
             if (storyUrl != null)
             {

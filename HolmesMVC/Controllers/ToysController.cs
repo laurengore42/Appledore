@@ -5,7 +5,7 @@
     using System.Data;
     using System.Linq;
     using System.Web.Mvc;
-    using HolmesMVC.BaconXml;
+    using HolmesMVC.Services.BaconXml;
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;

@@ -18,7 +18,7 @@
         public string StoryXml(string storyCode)
 #pragma warning restore CA1822 // Mark members as static
         {
-            var uri = new Uri("https://appledore.azurewebsites.net/services/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
+            var uri = new Uri("https://appledore.azurewebsites.net/services/storyservice/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
 
             var xr = new XmlDocument();
             xr.Load(WebRequest.Create(uri).GetResponse().GetResponseStream());

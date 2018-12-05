@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HolmesMVC.GoogleGeocode
+namespace HolmesMVC.Services.GoogleGeocode
 {
     public class LatLng
     {

@@ -4,7 +4,7 @@ using System.Web;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace HolmesMVC.GoogleGeocode
+namespace HolmesMVC.Services.GoogleGeocode
 {
     public static class Geocoder
     {

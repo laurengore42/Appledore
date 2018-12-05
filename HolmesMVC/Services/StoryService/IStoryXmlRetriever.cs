@@ -1,4 +1,4 @@
-﻿namespace HolmesMVC.Services
+﻿namespace HolmesMVC.Services.StoryService
 {
     using System.ServiceModel;
     using System.ServiceModel.Web;

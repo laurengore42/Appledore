@@ -1,4 +1,4 @@
-﻿namespace HolmesMVC
+﻿namespace HolmesMVC.Controllers
 {
     using System.Web.Mvc;
     using HolmesMVC.Models;

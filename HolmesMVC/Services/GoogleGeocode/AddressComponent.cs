@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HolmesMVC.GoogleGeocode
+namespace HolmesMVC.Services.GoogleGeocode
 {
     public class AddressComponent
     {

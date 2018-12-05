@@ -1,4 +1,4 @@
-﻿namespace HolmesMVC.GoogleGeocode
+﻿namespace HolmesMVC.Services.GoogleGeocode
 {
     public class Bounds
     {
