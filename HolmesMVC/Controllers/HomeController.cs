@@ -12,6 +12,7 @@
     using System.Xml.Linq;
     using HolmesMVC.ActionResults;
     using HolmesMVC.Enums;
+    using HolmesMVC.Extensions;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -168,7 +169,7 @@
             ViewBag.canCount = Db.Stories.Count();
 
             ViewBag.canChaCount = (from a in Db.Appearances
-                                   where a.Episode.Season.Adaptation.Name == "Canon"
+                                   where a.Episode.Season.Adaptation == Db.Adaptations.Canon()
                                    select a.CharacterID).Distinct().Count();
             
             return View();
@@ -338,7 +339,7 @@
                                        && (from ap in a.Appearances
                                            where
                                                (from ap2 in ap.Character.Appearances
-                                                    where ap2.Episode.Season.Adaptation.Name == "Canon"
+                                                    where ap2.Episode.Season.Adaptation == Db.Adaptations.Canon()
                                                     select ap2.ID).Any()
                                                && !ap.Actor.Surname.Contains("the dog")
                                                && (ap.Episode.Season.Adaptation.Medium == (int)Medium.Television

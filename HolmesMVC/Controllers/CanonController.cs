@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Web.Mvc;
+    using HolmesMVC.Extensions;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
@@ -14,9 +15,7 @@
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var adapt =
-                (from a in Db.Adaptations where a.Name == "Canon" select a)
-                    .FirstOrDefault();
+            var adapt = Db.Adaptations.Canon().FirstOrDefault();
             var profile =
                 (from p in Db.UserProfiles
                  where p.UserName == User.Identity.Name

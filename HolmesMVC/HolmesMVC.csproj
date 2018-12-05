@@ -212,6 +212,7 @@
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Extensions\AdaptationExtensions.cs" />
     <Compile Include="Services\BaconXml\BaconXmlTools.cs" />
     <Compile Include="Services\BaconXml\ItemsChoiceType.cs" />
     <Compile Include="Services\BaconXml\link.cs" />

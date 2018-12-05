@@ -7,6 +7,7 @@
     using System.Text.RegularExpressions;
     using System.Web.Hosting;
     using System.Xml.Linq;
+    using HolmesMVC.Extensions;
 
     public class CanonSearchNode
     {
@@ -270,7 +271,7 @@
 
             if (query != null)
             {
-                var storiesLocation = "~/Services/Stories/";
+                var storiesLocation = "~/Services/StoryService/Stories/";
                 var storiesExtension = ".xml";
 
                 var xmlDoc = new XDocument();
@@ -303,9 +304,9 @@
 
                 var unsortedNodes = Nodes;
                 var sortedNodes = new List<CanonSearchNode>();
-
+                
                 var sortedStories = (from e in Db.Episodes
-                                     where e.Season.Adaptation.Name == "Canon"
+                                     where e.Season.Adaptation == Db.Adaptations.Canon()
                                      select e.StoryID).ToList();
 
                 foreach (var s in sortedStories)
