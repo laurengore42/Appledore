@@ -325,7 +325,7 @@
     <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ScrapsView.cs" />
     <Compile Include="Models\ViewModels\ToyHolmes.cs" />
-    <Compile Include="HolmesDbController.cs" />
+    <Compile Include="Controllers\HolmesDbController.cs" />
     <Compile Include="Migrations\201502251210263_user has preferred canon order.cs" />
     <Compile Include="Migrations\201502251210263_user has preferred canon order.Designer.cs">
       <DependentUpon>201502251210263_user has preferred canon order.cs</DependentUpon>
@@ -407,7 +407,6 @@
     <Compile Include="Services\StoryService\StoryXmlRetriever.svc.cs">
       <DependentUpon>StoryXmlRetriever.svc</DependentUpon>
     </Compile>
-    <Compile Include="Stopwatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CanoPics\danc-1.png" />
