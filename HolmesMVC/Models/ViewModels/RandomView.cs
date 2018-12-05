@@ -38,7 +38,7 @@
                              ).ToList();
 
             //var canonChars = from ap in db.Appearances
-            //                 where ap.Episode.Season.Adaptation.Name == "Canon" // IsCanon not valid in LINQ to Entities
+            //                 where ap.Episode.Season.Adaptation == db.Adaptations.Canon()
             //                 && ap.CharacterID > 0
             //                 select ap.CharacterID;
 
@@ -47,7 +47,7 @@
             //                && ap.Episode.Season.Adaptation.Medium != (int)Medium.Stage
             //                group ap by ap.ActorID into grp
             //                select grp;
-            
+
             //var multiCharActors = (from ap in canonApps
             //                       where ap.Select(a => a.CharacterID).Distinct().Count() > 1
             //                       && ap.FirstOrDefault().ActorID > 0
