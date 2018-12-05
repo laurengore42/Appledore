@@ -15,7 +15,7 @@
         public ActionResult Index()
         {
             var adapt =
-                (from a in Db.Adaptations where a.IsCanon select a)
+                (from a in Db.Adaptations where a.Name == "Canon" select a)
                     .FirstOrDefault();
             var profile =
                 (from p in Db.UserProfiles
