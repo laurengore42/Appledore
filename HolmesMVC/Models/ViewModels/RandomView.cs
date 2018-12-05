@@ -28,7 +28,6 @@
             var epList = (from e in db.Episodes
                           where 
                           e.Season.Adaptation.Medium != (int)Medium.Stage
-                          && e.Season.Adaptation.Name != "Canon" // IsCanon not valid in LINQ to Entities
                           && e.Airdate.Month == thisMonth
                           && e.Airdate.Day == thisDay
                           && e.AirdatePrecision == (int)DatePrecision.Full
