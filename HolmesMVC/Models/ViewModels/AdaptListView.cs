@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HolmesMVC.Enums;
 
@@ -9,348 +8,30 @@ namespace HolmesMVC.Models.ViewModels
     {
         public AdaptListView(HolmesDBEntities Db)
         {
-            AdaptsFilm = (from a in Db.Adaptations
-                          where a.Medium == (int)Medium.Film
-                         && a.Seasons.Any()
-                         && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
-                          select new AdaptListAdapt
-                          {
-                              ID = a.ID,
+            AdaptsFilm = Db.Adaptations.AdaptsFilm().ToAdaptListAdapts();
 
-                              Name =
-                                    (
-                                    !string.IsNullOrEmpty(a.Name)
-                                    ? a.Name.Replace("\"", string.Empty)
-                                    : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                    ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                    ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                    : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                    : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
-                                   ).Replace("\"", string.Empty),
+            AdaptsSingleFilm = Db.Adaptations.AdaptsSingleFilm().ToAdaptListAdapts();
 
-                              Translation = string.IsNullOrEmpty(a.Translation)
-                                    ? string.Empty
-                                    : a.Translation.Replace("\"", string.Empty),
+            AdaptsRadio = Db.Adaptations.AdaptsRadio().ToAdaptListAdapts();
 
-                              Holmes = (from ap in a.Seasons
-                                        .SelectMany(s => s.Episodes)
-                                        .SelectMany(e => e.Appearances)
-                                        where ap.CharacterID == (int)CanonCharacter.Holmes
-                                        select ap).Any()
-                                    ? (from ap in a.Seasons
-                                       .SelectMany(s => s.Episodes)
-                                       .SelectMany(e => e.Appearances)
-                                       where ap.CharacterID == (int)CanonCharacter.Holmes
-                                       group ap by ap.ActorID into grp
-                                       orderby grp.Count() descending
-                                       select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                                    : string.Empty,
+            AdaptsSingleRadio = Db.Adaptations.AdaptsSingleRadio().ToAdaptListAdapts();
 
-                              Year = a.Seasons
-                              .OrderBy(s => s.AirOrder)
-                              .FirstOrDefault()
-                              .Episodes
-                              .OrderBy(e => e.Airdate)
-                              .FirstOrDefault()
-                              .Airdate
-                              .Year,
+            AdaptsTV = Db.Adaptations.AdaptsTV().ToAdaptListAdapts();
 
-                              EpCount = a.Seasons
-                              .SelectMany(s => s.Episodes)
-                              .Count(),
-
-                              Medium = ((Medium)a.Medium).ToString(),
-
-                              UrlName = a.UrlName
-                          }).ToList();
-
-            AdaptsSingleFilm = (from a in Db.Adaptations
-                                where a.Medium == (int)Medium.Film
-                         && a.Seasons.Any()
-                         && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
-                                select new AdaptListAdapt
-                                {
-                                    ID = a.ID,
-
-                                    Name =
-                                          (
-                                          !string.IsNullOrEmpty(a.Name)
-                                          ? a.Name.Replace("\"", string.Empty)
-                                          : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                          ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                          ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                          : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                          : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
-                                         ).Replace("\"", string.Empty),
-
-                                    Translation = string.IsNullOrEmpty(a.Translation)
-                                          ? string.Empty
-                                          : a.Translation.Replace("\"", string.Empty),
-
-                                    Holmes = (from ap in a.Seasons
-                                              .SelectMany(s => s.Episodes)
-                                              .SelectMany(e => e.Appearances)
-                                              where ap.CharacterID == (int)CanonCharacter.Holmes
-                                              select ap).Any()
-                                          ? (from ap in a.Seasons
-                                             .SelectMany(s => s.Episodes)
-                                             .SelectMany(e => e.Appearances)
-                                             where ap.CharacterID == (int)CanonCharacter.Holmes
-                                             group ap by ap.ActorID into grp
-                                             orderby grp.Count() descending
-                                             select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                                          : string.Empty,
-
-                                    Year = a.Seasons
-                                    .OrderBy(s => s.AirOrder)
-                                    .FirstOrDefault()
-                                    .Episodes
-                                    .OrderBy(e => e.Airdate)
-                                    .FirstOrDefault()
-                                    .Airdate
-                                    .Year,
-
-                                    EpCount = a.Seasons
-                                    .SelectMany(s => s.Episodes)
-                                    .Count(),
-
-                                    Medium = ((Medium)a.Medium).ToString(),
-
-                                    UrlName = a.UrlName
-                                }).ToList();
-
-            AdaptsTV = (from a in Db.Adaptations
-                        where a.Medium == (int)Medium.Television
-                         && a.Seasons.Any()
-                         && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
-                        select new AdaptListAdapt
-                        {
-                            ID = a.ID,
-
-                            Name =
-                                  (
-                                  !string.IsNullOrEmpty(a.Name)
-                                  ? a.Name.Replace("\"", string.Empty)
-                                  : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                  ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                  ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                  : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                  : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
-                                 ).Replace("\"", string.Empty),
-
-                            Translation = string.IsNullOrEmpty(a.Translation)
-                                  ? string.Empty
-                                  : a.Translation.Replace("\"", string.Empty),
-
-                            Holmes = (from ap in a.Seasons
-                                      .SelectMany(s => s.Episodes)
-                                      .SelectMany(e => e.Appearances)
-                                      where ap.CharacterID == (int)CanonCharacter.Holmes
-                                      select ap).Any()
-                                  ? (from ap in a.Seasons
-                                     .SelectMany(s => s.Episodes)
-                                     .SelectMany(e => e.Appearances)
-                                     where ap.CharacterID == (int)CanonCharacter.Holmes
-                                     group ap by ap.ActorID into grp
-                                     orderby grp.Count() descending
-                                     select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                                  : string.Empty,
-
-                            Year = a.Seasons
-                            .OrderBy(s => s.AirOrder)
-                            .FirstOrDefault()
-                            .Episodes
-                            .OrderBy(e => e.Airdate)
-                            .FirstOrDefault()
-                            .Airdate
-                            .Year,
-
-                            EpCount = a.Seasons
-                            .SelectMany(s => s.Episodes)
-                            .Count(),
-
-                            Medium = ((Medium)a.Medium).ToString(),
-
-                            UrlName = a.UrlName
-                        }).ToList();
-
-            AdaptsSingleRadio = (from a in Db.Adaptations
-                                 where a.Medium == (int)Medium.Radio
-                          && a.Seasons.Any()
-                          && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
-                                 select new AdaptListAdapt
-                                 {
-                                     ID = a.ID,
-
-                                     Name =
-                                          (
-                                          !string.IsNullOrEmpty(a.Name)
-                                          ? a.Name.Replace("\"", string.Empty)
-                                          : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                          ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                          ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                          : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                          : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
-                                         ).Replace("\"", string.Empty),
-
-                                     Translation = string.IsNullOrEmpty(a.Translation)
-                                          ? string.Empty
-                                          : a.Translation.Replace("\"", string.Empty),
-
-                                     Holmes = (from ap in a.Seasons
-                                               .SelectMany(s => s.Episodes)
-                                               .SelectMany(e => e.Appearances)
-                                               where ap.CharacterID == (int)CanonCharacter.Holmes
-                                               select ap).Any()
-                                          ? (from ap in a.Seasons
-                                             .SelectMany(s => s.Episodes)
-                                             .SelectMany(e => e.Appearances)
-                                             where ap.CharacterID == (int)CanonCharacter.Holmes
-                                             group ap by ap.ActorID into grp
-                                             orderby grp.Count() descending
-                                             select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                                          : string.Empty,
-
-                                     Year = a.Seasons
-                                    .OrderBy(s => s.AirOrder)
-                                    .FirstOrDefault()
-                                    .Episodes
-                                    .OrderBy(e => e.Airdate)
-                                    .FirstOrDefault()
-                                    .Airdate
-                                    .Year,
-
-                                     EpCount = a.Seasons
-                                    .SelectMany(s => s.Episodes)
-                                    .Count(),
-
-                                     Medium = ((Medium)a.Medium).ToString(),
-
-                                     UrlName = a.UrlName
-                                 }).ToList();
-
-            AdaptsRadio = (from a in Db.Adaptations
-                           where a.Medium == (int)Medium.Radio
-                       && a.Seasons.Any()
-                       && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
-                           select new AdaptListAdapt
-                           {
-                               ID = a.ID,
-
-                               Name =
-                                       (
-                                       !string.IsNullOrEmpty(a.Name)
-                                       ? a.Name.Replace("\"", string.Empty)
-                                       : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                       ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                       ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                       : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                       : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
-                                      ).Replace("\"", string.Empty),
-
-                               Translation = string.IsNullOrEmpty(a.Translation)
-                                       ? string.Empty
-                                       : a.Translation.Replace("\"", string.Empty),
-
-                               Holmes = (from ap in a.Seasons
-                                         .SelectMany(s => s.Episodes)
-                                         .SelectMany(e => e.Appearances)
-                                         where ap.CharacterID == (int)CanonCharacter.Holmes
-                                         select ap).Any()
-                                       ? (from ap in a.Seasons
-                                          .SelectMany(s => s.Episodes)
-                                          .SelectMany(e => e.Appearances)
-                                          where ap.CharacterID == (int)CanonCharacter.Holmes
-                                          group ap by ap.ActorID into grp
-                                          orderby grp.Count() descending
-                                          select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                                       : string.Empty,
-
-                               Year = a.Seasons
-                                 .OrderBy(s => s.AirOrder)
-                                 .FirstOrDefault()
-                                 .Episodes
-                                 .OrderBy(e => e.Airdate)
-                                 .FirstOrDefault()
-                                 .Airdate
-                                 .Year,
-
-                               EpCount = a.Seasons
-                                 .SelectMany(s => s.Episodes)
-                                 .Count(),
-
-                               Medium = ((Medium)a.Medium).ToString(),
-
-                               UrlName = a.UrlName
-                           }).ToList();
-
-            AdaptsOther = (from a in Db.Adaptations
-                           where a.Medium != (int)Medium.Television && a.Medium != (int)Medium.Radio && a.Medium != (int)Medium.Film && a.Medium != (int)Medium.Stage // to_do_theatre
-                          && a.Seasons.Any()
-                          && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
-                           select new AdaptListAdapt
-                           {
-                               ID = a.ID,
-
-                               Name =
-                                    (
-                                    !string.IsNullOrEmpty(a.Name)
-                                    ? a.Name.Replace("\"", string.Empty)
-                                    : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
-                                    ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
-                                    ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
-                                    : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
-                                    : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
-                                   ).Replace("\"", string.Empty),
-
-                               Translation = string.IsNullOrEmpty(a.Translation)
-                                    ? string.Empty
-                                    : a.Translation.Replace("\"", string.Empty),
-
-                               Holmes = (from ap in a.Seasons
-                                         .SelectMany(s => s.Episodes)
-                                         .SelectMany(e => e.Appearances)
-                                         where ap.CharacterID == (int)CanonCharacter.Holmes
-                                         select ap).Any()
-                                    ? (from ap in a.Seasons
-                                       .SelectMany(s => s.Episodes)
-                                       .SelectMany(e => e.Appearances)
-                                       where ap.CharacterID == (int)CanonCharacter.Holmes
-                                       group ap by ap.ActorID into grp
-                                       orderby grp.Count() descending
-                                       select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
-                                    : string.Empty,
-
-                               Year = a.Seasons
-                              .OrderBy(s => s.AirOrder)
-                              .FirstOrDefault()
-                              .Episodes
-                              .OrderBy(e => e.Airdate)
-                              .FirstOrDefault()
-                              .Airdate
-                              .Year,
-
-                               EpCount = a.Seasons
-                              .SelectMany(s => s.Episodes)
-                              .Count(),
-
-                               Medium = ((Medium)a.Medium).ToString(),
-
-                               UrlName = a.UrlName
-                           }).ToList();
+            AdaptsOther = Db.Adaptations.AdaptsOther().ToAdaptListAdapts();
         }
 
-        public List<AdaptListAdapt> AdaptsSingleFilm { get; set; }
+        public List<AdaptListAdapt> AdaptsFilm { get; private set; }
 
-        public List<AdaptListAdapt> AdaptsFilm { get; set; }
+        public List<AdaptListAdapt> AdaptsSingleFilm { get; private set; }
 
-        public List<AdaptListAdapt> AdaptsSingleRadio { get; set; }
+        public List<AdaptListAdapt> AdaptsRadio { get; private set; }
 
-        public List<AdaptListAdapt> AdaptsTV { get; set; }
+        public List<AdaptListAdapt> AdaptsSingleRadio { get; private set; }
 
-        public List<AdaptListAdapt> AdaptsRadio { get; set; }
+        public List<AdaptListAdapt> AdaptsTV { get; private set; }
 
-        public List<AdaptListAdapt> AdaptsOther { get; set; }
+        public List<AdaptListAdapt> AdaptsOther { get; private set; }
     }
 
     public class AdaptListAdapt
@@ -370,5 +51,117 @@ namespace HolmesMVC.Models.ViewModels
         public string Medium;
 
         public string UrlName;
+    }
+
+    public static class AdaptListViewExtensions
+    {
+        public static IQueryable<Adaptation> AdaptsFilm(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium == (int)Medium.Film
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
+                   select a;
+        }
+
+        public static IQueryable<Adaptation> AdaptsSingleFilm(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium == (int)Medium.Film
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
+                   select a;
+        }
+
+        public static IQueryable<Adaptation> AdaptsTV(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium == (int)Medium.Television
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
+                   select a;
+        }
+
+        public static IQueryable<Adaptation> AdaptsRadio(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium == (int)Medium.Radio
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
+                   select a;
+        }
+
+        public static IQueryable<Adaptation> AdaptsSingleRadio(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium == (int)Medium.Radio
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
+                   select a;
+        }
+
+        public static IQueryable<Adaptation> AdaptsOther(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium != (int)Medium.Television && a.Medium != (int)Medium.Radio && a.Medium != (int)Medium.Film && a.Medium != (int)Medium.Stage // to_do_theatre
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() > 1
+                   select a;
+        }
+
+        public static List<AdaptListAdapt> ToAdaptListAdapts(this IQueryable<Adaptation> adaptations)
+        {
+            return adaptations.ToList().Select(a => new AdaptListAdapt
+            {
+                ID = a.ID,
+
+                Name =
+                        (
+                        !string.IsNullOrEmpty(a.Name)
+                        ? a.Name.Replace("\"", string.Empty)
+                        : (a.Seasons.Count() == 1 && a.Seasons.FirstOrDefault().Episodes.Count() == 1)
+                        ? string.IsNullOrEmpty(a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title)
+                        ? a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Story.Name
+                        : a.Seasons.FirstOrDefault().Episodes.FirstOrDefault().Title
+                        : (a.Company + " " + (a.Medium == (int)Medium.Television ? "TV" : ((Medium)a.Medium).ToString()))
+                        ).Replace("\"", string.Empty),
+
+                Translation = string.IsNullOrEmpty(a.Translation)
+                                    ? string.Empty
+                                    : a.Translation.Replace("\"", string.Empty),
+
+                Holmes = (from ap in a.Seasons
+                          .SelectMany(s => s.Episodes)
+                          .SelectMany(e => e.Appearances)
+                          where ap.CharacterID == (int)CanonCharacter.Holmes
+                          select ap).Any()
+                                    ? (from ap in a.Seasons
+                                       .SelectMany(s => s.Episodes)
+                                       .SelectMany(e => e.Appearances)
+                                       where ap.CharacterID == (int)CanonCharacter.Holmes
+                                       group ap by ap.ActorID into grp
+                                       orderby grp.Count() descending
+                                       select grp.FirstOrDefault().Actor.Surname).FirstOrDefault()
+                                    : string.Empty,
+
+                Year = a.Seasons
+                              .OrderBy(s => s.AirOrder)
+                              .FirstOrDefault()
+                              .Episodes
+                              .OrderBy(e => e.Airdate)
+                              .FirstOrDefault()
+                              .Airdate
+                              .Year,
+
+                EpCount = a.Seasons
+                              .SelectMany(s => s.Episodes)
+                              .Count(),
+
+                Medium = ((Medium)a.Medium).ToString(),
+
+                UrlName = a.UrlName
+            })
+            .ToList();
+        }
     }
 }
