@@ -1,9 +1,4 @@
-﻿@using HolmesMVC
-@using HolmesMVC.Models
-@model HolmesMVC.Models.ViewModels.RandomView
-
-@*<h3>An actor with more than one role:</h3>
-@Html.ActionLink(Model.MultiActor.Actor.ShortName, "Details", "Actor", new { Model.MultiActor.Actor.UrlName }, null) played @Html.Raw(String.Join(" and ", Model.MultiActor.Characters.Select(c => Html.ActionLink(c.LongName, "Details", "Character", new { c.UrlName }, null))))*@
+﻿@model HolmesMVC.Models.ViewModels.RandomView
 
 <h3>Today's birthdays:</h3>
 @if (!Model.BirthdayActors.Any())
@@ -13,10 +8,10 @@
 else
 {
     <table>
-    @foreach (var a in Model.BirthdayActors)
-     {
-        <tr><td>@Html.ActionLink(a.Name, "Details", "Actor", new { a.UrlName }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
-     }
+        @foreach (var a in Model.BirthdayActors)
+        {
+            <tr><td>@Html.ActionLink(a.Name, "Details", "Actor", new { a.UrlName }, null) born </td><td> @((a.Birthdate).ToString("d MMMM yyyy"))</td></tr>
+        }
     </table>
 }
 
@@ -24,11 +19,13 @@ else
 @if (!Model.AnnivEpisodes.Any())
 {
     <text>None!</text>
-} else {
-    <table>
-@foreach (var e in Model.AnnivEpisodes)
-{
-        <tr><td>@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.AdaptMediumUrlName, adaptName = e.AdaptUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder }) starring @e.Holmes </td><td> @((e.Airdate).ToString("d MMMM yyyy"))</td></tr>
 }
+else
+{
+    <table>
+        @foreach (var e in Model.AnnivEpisodes)
+        {
+            <tr><td>@Html.RouteLink(e.Name, "EpDetails", new { adaptWord = e.AdaptMediumUrlName, adaptName = e.AdaptUrlName, seasonNumber = e.SeasonAirOrder, episodeNumber = e.AirOrder }) starring @e.Holmes </td><td> @((e.Airdate).ToString("d MMMM yyyy"))</td></tr>
+        }
     </table>
 }
