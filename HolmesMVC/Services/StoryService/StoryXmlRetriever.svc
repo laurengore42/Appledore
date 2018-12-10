@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="HolmesMVC.Services.StoryXmlRetriever" CodeBehind="StoryXmlRetriever.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="HolmesMVC.Services.StoryService.StoryXmlRetriever" CodeBehind="StoryXmlRetriever.svc.cs" %>
