@@ -323,7 +323,6 @@
     <Compile Include="Models\Mapping\HolmesLinkMap.cs" />
     <Compile Include="Models\ViewModels\AdaptListView.cs" />
     <Compile Include="Models\ViewModels\CanonSearchView.cs" />
-    <Compile Include="Models\ViewModels\MultiActor.cs" />
     <Compile Include="Models\ViewModels\ScrapsView.cs" />
     <Compile Include="Models\ViewModels\ToyHolmes.cs" />
     <Compile Include="Controllers\HolmesDbController.cs" />
