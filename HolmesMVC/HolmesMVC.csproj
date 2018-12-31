@@ -212,6 +212,10 @@
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Extensions\AdaptationExtensions.cs" />
+    <Compile Include="Migrations\201812311447596_remove reference table.cs" />
+    <Compile Include="Migrations\201812311447596_remove reference table.Designer.cs">
+      <DependentUpon>201812311447596_remove reference table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\BaconXml\BaconXmlTools.cs" />
     <Compile Include="Services\BaconXml\ItemsChoiceType.cs" />
     <Compile Include="Services\BaconXml\link.cs" />
@@ -1485,6 +1489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810021030217_adaptation unique urlname.resx">
       <DependentUpon>201810021030217_adaptation unique urlname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812311447596_remove reference table.resx">
+      <DependentUpon>201812311447596_remove reference table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

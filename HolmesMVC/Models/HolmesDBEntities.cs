@@ -63,7 +63,9 @@ namespace HolmesMVC.Models
 
         public override int SaveChanges()
         {
-            HttpContext.Current.Application["LastDbUpdate"] = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
+            if (HttpContext.Current != null && HttpContext.Current.Application != null) { 
+                HttpContext.Current.Application["LastDbUpdate"] = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
+            }
             return base.SaveChanges();
         }
     }
