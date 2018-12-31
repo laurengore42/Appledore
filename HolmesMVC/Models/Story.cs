@@ -9,7 +9,6 @@ namespace HolmesMVC.Models
         public Story()
         {
             Episodes = new List<Episode>();
-            References = new List<Reference>();
             Characters = new List<Character>();
         }
 
@@ -19,7 +18,6 @@ namespace HolmesMVC.Models
         public Outcome OutcomeType { get; set; }
         public virtual Date Date { get; set; }
         public virtual ICollection<Episode> Episodes { get; set; }
-        public virtual ICollection<Reference> References { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
     }
 }

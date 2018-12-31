@@ -209,7 +209,6 @@
     <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HonorificController.cs" />
-    <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Extensions\AdaptationExtensions.cs" />
@@ -360,7 +359,6 @@
     <Compile Include="Models\Mapping\DateMap.cs" />
     <Compile Include="Models\Mapping\EpisodeMap.cs" />
     <Compile Include="Models\Mapping\HonorificMap.cs" />
-    <Compile Include="Models\Mapping\ReferenceMap.cs" />
     <Compile Include="Models\Mapping\RenameMap.cs" />
     <Compile Include="Models\Mapping\SeasonMap.cs" />
     <Compile Include="Models\Mapping\SpeciesMap.cs" />
@@ -375,7 +373,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Reference.cs" />
     <Compile Include="Models\Rename.cs" />
     <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Species.cs" />
@@ -1385,11 +1382,6 @@
     <Content Include="Views\Home\RandomFact.cshtml" />
     <Content Include="Views\Toys\Scraps.cshtml" />
     <Content Include="Views\Rename\CreateFull.cshtml" />
-    <Content Include="Views\Reference\Index.cshtml" />
-    <Content Include="Views\Reference\Details.cshtml" />
-    <Content Include="Views\Reference\Create.cshtml" />
-    <Content Include="Views\Reference\Edit.cshtml" />
-    <Content Include="Views\Reference\Delete.cshtml" />
     <Content Include="Views\Canon\Index.cshtml" />
     <Content Include="Views\Appearance\MassAdd.cshtml" />
     <Content Include="Views\Story\Chunk.cshtml" />

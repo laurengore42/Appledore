@@ -10,7 +10,6 @@ namespace HolmesMVC.Models
         {
             HolmesLinks = new List<HolmesLink>();
             Appearances = new List<Appearance>();
-            References = new List<Reference>();
         }
 
         public int ID { get; set; }
@@ -26,7 +25,6 @@ namespace HolmesMVC.Models
         public virtual ICollection<Appearance> Appearances { get; set; }
         public virtual Season Season { get; set; }
         public virtual Story Story { get; set; }
-        public virtual ICollection<Reference> References { get; set; }
         public virtual ICollection<HolmesLink> HolmesLinks { get; set; }
 
         /// <summary>

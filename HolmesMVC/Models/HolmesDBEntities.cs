@@ -25,7 +25,6 @@ namespace HolmesMVC.Models
         public DbSet<Date> Dates { get; set; }
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<Honorific> Honorifics { get; set; }
-        public DbSet<Reference> References { get; set; }
         public DbSet<Rename> Renames { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Species> Species { get; set; }
@@ -48,7 +47,6 @@ namespace HolmesMVC.Models
             modelBuilder.Configurations.Add(new DateMap());
             modelBuilder.Configurations.Add(new EpisodeMap());
             modelBuilder.Configurations.Add(new HonorificMap());
-            modelBuilder.Configurations.Add(new ReferenceMap());
             modelBuilder.Configurations.Add(new RenameMap());
             modelBuilder.Configurations.Add(new SeasonMap());
             modelBuilder.Configurations.Add(new SpeciesMap());
