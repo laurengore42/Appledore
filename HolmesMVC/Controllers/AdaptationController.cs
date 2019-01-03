@@ -34,7 +34,11 @@
 
             var viewmodel = new AdaptView(adaptation);
 
-            if (viewmodel.Medium != (int)Medium.Radio)
+			if (viewmodel.SingleFilm)
+			{
+				return RedirectToAction("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
+			}
+			if (viewmodel.Medium != (int)Medium.Radio)
             {
                 return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
             }
@@ -58,10 +62,6 @@
             if (!viewmodel.SingleFilm)
             {
                 return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
-            }
-            if (viewmodel.Medium == (int)Medium.Radio)
-            {
-                return RedirectToAction("RadioDetails", "Adaptation", new { viewmodel.UrlName });
             }
             return View(viewmodel);
         }
