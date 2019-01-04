@@ -19,7 +19,7 @@ namespace HolmesMVC.Models
         public int Medium { get; set; }
         public string Company { get; set; }
         public string UrlName { get; set; }
-        public string MediumUrlName => Medium == (int)Enums.Medium.Radio ? "radio" : Seasons.SelectMany(s => s.Episodes).Count() == 1 ? "film" : Medium == (int)Enums.Medium.Television ? "tv" : "adaptation";
+        public string MediumUrlName => Medium == (int)Enums.Medium.Radio ? "radio" : Medium == (int)Enums.Medium.Film ? "film" : Medium == (int)Enums.Medium.Television ? "tv" : "adaptation";
 
         public virtual ICollection<Rename> Renames { get; set; }
         public virtual ICollection<Season> Seasons { get; set; }

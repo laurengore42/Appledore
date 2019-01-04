@@ -66,7 +66,7 @@
 
         //
         // GET: /tv/granada -- multi
-        // GET: /tv/granada -- single
+        // GET: /tv/higgins -- single
 
         [AllowAnonymous]
         public ActionResult TVDetails(string urlName = "")
