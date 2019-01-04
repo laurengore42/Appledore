@@ -9,7 +9,6 @@
 }
 @if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
 {
-    <link rel="canonical" href="https://appledore.azurewebsites.net/film/@Model.UrlName" />
     <script type="application/ld+json">
         {
         "@@context": "http://schema.org"
@@ -29,10 +28,20 @@
         }
     </script>
 }
+
+@if (Model.Medium == (int)Medium.Television)
+{
+    <link rel="canonical" href="https://appledore.azurewebsites.net/tv/@Model.UrlName" />
+}
+else if (Model.Medium == (int)Medium.Film)
+{
+    <link rel="canonical" href="https://appledore.azurewebsites.net/film/@Model.UrlName" />
+}
 else if (Model.Medium == (int)Medium.Radio)
 {
     <link rel="canonical" href="https://appledore.azurewebsites.net/radio/@Model.UrlName" />
 }
+
 <section class="rightfloatdetails">
     @if (Model.HolmesActors.Any() && !String.IsNullOrEmpty(Model.HolmesActors.First().PicShow))
     {
