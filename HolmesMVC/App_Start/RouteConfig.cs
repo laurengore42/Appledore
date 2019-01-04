@@ -83,9 +83,9 @@
                 new { controller = "Adaptation", action = "TVDetails" }
             );
             routes.MapRoute(
-                "AdaptSingleFilmDetails",
+                "AdaptFilmDetails",
                 "film/{urlName}",
-                new { controller = "Adaptation", action = "SingleFilmDetails" }
+                new { controller = "Adaptation", action = "FilmDetails" }
             );
             routes.MapRoute(
                 "AdaptDetails",

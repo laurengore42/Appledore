@@ -1313,7 +1313,7 @@
     <Content Include="Views\Appearance\Create.cshtml" />
     <Content Include="Views\Appearance\Delete.cshtml" />
     <Content Include="Views\Character\HistorySummary.cshtml" />
-    <Content Include="Views\Adaptation\SingleFilmDetails.cshtml" />
+    <Content Include="Views\Adaptation\SingleEpisodeDetails.cshtml" />
     <Content Include="Views\Character\History.cshtml" />
     <Content Include="Views\Adaptation\_PlayedBy.cshtml" />
     <Content Include="Views\Appearance\_AppActor.cshtml" />

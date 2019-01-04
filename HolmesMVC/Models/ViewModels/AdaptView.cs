@@ -30,10 +30,10 @@
                 DateOfFirstEpisode = Episodes.First().Airdate;
             }
 
-            SingleFilm = Episodes.Count() == 1;
+            SingleEpisode = Episodes.Count() == 1;
             SingleSeason = adapt.Seasons.Count() == 1;
 
-            if (SingleFilm)
+            if (SingleEpisode)
             {
                 ActorNames = from a in Episodes.First().Appearances
                              where a.ActorID > 0
@@ -62,7 +62,7 @@
 
         public bool SingleSeason { get; set; }
 
-        public bool SingleFilm { get; set; }
+        public bool SingleEpisode { get; set; }
 
         public IEnumerable<string> ActorNames { get; set; }
 

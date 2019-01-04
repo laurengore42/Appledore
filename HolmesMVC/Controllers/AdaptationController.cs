@@ -27,43 +27,39 @@
         public ActionResult RadioDetails(string urlName = "")
         {
             Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
-            if (adaptation == null)
+            if (adaptation == null || adaptation.Medium != (int)Medium.Radio)
             {
                 return RedirectToAction("Details", "Adaptation", new { urlName });
             }
 
             var viewmodel = new AdaptView(adaptation);
 
-			if (viewmodel.SingleFilm)
-			{
-				return RedirectToAction("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
-			}
-			if (viewmodel.Medium != (int)Medium.Radio)
+            if (viewmodel.SingleEpisode)
             {
-                return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+                return View("SingleEpisodeDetails", viewmodel);
             }
             return View("Details", viewmodel);
         }
 
         //
-        // GET: /film/without_a_clue
+        // GET: /film/early_rathbone
 
         [AllowAnonymous]
-        public ActionResult SingleFilmDetails(string urlName = "")
+        public ActionResult FilmDetails(string urlName = "")
         {
             Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
-            if (adaptation == null)
+            if (adaptation == null || adaptation.Medium != (int)Medium.Film)
             {
                 return RedirectToAction("Details", "Adaptation", new { urlName });
             }
 
             var viewmodel = new AdaptView(adaptation);
 
-            if (!viewmodel.SingleFilm)
+            if (viewmodel.SingleEpisode)
             {
-                return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+                return View("SingleEpisodeDetails", viewmodel);
             }
-            return View(viewmodel);
+            return View("Details", viewmodel);
         }
 
         //
@@ -73,23 +69,20 @@
         public ActionResult TVDetails(string urlName = "")
         {
             Adaptation adaptation = Db.Adaptations.Where(a => a.UrlName == urlName).FirstOrDefault();
-            if (adaptation == null)
+            if (adaptation == null || adaptation.Medium != (int)Medium.Television)
             {
                 return RedirectToAction("Details", "Adaptation", new { urlName });
             }
 
             var viewmodel = new AdaptView(adaptation);
 
-            if (viewmodel.SingleFilm)
+            if (viewmodel.SingleEpisode)
             {
-                return RedirectToAction("SingleFilmDetails", "Adaptation", new { viewmodel.UrlName });
-            }
-            if (viewmodel.Medium != (int)Medium.Television)
-            {
-                return RedirectToAction("Details", "Adaptation", new { viewmodel.UrlName });
+                return View("SingleEpisodeDetails", viewmodel);
             }
             return View("Details", viewmodel);
         }
+
 
         //
         // GET: /adaptation/wontner
@@ -129,7 +122,7 @@
                     actionName = "RadioDetails";
                     break;
                 case "film":
-                    actionName = "SingleFilmDetails";
+                    actionName = "FilmDetails";
                     break;
                 case "tv":
                     actionName = "TVDetails";
