@@ -14,7 +14,7 @@
             @foreach (var a in Model.AdaptsFilm.OrderBy(a => a.Year))
             {
             <li>
-                <text>@a.Year @Html.ActionLink(a.Name, "Details", "Adaptation", new { a.UrlName }, null)</text>
+                <text>@a.Year @Html.ActionLink(a.Name, "FilmDetails", "Adaptation", new { a.UrlName }, null)</text>
                 @if (!string.IsNullOrEmpty(a.Translation))
                 {
                     <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
