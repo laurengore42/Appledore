@@ -17,6 +17,8 @@ namespace HolmesMVC.Models.ViewModels
 
             AdaptsTV = Db.Adaptations.AdaptsTV().ToAdaptListAdapts();
 
+            AdaptsSingleTV = Db.Adaptations.AdaptsSingleTV().ToAdaptListAdapts();
+
             AdaptsOther = Db.Adaptations.AdaptsOther().ToAdaptListAdapts();
         }
 
@@ -29,6 +31,8 @@ namespace HolmesMVC.Models.ViewModels
         public List<AdaptListAdapt> AdaptsSingleRadio { get; private set; }
 
         public List<AdaptListAdapt> AdaptsTV { get; private set; }
+
+        public List<AdaptListAdapt> AdaptsSingleTV { get; private set; }
 
         public List<AdaptListAdapt> AdaptsOther { get; private set; }
     }

@@ -21,7 +21,8 @@
         }
 
         //
-        // GET: /radio/merrison
+        // GET: /radio/merrison -- multi
+        // GET: /radio/hardwicke -- single
 
         [AllowAnonymous]
         public ActionResult RadioDetails(string urlName = "")
@@ -42,7 +43,8 @@
         }
 
         //
-        // GET: /film/early_rathbone
+        // GET: /film/early_rathbone -- multi
+        // GET: /film/without_a_clue -- single
 
         [AllowAnonymous]
         public ActionResult FilmDetails(string urlName = "")
@@ -63,7 +65,8 @@
         }
 
         //
-        // GET: /tv/granada
+        // GET: /tv/granada -- multi
+        // GET: /tv/granada -- single
 
         [AllowAnonymous]
         public ActionResult TVDetails(string urlName = "")

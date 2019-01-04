@@ -90,7 +90,7 @@
                             actionName = "RadioDetails";
                             break;
                         case "film":
-                            actionName = "SingleFilmDetails";
+                            actionName = "FilmDetails";
                             break;
                         case "tv":
                             actionName = "TVDetails";

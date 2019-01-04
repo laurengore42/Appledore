@@ -42,6 +42,15 @@ namespace HolmesMVC.Extensions
                    select a;
         }
 
+        public static IQueryable<Adaptation> AdaptsSingleTV(this IQueryable<Adaptation> adaptations)
+        {
+            return from a in adaptations
+                   where a.Medium == (int)Medium.Television
+                   && a.Seasons.Any()
+                   && a.Seasons.SelectMany(s => s.Episodes).Count() == 1
+                   select a;
+        }
+
         public static IQueryable<Adaptation> AdaptsRadio(this IQueryable<Adaptation> adaptations)
         {
             return from a in adaptations
