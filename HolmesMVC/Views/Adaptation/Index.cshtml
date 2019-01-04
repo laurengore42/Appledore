@@ -119,28 +119,30 @@
             }
         </ul>
     }
-
+    
     @if (Model.AdaptsSingleRadio.Any())
-    {
-        <h3>Radio Plays</h3>
-        <ul>
-            @foreach (var a in Model.AdaptsSingleRadio.OrderBy(a => a.Year))
-            {
-                <li>
-                @if (a.Holmes.Length > 0)
-                {
-                    <text>@a.Year @Html.ActionLink(a.Name, "RadioDetails", "Adaptation", new { a.UrlName }, null) (@a.Holmes)</text>
-                }
-                else
-                {
-                    <text>@a.Year @Html.ActionLink(a.Name, "RadioDetails", "Adaptation", new { a.UrlName }, null)</text>
-                }
+    {            
+            <text>
+         <h3>Radio Plays</h3>
+         <ul>
+             @foreach (var a in Model.AdaptsSingleRadio.OrderBy(a => a.Year))
+             {
+                 <li>
+                 @if (a.Holmes.Length > 0)
+                 {
+                     <text>@a.Year @a.Holmes: '@Html.ActionLink(a.Name, "RadioDetails", "Adaptation", new { a.UrlName }, null)'</text>
+                 }
+                 else
+                 {
+                     <text>@a.Year: '@Html.ActionLink(a.Name, "RadioDetails", "Adaptation", new { a.UrlName }, null)'</text>
+                 }
                  @if (!string.IsNullOrEmpty(a.Translation)) {
                      <span style="font-weight: normal; font-size: small;"><i>@a.Translation</i></span>
-                 }   
-            </li>
-            }
-        </ul>
+                 }    
+                 </li>
+             }
+         </ul>
+</text>
     }
 
     @if (Model.AdaptsOther.Any())
