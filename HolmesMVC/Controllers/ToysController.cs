@@ -24,12 +24,12 @@
 
             var oldName = targetImdbName;
             if (!targetImdbName.Contains("(") &&
-                BaconXmlTools.IntegerHolmesNumber("Jeremy Brett (I)", targetImdbName) == -2)
+                BaconXmlTools.IntegerHolmesNumber(Shared.JeremyBrettImdb(), targetImdbName) == -2)
             {
                 targetImdbName += " (I)";
             }
 
-            var errorCode = BaconXmlTools.IntegerHolmesNumber("Jeremy Brett (I)", targetImdbName);
+            var errorCode = BaconXmlTools.IntegerHolmesNumber(Shared.JeremyBrettImdb(), targetImdbName);
             if (errorCode == -2)
             {
                 return "Could not find anyone called '" + oldName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q=" + oldName + "'>click here</a>";
@@ -131,14 +131,14 @@
                 var oldName = targetImdbName;
                 if (!targetImdbName.Contains("(")
                     && BaconXmlTools.IntegerHolmesNumber(
-                        "Jeremy Brett (I)",
+                        Shared.JeremyBrettImdb(),
                         targetImdbName) == -2)
                 {
                     targetImdbName += " (I)";
                 }
 
                 var errorCode = BaconXmlTools.IntegerHolmesNumber(
-                    "Jeremy Brett (I)",
+                    Shared.JeremyBrettImdb(),
                     targetImdbName);
                 if (errorCode == -2)
                 {
@@ -200,7 +200,7 @@
                         return stringOut
                             + "Got a " + thisHolmesNum
                                + " result when testing holmes " + i + ": "
-                               + holmesTesting + ".";
+                               + holmesTesting.Name + ". Memo: -2 is spellcheck";
                     }
 
                     if (thisHolmesNum < holmesNum)
@@ -371,6 +371,11 @@
                               select grp.FirstOrDefault().Actor).ToList();
 
             return View(holmesList);
+        }
+
+        public static string JeremyBrettImdb()
+        {
+            return "Jeremy Brett";
         }
     }
 }

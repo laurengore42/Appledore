@@ -89,5 +89,10 @@
 
         public static string BuildName(IEnumerable<string> names, string divider) =>
             string.Join(divider, names.Where(s => !string.IsNullOrEmpty(s)));
+
+        public static string JeremyBrettImdb()
+        {
+            return "Jeremy Brett";
+        }
     }
 }

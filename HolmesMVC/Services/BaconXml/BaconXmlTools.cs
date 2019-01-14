@@ -26,7 +26,7 @@
 
         public static string BrettNumber(string targetImdbName)
         {
-            return HolmesNumber(1, "Jeremy Brett (I)", targetImdbName).Replace("Holmes number", "Brett number");
+            return HolmesNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Replace("Holmes number", "Brett number");
         }
 
         public static ProcessedLink GetProcLink(
