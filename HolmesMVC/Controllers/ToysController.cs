@@ -129,6 +129,7 @@
                 targetImdbName = targetImdbName.Trim();
 
                 var oldName = targetImdbName;
+
                 if (!targetImdbName.Contains("(")
                     && BaconXmlTools.IntegerHolmesNumber(
                         Shared.JeremyBrettImdb(),
@@ -175,9 +176,12 @@
                         holmesTesting.Name,
                         targetImdbName);
 
-                    if (thisHolmesNum == -2 && !holmesTesting.Name.Contains("("))
+                    if (thisHolmesNum == -2)
                     {
-                        holmesTesting.Name += " (I)";
+                        if (holmesTesting.Name.Contains("(")) {
+                            holmesTesting.Name = holmesTesting.Name.Substring(0, holmesTesting.Name.IndexOf("("));
+                        }
+
                         thisHolmesNum = BaconXmlTools.IntegerHolmesNumber(
                             holmesTesting.Name,
                             targetImdbName);
