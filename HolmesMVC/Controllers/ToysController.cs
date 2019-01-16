@@ -154,11 +154,9 @@
                 }
 
                 // get holmes list
-                var holmeses = (from a in Db.Appearances
-                                where
-                                    a.CharacterID == (int)CanonCharacter.Holmes
-                                    && a.Actor.IMDbName != null
-                                select new ToyHolmes { ID = a.ActorID, Name = a.Actor.IMDbName }).Distinct().ToList();
+                var holmeses = (from a in Db.Actors
+                                where a.IMDbName != null
+                                select new ToyHolmes { ID = a.ID, Name = a.IMDbName }).ToList();
 
                 var r = new Random();
                 holmeses = holmeses.OrderBy(x => r.Next()).ToList();
