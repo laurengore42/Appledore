@@ -162,7 +162,7 @@
                 holmeses = holmeses.OrderBy(x => r.Next()).ToList();
 
                 // spelling passed, calculate number
-                var holmesNum = 1000000;
+                var lowestHolmesNum = 1000000;
                 var count = holmeses.Count();
                 string holmesStr = string.Empty;
 
@@ -170,51 +170,51 @@
                 {
                     var holmesTesting = holmeses[i];
 
-                    var thisHolmesNum = BaconNumberTools.BaconNumber(
+                    var holmesNum = BaconNumberTools.BaconNumber(
                         holmesTesting.Name,
                         targetImdbName);
 
-                    if (thisHolmesNum == -2)
+                    if (holmesNum == -2)
                     {
                         if (holmesTesting.Name.Contains("(")) {
                             holmesTesting.Name = holmesTesting.Name.Substring(0, holmesTesting.Name.IndexOf("("));
                         }
 
-                        thisHolmesNum = BaconNumberTools.BaconNumber(
+                        holmesNum = BaconNumberTools.BaconNumber(
                             holmesTesting.Name,
                             targetImdbName);
                     }
 
-                    if (thisHolmesNum < 0)
+                    if (holmesNum < 0)
                     {
                         // awards show kludge
-                        if (thisHolmesNum == -10)
+                        if (holmesNum == -10)
                         {
                             continue;
                         }
 
                         // genuinely unlinkable actors
-                        if (thisHolmesNum == -42)
+                        if (holmesNum == -42)
                         {
                             continue;
                         }
 
                         return stringOut
-                            + "Got a " + thisHolmesNum
+                            + "Got a " + holmesNum
                                + " result when testing holmes " + i + ": "
                                + holmesTesting.Name + ". Memo: -2 is spellcheck";
                     }
 
-                    if (thisHolmesNum < holmesNum)
+                    if (holmesNum < lowestHolmesNum)
                     {
                         holmesStr = BaconNumberTools.LowestHolmesNumberString(
                             holmesTesting.ID,
                             holmesTesting.Name,
                             targetImdbName);
-                        holmesNum = thisHolmesNum;
+                        lowestHolmesNum = holmesNum;
                     }
 
-                    if (holmesNum == 1)
+                    if (lowestHolmesNum == 1)
                     {
                         break;
                     }
