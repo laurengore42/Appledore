@@ -376,10 +376,5 @@
 
             return View(holmesList);
         }
-
-        public static string JeremyBrettImdb()
-        {
-            return "Jeremy Brett";
-        }
     }
 }
