@@ -216,12 +216,12 @@
     <Compile Include="Migrations\201812311447596_remove reference table.Designer.cs">
       <DependentUpon>201812311447596_remove reference table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\BaconXml\BaconXmlTools.cs" />
-    <Compile Include="Services\BaconXml\ItemsChoiceType.cs" />
-    <Compile Include="Services\BaconXml\link.cs" />
-    <Compile Include="Services\BaconXml\ProcessedLink.cs" />
-    <Compile Include="Services\BaconXml\ProcessedMovie.cs" />
-    <Compile Include="Services\BaconXml\spellcheck.cs" />
+    <Compile Include="Services\BaconNumber\BaconNumberTools.cs" />
+    <Compile Include="Services\BaconNumber\ItemsChoiceType.cs" />
+    <Compile Include="Services\BaconNumber\link.cs" />
+    <Compile Include="Services\BaconNumber\ProcessedLink.cs" />
+    <Compile Include="Services\BaconNumber\ProcessedMovie.cs" />
+    <Compile Include="Services\BaconNumber\spellcheck.cs" />
     <Compile Include="Services\GoogleGeocode\AddressComponent.cs" />
     <Compile Include="Services\GoogleGeocode\Bounds.cs" />
     <Compile Include="Services\GoogleGeocode\Geocoder.cs" />

@@ -1,4 +1,4 @@
-﻿namespace HolmesMVC.Services.BaconXml
+﻿namespace HolmesMVC.Services.BaconNumber
 {
 #pragma warning disable CA1819 // Properties should not return arrays
 #pragma warning disable IDE1006 // Naming Styles

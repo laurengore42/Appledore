@@ -5,7 +5,7 @@
     using System.Data;
     using System.Linq;
     using System.Web.Mvc;
-    using HolmesMVC.Services.BaconXml;
+    using HolmesMVC.Services.BaconNumber;
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
@@ -24,12 +24,12 @@
 
             var oldName = targetImdbName;
             if (!targetImdbName.Contains("(") &&
-                BaconXmlTools.IntegerHolmesNumber(Shared.JeremyBrettImdb(), targetImdbName) == -2)
+                BaconNumberTools.BaconNumber(Shared.JeremyBrettImdb(), targetImdbName) == -2)
             {
                 targetImdbName += " (I)";
             }
 
-            var errorCode = BaconXmlTools.IntegerHolmesNumber(Shared.JeremyBrettImdb(), targetImdbName);
+            var errorCode = BaconNumberTools.BaconNumber(Shared.JeremyBrettImdb(), targetImdbName);
             if (errorCode == -2)
             {
                 return "Could not find anyone called '" + oldName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q=" + oldName + "'>click here</a>";
@@ -45,7 +45,7 @@
                 return "According to the Oracle of Bacon, this actor CANNOT be linked to Jeremy Brett!";
             }
 
-            return BaconXmlTools.BrettNumber(targetImdbName);
+            return BaconNumberTools.BrettNumber(targetImdbName);
         }
 
         [AllowAnonymous]
@@ -131,14 +131,14 @@
                 var oldName = targetImdbName;
 
                 if (!targetImdbName.Contains("(")
-                    && BaconXmlTools.IntegerHolmesNumber(
+                    && BaconNumberTools.BaconNumber(
                         Shared.JeremyBrettImdb(),
                         targetImdbName) == -2)
                 {
                     targetImdbName += " (I)";
                 }
 
-                var errorCode = BaconXmlTools.IntegerHolmesNumber(
+                var errorCode = BaconNumberTools.BaconNumber(
                     Shared.JeremyBrettImdb(),
                     targetImdbName);
                 if (errorCode == -2)
@@ -172,7 +172,7 @@
                 {
                     var holmesTesting = holmeses[i];
 
-                    var thisHolmesNum = BaconXmlTools.IntegerHolmesNumber(
+                    var thisHolmesNum = BaconNumberTools.BaconNumber(
                         holmesTesting.Name,
                         targetImdbName);
 
@@ -182,7 +182,7 @@
                             holmesTesting.Name = holmesTesting.Name.Substring(0, holmesTesting.Name.IndexOf("("));
                         }
 
-                        thisHolmesNum = BaconXmlTools.IntegerHolmesNumber(
+                        thisHolmesNum = BaconNumberTools.BaconNumber(
                             holmesTesting.Name,
                             targetImdbName);
                     }
@@ -209,7 +209,7 @@
 
                     if (thisHolmesNum < holmesNum)
                     {
-                        holmesStr = BaconXmlTools.HolmesNumber(
+                        holmesStr = BaconNumberTools.LowestHolmesNumberString(
                             holmesTesting.ID,
                             holmesTesting.Name,
                             targetImdbName);

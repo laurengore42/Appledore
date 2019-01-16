@@ -1,4 +1,4 @@
-﻿namespace HolmesMVC.Services.BaconXml
+﻿namespace HolmesMVC.Services.BaconNumber
 {
 #pragma warning disable CA1819 // Properties should not return arrays
 #pragma warning disable IDE1006 // Naming Styles
@@ -8,7 +8,7 @@
     using System.Xml;
     using System.Xml.Serialization;
 
-    public static class BaconXmlTools
+    public static class BaconNumberTools
     {
         public static ProcessedLink CheckForBannedWords(ProcessedLink proclink)
         {
@@ -26,10 +26,10 @@
 
         public static string BrettNumber(string targetImdbName)
         {
-            return HolmesNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Replace("Holmes number", "Brett number");
+            return LowestHolmesNumberString(1, Shared.JeremyBrettImdb(), targetImdbName).Replace("Holmes number", "Brett number");
         }
 
-        public static int IntegerHolmesNumber(string holmesImdbName, string targetImdbName)
+        public static int BaconNumber(string holmesImdbName, string targetImdbName)
         {
             try
             {
@@ -61,7 +61,7 @@
             }
         }
 
-        public static string HolmesNumber(int thisHolmesId, string holmesImdbName, string targetImdbName)
+        public static string LowestHolmesNumberString(int thisHolmesId, string holmesImdbName, string targetImdbName)
         {
             var stringOut = string.Empty;
 
@@ -100,7 +100,7 @@
                 {
                     if (!holmesImdbName.Contains("("))
                     {
-                        return HolmesNumber(thisHolmesId, holmesImdbName + " (I)", targetImdbName);
+                        return LowestHolmesNumberString(thisHolmesId, holmesImdbName + " (I)", targetImdbName);
                     }
 
                     return "Error in Shared.HolmesNumber: possible ambiguous HolmesName? Was testing '" + holmesImdbName + "'.";
