@@ -174,19 +174,20 @@
                         holmesTesting.Name,
                         targetImdbName);
 
-                    if (holmesNum == -2)
-                    {
-                        if (holmesTesting.Name.Contains("(")) {
-                            holmesTesting.Name = holmesTesting.Name.Substring(0, holmesTesting.Name.IndexOf("("));
-                        }
-
-                        holmesNum = BaconNumberTools.BaconNumber(
-                            holmesTesting.Name,
-                            targetImdbName);
-                    }
-
                     if (holmesNum < 0)
                     {
+                        if (holmesNum == -2)
+                        {
+                            if (holmesTesting.Name.Contains("("))
+                            {
+                                holmesTesting.Name = holmesTesting.Name.Substring(0, holmesTesting.Name.IndexOf("("));
+                            }
+
+                            holmesNum = BaconNumberTools.BaconNumber(
+                                holmesTesting.Name,
+                                targetImdbName);
+                        }
+
                         // awards show kludge
                         if (holmesNum == -10)
                         {
@@ -202,7 +203,7 @@
                         return stringOut
                             + "Got a " + holmesNum
                                + " result when testing holmes " + i + ": "
-                               + holmesTesting.Name + ". Memo: -2 is spellcheck";
+                               + holmesTesting.Name + ".";
                     }
 
                     if (holmesNum < lowestHolmesNum)
