@@ -10,20 +10,6 @@
 
     public static class BaconNumberTools
     {
-        public static ProcessedLink CheckForBannedWords(ProcessedLink proclink)
-        {
-            var allNames = proclink.ProcessedMovies.Select(a => a.Name).ToList();
-            var concatNames = string.Join(" ", allNames).ToLower();
-
-            if (concatNames.Contains("award") || concatNames.Contains("oscars") || concatNames.Contains("emmys") || concatNames.Contains("night of 100 stars") || concatNames.Contains("live") || concatNames.Contains("stage") || concatNames.Contains("show business") || concatNames.Contains("anniversary") || concatNames.Contains("years of") || concatNames.Contains("greatest") || concatNames.Contains("tribute") || concatNames.Contains("stars") || concatNames.Contains("relief") || concatNames.Contains("red nose day") || concatNames.Contains("royal gala") || concatNames.Contains("salute to") || concatNames.Contains("stand up to"))
-            {
-                // throw it out, start again
-                return null;
-            }
-
-            return proclink;
-        }
-
         public static string BrettNumber(string targetImdbName)
         {
             return LowestHolmesNumberString(1, Shared.JeremyBrettImdb(), targetImdbName).Replace("Holmes number", "Brett number");
@@ -218,6 +204,20 @@
                     "Exception while getting ProcLink for " + holmesImdbName
                     + ": " + e.Message);
             }
+        }
+
+        private static ProcessedLink CheckForBannedWords(ProcessedLink proclink)
+        {
+            var allNames = proclink.ProcessedMovies.Select(a => a.Name).ToList();
+            var concatNames = string.Join(" ", allNames).ToLower();
+
+            if (concatNames.Contains("award") || concatNames.Contains("oscars") || concatNames.Contains("emmys") || concatNames.Contains("night of 100 stars") || concatNames.Contains("live") || concatNames.Contains("stage") || concatNames.Contains("show business") || concatNames.Contains("anniversary") || concatNames.Contains("years of") || concatNames.Contains("greatest") || concatNames.Contains("tribute") || concatNames.Contains("stars") || concatNames.Contains("relief") || concatNames.Contains("red nose day") || concatNames.Contains("royal gala") || concatNames.Contains("salute to") || concatNames.Contains("stand up to"))
+            {
+                // throw it out, start again
+                return null;
+            }
+
+            return proclink;
         }
     }
 #pragma warning restore CA1819 // Properties should not return arrays
