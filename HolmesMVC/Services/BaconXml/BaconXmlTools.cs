@@ -29,116 +29,6 @@
             return HolmesNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Replace("Holmes number", "Brett number");
         }
 
-        public static ProcessedLink GetProcLink(
-            string holmesImdbName,
-            string targetImdbName)
-        {
-            var uri =
-                new Uri(
-                    "https://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
-                    + "&a=" + holmesImdbName
-                    + "&b=" + targetImdbName
-                    + "&u=3&p=38b99ce9ec87&gm=0xef3ef7f");
-
-            try
-            {
-                var xr =
-                    XmlReader.Create(
-                        WebRequest.Create(uri).GetResponse().GetResponseStream());
-
-                if (xr.ReadOuterXml().Contains("spellcheck"))
-                {
-                    var scszr = new XmlSerializer(typeof(spellcheck));
-                    var scheck = (spellcheck)scszr.Deserialize(xr);
-                    if (scheck.match.Count() == 1)
-                    {
-                        return GetProcLink(holmesImdbName, scheck.match.First());
-                    }
-                }
-
-                var szr = new XmlSerializer(typeof(link));
-                var link = (link)szr.Deserialize(xr);
-                var proclink = new ProcessedLink(link);
-
-                proclink = CheckForBannedWords(proclink);
-
-                return proclink;
-            }
-            catch (InvalidOperationException e)
-            {
-                if (null != e.InnerException
-                    && e.InnerException.Message.Contains("error"))
-                {
-                    throw;
-                }
-
-                if (null != e.InnerException
-                    && e.InnerException.Message.Contains("spellcheck"))
-                {
-                    throw;
-                }
-
-                throw new Exception(
-                    "Exception while getting ProcLink for " + holmesImdbName
-                    + ": " + e.Message);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(
-                    "Exception while getting ProcLink for " + holmesImdbName
-                    + ": " + e.Message);
-            }
-        }
-
-        public static ProcessedLink GetFilmOnlyProcLink(
-            string holmesImdbName,
-            string targetImdbName)
-        {
-            var uri =
-                new Uri(
-                    "https://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
-                    + "&a=" + holmesImdbName
-                    + "&b=" + targetImdbName
-                    + "&u=1&p=38b99ce9ec87&gm=0xef3ef7f");
-
-            try
-            {
-                var xr = XmlReader.Create(
-                        WebRequest.Create(uri).GetResponse().GetResponseStream()
-                    );
-
-                var szr = new XmlSerializer(typeof(link));
-                var link = (link)szr.Deserialize(xr);
-                var proclink = new ProcessedLink(link);
-
-                return CheckForBannedWords(proclink);
-            }
-            catch (InvalidOperationException e)
-            {
-                if (null != e.InnerException
-                    && e.InnerException.Message.Contains("error"))
-                {
-                    throw;
-                }
-
-                if (null != e.InnerException
-                    && e.InnerException.Message.Contains("spellcheck"))
-                {
-                    throw;
-                }
-
-                throw new Exception(
-                    "Exception while getting ProcLink for " + holmesImdbName
-                    + ": " + e.Message);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(
-                    "Exception while getting ProcLink for " + holmesImdbName
-                    + ": " + e.Message);
-            }
-        }
-
         public static int IntegerHolmesNumber(string holmesImdbName, string targetImdbName)
         {
             try
@@ -217,6 +107,116 @@
                 }
 
                 return "Unknown error when deserialising XML: " + e.Message + "¦¦¦" + e.StackTrace;
+            }
+        }
+
+        private static ProcessedLink GetProcLink(
+            string holmesImdbName,
+            string targetImdbName)
+        {
+            var uri =
+                new Uri(
+                    "https://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
+                    + "&a=" + holmesImdbName
+                    + "&b=" + targetImdbName
+                    + "&u=3&p=38b99ce9ec87&gm=0xef3ef7f");
+
+            try
+            {
+                var xr =
+                    XmlReader.Create(
+                        WebRequest.Create(uri).GetResponse().GetResponseStream());
+
+                if (xr.ReadOuterXml().Contains("spellcheck"))
+                {
+                    var scszr = new XmlSerializer(typeof(spellcheck));
+                    var scheck = (spellcheck)scszr.Deserialize(xr);
+                    if (scheck.match.Count() == 1)
+                    {
+                        return GetProcLink(holmesImdbName, scheck.match.First());
+                    }
+                }
+
+                var szr = new XmlSerializer(typeof(link));
+                var link = (link)szr.Deserialize(xr);
+                var proclink = new ProcessedLink(link);
+
+                proclink = CheckForBannedWords(proclink);
+
+                return proclink;
+            }
+            catch (InvalidOperationException e)
+            {
+                if (null != e.InnerException
+                    && e.InnerException.Message.Contains("error"))
+                {
+                    throw;
+                }
+
+                if (null != e.InnerException
+                    && e.InnerException.Message.Contains("spellcheck"))
+                {
+                    throw;
+                }
+
+                throw new Exception(
+                    "Exception while getting ProcLink for " + holmesImdbName
+                    + ": " + e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(
+                    "Exception while getting ProcLink for " + holmesImdbName
+                    + ": " + e.Message);
+            }
+        }
+
+        private static ProcessedLink GetFilmOnlyProcLink(
+            string holmesImdbName,
+            string targetImdbName)
+        {
+            var uri =
+                new Uri(
+                    "https://oracleofbacon.org/cgi-bin/xml/post?enc=utf-8"
+                    + "&a=" + holmesImdbName
+                    + "&b=" + targetImdbName
+                    + "&u=1&p=38b99ce9ec87&gm=0xef3ef7f");
+
+            try
+            {
+                var xr = XmlReader.Create(
+                        WebRequest.Create(uri).GetResponse().GetResponseStream()
+                    );
+
+                var szr = new XmlSerializer(typeof(link));
+                var link = (link)szr.Deserialize(xr);
+                var proclink = new ProcessedLink(link);
+
+                return CheckForBannedWords(proclink);
+            }
+            catch (InvalidOperationException e)
+            {
+                if (null != e.InnerException
+                    && e.InnerException.Message.Contains("error"))
+                {
+                    throw;
+                }
+
+                if (null != e.InnerException
+                    && e.InnerException.Message.Contains("spellcheck"))
+                {
+                    throw;
+                }
+
+                throw new Exception(
+                    "Exception while getting ProcLink for " + holmesImdbName
+                    + ": " + e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(
+                    "Exception while getting ProcLink for " + holmesImdbName
+                    + ": " + e.Message);
             }
         }
     }
