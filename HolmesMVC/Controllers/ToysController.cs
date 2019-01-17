@@ -22,17 +22,10 @@
             // check spelling of target
             targetImdbName = targetImdbName.Trim();
 
-            var oldName = targetImdbName;
-            if (!targetImdbName.Contains("(") &&
-                BaconNumberTools.BaconNumber(Shared.JeremyBrettImdb(), targetImdbName) == -2)
-            {
-                targetImdbName += " (I)";
-            }
-
-            var errorCode = BaconNumberTools.BaconNumber(Shared.JeremyBrettImdb(), targetImdbName);
+            var errorCode = new BaconNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Number;
             if (errorCode == -2)
             {
-                return "Could not find anyone called '" + oldName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q=" + oldName + "'>click here</a>";
+                return "Could not find anyone called '" + targetImdbName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q=" + targetImdbName + "'>click here</a>";
             }
 
             if (errorCode == -1)
@@ -45,7 +38,7 @@
                 return "According to the Oracle of Bacon, this actor CANNOT be linked to Jeremy Brett!";
             }
 
-            return BaconNumberTools.BrettNumber(targetImdbName);
+            return BaconNumber.BrettNumber(targetImdbName);
         }
 
         [AllowAnonymous]
@@ -128,24 +121,12 @@
                 // check spelling of target
                 targetImdbName = targetImdbName.Trim();
 
-                var oldName = targetImdbName;
-
-                if (!targetImdbName.Contains("(")
-                    && BaconNumberTools.BaconNumber(
-                        Shared.JeremyBrettImdb(),
-                        targetImdbName) == -2)
-                {
-                    targetImdbName += " (I)";
-                }
-
-                var errorCode = BaconNumberTools.BaconNumber(
-                    Shared.JeremyBrettImdb(),
-                    targetImdbName);
+                var errorCode = new BaconNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Number;
                 if (errorCode == -2)
                 {
-                    return "Could not find anyone called '" + oldName
+                    return "Could not find anyone called '" + targetImdbName
                            + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q="
-                           + oldName + "'>click here</a>";
+                           + targetImdbName + "'>click here</a>";
                 }
 
                 if (errorCode == -1)
@@ -170,49 +151,40 @@
                 {
                     var holmesTesting = holmeses[i];
 
-                    var holmesNum = BaconNumberTools.BaconNumber(
-                        holmesTesting.Name,
-                        targetImdbName);
+                    var baconNum = new BaconNumber(holmesTesting.ID, holmesTesting.Name, targetImdbName);
 
-                    if (holmesNum < 0)
+                    if (baconNum.Number < 0)
                     {
-                        if (holmesNum == -2)
-                        {
-                            if (holmesTesting.Name.Contains("("))
-                            {
-                                holmesTesting.Name = holmesTesting.Name.Substring(0, holmesTesting.Name.IndexOf("("));
-                            }
-
-                            holmesNum = BaconNumberTools.BaconNumber(
-                                holmesTesting.Name,
-                                targetImdbName);
-                        }
-
                         // awards show kludge
-                        if (holmesNum == -10)
+                        if (baconNum.Number == -10)
                         {
                             continue;
                         }
 
                         // genuinely unlinkable actors
-                        if (holmesNum == -42)
+                        if (baconNum.Number == -42)
                         {
                             continue;
                         }
 
+                        // spellcheck
+                        if (baconNum.Number == -2)
+                        {
+                            return stringOut
+                                + "Please spellcheck holmes " + i + ": "
+                                   + holmesTesting.Name + ".";
+                        }
+
                         return stringOut
-                            + "Got a " + holmesNum
+                            + "Got a " + baconNum.Number
                                + " result when testing holmes " + i + ": "
                                + holmesTesting.Name + ".";
                     }
 
-                    if (holmesNum < lowestHolmesNum)
+                    if (baconNum.Number < lowestHolmesNum)
                     {
-                        holmesStr = BaconNumberTools.LowestHolmesNumberString(
-                            holmesTesting.ID,
-                            holmesTesting.Name,
-                            targetImdbName);
-                        lowestHolmesNum = holmesNum;
+                        holmesStr = baconNum.Message;
+                        lowestHolmesNum = baconNum.Number;
                     }
 
                     if (lowestHolmesNum == 1)
