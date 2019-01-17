@@ -22,18 +22,18 @@
             // check spelling of target
             targetImdbName = targetImdbName.Trim();
 
-            var errorCode = new BaconNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Number;
-            if (errorCode == -2)
+            var spellcheckBN = new BaconNumber(1, Shared.JeremyBrettImdb(), targetImdbName);
+            if (spellcheckBN.Number == -2)
             {
                 return "Could not find anyone called '" + targetImdbName + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q=" + targetImdbName + "'>click here</a>";
             }
 
-            if (errorCode == -1)
+            if (spellcheckBN.Number == -1)
             {
                 return "Unknown error during spellcheck!";
             }
 
-            if (errorCode == -42)
+            if (spellcheckBN.Number == -42)
             {
                 return "According to the Oracle of Bacon, this actor CANNOT be linked to Jeremy Brett!";
             }
@@ -121,17 +121,30 @@
                 // check spelling of target
                 targetImdbName = targetImdbName.Trim();
 
-                var errorCode = new BaconNumber(1, Shared.JeremyBrettImdb(), targetImdbName).Number;
-                if (errorCode == -2)
+                var spellcheckBN = new BaconNumber(1, Shared.JeremyBrettImdb(), targetImdbName);
+                if (spellcheckBN.Number == -2)
                 {
                     return "Could not find anyone called '" + targetImdbName
                            + "' in IMDb. You may need to add (I) or (II) to the name. Try searching: <a href='https://www.imdb.com/find?s=nm&q="
                            + targetImdbName + "'>click here</a>";
                 }
 
-                if (errorCode == -1)
+                if (spellcheckBN.Number == -1)
                 {
                     return "Unknown error during spellcheck!";
+                }
+
+
+                // if we can get out early, do it
+                int lowestHolmesNum;
+                if (spellcheckBN.Number == 1)
+                {
+                    return stringOut + spellcheckBN.Message;
+                }
+                // otherwise, keep going
+                else
+                {
+                    lowestHolmesNum = spellcheckBN.Number;
                 }
 
                 // get holmes list
@@ -143,7 +156,6 @@
                 holmeses = holmeses.OrderBy(x => r.Next()).ToList();
 
                 // spelling passed, calculate number
-                var lowestHolmesNum = 1000000;
                 var count = holmeses.Count();
                 string holmesStr = string.Empty;
 
@@ -151,7 +163,16 @@
                 {
                     var holmesTesting = holmeses[i];
 
-                    var baconNum = new BaconNumber(holmesTesting.ID, holmesTesting.Name, targetImdbName);
+                    // this saves checking Jeremy twice
+                    BaconNumber baconNum;
+                    if (holmesTesting.ID == 1)
+                    {
+                        baconNum = spellcheckBN;
+                    }
+                    else
+                    {
+                        baconNum = new BaconNumber(holmesTesting.ID, holmesTesting.Name, targetImdbName);
+                    }
 
                     if (baconNum.Number < 0)
                     {
@@ -171,7 +192,7 @@
                         if (baconNum.Number == -2)
                         {
                             return stringOut
-                                + "Please spellcheck holmes " + i + ": "
+                                + "Please spellcheck this actor's IMDb name: "
                                    + holmesTesting.Name + ".";
                         }
 
