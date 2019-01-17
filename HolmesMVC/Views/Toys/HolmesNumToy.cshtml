@@ -13,7 +13,8 @@
             Please report any bugs or errors!<br/><br />
             <input id="targetName" type="text" value="" />
             <input id="holmesNum" type="button" value="Get Holmes Number" />
-            <input id="brettNum" type="button" value="Get Brett Number (for purists)" /><br/><br />
+            <input id="brettNum" type="button" value="Get Brett Number (for purists)" />
+            <input id="allNums" type="button" value="Calculate Full Set" /><br/><br />
 
             <div id="testarea"></div>
         </div>
@@ -52,6 +53,28 @@
                         $('#testarea').html("Calculating...");
                         $.ajax({
                             url: "/Toys/BrettNum",
+                            datatype: "text",
+                            data: { 'targetImdbName': target },
+                            type: "POST",
+                            success: function(data) {
+                                $('#testarea').html(data);
+                            },
+                            error: function(x, t, m) {
+                                if (m === "Internal Server Error") {
+                                    $('#testarea').html("Internal Server Error: unhandled exception during calculation.");
+                                } else {
+                                    alert(t + ":" + m);
+                                    $('#testarea').html(t + ":" + m);
+                                }
+                            }
+                        });
+                    });
+
+                    $("#allNums").click(function() {
+                        var target = $('#targetName').val();
+                        $('#testarea').html("Calculating...");
+                        $.ajax({
+                            url: "/Toys/ProduceHolmesList",
                             datatype: "text",
                             data: { 'targetImdbName': target },
                             type: "POST",

@@ -15,6 +15,29 @@
     {
         [AllowAnonymous]
         [HttpPost]
+        public string ProduceHolmesList(string targetImdbName)
+        {
+            var stringOut = "";
+
+            // get holmes list
+            var holmeses = (from a in Db.Actors
+                            where a.IMDbName != null
+                            select new ToyHolmes { ID = a.ID, Name = a.IMDbName }).ToList();
+
+            // calculate numbers
+            for (int i = 0; i < holmeses.Count(); i++)
+            {
+                var holmesTesting = holmeses[i];
+                BaconNumber baconNum = new BaconNumber(holmesTesting.ID, holmesTesting.Name, targetImdbName);
+                
+                stringOut += "; Holmes "+holmesTesting.Name+" distance "+baconNum.Number;
+            }
+
+            return stringOut;
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
 #pragma warning disable CA1822 // Mark members as static
         public string BrettNum(string targetImdbName)
 #pragma warning restore CA1822 // Mark members as static
@@ -156,10 +179,9 @@
                 holmeses = holmeses.OrderBy(x => r.Next()).ToList();
 
                 // spelling passed, calculate number
-                var count = holmeses.Count();
                 string holmesStr = string.Empty;
 
-                for (int i = 0; i < count; i++)
+                for (int i = 0; i < holmeses.Count(); i++)
                 {
                     var holmesTesting = holmeses[i];
 
