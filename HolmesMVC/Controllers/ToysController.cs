@@ -202,7 +202,7 @@
                                + holmesTesting.Name + ".";
                     }
 
-                    if (baconNum.Number < lowestHolmesNum || holmesTesting.ID == 1)
+                    if (baconNum.Number < lowestHolmesNum || holmesTesting.ID == 1 && baconNum.Number == lowestHolmesNum)
                     {
                         holmesStr = baconNum.Message;
                         lowestHolmesNum = baconNum.Number;
