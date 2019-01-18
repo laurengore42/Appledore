@@ -11,10 +11,10 @@
         <li>
             <a>Toys</a>
             <ul>
-                <li>@Html.ActionLink("Holmes Number", "HolmesNumToy", "Toys")</li>
-                <li>@Html.ActionLink("Photo Collage", "PhotoCollageToy", "Toys")</li>
-                <li>@Html.ActionLink("Birthplace Map", "MapPinToy", "Toys")</li>
-                <li>@Html.ActionLink("Timeline Viewer", "MultiTimelineToy", "Toys")</li>
+                <li><a href="@Url.Action("HolmesNumToy", "Toys")">Holmes&nbsp;Number</a></li>
+                <li><a href="@Url.Action("PhotoCollageToy", "Toys")">Photo&nbsp;Collage</a></li>
+                <li><a href="@Url.Action("MapPinToy", "Toys")">Birthplace&nbsp;Map</a></li>
+                <li><a href="@Url.Action("MultiTimelineToy", "Toys")">Timeline&nbsp;Viewer</a></li>
             </ul>
         </li>
         <li>@Html.ActionLink("Credits", "Credits", "Home")</li>
