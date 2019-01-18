@@ -22,9 +22,11 @@ namespace HolmesMVC.Services.BaconNumber
                 {
                     Number = -10; // possible banned word found, throw out this Holmes
                 }
-
-                Number = proclink.ProcessedMovies.Count();
-                Message = LowestHolmesNumberString(thisHolmesId, holmesImdbName, targetImdbName, proclink);
+                else
+                {
+                    Number = proclink.ProcessedMovies.Count();
+                    Message = LowestHolmesNumberString(thisHolmesId, holmesImdbName, targetImdbName, proclink);
+                }
             }
             catch (InvalidOperationException e)
             {
