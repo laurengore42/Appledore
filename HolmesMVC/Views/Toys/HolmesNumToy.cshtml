@@ -14,7 +14,10 @@
             <input id="targetName" type="text" value="" />
             <input id="holmesNum" type="button" value="Get Holmes Number" />
             <input id="brettNum" type="button" value="Get Brett Number (for purists)" />
+            @if (Request.IsAuthenticated)
+            {
             <input id="allNums" type="button" value="Calculate Full Set" /><br/><br />
+            }
 
             <div id="testarea"></div>
         </div>
