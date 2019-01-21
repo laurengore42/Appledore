@@ -292,11 +292,15 @@
                             select new { 
                                 a.ID,
                                 a.IMDbName,
-                                FirstOrderLinks = a.Appearances.Select(app => app.Episode).SelectMany(e => e.Appearances).Where(app => app.Actor.IMDbName != null && app.ActorID != a.ID).Select(app => app.ActorID)
+                                FirstOrderLinks = a.Appearances
+                                .Select(app => app.Episode)
+                                .SelectMany(e => e.Appearances)
+                                .Where(app => app.Actor.IMDbName != null && app.ActorID != a.ID)
+                                .Select(app => app.ActorID)
                             }).ToList();
 
-            var nodeList = new List<string>();
-            var linkList = new List<string>();
+            var nodeList = new List<jsonnode>();
+            var linkList = new List<jsonlink>();
 
             // calculate numbers
             for (int i = 0; i < holmeses.Count(); i++)
@@ -305,7 +309,12 @@
 
                 if (!blockedNames.Contains(rootHolmes.IMDbName))
                 {
-                    nodeList.Add("{\"id\": \"" + rootHolmes.ID + "\", \"name\": \"" + rootHolmes.IMDbName.Replace("'", "").ToUpper() + "\", \"group\": " + 1 + "}");
+                    nodeList.Add(new jsonnode
+                    {
+                        id = rootHolmes.ID,
+                        name = rootHolmes.IMDbName.Replace("'", "").ToUpper(),
+                        group = 1
+                    });
                 }
                 else
                 {
@@ -320,22 +329,6 @@
                     if (rootHolmes.FirstOrderLinks.Contains(leafHolmes.ID))
                     {
                         leafJoin = 1;
-                    }
-                    else
-                    {
-                        var secondOrderLinks = holmeses.Where(h => rootHolmes.FirstOrderLinks.Contains(h.ID)).SelectMany(h => h.FirstOrderLinks);
-                        if (secondOrderLinks.Contains(leafHolmes.ID))
-                        {
-                            leafJoin = 2;
-                        }
-                        else
-                        {
-                            var thirdOrderLinks = holmeses.Where(h => secondOrderLinks.Contains(h.ID)).SelectMany(h => h.FirstOrderLinks);
-                            if (thirdOrderLinks.Contains(leafHolmes.ID))
-                            {
-                                leafJoin = 3;
-                            }
-                        }
                     }
 
                     // BaconNumber baconNum = new BaconNumber(rootHolmes.ID, rootHolmes.IMDbName, leafHolmes.IMDbName);
@@ -358,12 +351,17 @@
 
                     if (leafJoin > 0)
                     {
-                        linkList.Add("{\"source\": \"" + rootHolmes.ID + "\", \"target\": \"" + leafHolmes.ID + "\", \"value\": " + leafJoin + "}");
+                        linkList.Add(new jsonlink
+                        {
+                            source = rootHolmes.ID,
+                            target = leafHolmes.ID,
+                            value = leafJoin
+                        });
                     }
                 }
             }
 
-            var jsonString = "{ \"nodes\" : [ " + string.Join(", ", nodeList) + " ] , \"links\" : [ " + string.Join(", ", linkList) + " ] }";
+            var jsonString = "{ \"nodes\" : " + JsonConvert.SerializeObject(nodeList) + ", \"links\" : " + JsonConvert.SerializeObject(linkList) + " }";
 
             //var jsonString = StoredScrapsJson();
 
