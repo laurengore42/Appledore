@@ -261,43 +261,61 @@
             return stringOut;
         }
 
+        private class linkedHolmes
+        {
+            public int ID { get; set; }
+            public string IMDbName { get; set; }
+            public List<int> DirectHolmesLinks { get; set; }
+            public List<int> DirectWatsonLinks { get; set; }
+        }
+
         public ViewResult Scraps()
         {
-            // How about an expansion of the HolmesNum to generate a network?
-            // Inspired by talking to Ian Rennie about connections between Holmeses
-            // 'here's one for you: Jeremy Brett was in Mad Dogs And Englishmen with C Thomas Howell, who was in the show Smith with JLM.'
-
-            // Colour code the links for closeness, rather than showing the intermediate non-Holmes actors
-            // Make it so you can click on one to see the details
-            // I'm envisaging something like the navigation map on my tablet for Elite Dangerous star charts
-            // The links are the important thing, not the layout. Is there a library to make them fit on the page / bounce around until they fit?
-
-            // Answer: yes there is, check out d3.js http://bl.ocks.org/mbostock/4062045
-
-            // This is going to be computation heavy, so store the links in a new database table and have a recalculate action you can call on demand
-            // e.g. when you've added someone new
-            // Initially might need to make a few links by hand and work on the display / on the network drawing
-            // then we can think about using the Bacon code to generate links
-
-            // Perhaps two views: closeness of net, and chronological...ness, which means we'll need dates on the links
-            // They'll be similar but not identical: actors have to both be alive, to appear together
-            // (unless they are Basil Rathbone who managed to be in TGMD anyway)
-            // Basically we're looking to chase back the lineage of the character into the very early days of film
-
             string[] blockedNames = { "Nobody" };
-
+            
             // get holmes list
             var holmeses = (from a in Db.Actors
                             where a.IMDbName != null
-                            select new { 
-                                a.ID,
-                                a.IMDbName,
-                                FirstOrderLinks = a.Appearances
+                            select new linkedHolmes { 
+                                ID = a.ID,
+                                IMDbName = a.IMDbName,
+                                // Holmeses who have acted together in the same episode
+                                DirectHolmesLinks = a.Appearances
                                 .Select(app => app.Episode)
                                 .SelectMany(e => e.Appearances)
                                 .Where(app => app.Actor.IMDbName != null && app.ActorID != a.ID)
-                                .Select(app => app.ActorID)
+                                .Select(app => app.ActorID).ToList()
                             }).ToList();
+
+            // Now we're getting somewhere!
+            // This process is slow as hell, but has created an interesting starter-constellation
+            // with Douglas Wilmer at the heart of it
+            // a 2 indicates a Holmes who has not acted with another Holmes,
+            // but has acted with his Watson
+            foreach(var h in holmeses)
+            {
+                var adjacentWatsons = Db.Actors.Find(h.ID).Appearances
+                    .Select(app => app.Episode)
+                    .SelectMany(e => e.Appearances.Where(app => app.CharacterID == 2 && app.ActorID != h.ID))
+                    .Select(app => app.Actor);
+                foreach (var w in adjacentWatsons)
+                {
+                    var adjacentHolmeses = Db.Actors.Find(w.ID).Appearances
+                    .Select(app => app.Episode)
+                    .SelectMany(e => e.Appearances.Where(app => app.Actor.IMDbName != null && app.ActorID != h.ID && app.ActorID != w.ID))
+                    .Select(app => app.ActorID);
+
+                    if (adjacentHolmeses.Any())
+                    {
+                        if (h.DirectWatsonLinks == null)
+                        {
+                            h.DirectWatsonLinks = new List<int>();
+                        }
+                        h.DirectWatsonLinks.AddRange(adjacentHolmeses);
+                    }
+                }
+
+            }
 
             var nodeList = new List<jsonnode>();
             var linkList = new List<jsonlink>();
@@ -317,9 +335,14 @@
                     var leafHolmes = holmeses[j];
                     var leafJoin = 0;
 
-                    if (rootHolmes.FirstOrderLinks.Contains(leafHolmes.ID))
+                    if (rootHolmes.DirectHolmesLinks != null && rootHolmes.DirectHolmesLinks.Contains(leafHolmes.ID))
                     {
                         leafJoin = 1;
+                    }
+
+                    if (rootHolmes.DirectWatsonLinks != null && rootHolmes.DirectWatsonLinks.Contains(leafHolmes.ID))
+                    {
+                        leafJoin = 2;
                     }
 
                     // BaconNumber baconNum = new BaconNumber(rootHolmes.ID, rootHolmes.IMDbName, leafHolmes.IMDbName);
