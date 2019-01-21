@@ -307,16 +307,7 @@
             {
                 var rootHolmes = holmeses[i];
 
-                if (!blockedNames.Contains(rootHolmes.IMDbName))
-                {
-                    nodeList.Add(new jsonnode
-                    {
-                        id = rootHolmes.ID,
-                        name = rootHolmes.IMDbName.Replace("'", "").ToUpper(),
-                        group = 1
-                    });
-                }
-                else
+                if (blockedNames.Contains(rootHolmes.IMDbName))
                 {
                     continue;
                 }
@@ -357,6 +348,26 @@
                             target = leafHolmes.ID,
                             value = leafJoin
                         });
+
+                        if (!nodeList.Where(h => h.id == rootHolmes.ID).Any())
+                        {
+                            nodeList.Add(new jsonnode
+                            {
+                                id = rootHolmes.ID,
+                                name = rootHolmes.IMDbName.Replace("'", "").ToUpper(),
+                                group = 1
+                            });
+                        }
+
+                        if (!nodeList.Where(h => h.id == leafHolmes.ID).Any())
+                        {
+                            nodeList.Add(new jsonnode
+                            {
+                                id = leafHolmes.ID,
+                                name = leafHolmes.IMDbName.Replace("'", "").ToUpper(),
+                                group = 1
+                            });
+                        }
                     }
                 }
             }
