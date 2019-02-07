@@ -65,15 +65,14 @@
 
         #region Private Functions
 
-        private List<CanonSearchNode> GetRelevantNodes(HolmesDBEntities Db, XDocument xmlDoc, string query)
+        private List<CanonSearchNode> GetRelevantNodes(Dictionary<string, Story> nodeNames, XDocument xmlDoc, string query)
         {
             List<CanonSearchNode> nodes = new List<CanonSearchNode>();
             if (string.IsNullOrEmpty(query) || xmlDoc == null)
             {
                 return nodes;
             }
-
-            Dictionary<string, Story> nodeNames = GetNodeNames(Db);
+            
             query = query.ToLower();
             nodes = (from item in xmlDoc.Descendants("p")
                      where item.Value.ToLower().Contains(query)
@@ -275,6 +274,7 @@
                 var storiesExtension = ".xml";
 
                 var xmlDoc = new XDocument();
+                var nodeNames = GetNodeNames(Db);
 
                 foreach (var s in Db.Stories)
                 {
@@ -288,7 +288,7 @@
                         {
                             query = query.Replace("\"", string.Empty);
                             Query = "\"" + query + "\"";
-                            Nodes.AddRange(GetRelevantNodes(Db, xmlDoc, query));
+                            Nodes.AddRange(GetRelevantNodes(nodeNames, xmlDoc, query));
                         }
                         else
                         {
@@ -296,7 +296,7 @@
                             Query = string.Join(", ", splitQuery);
                             foreach (var keyword in splitQuery)
                             {
-                                Nodes.AddRange(GetRelevantNodes(Db, xmlDoc, keyword));
+                                Nodes.AddRange(GetRelevantNodes(nodeNames, xmlDoc, keyword));
                             }
                         }
                     }
@@ -306,7 +306,7 @@
                 var sortedNodes = new List<CanonSearchNode>();
                 
                 var sortedStories = (from e in Db.Episodes
-                                     where e.Season.Adaptation == Db.Adaptations.Canon()
+                                     where e.Season.Adaptation.Name == "Canon"
                                      select e.StoryID).ToList();
 
                 foreach (var s in sortedStories)
