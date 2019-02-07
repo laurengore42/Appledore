@@ -13,7 +13,9 @@
     {
         public string Snippet;
 
-        public Story Story;
+        public string StoryName;
+
+        public string StoryID;
     }
 
     public class CanonSearchView
@@ -65,7 +67,7 @@
 
         #region Private Functions
 
-        private List<CanonSearchNode> GetRelevantNodes(Dictionary<string, Story> nodeNames, XDocument xmlDoc, string query)
+        private List<CanonSearchNode> GetRelevantNodes(Dictionary<string, CanonSearchNode> nodeNames, XDocument xmlDoc, string query)
         {
             List<CanonSearchNode> nodes = new List<CanonSearchNode>();
             if (string.IsNullOrEmpty(query) || xmlDoc == null)
@@ -78,7 +80,8 @@
                      where item.Value.ToLower().Contains(query)
                      select new CanonSearchNode
                      {
-                         Story = nodeNames[item.Ancestors("story").Descendants("title").First().Value.ToLower().Trim()],
+                         StoryName = nodeNames[item.Ancestors("story").Descendants("title").First().Value.ToLower().Trim()].StoryName,
+                         StoryID = nodeNames[item.Ancestors("story").Descendants("title").First().Value.ToLower().Trim()].StoryID,
                          Snippet = item.Value
                      }
                                 ).ToList();
@@ -86,13 +89,19 @@
             return nodes;
         }
 
-        private static Dictionary<string, Story> GetNodeNames(HolmesDBEntities Db)
+        private static Dictionary<string, CanonSearchNode> GetNodeNames(HolmesDBEntities Db)
         {
-            Dictionary<string, Story> nodeNames = new Dictionary<string, Story>();
+            Dictionary<string, CanonSearchNode> nodeNames = new Dictionary<string, CanonSearchNode>();
 
             foreach (var s in Db.Stories)
             {
-                nodeNames.Add(s.Name.ToLower().Trim(), s);
+                nodeNames.Add(
+                    s.Name.ToLower().Trim(),
+                    new CanonSearchNode
+                    {
+                        StoryName = s.Name,
+                        StoryID = s.ID
+                    });
             }
 
             return nodeNames;
@@ -266,7 +275,7 @@
 
         public CanonSearchView(HolmesDBEntities Db, string query)
         {
-            Nodes = new List<CanonSearchNode>();
+            var unsortedNodes = new List<CanonSearchNode>();
 
             if (query != null)
             {
@@ -288,7 +297,7 @@
                         {
                             query = query.Replace("\"", string.Empty);
                             Query = "\"" + query + "\"";
-                            Nodes.AddRange(GetRelevantNodes(nodeNames, xmlDoc, query));
+                            unsortedNodes.AddRange(GetRelevantNodes(nodeNames, xmlDoc, query));
                         }
                         else
                         {
@@ -296,13 +305,12 @@
                             Query = string.Join(", ", splitQuery);
                             foreach (var keyword in splitQuery)
                             {
-                                Nodes.AddRange(GetRelevantNodes(nodeNames, xmlDoc, keyword));
+                                unsortedNodes.AddRange(GetRelevantNodes(nodeNames, xmlDoc, keyword));
                             }
                         }
                     }
                 }
 
-                var unsortedNodes = Nodes;
                 var sortedNodes = new List<CanonSearchNode>();
                 
                 var sortedStories = (from e in Db.Episodes
@@ -311,7 +319,7 @@
 
                 foreach (var s in sortedStories)
                 {
-                    sortedNodes.AddRange(unsortedNodes.Where(n => n.Story.ID == s));
+                    sortedNodes.AddRange(unsortedNodes.Where(n => n.StoryID == s));
                 }
 
                 Nodes = sortedNodes;

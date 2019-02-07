@@ -14,13 +14,14 @@
 {
     <br />
 
-    HolmesMVC.Models.Story previousStory = null;
+    var previousStoryID = string.Empty;
+    var previousStoryName = string.Empty;
 
     foreach (var node in Model.Nodes)
     {
-        if (previousStory != null && node.Story.ID != previousStory.ID)
+        if (previousStoryID != string.Empty && node.StoryID != previousStoryID)
         {
-    <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br />
+    <text>-- </text>@Html.ActionLink(previousStoryName, "Details", "Story", new { id = previousStoryID }, null)<br />
     <br />
     <hr />
     <br />
@@ -28,13 +29,14 @@
             
     @Html.Raw(node.Snippet)<br />
     <br />
-    
-        previousStory = node.Story;
+
+        previousStoryID = node.StoryID;
+        previousStoryName = node.StoryName;
 
     }
-    if (previousStory != null)
+    if (previousStoryID != null)
     {
-    <text>-- </text>@Html.ActionLink(previousStory.Name, "Details", "Story", new { id = previousStory.ID }, null)<br />
+    <text>-- </text>@Html.ActionLink(previousStoryName, "Details", "Story", new { id = previousStoryID }, null)<br />
     <br />
     <br />
     }
