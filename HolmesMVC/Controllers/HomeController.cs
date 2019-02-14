@@ -383,17 +383,35 @@
             }
             else
             {
-                var unlockedEpisodes = (from e in Db.Episodes
+                var unlockedNonRadioEpisodes = (from e in Db.Episodes
                                        where
                                            e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
+                                           && e.Season.Adaptation.Medium != (int)Medium.Radio
                                            && !(from a in e.Appearances
                                                 where a.ActorID == 0 && a.CharacterID == 0
                                                 select a.ID).Any()
                                        select e).ToList();
 
-                rand = (new Random()).Next(unlockedEpisodes.Count() - 1);
-                ViewBag.unlockedEpisode = unlockedEpisodes[rand];
-                ViewBag.unlockedEpisodeCount = unlockedEpisodes.Count();
+                if (unlockedNonRadioEpisodes.Any())
+                {
+                    rand = (new Random()).Next(unlockedNonRadioEpisodes.Count() - 1);
+                    ViewBag.unlockedEpisode = unlockedNonRadioEpisodes[rand];
+                    ViewBag.unlockedEpisodeCount = unlockedNonRadioEpisodes.Count();
+                }
+                else
+                {
+                    var unlockedRadioEpisodes = (from e in Db.Episodes
+                                                    where
+                                                        e.Season.Adaptation.Medium == (int)Medium.Radio
+                                                        && !(from a in e.Appearances
+                                                             where a.ActorID == 0 && a.CharacterID == 0
+                                                             select a.ID).Any()
+                                                    select e).ToList();
+
+                    rand = (new Random()).Next(unlockedRadioEpisodes.Count() - 1);
+                    ViewBag.unlockedEpisode = unlockedRadioEpisodes[rand];
+                    ViewBag.unlockedEpisodeCount = unlockedRadioEpisodes.Count();
+                }
             }
 
             return View();
