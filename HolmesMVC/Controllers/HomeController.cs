@@ -339,7 +339,7 @@
                                        && (from ap in a.Appearances
                                            where
                                                (from ap2 in ap.Character.Appearances
-                                                    where ap2.Episode.Season.Adaptation == Db.Adaptations.Canon()
+                                                    where ap2.Episode.Season.Adaptation.Name == "Canon"
                                                     select ap2.ID).Any()
                                                && !ap.Actor.Surname.Contains("the dog")
                                                && (ap.Episode.Season.Adaptation.Medium == (int)Medium.Television
