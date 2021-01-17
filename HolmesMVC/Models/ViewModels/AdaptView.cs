@@ -17,8 +17,10 @@
             MediumName = ((Medium)adapt.Medium).ToString();
             UrlName = adapt.UrlName;
             Company = adapt.Company;
+			Imdb = adapt.Imdb;
+			Letterboxd = adapt.Letterboxd;
 
-            HolmesActors = adapt.PlayedBy(CanonCharacter.Holmes);
+			HolmesActors = adapt.PlayedBy(CanonCharacter.Holmes);
             WatsonActors = adapt.PlayedBy(CanonCharacter.Watson);
 
             Episodes = (from e in adapt.Seasons.SelectMany(s => s.Episodes)
@@ -56,7 +58,11 @@
 
         public string Company { get; set; }
 
-        public List<Actor> HolmesActors { get; set; }
+		public string Imdb { get; set; }
+
+		public string Letterboxd { get; set; }
+
+		public List<Actor> HolmesActors { get; set; }
 
         public List<Actor> WatsonActors { get; set; }
 

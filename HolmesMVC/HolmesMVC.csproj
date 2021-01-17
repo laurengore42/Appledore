@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -23,6 +24,8 @@
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,10 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -211,6 +214,10 @@
     <Compile Include="Migrations\201812311447596_remove reference table.cs" />
     <Compile Include="Migrations\201812311447596_remove reference table.Designer.cs">
       <DependentUpon>201812311447596_remove reference table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101172308144_imdb and letterboxd for films.cs" />
+    <Compile Include="Migrations\202101172308144_imdb and letterboxd for films.designer.cs">
+      <DependentUpon>202101172308144_imdb and letterboxd for films.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\BaconNumber\BaconNumber.cs" />
     <Compile Include="Services\BaconNumber\ItemsChoiceType.cs" />
@@ -1487,6 +1494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812311447596_remove reference table.resx">
       <DependentUpon>201812311447596_remove reference table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101172308144_imdb and letterboxd for films.resx">
+      <DependentUpon>202101172308144_imdb and letterboxd for films.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

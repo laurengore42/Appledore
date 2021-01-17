@@ -19,6 +19,8 @@ namespace HolmesMVC.Models
         public int Medium { get; set; }
         public string Company { get; set; }
         public string UrlName { get; set; }
+		public string Imdb { get; set; }
+		public string Letterboxd { get; set; }
         public string MediumUrlName => Medium == (int)Enums.Medium.Radio ? "radio" : Medium == (int)Enums.Medium.Film ? "film" : Medium == (int)Enums.Medium.Television ? "tv" : "adaptation";
 
         public virtual ICollection<Rename> Renames { get; set; }

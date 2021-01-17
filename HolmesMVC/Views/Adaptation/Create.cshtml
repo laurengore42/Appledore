@@ -10,45 +10,61 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Adaptation</legend>
+<fieldset>
+	<legend>Adaptation</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
+	<div class="editor-label">
+		@Html.LabelFor(model => model.Name)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.Name)
+		@Html.ValidationMessageFor(model => model.Name)
+	</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UrlName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UrlName)
-            @Html.ValidationMessageFor(model => model.UrlName)
-        </div>
+	<div class="editor-label">
+		@Html.LabelFor(model => model.UrlName)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.UrlName)
+		@Html.ValidationMessageFor(model => model.UrlName)
+	</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Medium, "Medium")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Medium", String.Empty)
-            @Html.ValidationMessageFor(model => model.Medium)
-        </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Company)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Company)
-            @Html.ValidationMessageFor(model => model.Company)
-        </div>
+	<div class="editor-label">
+		@Html.LabelFor(model => model.Medium, "Medium")
+	</div>
+	<div class="editor-field">
+		@Html.DropDownList("Medium", String.Empty)
+		@Html.ValidationMessageFor(model => model.Medium)
+	</div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+	<div class="editor-label">
+		@Html.LabelFor(model => model.Company)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.Company)
+		@Html.ValidationMessageFor(model => model.Company)
+	</div>
+
+	<div class="editor-label">
+		@Html.LabelFor(model => model.Imdb)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.Imdb)
+		@Html.ValidationMessageFor(model => model.Imdb)
+	</div>
+
+	<div class="editor-label">
+		@Html.LabelFor(model => model.Letterboxd)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.Letterboxd)
+		@Html.ValidationMessageFor(model => model.Letterboxd)
+	</div>
+
+	<p>
+		<input type="submit" value="Create" />
+	</p>
+</fieldset>
 }
 
 @section Scripts {

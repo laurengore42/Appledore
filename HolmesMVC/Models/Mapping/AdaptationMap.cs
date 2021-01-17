@@ -33,7 +33,9 @@ namespace HolmesMVC.Models.Mapping
             Property(t => t.Translation).HasColumnName("Translation");
             Property(t => t.Medium).HasColumnName("Medium");
             Property(t => t.Company).HasColumnName("Company");
-            Property(t => t.UrlName).HasColumnName("UrlName");
+			Property(t => t.Imdb).HasColumnName("Imdb");
+			Property(t => t.Letterboxd).HasColumnName("Letterboxd");
+			Property(t => t.UrlName).HasColumnName("UrlName");
 
         }
     }
