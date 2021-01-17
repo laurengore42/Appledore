@@ -1,8 +1,10 @@
 ﻿namespace HolmesMVC.Models.ViewModels
 {
-    using System.Collections.Generic;
+	using System;
+	using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
+	using System.Net;
+	using System.Text.RegularExpressions;
     using System.Web.Hosting;
     using System.Xml;
 
@@ -108,14 +110,12 @@
 
         private string GetStoryXml()
         {
-            var xmlDoc = new XmlDocument();
-            var storyUrl = HostingEnvironment.MapPath("/Services/Stories/" + ID + ".xml");
-            if (storyUrl != null)
-            {
-                xmlDoc.Load(storyUrl);
-                return xmlDoc.DocumentElement.OuterXml;
-            }
-            return null;
+			var uri = new Uri("https://appledore.azurewebsites.net/services/storyservice/storyxmlretriever.svc/retrieve?storyCode=" + ID);
+
+			var xr = new XmlDocument();
+			xr.Load(WebRequest.Create(uri).GetResponse().GetResponseStream());
+
+			return xr.DocumentElement.OuterXml;
         }
 
         private static string HtmlTrim(string storyWithTags)
