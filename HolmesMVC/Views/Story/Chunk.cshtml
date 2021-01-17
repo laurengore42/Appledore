@@ -14,8 +14,24 @@
 	<article>
 		<div class="storyChunk">@Html.Raw(Model.ChunkXml)</div>
 		-- <i>@Html.ActionLink("'" + Model.Episode.Story + "'", "Details", "Story", new { id = Model.Episode.StoryCode }, null)</i>, Sir Arthur Conan Doyle
-		<p><a href="https://twitter.com/intent/tweet?text=A quote from '@Model.Episode.Story'" class="twitter-share-button">Tweet</a>
-		<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^https:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script></p>
+		<p><a href="https://twitter.com/intent/tweet" data-text="A quote from '@Model.Episode.Story'" data-url="@Request.Url" class="twitter-share-button">Tweet</a></p>
+		<script>
+			window.twttr = (function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0],
+					t = window.twttr || {};
+				if (d.getElementById(id)) return t;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "https://platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js, fjs);
+
+				t._e = [];
+				t.ready = function (f) {
+					t._e.push(f);
+				};
+
+				return t;
+			}(document, "script", "twitter-wjs"));</script>
 	</article>
 </section>
 
