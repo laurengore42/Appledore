@@ -2,6 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+.vs/config/applicationhost.config
 .vs/HolmesMVC/v15/*
 /HolmesMVC/obj/Release/AspnetCompileMerge
 /HolmesMVC/obj/Release/Package/PackageTmp
@@ -13,6 +14,7 @@
 /HolmesMVC/web.debug.config
 /HolmesMVC/web.release.config
 /HolmesMVC/web.config
+/packages
 
 
 # Project-specific ignores
