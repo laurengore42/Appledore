@@ -219,6 +219,10 @@
     <Compile Include="Migrations\202101172308144_imdb and letterboxd for films.designer.cs">
       <DependentUpon>202101172308144_imdb and letterboxd for films.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101181653544_imdb and letterboxd for film in series.cs" />
+    <Compile Include="Migrations\202101181653544_imdb and letterboxd for film in series.designer.cs">
+      <DependentUpon>202101181653544_imdb and letterboxd for film in series.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\BaconNumber\BaconNumber.cs" />
     <Compile Include="Services\BaconNumber\ItemsChoiceType.cs" />
     <Compile Include="Services\BaconNumber\link.cs" />
@@ -1497,6 +1501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101172308144_imdb and letterboxd for films.resx">
       <DependentUpon>202101172308144_imdb and letterboxd for films.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101181653544_imdb and letterboxd for film in series.resx">
+      <DependentUpon>202101181653544_imdb and letterboxd for film in series.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

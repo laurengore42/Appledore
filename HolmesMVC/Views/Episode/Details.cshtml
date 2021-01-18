@@ -60,65 +60,99 @@
         }
     </script>
 }
-<section class="leftfloatdetails">
-    <h2 class="detailscategory">Episode</h2>
-    <h2 class="detailsheader">@ViewBag.Title
-    @if (Model.Translation != null && Model.Translation != string.Empty)
-    {
-        <span style="font-weight: normal; font-size: small;"><i>@Model.Translation</i></span>
-    }</h2>
-    <ul class="actordetails">
-        @{ 
-            var mediumName = "";
-            if (Model.Medium == (int)Medium.Television)
-            {
-                mediumName = "TV";
-            }
-            else if (Model.Medium == (int)Medium.Radio)
-            {
-                mediumName = "Radio";
-            }
-            else if (Model.Medium == (int)Medium.Film)
-            {
-                mediumName = "Film";
-            }
-        }
-        <li>Adaptation: @Html.ActionLink(Model.AdaptationName,mediumName+"Details", "Adaptation", new { urlName = Model.AdaptationUrlName }, null)@if (Model.AdaptationTranslation != null && Model.AdaptationTranslation != string.Empty){ <span style="font-weight: normal; font-size: small;"><i>@Model.AdaptationTranslation</i></span>}</li>
-        <li>Episode: @Html.DisplayFor(model => model.SeasonCode)</li>
-        @{
-            var airdateFormat = "dd MMMM yyyy";
-            if (Model.AirdatePrecision == DatePrecision.Month)
-            {
-                airdateFormat = "MMMM yyyy";
-            }
-            else if (Model.AirdatePrecision == DatePrecision.Year)
-            {
-                airdateFormat = "yyyy";
-            }
-        }
-        <li>Airdate: @Model.Airdate.ToString(airdateFormat)</li>
-        @if (!Model.Story.IsNullOrWhiteSpace())
-        { <text><li>Canon basis: @Html.ActionLink(Model.Story, "Details", "Story", new { id = Model.StoryCode }, null)</li></text> }
-        
-        @if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
-        {
-            var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy"); 
-    <text>        <li>IMDb: <a target="_blank" href = '@IMDbUrl'>@Model.DisplayName</a> <i>(link not verified)</i></li></text>}
-    </ul>
-    <p class="dblinks">
-        @if (Model.EpPrev > 0 || Model.EpPrevName != null)
-        {
-            <text>Previous: @Html.RouteLink(Model.EpPrevName, "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.EpPrevSeason, episodeNumber = Model.EpPrevAirOrder }) @if (Model.EpPrevTranslation != null && Model.EpPrevTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpPrevTranslation</i></span>}
-            <br />
-            </text>}
-        @if (Model.EpNext > 0 || Model.EpNextName != null)
-        {
-            <text>Next: @Html.RouteLink(Model.EpNextName, "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.EpNextSeason, episodeNumber = Model.EpNextAirOrder }) @if (Model.EpNextTranslation != null && Model.EpNextTranslation != string.Empty) {<span style="font-weight: normal; font-size: small;"><i>@Model.EpNextTranslation</i></span>}</text>}
-    </p>
+	<section class="leftfloatdetails">
+		<h2 class="detailscategory">Episode</h2>
+		<h2 class="detailsheader">
+			@ViewBag.Title
+			@if (Model.Translation != null && Model.Translation != string.Empty)
+			{
+				<span style="font-weight: normal; font-size: small;"><i>@Model.Translation</i></span>
+			}
+		</h2>
+		<ul class="actordetails">
+			@{
+				var mediumName = "";
+				if (Model.Medium == (int)Medium.Television)
+				{
+					mediumName = "TV";
+				}
+				else if (Model.Medium == (int)Medium.Radio)
+				{
+					mediumName = "Radio";
+				}
+				else if (Model.Medium == (int)Medium.Film)
+				{
+					mediumName = "Film";
+				}
+			}
+			<li>
+				Adaptation: @Html.ActionLink(Model.AdaptationName, mediumName + "Details", "Adaptation", new { urlName = Model.AdaptationUrlName }, null)@if (Model.AdaptationTranslation != null && Model.AdaptationTranslation != string.Empty)
+				{<span style="font-weight: normal; font-size: small;"><i>@Model.AdaptationTranslation</i></span>}
+			</li>
+			<li>Episode: @Html.DisplayFor(model => model.SeasonCode)</li>
+			@{
+				var airdateFormat = "dd MMMM yyyy";
+				if (Model.AirdatePrecision == DatePrecision.Month)
+				{
+					airdateFormat = "MMMM yyyy";
+				}
+				else if (Model.AirdatePrecision == DatePrecision.Year)
+				{
+					airdateFormat = "yyyy";
+				}
+			}
+			<li>Airdate: @Model.Airdate.ToString(airdateFormat)</li>
+			@if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
+			{
+				var IMDbUrl = "";
+				var verified = false;
+				if (!string.IsNullOrWhiteSpace(Model.Imdb))
+				{
+					IMDbUrl = "https://www.imdb.com/title/" + Model.Imdb;
+					verified = true;
+				}
+				else
+				{
+					IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy");
+				}
+				<li>
+					IMDb: <a target="_blank" href='@IMDbUrl'>@Model.DisplayName</a>&nbsp;@if (!verified)
+					{<i>(link not verified)</i>}
+				</li>
+			}
+			@if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
+			{
+				var LetterboxdUrl = "";
+				if (!string.IsNullOrWhiteSpace(Model.Letterboxd))
+				{
+					LetterboxdUrl = "https://letterboxd.com/film/" + Model.Letterboxd;
+					<li>
+						Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@Model.DisplayName</a>
+					</li>
+				}
+			}
+		</ul>
+		@if (!Model.Story.IsNullOrWhiteSpace())
+		{<text>
+				<ul class="actordetails"><li>Canon basis: @Html.ActionLink(Model.Story, "Details", "Story", new { id = Model.StoryCode }, null)</li></ul></text>
+		}
 
-    @Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.EpId })
+		<p class="dblinks">
+			@if (Model.EpPrev > 0 || Model.EpPrevName != null)
+			{
+				<text>Previous: @Html.RouteLink(Model.EpPrevName, "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.EpPrevSeason, episodeNumber = Model.EpPrevAirOrder }) @if (Model.EpPrevTranslation != null && Model.EpPrevTranslation != string.Empty)
+				{<span style="font-weight: normal; font-size: small;"><i>@Model.EpPrevTranslation</i></span>}
+				<br />
+				</text>}
+			@if (Model.EpNext > 0 || Model.EpNextName != null)
+			{
+				<text>Next: @Html.RouteLink(Model.EpNextName, "EpDetails", new { adaptWord = Model.AdaptationMediumUrlName, adaptName = Model.AdaptationUrlName, seasonNumber = Model.EpNextSeason, episodeNumber = Model.EpNextAirOrder }) @if (Model.EpNextTranslation != null && Model.EpNextTranslation != string.Empty)
+				{<span style="font-weight: normal; font-size: small;"><i>@Model.EpNextTranslation</i></span>}</text>}
+		</p>
 
-</section>
+		@Html.Action("DatabaseLinks", "Home", new { table = "Episode", id = Model.EpId })
+
+	</section>
 <section class="rightfloatdetails">
     @Html.Action("PerEpisode", "Appearance", new { Model.EpId })
 </section>

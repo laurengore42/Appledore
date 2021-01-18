@@ -46,7 +46,11 @@
 
         public string Poster { get; set; }
 
-        public string StoryCode { get; set; }
+		public string Imdb { get; set; }
+
+		public string Letterboxd { get; set; }
+
+		public string StoryCode { get; set; }
 
         public string Story { get; set; }
 
@@ -111,7 +115,9 @@
             Title = episode.Title;
             Translation = episode.Translation;
             Poster = episode.Poster;
-            DisplayName = episode.DisplayName;
+			Imdb = episode.Imdb;
+			Letterboxd = episode.Letterboxd;
+			DisplayName = episode.DisplayName;
             Medium = episode.Season.Adaptation.Medium;
             MediumName = ((Medium)episode.Season.Adaptation.Medium).ToString();
             StoryCode = episode.StoryID;

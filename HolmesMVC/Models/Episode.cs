@@ -16,7 +16,9 @@ namespace HolmesMVC.Models
         public int SeasonID { get; set; }
         public string StoryID { get; set; }
         public string Poster { get; set; }
-        public System.DateTime Airdate { get; set; }
+		public string Imdb { get; set; }
+		public string Letterboxd { get; set; }
+		public System.DateTime Airdate { get; set; }
         public string Title { get; set; }
         public string Translation { get; set; }
         public int AirdatePrecision { get; set; }
