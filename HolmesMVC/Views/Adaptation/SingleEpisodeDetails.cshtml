@@ -89,15 +89,38 @@ else if (Model.Medium == (int)Medium.Radio)
 		}
 		@if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
 		{
-			var IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
+			var IMDbUrl = "";
+			var verified = false;
+			if (!string.IsNullOrWhiteSpace(Model.Imdb))
+			{
+				IMDbUrl = "https://www.imdb.com/title/" + Model.Imdb;
+				verified = true;
+			}
+			else
+			{
+				IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
+			}
 			<text><br />
-				IMDb: <a target="_blank" href='@IMDbUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>
+				IMDb: <a target="_blank" href='@IMDbUrl'>@ViewBag.Title</a></text>if (!verified)
+			{<text><i>(link not verified)</i></text>}
 		}
 		@if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
 		{
-			var LetterboxdUrl = "https://letterboxd.com/search/" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
+			var LetterboxdUrl = "";
+			var verified = false;
+			if (!string.IsNullOrWhiteSpace(Model.Letterboxd))
+			{
+				LetterboxdUrl = "https://letterboxd.com/film/" + Model.Letterboxd;
+				verified = true;
+			}
+			else
+			{
+				LetterboxdUrl = "https://letterboxd.com/search/" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
+			}
 			<text><br />
-				Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@ViewBag.Title</a> <i>(link not verified)</i></text>}
+				Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@ViewBag.Title</a></text>if (!verified)
+			{<text><i>(link not verified)</i></text>}
+		}
 		@if (!string.IsNullOrWhiteSpace(ViewBag.Episode.StoryID))
 		{
 			<text><br /><br />
