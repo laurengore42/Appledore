@@ -101,9 +101,9 @@ else if (Model.Medium == (int)Medium.Radio)
 				IMDbUrl = "https://www.imdb.com/find?s=tt&q=" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
 			}
 			<text><br />
-				IMDb: <a target="_blank" href='@IMDbUrl'>@ViewBag.Title</a></text>if (!verified)
+				IMDb: <a target="_blank" href='@IMDbUrl'>@ViewBag.Title</a>&nbsp;</text>if (!verified)
 			{<text><i>(link not verified)</i></text>}
-		}
+	}
 		@if (Model.Medium == (int)Medium.Television || Model.Medium == (int)Medium.Film)
 		{
 			var LetterboxdUrl = "";
@@ -118,9 +118,9 @@ else if (Model.Medium == (int)Medium.Radio)
 				LetterboxdUrl = "https://letterboxd.com/search/" + ((String)(ViewBag.Title)).Replace(" ", "+") + "+" + ViewBag.Episode.Airdate.ToString("yyyy");
 			}
 			<text><br />
-				Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@ViewBag.Title</a></text>if (!verified)
+				Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@ViewBag.Title</a>&nbsp;</text>if (!verified)
 			{<text><i>(link not verified)</i></text>}
-		}
+	}
 		@if (!string.IsNullOrWhiteSpace(ViewBag.Episode.StoryID))
 		{
 			<text><br /><br />
