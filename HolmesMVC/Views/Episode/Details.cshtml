@@ -130,6 +130,13 @@
 						Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@Model.DisplayName</a>
 					</li>
 				}
+				else if (Model.Medium == (int)Medium.Film)
+				{
+					LetterboxdUrl = "https://letterboxd.com/search/" + Model.DisplayName.Replace(" ", "+") + "+" + Model.Airdate.ToString("yyyy");
+					<li>
+						Letterboxd: <a target="_blank" href='@LetterboxdUrl'>@Model.DisplayName</a>&nbsp;<i>(link not verified)</i>
+					</li>
+				}
 			}
 		</ul>
 		@if (!Model.Story.IsNullOrWhiteSpace())
