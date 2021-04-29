@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: jQuery
+    versions:
+    - 3.5.1
+  - dependency-name: jQuery.Validation
+    versions:
+    - 1.19.2
