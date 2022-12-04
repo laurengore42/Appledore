@@ -16,7 +16,7 @@
     using HolmesMVC.Models;
     using HolmesMVC.Models.ViewModels;
 
-    [OutputCache(Duration = 2628000, VaryByCustom = "LastDbUpdate")]
+    [OutputCache(Duration = 3600, VaryByCustom = "LastDbUpdate")]
     public class HomeController : HolmesDbController
     {
         [AllowAnonymous]
