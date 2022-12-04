@@ -41,16 +41,23 @@ else
                 </td>
                 <td class="castchar">
                     as
-                    <span @if (appearance.Character.IsCanon) { <text> class="strong" </text>  }>
-                        @if (null == rename)
-                        {
-                            @Html.ActionLink(appearance.Character.LongName, "Details", "Character", new { appearance.Character.UrlName }, null)
-                        }
-                        else
-                        {
-                            @Html.ActionLink(rename.LongName, "Details", "Character", new { appearance.Character.UrlName }, null)
-                        }
-                    </span>
+					<span @if (appearance.Character.IsCanon) { <text> class="strong" </text> }>
+						@if (null == rename)
+						{
+							if (appearance.Character.LongName == "")
+							{
+								@Html.ActionLink("(blank?)", "Details", "Character", new { appearance.Character.UrlName }, null)
+							}
+							else
+							{
+								@Html.ActionLink(appearance.Character.LongName, "Details", "Character", new { appearance.Character.UrlName }, null)
+							}
+						}
+						else
+						{
+							@Html.ActionLink(rename.LongName, "Details", "Character", new { appearance.Character.UrlName }, null)
+						}
+					</span>
                 </td>
             }
                 @if (Request.IsAuthenticated && ViewBag.Locked == false)
