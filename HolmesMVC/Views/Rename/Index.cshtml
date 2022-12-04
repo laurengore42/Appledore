@@ -10,24 +10,30 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table>
-    <tr>
-        <th>
-            Adaptation
-        </th>
-        <th>
-            Actor
-        </th>
-        <th>
-            Original
-        </th>
-        <th>
-            Rename
-        </th>
-        <th></th>
-    </tr>
+	<tr>
+		<th>
+			ID
+		</th>
+		<th>
+			Adaptation
+		</th>
+		<th>
+			Actor
+		</th>
+		<th>
+			Original
+		</th>
+		<th>
+			Rename
+		</th>
+		<th></th>
+	</tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @item.ID
+        </td>
         <td>
             @item.AdaptName
         </td>
