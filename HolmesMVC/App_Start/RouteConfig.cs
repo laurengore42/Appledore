@@ -101,11 +101,16 @@
                 new { id = @"\d+" }
             );
 
-            // XML route
+            // XML routes
             routes.MapRoute(
                 "StoryXml",
                 "story/storyxml",
                 new { controller = "Story", action = "StoryXml" }
+            );
+            routes.MapRoute(
+                "StoryAdapteds",
+                "story/storyadapteds",
+                new { controller = "Story", action = "StoryAdapteds" }
             );
 
             // stories, and chunks

@@ -53,18 +53,9 @@
     <article>
         <div class="adapteds">
             <h3>Adaptations</h3>
-            <ul>
-                @foreach (Episode e in Model.Adapteds)
-                {
-                    <li>
-                        @{
-                            var actorHolmes = e.Season.Adaptation.PlayedBy(CanonCharacter.Holmes).First();
-                        }
-                        @e.Airdate.ToString("yyyy"): @Html.RouteLink("'" + e.DisplayName + "'", "EpDetails", new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }),@if (!string.IsNullOrEmpty(e.Translation))
-                        {<span style="font-weight: normal; font-size: small;"><i>@e.Translation</i></span>} starring @Html.ActionLink(actorHolmes.ShortName, "Details", "Actor", new { actorHolmes.UrlName }, null)
-                    </li>
-                }
-            </ul>
+            <div id="adaptedsLoader">
+                Loading adaptation links...
+            </div>
         </div>
     </article>
 </section>
@@ -77,13 +68,13 @@
 
 <section class="leftfloatdetails">
     <article>
-        <div class="story">
+        <div id="storyLoader" class="story">
             Loading story text...
         </div>
     </article>
 </section>
 
-<input type="button" class="selButton" value="Extract chunk" style="display:none;" />
+<input type="button" id="selButton" value="Extract chunk" style="display:none;" />
 
 <div class="clear-fix"></div>
 

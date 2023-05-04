@@ -64,16 +64,32 @@ $(document).ready(function () {
         url: "/Story/StoryXml",
         data: "storyCode=" + location.pathname.toLowerCase().replace("/story/", "").toUpperCase(),
         success: function (content) {
-            $('.story').html(content);
+            $('#storyLoader').html(content);
         },
         error: function (xhr, status, errorThrown) {
-            $('.story').html(xhr.responseText);
+            $('#storyLoader').html(xhr.responseText);
         }
-    });
+        });
 
-    $('.story').mousemove(function (event) {
+    $.ajax(
+        {
+            async: true,
+            type: "GET",
+            contentType: "application/xml",
+            dataType: "text",
+            url: "/Story/StoryAdapteds",
+            data: "storyCode=" + location.pathname.toLowerCase().replace("/story/", "").toUpperCase(),
+            success: function (content) {
+                $('#adaptedsLoader').html(content);
+            },
+            error: function (xhr, status, errorThrown) {
+                $('#adaptedsLoader').html(xhr.responseText);
+            }
+        }); 
+
+    $('#storyLoader').mousemove(function (event) {
         var textChunk = getSelectedText();
-        var button = $('.selButton');
+        var button = $('#selButton');
 
         if (textChunk.length <= 0) {
             button.hide();
@@ -89,8 +105,8 @@ $(document).ready(function () {
         button.show();
     });
 
-    $('.selButton').click(function () {
-        var storySection = $('.story');
+    $('#selButton').click(function () {
+        var storySection = $('#storyLoader');
 
         var textChunk = getSelectedText();
         if (textChunk.length <= 0) {

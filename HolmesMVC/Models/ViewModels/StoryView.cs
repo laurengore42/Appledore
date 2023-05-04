@@ -51,14 +51,6 @@
                 BaringGouldEndString = string.Empty;
             }
 
-            // these episodes are all the adaptations of that story
-            Adapteds = (from e in story.Episodes
-                        where
-                            (null == e.Season.Adaptation.Name
-                             || e.Season.Adaptation.Name != "Canon")
-                            && e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
-                        select e).OrderBy(e => e.Airdate).ToList();
-
             GetChunk(chunkStart, chunkLength);
         }
 
@@ -71,8 +63,6 @@
         public string BaringGouldStartString { get; set; }
 
         public string BaringGouldEndString { get; set; }
-
-        public List<Episode> Adapteds { get; set; }
 
         public Villain VillainType { get; set; }
 
