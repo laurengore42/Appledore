@@ -1,9 +1,12 @@
 ﻿namespace HolmesMVC.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using System.Xml;
     using HolmesMVC.Enums;
     using HolmesMVC.Models;
@@ -14,9 +17,7 @@
     {
         [AllowAnonymous]
         [HttpGet]
-#pragma warning disable CA1822 // Mark members as static
         public string StoryXml(string storyCode)
-#pragma warning restore CA1822 // Mark members as static
         {
             var uri = new Uri("https://appledore.azurewebsites.net/services/storyservice/storyxmlretriever.svc/retrieve?storyCode=" + storyCode);
 
@@ -24,6 +25,47 @@
             xr.Load(WebRequest.Create(uri).GetResponse().GetResponseStream());
 
             return xr.DocumentElement.OuterXml;
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public string StoryAdapteds(string storyCode)
+        {
+            var ID = storyCode.ToUpper();
+            var story = Db.Stories.Find(ID);
+
+            // these episodes are all the adaptations of that story
+            var adapteds = (from e in story.Episodes
+                            where
+                                (null == e.Season.Adaptation.Name
+                                    || e.Season.Adaptation.Name != "Canon")
+                                && e.Season.Adaptation.Medium != (int)Medium.Stage // to_do_theatre
+                            select e).OrderBy(e => e.Airdate).ToList();
+
+            var returnString = "";
+
+            returnString += "<ul>";
+            foreach (Episode e in adapteds)
+            {
+                var actorHolmes = e.Season.Adaptation.PlayedBy(CanonCharacter.Holmes).First();
+                returnString += "<li>";
+                returnString += e.Airdate.ToString("yyyy");
+                returnString += ": ";
+                returnString += HtmlHelper.GenerateRouteLink(HttpContext.Request.RequestContext, RouteTable.Routes, "'" + e.DisplayName + "'", "EpDetails", new RouteValueDictionary(new { adaptWord = e.Season.Adaptation.MediumUrlName, adaptName = e.Season.Adaptation.UrlName, seasonNumber = e.Season.AirOrder, episodeNumber = e.AirOrder }), null);
+                returnString += ",";
+                if (!string.IsNullOrEmpty(e.Translation))
+                {
+                    returnString += "<span style=\"font-weight: normal; font-size: small;\"><i>";
+                    returnString += e.Translation;
+                    returnString += "</i></span>";
+                }
+                returnString += " starring ";
+                returnString += HtmlHelper.GenerateLink(HttpContext.Request.RequestContext, RouteTable.Routes, actorHolmes.ShortName, "ActorDetails", "Details", "Actor", new RouteValueDictionary(new { actorHolmes.UrlName }), null);
+                returnString += "</li>";
+            }
+            returnString += "</ul>";
+
+            return returnString;
         }
 
         [AllowAnonymous]
